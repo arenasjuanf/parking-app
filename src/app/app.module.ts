@@ -5,19 +5,15 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment'
 import { LoginComponent } from './pages/login/login.component';
-import { SuperAdminHomeComponent } from './pages/super-admin-home/super-admin-home.component';
-import { AdminHomeComponent } from './pages/admin-home/admin-home.component';
-import { ClientesHomeComponent } from './pages/clientes-home/clientes-home.component';
+import { PlatformComponent } from './pages/platform/platform.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SuperAdminHomeComponent,
-    AdminHomeComponent,
-    ClientesHomeComponent
+    PlatformComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +21,7 @@ import { ClientesHomeComponent } from './pages/clientes-home/clientes-home.compo
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
+    AngularFireDatabaseModule
   ],
   providers: [],
   bootstrap: [AppComponent]

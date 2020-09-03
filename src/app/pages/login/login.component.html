@@ -1,14 +1,35 @@
-<div class="container-fluid">
-    <form (ngSubmit)="login(formulario)" #formulario="ngForm" >
-        <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" placeholder="Enter email" name="email" ngModel required>
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+<div class="container mt-5 h-100 d-flex flex-column justify-content-center">
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <div class="logo-container">
+                <img src="../../../assets/images/logo.jpg" alt="marking mcqueen">
+            </div>
         </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" placeholder="Password" name="password" ngModel required>
+        <div class="col-md-6 col-12">
+            <div class="form-container">
+                <h1>
+                    Iniciar Sesión
+                </h1>
+                <form (ngSubmit)="login(formulario)" #formulario="ngForm">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Correo</label>
+                        <input type="email" class="form-control" placeholder="Enter email" name="email" ngModel required>
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Clave</label>
+                        <input type="password" class="form-control" placeholder="Password" name="password" ngModel required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fa fa-sign-in" aria-hidden="true"></i>
+                        Ingresar
+                    </button>
+                </form>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    </div>
 </div>
+
+
+

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-super-admin-home',
@@ -13,4 +13,7 @@ export class SuperAdminHomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  validar(){
+    this.auth.cerrarSesion();
+  }
 }

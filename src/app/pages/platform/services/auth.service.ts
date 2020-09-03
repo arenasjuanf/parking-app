@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators'
 export class AuthService {
 
   datosUsuario: any; // data De Usuario loggeado
+  sesionActiva: boolean; // variable que almacena si hay sesión o no
 
 
   constructor(
@@ -20,23 +21,28 @@ export class AuthService {
     private dbService: DatabaseService
 
   ) { 
-    this.validarData();
+    // el observable mantiene listo vigilando la sesión
+    this.validarSesion();
   }
 
 
-  validarData(){
+  async validarSesion(){
     this.afAuth.authState.subscribe(user => {
-      console.log('user info: ', user);
-      return;
-      if (user) {
-        this.datosUsuario = user;
-        localStorage.setItem('usuario', JSON.stringify(this.datosUsuario));
-        //JSON.parse(localStorage.getItem('user'));
-      } else {
+      if (user && localStorage.getItem('usuario')) {
+        console.log('hay una sesión activa');
+        this.sesionActiva = true;
+      } else{
+        console.log('sesion cerrada');
         localStorage.setItem('usuario', null);
-        //JSON.parse(localStorage.getItem('usuario'));
+        this.sesionActiva = false;
+        this.router.navigateByUrl('/login');
       }
-    })
+    });
+
+  }
+
+  guardarLS(datosUsuario){
+    localStorage.setItem('usuario', JSON.stringify(datosUsuario));
   }
 
   login(email, password) {
@@ -75,7 +81,7 @@ export class AuthService {
   }
 
   cerrarSesion() {
-    return this.afAuth.signOut().then(() => {})
+    return this.afAuth.signOut();
   }
 
   SetUserData(user) {
@@ -97,7 +103,8 @@ export class AuthService {
     const data = this.dbService.getPorId('usuarios', usuario.uid).snapshotChanges().pipe(
       map(x => x[0].payload.val())
     ).subscribe(usuario => {
-      const ruta = `${usuario['tipoUsuario']}/home`;
+      this.guardarLS(usuario);
+      const ruta = `platform/${usuario['tipoUsuario']}/home`;
       this.router.navigateByUrl(ruta);
     });
   }
