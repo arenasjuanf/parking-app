@@ -3,7 +3,7 @@
   "version": 1, 
   "newProjectRoot": "projects",
   "projects": {
-    "heroesApp": {
+    "parkingApp": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/heroesApp",
+            "outputPath": "dist/parkingApp",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -67,18 +67,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "heroesApp:build"
+            "browserTarget": "parkingApp:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "heroesApp:build:production"
+              "browserTarget": "parkingApp:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "heroesApp:build"
+            "browserTarget": "parkingApp:build"
           }
         },
         "test": {
@@ -120,15 +120,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "heroesApp:serve"
+            "devServerTarget": "parkingApp:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "heroesApp:serve:production"
+              "devServerTarget": "parkingApp:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "heroesApp"
+  "defaultProject": "parkingApp"
 }
