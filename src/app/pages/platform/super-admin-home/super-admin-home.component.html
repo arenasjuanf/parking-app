@@ -1,5 +1,5 @@
 <mat-drawer-container class="h-100 w-100" >
-    <mat-drawer mode="side" opened>
+    <mat-drawer mode="side" #drawer>
         <mat-card class="d-flex">
             <mat-card-header>
                 <mat-card-title>Parking McQueen </mat-card-title>
@@ -7,16 +7,17 @@
             </mat-card-header>
             <i class="fas fa-car fa-2x"></i>
         </mat-card>
-        <mat-list *ngFor="let item of menus">
-            <mat-list-item role="listitem">
+        <mat-selection-list *ngFor="let item of menus" [multiple]="false">
+            <mat-list-option role="listitem" (click)="goTo(item.ruta)">
                 {{item.nombre | titlecase}}
                 <i class="{{item.faIcon}}"></i>
-            </mat-list-item>
+            </mat-list-option>
             <mat-divider></mat-divider>
-        </mat-list>
+        </mat-selection-list>
 
     </mat-drawer>
     <mat-drawer-content>
+        <h3 (click)="drawer.toggle()">accion</h3>
         <router-outlet></router-outlet>
     </mat-drawer-content>
 </mat-drawer-container>

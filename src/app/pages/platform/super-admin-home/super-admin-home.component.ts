@@ -24,6 +24,8 @@ export class SuperAdminHomeComponent implements OnInit {
     this.auth.cerrarSesion();
   }
 
-
+  goTo(ruta){
+    console.log({ruta});
+  }
 
 }
