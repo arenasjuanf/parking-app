@@ -1,4 +1,4 @@
-<div class="container mt-5 h-100 d-flex flex-column justify-content-center">
+<div class="container h-100 d-flex flex-column justify-content-center">
     <div class="row">
         <div class="col-md-6 col-12">
             <div class="logo-container text-center">
@@ -8,31 +8,32 @@
                 <h1 class="titulo_melo text-center">Parking McQueen</h1>
             </div>
         </div>
-        <div class="col-md-6 col-12">
-            <div class="form-container">
-                <h1>
+        <div class="col-md-5 col-12">
+            <div class="form-container h-100 d-flex flex-column justify-content-around">
+                <h1 class="text-center">
                     Iniciar Sesión
                 </h1>
                 <form (ngSubmit)="login(formulario)" #formulario="ngForm">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Correo</label>
-                        <input type="email" class="form-control" placeholder="Enter email" name="email" ngModel required>
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <div class="form-group d-flex flex-column align-items-center justify-content-center">
+                        <!-- <label for="exampleInputEmail1">Correo</label> -->
+                        <input type="email" class="form-control" placeholder="Usuario" name="email" ngModel
+                            required>
+                        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                            else.</small> -->
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Clave</label>
-                        <input type="password" class="form-control" placeholder="Password" name="password" ngModel required>
+                    <div class="form-group d-flex flex-column align-items-center justify-content-center">
+                        <!-- <label for="exampleInputPassword1">Clave</label> -->
+                        <input type="password" class="form-control" placeholder="Contraseña" name="password" ngModel
+                            required>
                     </div>
-
-                    <button type="submit" class="btn btn-primary btn-block">
-                        <i class="fa fa-sign-in" aria-hidden="true"></i>
-                        Ingresar
-                    </button>
+                    <div class="d-flex flex-column align-items-center justify-content-center">
+                        <button type="submit" class="btn btn-primary btn-block w-50">
+                            <i class="fa fa-sign-in" aria-hidden="true"></i>
+                            Ingresar
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
-
-
