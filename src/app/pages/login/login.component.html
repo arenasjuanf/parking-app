@@ -15,6 +15,15 @@
                 </h1>
                 <form (ngSubmit)="login(formulario)" #formulario="ngForm">
                     <div class="form-group d-flex flex-column align-items-center justify-content-center">
+                        <select class="custom-select">
+                            <option selected>Seleccione una opción...</option>
+                            <option value="1">Usuario</option>
+                            <option value="2">Administrador</option>
+                            <option value="3">Empresa</option>
+                            <option value="4">Super admin</option>
+                        </select>
+                    </div>
+                    <div class="form-group d-flex flex-column align-items-center justify-content-center">
                         <!-- <label for="exampleInputEmail1">Correo</label> -->
                         <input type="email" class="form-control" placeholder="Usuario" name="email" ngModel
                             required>
