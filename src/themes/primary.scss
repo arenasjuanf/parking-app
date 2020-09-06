@@ -1,0 +1,39 @@
+//  https://material.io/design/color/#
+@import "~@angular/material/theming";
+// Plus importa para otros componentes en su aplicación.
+
+$mat-myapp-primary: (
+  50: #fde9e9,
+  100: #fac7c8,
+  200: #f7a2a3,
+  300: #f37d7e,
+  400: #f16162,
+  500: #ee4546,
+  600: #ec3e3f,
+  700: #e93637,
+  800: #e72e2f,
+  900: #e21f20,
+  A100: #ffffff,
+  A200: #ffe5e6,
+  A400: #ffb3b3,
+  A700: #ff9999,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
+);
+
+// Definir el tema por defecto (igual que el ejemplo anterior).
+$red-palette: $mat-myapp-primary;

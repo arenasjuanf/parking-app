@@ -1,0 +1,61 @@
+//  https://material.angular.io/guide/theming
+//  https://material.angular.io/guide/theming-your-components
+
+@import "~@angular/material/theming";
+
+@mixin typography($tipografia-personalizada) {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  strong,
+  span,
+  a,
+  p {
+    font-family: $fuente;
+  }
+}
+
+//=================
+//ESTILOS GENERALES
+//=================
+
+// Estos son los elementos que tomara progresivamente a medida que se declaren,
+// Recordar que en este caso el orden altera el producto.
+//  $font-size
+//  $line-height
+//  $font-weight
+//  $font-family
+//  $letter-spacing
+
+// Este sera nuestro tipografia-personalizada, en donde asignaremos nuestros valores de los parametros
+// Recordar que para asignar valores este tomara parametros por defecto que se declaran directamente
+// en _theming.scss de sass
+$fuente: "Montserrat", sans-serif;
+$tipografia-personalizada: mat-typography-config(
+  $font-family: $fuente,
+  $display-2: mat-typography-level(50px, 24px, 500),
+  $display-4: mat-typography-level(60px, 60px, 500),
+  $display-1: mat-typography-level(16px, 56px, 700),
+  $headline: mat-typography-level(39px, 37px, 300),
+  $title: mat-typography-level(17pt, 42px, 500),
+  $subheading-2: mat-typography-level(20pt, 42px, 500),
+  $subheading-1: mat-typography-level(15px, 24px, 400),
+  $body-2: mat-typography-level(14px, 24px, 500),
+  $body-1: mat-typography-level(15px, 20px, 400),
+  $caption: mat-typography-level(12px, 20px, 400),
+  $button: mat-typography-level(15px, 15px, 500),
+  // Line-height must be unit-less fraction of the font-size. $input: mat-typography-level(inherit, 1.125, 400)
+);
+
+// Con esta Funcion asignamos los valores por defecto de toda la aplicación,
+// Override Tipografía para todo el material angular, incluida la tipografía de base mat y todos los componentes.
+@include angular-material-typography($tipografia-personalizada);
+@include typography($tipografia-personalizada);
+
+// Incluir los estilos comunes para Material Angular. Incluimos esto aquí para que solo
+// tiene que cargar un solo archivo css para material angular en su aplicación.
+// ** ¡Asegúrate de que solo incluyas esta mezcla una vez! **
+@include mat-core($tipografia-personalizada);

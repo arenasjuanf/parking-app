@@ -1,0 +1,21 @@
+
+mat-drawer-container{
+  mat-drawer{
+    width: 20% !important;
+  }
+  mat-drawer-content{
+    margin-left: 20% !important;
+  }
+
+  mat-list{
+    mat-list-item::ng-deep{
+      .mat-list-item-content{
+        display: flex !important;
+        justify-content: space-between !important;
+        width: 100%;
+      }
+      
+    }
+  }
+
+}

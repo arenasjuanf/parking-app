@@ -1,1 +1,23 @@
-<p (click)="validar()">super-admin-home works!</p>
+<mat-drawer-container class="h-100 w-100" >
+    <mat-drawer mode="side" opened>
+        <mat-card class="d-flex">
+            <mat-card-header>
+                <mat-card-title>Parking McQueen </mat-card-title>
+                <mat-card-subtitle>{{ fecha | date:'medium' }}</mat-card-subtitle>
+            </mat-card-header>
+            <i class="fas fa-car fa-2x"></i>
+        </mat-card>
+        <mat-list *ngFor="let item of menus">
+            <mat-list-item role="listitem">
+                {{item.nombre | titlecase}}
+                <i class="{{item.faIcon}}"></i>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+        </mat-list>
+
+    </mat-drawer>
+    <mat-drawer-content>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>
+

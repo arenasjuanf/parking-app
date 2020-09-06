@@ -103,8 +103,9 @@ export class AuthService {
     const data = this.dbService.getPorId('usuarios', usuario.uid).snapshotChanges().pipe(
       map(x => x[0].payload.val())
     ).subscribe(usuario => {
+      console.log(usuario);
       this.guardarLS(usuario);
-      const ruta = `platform/${usuario['tipoUsuario']}/home`;
+      const ruta = `platform/${usuario['tipoUsuario']}`;
       this.router.navigateByUrl(ruta);
     });
   }
