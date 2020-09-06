@@ -52,7 +52,7 @@ export class AuthService {
           this.validarTipoUser(result.user);
         }
       }).catch((error) => {
-        console.log('error');
+        window.alert(error);
       });
   }
 
