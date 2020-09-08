@@ -7,12 +7,13 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./super-admin-home.component.scss']
 })
 export class SuperAdminHomeComponent implements OnInit {
+  opened: boolean = true;
 
   constructor(public auth: AuthService) { }
   
   public menus:object[] = [
     { nombre: 'parqueaderos', ruta: '/parqueaderos', faIcon: 'fas fa-parking  fa-lg'},
-    { nombre: 'historial de usuarios', ruta: '/usuarios', faIcon: 'fas fa-users  fa-lg' },
+    { nombre: 'usuarios', ruta: '/usuarios', faIcon: 'fas fa-users  fa-lg' },
 
   ];
 
@@ -26,6 +27,10 @@ export class SuperAdminHomeComponent implements OnInit {
 
   goTo(ruta){
     console.log({ruta});
+  }
+
+  panel(drawer){
+    this.opened = drawer.opened;
   }
 
 }

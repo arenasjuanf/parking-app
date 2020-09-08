@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
-
 const MODULES = [
     CommonModule,
     MatInputModule,

@@ -3,9 +3,14 @@ mat-drawer-container{
   mat-drawer{
     width: 20% !important;
   }
-  mat-drawer-content{
-    margin-left: 20% !important;
+  .indicadorPanel{
+    width: 15px;
+    background-color: #d8d8d8;
+    border-radius: 0px 10px 10px 0px;
+    border: 1px solid lightgray;
+    cursor: pointer;
   }
+
 
   mat-list{
     mat-list-item::ng-deep{
@@ -14,7 +19,32 @@ mat-drawer-container{
         justify-content: space-between !important;
         width: 100%;
       }
-      
+    }
+  }
+
+  .permisos{
+    width: 100%;
+    .permiso{
+      margin-bottom: 2px;
+      width: 100%;
+      ::ng-deep{
+        .mat-button-wrapper{
+          display: flex;
+          justify-content: space-between;
+          p{
+            margin: 0px;
+          }
+          i{
+            margin-top:auto;
+            margin-bottom: auto;
+          }
+
+        }
+      }
+    }
+    .permiso:hover{
+      background-color: #5152a9;
+      color: white;
     }
   }
 
