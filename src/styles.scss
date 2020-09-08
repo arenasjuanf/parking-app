@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800,900&display=swap");
+@import "~@angular/material/theming";
+@import "~animate.css/animate.min";
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+@import "~@angular/material/theming";
+// https://getbootstrap.com/docs/4.0/layout/grid/
+// https://daneden.github.io/animate.css/
+/* You can add global styles to this file, and also import other style files */
+@import "./themes/principal.scss";
+@import "~@angular/material/theming";
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+/* Add application styles & imports to this file! */
+@import "~@angular/material/theming";
+@import "./themes/primary.scss";
+@import "./themes/secondary.scss";
+@import "./themes/warn.scss";
+@import "./themes/accent.scss";
+
+$primary: mat-palette($red-palette);
+$warn: mat-palette($orange-palette);
+$accent: mat-palette($green-palette);
+
+$theme: mat-light-theme($primary, $accent, $warn);
+
+@include angular-material-theme($theme);

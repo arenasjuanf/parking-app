@@ -1,0 +1,39 @@
+//  https://material.io/design/color/#
+@import "~@angular/material/theming";
+// Plus importa para otros componentes en su aplicación.
+
+$mat-myapp-warn: (
+  50: #fef3ea,
+  100: #fce2cb,
+  200: #facfa8,
+  300: #f8bc85,
+  400: #f7ad6b,
+  500: #f59f51,
+  600: #f4974a,
+  700: #f28d40,
+  800: #f08337,
+  900: #ee7227,
+  A100: #ffffff,
+  A200: #fff9f6,
+  A400: #ffd8c3,
+  A700: #ffc8aa,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
+);
+
+// Definir el tema por defecto (igual que el ejemplo anterior).
+$orange-palette: $mat-myapp-warn;

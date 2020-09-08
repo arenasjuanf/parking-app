@@ -24,7 +24,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
+              "src/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
@@ -129,10 +129,6 @@
           }
         }
       }
-    }
-  },
-  "defaultProject": "parkingApp",
-  "cli": {
-    "analytics": "e0cca588-8773-465d-9c24-38f10885086a"
-  }
+    }},
+  "defaultProject": "parkingApp"
 }
