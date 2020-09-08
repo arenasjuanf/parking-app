@@ -1,16 +1,24 @@
 .form-container{
-    border: 1px solid;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: lightgray;
+  border: 1px solid;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgba(176, 173, 173, 0.5);
 }
 
 .titulo_melo {
-    font-size: 4rem;
-      font-weight: bold;
-    font-family: sans-serif;
-    color: white;
-    background: linear-gradient(to bottom, #016486 0%, #92888d 100%);;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  font-size: 4rem;
+    font-weight: bold;
+  font-family: sans-serif;
+  color: white;
+  background: linear-gradient(to bottom, #016486 0%, #92888d 100%);;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* .container {
+background-image: url('https://www.xtrafondos.com/thumbs/1_5058.jpg');
+background-repeat: no-repeat;
+background-size: 100%;
+} */
+input, select {
+width: 90%;
 }
