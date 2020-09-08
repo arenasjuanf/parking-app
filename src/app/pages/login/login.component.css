@@ -19,6 +19,6 @@ background-image: url('https://www.xtrafondos.com/thumbs/1_5058.jpg');
 background-repeat: no-repeat;
 background-size: 100%;
 } */
-input, select {
-width: 90%;
+input {
+  width: 90%;
 }
