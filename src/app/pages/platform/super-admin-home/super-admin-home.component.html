@@ -1,24 +1,22 @@
 <mat-drawer-container class="h-100 w-100" >
     <mat-drawer mode="side" #drawer [(opened)]="opened">
-        <mat-card class="d-flex">
-            <mat-card-header>
-                <mat-card-title>Parking McQueen </mat-card-title>
-                <mat-card-subtitle>{{ fecha | date:'medium' }}</mat-card-subtitle>
-            </mat-card-header>
-            <i class="fas fa-car fa-2x"></i>
+        <mat-card >
+            <div class="d-flex">
+                <mat-card-header>
+                    <mat-card-title>Parking McQueen </mat-card-title>
+                    <mat-card-subtitle>{{ fecha | date:'medium' }}</mat-card-subtitle>
+                </mat-card-header>
+                <i class="fas fa-car fa-2x"></i>
+            </div>
+            <button class="btn btn-primary btn-block" (click)="logout()">
+                Cerrar Sesión <i class="fas fa-sign-out-alt"></i>
+            </button>
         </mat-card>
-        <!-- <mat-selection-list  [multiple]="false">
-            <mat-list-option role="listitem" (click)="goTo(item.ruta)" *ngFor="let item of menus" class="d-flex">
-                <div></div>
-                <mat-icon aria-hidden="false">home</mat-icon>
-            </mat-list-option>
-            <mat-divider></mat-divider>
-        </mat-selection-list> -->
+
         <div class="permisos">
-            <button class="permiso" *ngFor="let item of menus"  mat-raised-button>
+            <button class="permiso" *ngFor="let item of menus"  mat-raised-button (click)="goTo(item.ruta)"  [ngClass]="{'activo': '/platform/superAdmin'+item.ruta == rutaActual}">
                 <p>{{item.nombre | titlecase}} </p>
                 <i class="{{item.faIcon}}"></i>
-
             </button>
         </div>
         

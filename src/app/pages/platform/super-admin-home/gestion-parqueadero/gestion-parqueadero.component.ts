@@ -1,0 +1,119 @@
+import { Component, OnInit, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { DatabaseService } from '../../services/database.service';
+import { AuthService } from '../../services/auth.service';
+
+@Component({
+  selector: 'app-gestion-parqueadero',
+  templateUrl: './gestion-parqueadero.component.html',
+  styleUrls: ['./gestion-parqueadero.component.scss']
+})
+export class GestionParqueaderoComponent implements OnInit {
+
+  form: FormGroup;
+  mostrarTabla: boolean = false;
+  imagenDefecto: any = './../../../../../assets/images/logo.jpg';
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private fb: FormBuilder,
+    private dbService: DatabaseService,
+    private dialogRef: MatDialogRef<GestionParqueaderoComponent>,
+    public auth: AuthService
+  ) { 
+    this.initForm();
+  }
+
+  ngOnInit(): void {
+  }
+
+  initForm() {
+    this.form = this.fb.group({
+      logo: ['', Validators.required],
+      nit: ['', Validators.required],
+      razonSocial: ['', Validators.required],
+      nombrePropietario: ['', Validators.required],
+      paginaWeb: [''],
+      correo: ['',[Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")]],
+      direccion: ['', Validators.required],
+      cantidadPisos: [1, Validators.required],
+      capacidadCarros: ['', Validators.required],
+      capacidadMotos: ['', Validators.required],
+      telefono: ['', Validators.required],
+      pisos: this.fb.array([
+        this.fb.group({
+          piso: [1, Validators.required],
+          cantidadCarros: ['', Validators.required],
+          cantidadMotos: ['', Validators.required]
+        })
+      ])
+    });
+  }
+
+
+  get pisos(){
+    return this.form.get('pisos') as FormArray;
+  }
+
+  async subirfoto(evento){
+    const file = evento.target.files[0];
+    const str = await this.toBase64(file);
+    this.imagenDefecto = str;
+    this.form.get('logo').setValue(str);
+  }
+
+  toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+
+  setImagenDefecto(){
+    this.imagenDefecto = './../../../../../assets/images/logo.jpg';
+  }
+
+  registrarParqueadero(){
+    if(this.form.valid){
+      this.dbService.addData('parqueaderos', this.form.value).then(res => {
+        console.log(res.key);
+        this.registrarAdmin(res.key);
+      })
+    }
+  }
+
+  registrarAdmin(idParqueadero) {
+    const data = {
+      parqueaderos: [idParqueadero],
+      tipoUsuario: 'admin'
+    };
+    const email = this.form.value['correo'];
+    const pass = this.form.value['nit'];
+    this.auth.registrarAdmin(email, pass, data ).then(result => {
+      this.dialogRef.close();
+    }).catch(error => {
+      console.log('error registro: ', error);
+    });
+  }
+
+  gestionarPisos(agregar){
+    let pisos = this.form.get('pisos') as FormArray;
+    let valor = this.form.get('cantidadPisos').value;
+
+    if(agregar){
+      valor +=1;
+      pisos.push(this.fb.group({
+        piso: [valor, Validators.required],
+        cantidadCarros: ['', Validators.required],
+        cantidadMotos: ['', Validators.required]
+      }));
+
+    }else{
+      valor -=1;
+      pisos.removeAt(valor-1);
+    }
+    this.form.get('cantidadPisos').setValue(valor);
+  }
+
+
+}

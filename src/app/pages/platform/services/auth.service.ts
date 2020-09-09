@@ -66,6 +66,26 @@ export class AuthService {
       })
   }
 
+  registrarAdmin(email, password, data) {
+    return this.afAuth.createUserWithEmailAndPassword(email, password)
+      .then((result) => {
+
+        const user = {
+
+          ...data,
+          uid: result.user.uid,
+          email: result.user.email,
+          displayName: result.user.displayName,
+          emailVerified: result.user.emailVerified
+        }
+        console.log('usususususuer : ', user);
+        this.SetUserData(user, true);
+
+      }).catch((error) => {
+        window.alert(error.message);
+      });
+  }
+
   recuperarClave(passwordResetEmail) {
     return this.afAuth.sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
@@ -84,10 +104,10 @@ export class AuthService {
     return this.afAuth.signOut();
   }
 
-  SetUserData(user) {
+  SetUserData(user, admin?) {
 
     /* const userRef = this.afs.collection('usuarios'); */
-    const userData = {
+    const userData = admin ? user : {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
@@ -95,8 +115,10 @@ export class AuthService {
     }
 
     this.dbService.addData('usuarios', userData).then( res => {
-      console.log('res: ', res);
-    })
+      console.log('res setUserData: ', res);
+    }).catch(error => {
+      console.log('error: ', error);
+    });
   }
 
   validarTipoUser(usuario){

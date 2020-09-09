@@ -1,1 +1,39 @@
-<p>parqueaderos works!</p>
+
+<div class="contenedor">
+    <mat-card class="d-flex justify-content-between">
+        <h3>Parqueaderos </h3>
+        <button mat-raised-button (click)="abrirModal()">
+            <i class="fas fa-plus"></i> 
+            Agregar Parqueadero
+        </button>
+    </mat-card>
+
+    <div class="contenedor-tabla">
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Logo</th>
+                    <th scope="col">Documento</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of listaParqueaderos">
+                    <td class="logo_container align-middle">
+                       
+                        <img class="logo" [src]="item.logo">
+                        
+                    </td>
+                    <td class="align-middle">{{ item.nit }}</td>
+                    <td class="align-middle">{{ item.razonSocial | titlecase}}</td>
+                    <td class="align-middle">{{ item.telefono }}</td>
+                    <td class="align-middle">Botoncitos</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
