@@ -42,7 +42,8 @@ mat-drawer-container{
         }
       }
     }
-    .permiso:hover{
+
+    .permiso:hover, .activo{
       background-color: #5152a9;
       color: white;
     }

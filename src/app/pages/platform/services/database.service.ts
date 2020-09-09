@@ -12,6 +12,7 @@ export class DatabaseService {
   private dataPrueba: AngularFireList<any>;
   private usuarios: AngularFireList<any>;
   private vehiculos: AngularFireList<any>;
+  private parqueaderos: AngularFireList<any>;
 
 
 
@@ -26,6 +27,7 @@ export class DatabaseService {
     this.dataPrueba = this.db.list('/dataPrueba');
     this.usuarios = this.db.list('/usuarios');
     this.vehiculos = this.db.list('/vehiculos');
+    this.parqueaderos = this.db.list('/parqueaderos');
   }
 
 

@@ -11,12 +11,18 @@ import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { HistorialUsuariosComponent } from './historial-usuarios/historial-usuarios.component';
+import { GestionParqueaderoComponent } from './gestion-parqueadero/gestion-parqueadero.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     SuperAdminHomeComponent,
-    ParqueaderosComponent
+    ParqueaderosComponent,
+    HistorialUsuariosComponent,
+    GestionParqueaderoComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +35,10 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     MatListModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 
 })
