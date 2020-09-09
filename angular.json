@@ -129,6 +129,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "parkingApp"
+    }
+  },
+  "defaultProject": "parkingApp",
+  "cli": {
+    "analytics": "9fc4aaa6-7474-48c5-b269-3b2a2841d96c"
+  }
 }
