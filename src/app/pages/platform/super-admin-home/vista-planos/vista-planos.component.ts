@@ -13,7 +13,14 @@ export class VistaPlanosComponent implements OnInit {
     public dialogRef: MatDialogRef<VistaPlanosComponent>,
   ) {
     this.data.forEach(piso => {
-      const puestos = piso.carros.concat(piso.motos);
+      let puestos = [];
+      if(!piso.motos && piso.carros){
+        puestos = piso.carros;
+      } else if (!piso.carros && piso.motos){
+        puestos = piso.motos;
+      }else{
+        puestos = piso.carros.concat(piso.motos);
+      }
       piso.puestos = puestos;
     });
     console.log(this.data);
