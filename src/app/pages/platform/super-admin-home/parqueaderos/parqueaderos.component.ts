@@ -32,8 +32,9 @@ export class ParqueaderosComponent implements OnInit {
     }
     this.dialog.open(GestionParqueaderoComponent, {
       data,
-      maxWidth: 700,
-      maxHeight: 600
+      maxWidth: 900,
+      maxHeight: 700,
+      disableClose: true
     });
   }
 
@@ -46,6 +47,5 @@ export class ParqueaderosComponent implements OnInit {
       this.listaParqueaderos = result;
     });
   }
-
 
 }

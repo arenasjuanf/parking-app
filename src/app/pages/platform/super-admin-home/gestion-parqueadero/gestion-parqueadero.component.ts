@@ -1,8 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { DatabaseService } from '../../services/database.service';
 import { AuthService } from '../../services/auth.service';
+import { constantes } from 'src/app/constantes';
+import { VistaPlanosComponent } from '../vista-planos/vista-planos.component';
 
 @Component({
   selector: 'app-gestion-parqueadero',
@@ -13,13 +15,14 @@ export class GestionParqueaderoComponent implements OnInit {
 
   form: FormGroup;
   mostrarTabla: boolean = false;
-  imagenDefecto: any = './../../../../../assets/images/logo.jpg';
+  imagenDefecto:any = constantes.logoDefecto;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
     private dbService: DatabaseService,
-    private dialogRef: MatDialogRef<GestionParqueaderoComponent>,
-    public auth: AuthService
+    public dialogRef: MatDialogRef<GestionParqueaderoComponent>,
+    public auth: AuthService,
+    public dialog: MatDialog
   ) { 
     this.initForm();
   }
@@ -46,8 +49,16 @@ export class GestionParqueaderoComponent implements OnInit {
           cantidadCarros: ['', Validators.required],
           cantidadMotos: ['', Validators.required]
         })
-      ])
+      ]),
+      plano:[[], Validators.required]
     });
+
+    this.form.get('pisos').valueChanges.subscribe(cambios => {
+      if (this.form.get('pisos').valid){
+        this.visualizarPlano();
+      }
+    });
+
   }
 
 
@@ -57,9 +68,11 @@ export class GestionParqueaderoComponent implements OnInit {
 
   async subirfoto(evento){
     const file = evento.target.files[0];
-    const str = await this.toBase64(file);
-    this.imagenDefecto = str;
-    this.form.get('logo').setValue(str);
+    if(file){
+      const str = await this.toBase64(file);
+      this.imagenDefecto = str;
+      this.form.get('logo').setValue(str);
+    }
   }
 
   toBase64 = file => new Promise((resolve, reject) => {
@@ -67,10 +80,10 @@ export class GestionParqueaderoComponent implements OnInit {
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result);
     reader.onerror = error => reject(error);
-  });
+  })
 
   setImagenDefecto(){
-    this.imagenDefecto = './../../../../../assets/images/logo.jpg';
+    this.imagenDefecto = constantes.logoDefecto;
   }
 
   registrarParqueadero(){
@@ -115,5 +128,52 @@ export class GestionParqueaderoComponent implements OnInit {
     this.form.get('cantidadPisos').setValue(valor);
   }
 
+  visualizarPlano(mostrar?){
+    const plano  = [];
+    const pisos = this.form.get('pisos').value;
+
+    pisos.forEach(element => {
+      let cont = 1;
+      const objPiso = {};
+      objPiso['piso'] = element.piso;
+      if(element.cantidadCarros){
+        const carros = [];
+        for(let i = 1; i <= element.cantidadCarros ; i++){
+          const objPuestoCarro = {};
+          objPuestoCarro['puesto'] = cont + (element.piso * 100);
+          objPuestoCarro['clase'] = 'carro';
+          cont++;
+          carros.push(objPuestoCarro);
+        }
+        objPiso['carros'] = carros;
+      }
+      if (element.cantidadMotos) {
+        const motos = [];
+        for (let i = 1; i <= element.cantidadMotos; i++) {
+          const objPuestoCarro = {};
+          objPuestoCarro['puesto'] = cont + (element.piso * 100);
+          objPuestoCarro['clase'] = 'moto';
+          cont++;
+          motos.push(objPuestoCarro);
+        }
+        objPiso['motos'] = motos;
+      }
+
+      plano.push(objPiso);
+    });
+
+    this.form.get('plano').setValue(plano);
+
+    if (mostrar) {
+      this.dialog.open(VistaPlanosComponent, {
+        data: plano,
+        maxWidth: 700,
+        maxHeight: 600,
+        minHeight: 600,
+        minWidth: 700
+      })
+    }
+
+  }
 
 }
