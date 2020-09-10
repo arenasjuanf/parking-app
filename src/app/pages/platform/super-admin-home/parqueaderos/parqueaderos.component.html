@@ -12,11 +12,11 @@
         <table class="table">
             <thead class="thead-light">
                 <tr>
-                    <th scope="col">Logo</th>
-                    <th scope="col">Documento</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Telefono</th>
-                    <th scope="col">Acciones</th>
+                    <th scope="col" class="text-center" >Logo</th>
+                    <th scope="col" class="text-center" >Documento</th>
+                    <th scope="col" class="text-center" >Nombre</th>
+                    <th scope="col" class="text-center" >Telefono</th>
+                    <th scope="col" class="text-center" >Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,10 +26,23 @@
                         <img class="logo" [src]="item.logo">
                         
                     </td>
-                    <td class="align-middle">{{ item.nit }}</td>
-                    <td class="align-middle">{{ item.razonSocial | titlecase}}</td>
-                    <td class="align-middle">{{ item.telefono }}</td>
-                    <td class="align-middle">Botoncitos</td>
+                    <td class="align-middle text-center">{{ item.nit }}</td>
+                    <td class="align-middle text-center">{{ item.razonSocial | titlecase}}</td>
+                    <td class="align-middle text-center">{{ item.telefono }}</td>
+                    <td class="align-middle text-center">
+                        <button type="button" class="btn btn-outline-primary">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <button type="button" class="btn btn-outline-success">
+                            <i class="far fa-check-square"></i>
+                        </button>
+                        <button type="button" class="btn btn-outline-danger">
+                            <i class="fas fa-share"></i>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>

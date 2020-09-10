@@ -1,4 +1,10 @@
 <div class="m-2">
+    <div class="text-right">
+        <button class="btn  btn-outline-danger" (click)="dialogRef.close()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    
     <form [formGroup]="form">
         <div class="row">
     
@@ -83,42 +89,58 @@
             </div>
         </div>
         <div class="row">
+
             <div class="col-3 d-flex flex-column justify-content-end">
-                <button type="button" class="btn btn-primary mt-2" [disabled]="!form.get('cantidadPisos').valid">
-                    Agregar Plano
+                <button type="button" class="btn btn-primary mt-2" (click)="visualizarPlano(true)" [disabled]="!form.get('pisos').valid">
+                    Visualizar Plano
                 </button>
-                <button class="btn btn-primary mt-2" (click)="registrarParqueadero()" [disabled]="!form.valid">
+                <button type="button" class="btn btn-primary mt-2" (click)="registrarParqueadero()" [disabled]="!form.valid">
                     Registrar
                 </button>
             </div>
-            <table class="col-9">
-                <thead class="thead-dark">
-                    <tr>
-                        <th class="text-center" > Piso</th>
-                        <th class="text-center" > Nº Carros</th>
-                        <th class="text-center" > Nº Motos</th>
-                    </tr>
-                </thead>
-                <tbody formArrayName="pisos">
-                    <tr *ngFor="let control of pisos.controls; let i = index;">
-                        <th class="text-center">{{i+1}}</th>
-                        <td [formGroupName]="i" class="text-center">
-                            <mat-form-field appearance="outline" >
-                                <mat-label>Nº Carros</mat-label>
-                                <input matInput type="number" formControlName="cantidadCarros">
-                            </mat-form-field>
-                        </td>
-                        <td [formGroupName]="i" class="text-center">
-                            <mat-form-field appearance="outline" >
-                                <mat-label>Nº Motos</mat-label>
-                                <input matInput type="number" formControlName="cantidadMotos">
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            
+            <mat-accordion class="col-9">
+                <mat-expansion-panel >
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Plano de parqueadero
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            Asigna Pisos Y Cupos
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-center"> Piso</th>
+                                <th class="text-center"> Nº Carros</th>
+                                <th class="text-center"> Nº Motos</th>
+                            </tr>
+                        </thead>
+                        <tbody formArrayName="pisos">
+                            <tr *ngFor="let control of pisos.controls; let i = index;">
+                                <th class="text-center">{{i+1}}</th>
+                                <td [formGroupName]="i" class="text-center">
+                                    <mat-form-field appearance="outline" class="w-75">
+                                        <mat-label>Nº Carros</mat-label>
+                                        <input matInput type="number" formControlName="cantidadCarros">
+                                    </mat-form-field>
+                                </td>
+                                <td [formGroupName]="i" class="text-center">
+                                    <mat-form-field appearance="outline" class="w-75">
+                                        <mat-label>Nº Motos</mat-label>
+                                        <input matInput type="number" formControlName="cantidadMotos">
+                                    </mat-form-field>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+
+                    
+                </mat-expansion-panel>
+            </mat-accordion>
         </div>
-    
     </form>
 </div>

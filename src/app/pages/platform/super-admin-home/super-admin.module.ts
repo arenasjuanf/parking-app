@@ -15,6 +15,8 @@ import { HistorialUsuariosComponent } from './historial-usuarios/historial-usuar
 import { GestionParqueaderoComponent } from './gestion-parqueadero/gestion-parqueadero.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { VistaPlanosComponent } from './vista-planos/vista-planos.component';
 
 
 @NgModule({
@@ -22,7 +24,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SuperAdminHomeComponent,
     ParqueaderosComponent,
     HistorialUsuariosComponent,
-    GestionParqueaderoComponent
+    GestionParqueaderoComponent,
+    VistaPlanosComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +41,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     MatDialogModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatExpansionModule
   ]
 
 })
