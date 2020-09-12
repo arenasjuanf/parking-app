@@ -2,10 +2,25 @@
   <mat-card class="d-flex justify-content-between">
     <h3>Historial Usuarios</h3>
   </mat-card>
+  <mat-card class="border-search">
+    <div class="container-options d-flex align-items-center justify-content-center">
+      <mat-form-field appearance="outline">
+        <mat-label>Documento o nombre del usuario</mat-label>
+        <input matInput type="text" min="1">
+        <span matPrefix>
+          <mat-icon>search</mat-icon>
+        </span>
+      </mat-form-field>
+      <button mat-flat-button color="accent">
+        <mat-icon>search</mat-icon>
+        <span>Buscar</span>
+      </button>
+    </div>
+  </mat-card>
   <div class="contenedor-lista">
     <div class="item-lista" *ngFor="let item of listUsers;">
       <mat-accordion class="example-headers-align" multi>
-        <mat-expansion-panel>
+        <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>{{ item['email'] }}</mat-panel-title>
             <mat-panel-description>
@@ -14,18 +29,26 @@
           </mat-expansion-panel-header>
           <div class="container-info-parking">
             <div class="header">
-              <div>Parqueadero</div>
-              <div>Vehiculo</div>
-              <div>Fecha</div>
-              <div>Hora ingreso</div>
-              <div>Hora salida</div>
+              <span class="item">Parqueadero</span>
+              <span class="item">Vehiculo</span>
+              <span class="item">Fecha</span>
+              <span class="item">Hora ingreso</span>
+              <span class="item">Hora salida</span>
+              <span></span>
+              <span></span>
             </div>
             <div class="content">
-              <div>{{ item['email'] }}</div>
-              <div>{{ item['email'] }}</div>
-              <div>{{ item['email'] }}</div>
-              <div>{{ item['email'] }}</div>
-              <div>{{ item['email'] }}</div>
+              <span class="item">{{ item['email'] }}</span>
+              <span class="item">{{ item['email'] }}</span>
+              <span class="item">{{ item['email'] }}</span>
+              <span class="item">{{ item['email'] }}</span>
+              <span class="item">{{ item['email'] }}</span>
+              <span class="btn btn-outline-primary">
+                <i class="fas fa-edit"></i>
+              </span>
+              <span class="btn btn-outline-secondary">
+                <i class="far fa-eye"></i>
+              </span>
             </div>
           </div>
         </mat-expansion-panel>
