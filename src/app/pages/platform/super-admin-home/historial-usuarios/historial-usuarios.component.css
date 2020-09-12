@@ -1,0 +1,14 @@
+.contenedor-lista {
+  padding: 15px;
+}
+.item-lista{
+  margin-bottom: 15px;
+}
+.container-info-parking .header,
+.container-info-parking .content {
+  display: flex;
+}
+.container-info-parking .header div,
+.container-info-parking .content div {
+  width: 20%;
+}
