@@ -36,7 +36,7 @@ export class DatabaseService {
   // nombre_coleccion = nombre de la referencia de la coleccion
   // obj = Objeto estructurado de la data a guardar
   addData(nombre_coleccion: string, obj: any) {
-    return this[nombre_coleccion].push(obj);
+    return this.afs.collection(`/${nombre_coleccion}`).add(obj);
   }
 
   // descripción: Borrar un Jugador de la DB
@@ -51,21 +51,27 @@ export class DatabaseService {
   // parametros: 
   // nombre_coleccion = nombre de la referencia de la coleccion
   getData(nombre_coleccion: string): Observable<any[]> {
-    return this[nombre_coleccion].snapshotChanges();
+    return this.afs.collection(nombre_coleccion).snapshotChanges();
   }
 
   getPorId(nombre_coleccion, uid){
-    return this.db.list(`/${nombre_coleccion}`, ref => ref.orderByChild('uid').equalTo(uid));
+    return this.afs.collection(nombre_coleccion, ref => ref.where('uid', '==', uid));
+  }
+
+  getPorFiltro(nombre_coleccion, filtro, valor) {
+    return this.afs.collection(`/${nombre_coleccion}`, ref =>
+      ref.where(filtro, '==', valor)
+    );
   }
 
 
   // descripción: modifica documento especificando coleccion y id
   // parametros: 
   // nombre_coleccion = nombre de la referencia de la coleccion
-  // uid = id documento
+  // id = id documento
   // data: nuevos datos a ingresar
-  modificar(nombre_coleccion, uid, data){
-    return this[nombre_coleccion].update(uid, data);
+  modificar(nombre_coleccion, id, data){
+    return this.afs.collection(nombre_coleccion).doc(id).set(data, {merge: true});
   }
 
 

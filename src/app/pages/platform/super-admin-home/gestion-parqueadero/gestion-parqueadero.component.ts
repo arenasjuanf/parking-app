@@ -96,8 +96,9 @@ export class GestionParqueaderoComponent implements OnInit {
   registrarParqueadero(){
     if(this.form.valid){
       this.dbService.addData('parqueaderos', this.form.value).then(res => {
-        console.log(res.key);
-        this.registrarAdmin(res.key);
+        console.log('respuesta agregar parqueadero ',res);
+        console.log(res.id)
+        this.registrarAdmin(res.id);
       })
     }
   }
@@ -105,7 +106,8 @@ export class GestionParqueaderoComponent implements OnInit {
   registrarAdmin(idParqueadero) {
     const data = {
       parqueaderos: [idParqueadero],
-      tipoUsuario: 'admin'
+      tipoUsuario: 'admin',
+      nombre: this.form.get('nombrePropietario').value
     };
     const email = this.form.value['correo'];
     const pass = this.form.value['nit'];
@@ -215,7 +217,7 @@ export class GestionParqueaderoComponent implements OnInit {
         console.log('modificar: ', this.dataRecibida.key);
         this.dbService.modificar('parqueaderos', this.dataRecibida.key, this.form.value).then(
           result => {
-            console.log('resultado modificar: ', result)
+            console.log('parqueadero actualizado');
           }
         ).catch( error => {
           console.log('error modificar :', error);

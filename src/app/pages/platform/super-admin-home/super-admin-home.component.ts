@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { PerfilComponent } from './perfil/perfil.component';
 
 @Component({
   selector: 'app-super-admin-home',
@@ -12,7 +14,7 @@ export class SuperAdminHomeComponent implements OnInit {
   rutaActual:string;
   usuario:any;
 
-  constructor(public auth: AuthService, private router: Router) {
+  constructor(public auth: AuthService, private router: Router, public dialog: MatDialog) {
     this.rutaActual = this.router.url;
     this.usuario = JSON.parse(localStorage.getItem('usuario'));
   }
@@ -43,6 +45,15 @@ export class SuperAdminHomeComponent implements OnInit {
 
   logout(){
     this.auth.cerrarSesion();
+  }
+
+  editarPerfil(){
+    this.dialog.open(PerfilComponent, {
+      data: {},
+      height: '500px',
+      width: '600px',
+      disableClose: true
+    });
   }
 
 }

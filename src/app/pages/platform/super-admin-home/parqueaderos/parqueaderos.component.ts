@@ -42,7 +42,7 @@ export class ParqueaderosComponent implements OnInit {
   getParqueaderos(){
     this.dbService.getData('parqueaderos').pipe(
       map((x:any[]) => {
-        return x.map(park => ({  ...park.payload.val(), key: park.key }));
+        return x.map(park => ({  ...park.payload.doc.data(), key: park.payload.doc.id }));
       })
     ).subscribe(result =>{
       this.listaParqueaderos = result;

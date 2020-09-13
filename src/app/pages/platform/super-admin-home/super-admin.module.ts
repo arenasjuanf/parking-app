@@ -18,6 +18,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { VistaPlanosComponent } from './vista-planos/vista-planos.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { PerfilComponent } from './perfil/perfil.component';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ParqueaderosComponent,
     HistorialUsuariosComponent,
     GestionParqueaderoComponent,
-    VistaPlanosComponent
+    VistaPlanosComponent,
+    PerfilComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +47,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     FormsModule,
     ReactiveFormsModule,
     MatExpansionModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSelectModule
   ]
 
 })
