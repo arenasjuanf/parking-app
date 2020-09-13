@@ -76,9 +76,9 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-2">
-            <div class="order-2 order-md-1 col-12 col-md-3 mt-2 mt-md-0 d-flex flex-column justify-content-start">
-                <button type="button" class="btn btn-primary mt-2" (click)="visualizarPlano(true)" [disabled]="!form.get('pisos').valid">
+        <div class="row">
+            <div class="col-3 d-flex flex-column justify-content-end">
+                <button type="button" class="btn btn-primary mt-2" (click)="visualizarPlano(true)" [disabled]="!form.get('pisos').valid && accion !== 'ver'">
                     Visualizar Plano <i class="far fa-eye"></i>
                 </button>
                 <button type="button" class="btn btn-primary mt-2" (click)="guardar()" [disabled]="!form.valid">
