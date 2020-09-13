@@ -1,52 +1,53 @@
 
 <div class="contenedor">
-    <mat-card class="d-flex justify-content-between">
+    <mat-card class="d-flex flex-column flex-md-row flex-row justify-content-between">
         <h3>Parqueaderos </h3>
-        <button mat-raised-button (click)="abrirModal()">
+        <button class="btn btn-primary" mat-raised-button (click)="abrirModal()">
             <i class="fas fa-plus"></i> 
             Agregar Parqueadero
         </button>
     </mat-card>
 
-    <div class="contenedor-tabla">
-        <table class="table">
-            <thead class="thead-light">
-                <tr>
-                    <th scope="col" class="text-center" >Logo</th>
-                    <th scope="col" class="text-center" >Documento</th>
-                    <th scope="col" class="text-center" >Nombre</th>
-                    <th scope="col" class="text-center" >Telefono</th>
-                    <th scope="col" class="text-center" >Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of listaParqueaderos">
-                    <td class="logo_container align-middle">
-                       
-                        <img class="logo" [src]="item.logo">
-                        
-                    </td>
-                    <td class="align-middle text-center">{{ item.nit }}</td>
-                    <td class="align-middle text-center">{{ item.razonSocial | titlecase}}</td>
-                    <td class="align-middle text-center">{{ item.telefono }}</td>
-                    <td class="align-middle text-center">
-                        <button type="button" class="btn btn-primary" matTooltip="Modificar" (click)="abrirModal(item, 'modificar')" matTooltipPosition="above">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button type="button" class="btn btn-secondary" matTooltip="Ver" (click)="abrirModal(item, 'ver')" matTooltipPosition="above">
-                            <i class="far fa-eye"></i>
-                        </button>
-                        <button type="button" class="btn btn-success" matTooltip="Habilitar / Deshabilitar"  matTooltipPosition="above">
-                            <i class="far fa-check-square"></i>
-                        </button>
-                        <button type="button" class="btn btn-danger" matTooltip="Ingresar"  matTooltipPosition="above">
-                            <i class="fas fa-share"></i>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <mat-card>
+        <div class="contenedor-tabla">
+            <table class="table table-responsive">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col" class="text-center" >Logo</th>
+                        <th scope="col" class="text-center" >Documento</th>
+                        <th scope="col" class="text-center" >Nombre</th>
+                        <th scope="col" class="text-center" >Telefono</th>
+                        <th scope="col" class="text-center" >Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of listaParqueaderos">
+                        <td class="logo_container align-middle text-center">
+                            <img class="logo" [src]="item.logo">
+                        </td>
+                        <td class="align-middle text-center">{{ item.nit }}</td>
+                        <td class="align-middle text-center">{{ item.razonSocial | titlecase}}</td>
+                        <td class="align-middle text-center">{{ item.telefono }}</td>
+                        <td class="align-middle text-center">
+                            <button type="button" class="btn btn-primary mx-1" matTooltip="Modificar" (click)="abrirModal(item, 'modificar')" matTooltipPosition="above">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button type="button" class="btn btn-secondary mx-1" matTooltip="Ver" (click)="abrirModal(item, 'ver')" matTooltipPosition="above">
+                                <i class="far fa-eye"></i>
+                            </button>
+                            <button type="button" class="btn btn-success mx-1" matTooltip="Habilitar / Deshabilitar"  matTooltipPosition="above">
+                                <i class="far fa-check-square"></i>
+                            </button>
+                            <!-- <button type="button" class="btn btn-danger" matTooltip="Ingresar"  matTooltipPosition="above">
+                                <i class="fas fa-share"></i>
+                            </button> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </mat-card>
+
 
 
 </div>
