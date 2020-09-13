@@ -1,8 +1,15 @@
 
 mat-drawer-container{
   mat-drawer{
-    width: 20% !important;
+    width: 60% !important;
   }
+
+  @media (min-width: 768px) {
+    mat-drawer{
+      width: 20% !important;
+    }
+  }
+
   .indicadorPanel{
     width: 15px;
     background-color: #d8d8d8;
@@ -44,7 +51,7 @@ mat-drawer-container{
     }
 
     .permiso:hover, .activo{
-      background-color: #5152a9;
+      background-color: #ed3237;
       color: white;
     }
   }
