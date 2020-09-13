@@ -9,18 +9,17 @@ import { map } from 'rxjs/operators'
 })
 export class AuthService {
 
-  datosUsuario: any; // data De Usuario loggeado
   sesionActiva: boolean; // variable que almacena si hay sesión o no
 
 
   constructor(
-    public afs: AngularFirestore,   
+    public afs: AngularFirestore,
     public afAuth: AngularFireAuth,
     public ngZone: NgZone,
     public router: Router,
     private dbService: DatabaseService
 
-  ) { 
+  ) {
     // el observable mantiene listo vigilando la sesión
     this.validarSesion();
   }
@@ -28,6 +27,7 @@ export class AuthService {
 
   async validarSesion(){
     this.afAuth.authState.subscribe(user => {
+      console.log(user);
       if (user && localStorage.getItem('usuario')) {
         console.log('hay una sesión activa');
         this.sesionActiva = true;
@@ -41,8 +41,14 @@ export class AuthService {
 
   }
 
-  guardarLS(datosUsuario){
-    localStorage.setItem('usuario', JSON.stringify(datosUsuario));
+  guardarLS(datosUsuario, update?){
+    if(update){
+      const tmp = Object.assign(this.datosUsuario, datosUsuario);
+      localStorage.setItem('usuario', JSON.stringify(tmp));
+    }else{
+      localStorage.setItem('usuario', JSON.stringify(datosUsuario));
+
+    }
   }
 
   login(email, password) {
@@ -100,6 +106,11 @@ export class AuthService {
     return (user !== null) ? true : false;
   }
 
+  get datosUsuario(){
+    return JSON.parse(localStorage.getItem('usuario'));
+  }
+
+
   cerrarSesion() {
     return this.afAuth.signOut();
   }
@@ -114,7 +125,13 @@ export class AuthService {
       emailVerified: user.emailVerified
     }
 
-    this.dbService.addData('usuarios', userData).then( res => {
+    /* this.dbService.addData('usuarios', userData).then( res => {
+      console.log('res setUserData: ', res);
+    }).catch(error => {
+      console.log('error: ', error);
+    }); */
+
+    this.afs.collection(`/usuarios`).add(userData).then(res => {
       console.log('res setUserData: ', res);
     }).catch(error => {
       console.log('error: ', error);
@@ -122,14 +139,13 @@ export class AuthService {
   }
 
   validarTipoUser(usuario){
-    const data = this.dbService.getPorId('usuarios', usuario.uid).snapshotChanges().pipe(
-      map(x => x[0].payload.val())
-    ).subscribe(usuario => {
-      console.log(usuario);
-      this.guardarLS(usuario);
-      const ruta = `platform/${usuario['tipoUsuario']}`;
-      this.router.navigateByUrl(ruta);
-    });
+    this.dbService.getPorId('usuarios', usuario.uid).snapshotChanges().subscribe(usuario => {
+        const user = usuario[0].payload.doc.data();
+        user['id'] = usuario[0].payload.doc.id;
+        this.guardarLS(Object.assign({}, user));
+        const ruta = `platform/${user['tipoUsuario']}`;
+        this.router.navigateByUrl(ruta);
+      });
   }
 
 }
