@@ -27,7 +27,6 @@ export class AuthService {
 
   async validarSesion(){
     this.afAuth.authState.subscribe(user => {
-      console.log(user);
       if (user && localStorage.getItem('usuario')) {
         console.log('hay una sesión activa');
         this.sesionActiva = true;

@@ -49,4 +49,8 @@ export class ParqueaderosComponent implements OnInit {
     });
   }
 
+  cambiarEstado(elemento){
+    this.dbService.modificar('parqueaderos', elemento.key, { habilitado: elemento.habilitado ? false : true })
+  }
+
 }

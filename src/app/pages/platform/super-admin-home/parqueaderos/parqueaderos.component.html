@@ -35,8 +35,8 @@
                             <button type="button" class="btn btn-secondary my-1 my-md-0 mx-0 mx-md-1" matTooltip="Ver" (click)="abrirModal(item, 'ver')" matTooltipPosition="above">
                                 <i class="far fa-eye"></i>
                             </button>
-                            <button type="button" class="btn btn-success my-1 my-md-0 mx-0 mx-md-1" matTooltip="Habilitar / Deshabilitar"  matTooltipPosition="above">
-                                <i class="far fa-check-square"></i>
+                            <button type="button" class="btn btn-success my-1 my-md-0 mx-0 mx-md-1" [matTooltip]=" item.habilitado ? 'Deshabilitar' : 'Habilitar' "  matTooltipPosition="above" (click)="cambiarEstado(item)">
+                                <i [ngClass]="item.habilitado ? 'far fa-check-square' : 'far fa-square'"></i>
                             </button>
                             <!-- <button type="button" class="btn btn-danger" matTooltip="Ingresar"  matTooltipPosition="above">
                                 <i class="fas fa-share"></i>
