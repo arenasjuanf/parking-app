@@ -19,8 +19,8 @@ export class HistorialUsuariosComponent implements OnInit {
 
   getUsuarios() {
     this.dbService.getData("usuarios").pipe(
-      map((x: any[]) => {
-        return x.map(park => (park.payload.val()));
+      map((x:any[]) => {
+        return x.map(park => ({  ...park.payload.doc.data(), key: park.payload.doc.id }));
       })
     ).subscribe(usuarios => {
       this.listUsers = usuarios;
