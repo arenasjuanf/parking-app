@@ -51,7 +51,7 @@ export class DatabaseService {
   // parametros: 
   // nombre_coleccion = nombre de la referencia de la coleccion
   getData(nombre_coleccion: string): Observable<any[]> {
-    return this[nombre_coleccion].valueChanges();
+    return this[nombre_coleccion].snapshotChanges();
   }
 
   getPorId(nombre_coleccion, uid){
