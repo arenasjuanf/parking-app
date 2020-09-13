@@ -17,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { VistaPlanosComponent } from './vista-planos/vista-planos.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { VistaPlanosComponent } from './vista-planos/vista-planos.component';
     MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTooltipModule
   ]
 
 })

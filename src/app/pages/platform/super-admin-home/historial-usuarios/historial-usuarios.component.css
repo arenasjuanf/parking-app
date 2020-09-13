@@ -24,3 +24,8 @@ mat-form-field {
 .container-info-parking .content .item {
   width: 20%;
 }
+
+mat-expansion-panel{
+  margin-top: 10px;
+  border-radius: 10px !important;
+}

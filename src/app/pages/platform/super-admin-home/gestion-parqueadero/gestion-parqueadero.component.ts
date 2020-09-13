@@ -5,6 +5,7 @@ import { DatabaseService } from '../../services/database.service';
 import { AuthService } from '../../services/auth.service';
 import { constantes } from 'src/app/constantes';
 import { VistaPlanosComponent } from '../vista-planos/vista-planos.component';
+import { ɵangular_packages_platform_browser_platform_browser_j } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-gestion-parqueadero',
@@ -16,15 +17,21 @@ export class GestionParqueaderoComponent implements OnInit {
   form: FormGroup;
   mostrarTabla: boolean = false;
   imagenDefecto:any = constantes.logoDefecto;
+  accion: string;
+
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public dataRecibida: any,
     private fb: FormBuilder,
     private dbService: DatabaseService,
     public dialogRef: MatDialogRef<GestionParqueaderoComponent>,
     public auth: AuthService,
-    public dialog: MatDialog
-  ) { 
+    public dialog: MatDialog,
+  ) {
+    this.accion = this.dataRecibida.accion;
     this.initForm();
+    if(this.accion != 'crear'){
+      this.setearData();
+    }
   }
 
   ngOnInit(): void {
@@ -55,12 +62,12 @@ export class GestionParqueaderoComponent implements OnInit {
 
     this.form.get('pisos').valueChanges.subscribe(cambios => {
       if (this.form.get('pisos').valid){
+        console.log('entraa');
         this.visualizarPlano();
       }
     });
 
   }
-
 
   get pisos(){
     return this.form.get('pisos') as FormArray;
@@ -129,16 +136,18 @@ export class GestionParqueaderoComponent implements OnInit {
   }
 
   visualizarPlano(mostrar?){
-    const plano  = [];
+    let plano = [];
+
+
     const pisos = this.form.get('pisos').value;
 
     pisos.forEach(element => {
       let cont = 1;
       const objPiso = {};
       objPiso['piso'] = element.piso;
-      if(element.cantidadCarros){
+      if (element.cantidadCarros) {
         const carros = [];
-        for(let i = 1; i <= element.cantidadCarros ; i++){
+        for (let i = 1; i <= element.cantidadCarros; i++) {
           const objPuestoCarro = {};
           objPuestoCarro['puesto'] = cont + (element.piso * 100);
           objPuestoCarro['clase'] = 'carro';
@@ -161,8 +170,8 @@ export class GestionParqueaderoComponent implements OnInit {
 
       plano.push(objPiso);
     });
-
     this.form.get('plano').setValue(plano);
+
 
     if (mostrar) {
       this.dialog.open(VistaPlanosComponent, {
@@ -175,5 +184,48 @@ export class GestionParqueaderoComponent implements OnInit {
     }
 
   }
+
+  setearData(){
+    if (this.dataRecibida){
+
+      for (let i = 1; i < this.dataRecibida.pisos.length; i++) {
+        this.pisos.push(this.fb.group({
+          piso: [i, Validators.required],
+          cantidadCarros: ['', Validators.required],
+          cantidadMotos: ['', Validators.required]
+        }));
+      }
+
+      this.form.patchValue(this.dataRecibida);
+      this.imagenDefecto = this.dataRecibida.logo;
+      this.accion = this.dataRecibida.accion;
+      if(this.accion == 'ver'){
+        this.form.disable();
+        console.log(this.form)
+      }
+    }
+  }
+
+  guardar(){
+    switch(this.accion){
+      case 'crear':
+        this.registrarParqueadero();
+        break;
+      case 'modificar':
+        console.log('modificar: ', this.dataRecibida.key);
+        this.dbService.modificar('parqueaderos', this.dataRecibida.key, this.form.value).then(
+          result => {
+            console.log('resultado modificar: ', result)
+          }
+        ).catch( error => {
+          console.log('error modificar :', error);
+        });
+        break;
+      default:
+        console.log('otro: ', this.accion);
+    }
+
+  }
+
 
 }

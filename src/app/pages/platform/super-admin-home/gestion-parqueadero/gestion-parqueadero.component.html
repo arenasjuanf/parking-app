@@ -16,10 +16,10 @@
                 </div>
                 <div class="row d-flex justify-content-around">
                     <input hidden (change)="subirfoto($event)" #fileInput type="file" id="file" accept=".jpg,.jpeg,.png, .bmp">
-                    <button type="button" class="btn btn-primary rounded-circle" (click)="fileInput.click()">
+                    <button [disabled]="form.disabled" type="button" class="btn btn-primary rounded-circle" (click)="fileInput.click()">
                         <i class="fas fa-plus"></i>
                     </button>
-                    <button type="button" class="btn btn-primary rounded-circle" (click)="setImagenDefecto()">
+                    <button [disabled]="form.disabled" type="button" class="btn btn-primary rounded-circle" (click)="setImagenDefecto()">
                         <i class="fas fa-minus"></i>
                     </button>
                 </div>
@@ -57,18 +57,15 @@
                     </mat-form-field>
                 </div>
                 <div class="row">
-                    <!-- <mat-form-field appearance="outline" class="col-3">
-                        <mat-label>Nº Pisos</mat-label>
-                        <input matInput type="number"  formControlName="cantidadPisos">
-                    </mat-form-field> -->
+
                     <div class="col-3 text-center">
                         <p class="label-pisos">Nº Pisos</p>
                         <div class="d-flex justify-content-between">
-                            <button type="button" mat-icon-button (click)="gestionarPisos(false)" [disabled]="form.get('cantidadPisos').value == 1">
+                            <button type="button" mat-icon-button (click)="gestionarPisos(false)" [disabled]="form.get('cantidadPisos').value == 1 || form.disabled ">
                                 <mat-icon>remove</mat-icon>
                             </button>
                             <p class="m-auto">{{ form.get('cantidadPisos').value }}</p>
-                            <button type="button" mat-icon-button (click)="gestionarPisos(true)">
+                            <button [disabled]="form.disabled" type="button" mat-icon-button (click)="gestionarPisos(true)">
                                 <mat-icon>add</mat-icon>
                             </button>
                         </div>
@@ -94,8 +91,8 @@
                 <button type="button" class="btn btn-primary mt-2" (click)="visualizarPlano(true)" [disabled]="!form.get('pisos').valid">
                     Visualizar Plano
                 </button>
-                <button type="button" class="btn btn-primary mt-2" (click)="registrarParqueadero()" [disabled]="!form.valid">
-                    Registrar
+                <button type="button" class="btn btn-primary mt-2" (click)="guardar()" [disabled]="!form.valid">
+                    {{ this.accion | titlecase }}
                 </button>
             </div>
             <mat-accordion class="col-9">
@@ -136,9 +133,6 @@
                         </tbody>
                     </table>
 
-
-
-                    
                 </mat-expansion-panel>
             </mat-accordion>
         </div>

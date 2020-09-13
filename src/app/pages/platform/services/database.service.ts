@@ -39,8 +39,6 @@ export class DatabaseService {
     return this[nombre_coleccion].push(obj);
   }
 
-
-
   // descripción: Borrar un Jugador de la DB
   // parametros: 
   // nombre_coleccion = nombre de la referencia de la coleccion
@@ -59,4 +57,16 @@ export class DatabaseService {
   getPorId(nombre_coleccion, uid){
     return this.db.list(`/${nombre_coleccion}`, ref => ref.orderByChild('uid').equalTo(uid));
   }
+
+
+  // descripción: modifica documento especificando coleccion y id
+  // parametros: 
+  // nombre_coleccion = nombre de la referencia de la coleccion
+  // uid = id documento
+  // data: nuevos datos a ingresar
+  modificar(nombre_coleccion, uid, data){
+    return this[nombre_coleccion].update(uid, data);
+  }
+
+
 }

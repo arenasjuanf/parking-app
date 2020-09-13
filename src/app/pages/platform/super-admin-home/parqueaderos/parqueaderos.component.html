@@ -30,16 +30,16 @@
                     <td class="align-middle text-center">{{ item.razonSocial | titlecase}}</td>
                     <td class="align-middle text-center">{{ item.telefono }}</td>
                     <td class="align-middle text-center">
-                        <button type="button" class="btn btn-outline-primary">
+                        <button type="button" class="btn btn-primary" matTooltip="Modificar" (click)="abrirModal(item, 'modificar')" matTooltipPosition="above">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <button type="button" class="btn btn-outline-secondary">
+                        <button type="button" class="btn btn-secondary" matTooltip="Ver" (click)="abrirModal(item, 'ver')" matTooltipPosition="above">
                             <i class="far fa-eye"></i>
                         </button>
-                        <button type="button" class="btn btn-outline-success">
+                        <button type="button" class="btn btn-success" matTooltip="Habilitar / Deshabilitar"  matTooltipPosition="above">
                             <i class="far fa-check-square"></i>
                         </button>
-                        <button type="button" class="btn btn-outline-danger">
+                        <button type="button" class="btn btn-danger" matTooltip="Ingresar"  matTooltipPosition="above">
                             <i class="fas fa-share"></i>
                         </button>
                     </td>
