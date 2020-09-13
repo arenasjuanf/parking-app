@@ -18,9 +18,9 @@
     </div>
   </mat-card>
   <div class="contenedor-lista">
-    <div class="item-lista" *ngFor="let item of listUsers;">
-      <mat-accordion class="example-headers-align" multi>
-        <mat-expansion-panel hideToggle>
+    <div class="item-lista" >
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel *ngFor="let item of listUsers" >
           <mat-expansion-panel-header>
             <mat-panel-title>{{ item['email'] }}</mat-panel-title>
             <mat-panel-description>
