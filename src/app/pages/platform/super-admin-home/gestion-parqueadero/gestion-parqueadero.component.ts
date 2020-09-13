@@ -178,10 +178,10 @@ export class GestionParqueaderoComponent implements OnInit {
     if (mostrar) {
       this.dialog.open(VistaPlanosComponent, {
         data: plano,
-        maxWidth: 700,
+        /* maxWidth: 700,
         maxHeight: 600,
         minHeight: 600,
-        minWidth: 700
+        minWidth: 700 */
       })
     }
 
