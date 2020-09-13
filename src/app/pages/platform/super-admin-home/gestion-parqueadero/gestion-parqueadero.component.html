@@ -1,18 +1,17 @@
 <div class="m-2">
     <div class="text-right">
-        <button class="btn  btn-outline-danger" (click)="dialogRef.close()">
+        <button class="btn btn-secondary" (click)="dialogRef.close()">
             <i class="fas fa-times"></i>
         </button>
     </div>
     
+    <hr>
+
     <form [formGroup]="form">
         <div class="row">
-    
-            <div class="col-3">
-                <div class="foto row">
-                    <div class="w-100 d-flex justify-content-center">
-                        <img [src]="imagenDefecto">
-                    </div>
+            <div class="col-12 col-md-3">
+                <div class="w-100 d-flex justify-content-center">
+                    <img class="w-100" [src]="imagenDefecto">
                 </div>
                 <div class="row d-flex justify-content-around">
                     <input hidden (change)="subirfoto($event)" #fileInput type="file" id="file" accept=".jpg,.jpeg,.png, .bmp">
@@ -24,41 +23,43 @@
                     </button>
                 </div>
             </div>
-            <div class="col-9">
+            <div class="col-12 col-md-9">
                 <div class="row">
-                    <mat-form-field appearance="outline" class="col-6">
+                    <mat-form-field appearance="outline" class="col-6 my-1">
                         <mat-label>Nit</mat-label>
                         <input matInput type="text" formControlName="nit">
                     </mat-form-field>
-                    <mat-form-field appearance="outline" class="col-6">
+                    <mat-form-field appearance="outline" class="col-6 my-1">
                         <mat-label>Nombre o razón social</mat-label>
                         <input matInput type="text" formControlName="razonSocial">
                     </mat-form-field>
                 </div>
                 <div class="row">
-                    <mat-form-field appearance="outline" class="col-6">
+                    <mat-form-field appearance="outline" class="col-6 my-1">
                         <mat-label>Nombre del propietario</mat-label>
                         <input matInput type="text" formControlName="nombrePropietario">
                     </mat-form-field>
-                    <mat-form-field appearance="outline" class="col-6">
+                    <mat-form-field appearance="outline" class="col-6 my-1">
                         <mat-label>Url página web</mat-label>
                         <input matInput type="text" formControlName="paginaWeb">
                     </mat-form-field>
                 </div>
                 <div class="row">
-                    <mat-form-field appearance="outline" class="col-6">
+                    <mat-form-field appearance="outline" class="col-6 my-1">
                         <mat-label>Correo electronico</mat-label>
                         <input matInput type="email" formControlName="correo">
                     </mat-form-field>
-
                     <mat-form-field appearance="outline" class="col-6">
+                        <mat-label>Telefono</mat-label>
+                        <input matInput type="text" formControlName="telefono">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="col-12 my-1">
                         <mat-label>Dirección</mat-label>
                         <input matInput type="text" formControlName="direccion">
                     </mat-form-field>
                 </div>
-                <div class="row">
-
-                    <div class="col-3 text-center">
+                <div class="row my-2">
+                    <div class="col-4 text-center">
                         <p class="label-pisos">Nº Pisos</p>
                         <div class="d-flex justify-content-between">
                             <button type="button" mat-icon-button (click)="gestionarPisos(false)" [disabled]="form.get('cantidadPisos').value == 1 || form.disabled ">
@@ -70,26 +71,21 @@
                             </button>
                         </div>
                     </div>
-                    <mat-form-field appearance="outline" class="col-3">
+                    <mat-form-field appearance="outline" class="col-4">
                         <mat-label>Capacidad carros</mat-label>
                         <input matInput type="number" formControlName="capacidadCarros">
                     </mat-form-field>
-                    <mat-form-field appearance="outline" class="col-3">
+                    <mat-form-field appearance="outline" class="col-4">
                         <mat-label>Capacidad Motos</mat-label>
                         <input matInput type="text" formControlName="capacidadMotos">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="col-3">
-                        <mat-label>Telefono</mat-label>
-                        <input matInput type="text" formControlName="telefono">
                     </mat-form-field>
                 </div>
             </div>
         </div>
         <div class="row">
-
             <div class="col-3 d-flex flex-column justify-content-end">
                 <button type="button" class="btn btn-primary mt-2" (click)="visualizarPlano(true)" [disabled]="!form.get('pisos').valid">
-                    Visualizar Plano
+                    Visualizar Plano <i class="far fa-eye"></i>
                 </button>
                 <button type="button" class="btn btn-primary mt-2" (click)="guardar()" [disabled]="!form.valid">
                     {{ this.accion | titlecase }}
@@ -132,7 +128,6 @@
                             </tr>
                         </tbody>
                     </table>
-
                 </mat-expansion-panel>
             </mat-accordion>
         </div>
