@@ -20,7 +20,7 @@ export class HistorialUsuariosComponent implements OnInit {
   getUsuarios() {
     this.dbService.getData("usuarios").pipe(
       map((x: any[]) => {
-        return x.map(park => ({ ...park.payload.val() }));
+        return x.map(park => (park.payload.val()));
       })
     ).subscribe(usuarios => {
       this.listUsers = usuarios;

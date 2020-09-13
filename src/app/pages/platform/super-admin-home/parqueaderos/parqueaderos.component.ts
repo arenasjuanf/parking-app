@@ -25,23 +25,24 @@ export class ParqueaderosComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  abrirModal(id?){
-    const data = {};
-    if(id){
-      data[id] = id;
-    }
-    this.dialog.open(GestionParqueaderoComponent, {
+  abrirModal(datos?, accion = 'crear'){
+    console.log(datos);
+    const data = datos ? datos : {};
+    data['accion'] = accion;
+    const parametros = {
       data,
       maxWidth: 900,
       maxHeight: 700,
       disableClose: true
-    });
+    };
+
+    this.dialog.open(GestionParqueaderoComponent, parametros);
   }
 
   getParqueaderos(){
     this.dbService.getData('parqueaderos').pipe(
       map((x:any[]) => {
-        return x.map(park => ({  ...park.payload.val() }));
+        return x.map(park => ({  ...park.payload.val(), key: park.key }));
       })
     ).subscribe(result =>{
       this.listaParqueaderos = result;
