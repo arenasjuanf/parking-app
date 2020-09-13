@@ -84,7 +84,7 @@
         </div>
         <div class="row">
             <div class="col-3 d-flex flex-column justify-content-end">
-                <button type="button" class="btn btn-primary mt-2" (click)="visualizarPlano(true)" [disabled]="!form.get('pisos').valid">
+                <button type="button" class="btn btn-primary mt-2" (click)="visualizarPlano(true)" [disabled]="!form.get('pisos').valid && accion !== 'ver'">
                     Visualizar Plano <i class="far fa-eye"></i>
                 </button>
                 <button type="button" class="btn btn-primary mt-2" (click)="guardar()" [disabled]="!form.valid">

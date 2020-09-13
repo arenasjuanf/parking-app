@@ -27,7 +27,7 @@
               Tipo de usuario: {{ item['tipoUsuario'] }}
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <div class="container-info-parking">
+          <div class="container-info-parking" *ngIf="item['datos']">
             <div class="header">
               <span class="item">Parqueadero</span>
               <span class="item">Vehiculo</span>
@@ -50,6 +50,9 @@
                 <i class="far fa-eye"></i>
               </span>
             </div>
+          </div>
+          <div class="container-info-parking text-center" *ngIf="!item['datos']">
+            No hay registros
           </div>
         </mat-expansion-panel>
       </mat-accordion>
