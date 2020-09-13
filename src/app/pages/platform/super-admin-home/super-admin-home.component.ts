@@ -10,9 +10,11 @@ import { Router } from '@angular/router';
 export class SuperAdminHomeComponent implements OnInit {
   opened: boolean = true;
   rutaActual:string;
+  usuario:any;
 
   constructor(public auth: AuthService, private router: Router) {
     this.rutaActual = this.router.url;
+    this.usuario = JSON.parse(localStorage.getItem('usuario'));
   }
   
   public menus:object[] = [

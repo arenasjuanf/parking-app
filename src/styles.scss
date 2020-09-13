@@ -39,6 +39,9 @@ $theme: mat-light-theme($primary, $accent, $warn);
 
 @include angular-material-theme($theme);
 
+.pointer{
+  cursor:pointer;
+}
 
 /* Ancho de pantalla */
 
