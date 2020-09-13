@@ -2,8 +2,14 @@
   <mat-card class="d-flex justify-content-between">
     <h3>Historial Usuarios</h3>
   </mat-card>
-  <mat-card class="border-search">
-    <div class="container-options d-flex align-items-center justify-content-center">
+  <mat-card>
+    <div class="input-group">
+      <input type="text" autofocus class="form-control" placeholder="Documento o nombre del usuario" aria-label="Documento o nombre del usuario" aria-describedby="button-addon2">
+      <div class="input-group-append">
+        <button class="btn btn-secondary" type="button" id="button-addon2"><i class="fas fa-search"></i> Buscar</button>
+      </div>
+    </div>
+    <!-- <div class="container-options d-flex align-items-center justify-content-center">
       <mat-form-field appearance="outline">
         <mat-label>Documento o nombre del usuario</mat-label>
         <input matInput type="text" min="1">
@@ -15,8 +21,9 @@
         <mat-icon>search</mat-icon>
         <span>Buscar</span>
       </button>
-    </div>
+    </div> -->
   </mat-card>
+
   <div class="contenedor-lista">
     <div class="item-lista" >
       <mat-accordion class="example-headers-align">
