@@ -105,7 +105,8 @@ export class GestionParqueaderoComponent implements OnInit {
   registrarAdmin(idParqueadero) {
     const data = {
       parqueaderos: [idParqueadero],
-      tipoUsuario: 'admin'
+      tipoUsuario: 'admin',
+      nombre: this.form.get('nombrePropietario').value
     };
     const email = this.form.value['correo'];
     const pass = this.form.value['nit'];
