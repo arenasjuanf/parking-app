@@ -10,10 +10,8 @@
     <form [formGroup]="form">
         <div class="row">
             <div class="col-12 col-md-3">
-                <div class="w-100 d-flex justify-content-center">
-                    <img class="w-100" [src]="imagenDefecto">
-                </div>
-                <div class="row d-flex justify-content-around">
+                <img class="w-100" [src]="imagenDefecto">
+                <div class="d-flex justify-content-around mt-2">
                     <input hidden (change)="subirfoto($event)" #fileInput type="file" id="file" accept=".jpg,.jpeg,.png, .bmp">
                     <button [disabled]="form.disabled" type="button" class="btn btn-primary rounded-circle" (click)="fileInput.click()">
                         <i class="fas fa-plus"></i>
@@ -25,31 +23,27 @@
             </div>
             <div class="col-12 col-md-9">
                 <div class="row">
-                    <mat-form-field appearance="outline" class="col-6 my-1">
+                    <mat-form-field appearance="outline" class="col-12 col-md-6 my-1">
                         <mat-label>Nit</mat-label>
                         <input matInput type="text" formControlName="nit">
                     </mat-form-field>
-                    <mat-form-field appearance="outline" class="col-6 my-1">
+                    <mat-form-field appearance="outline" class="col-12 col-md-6 my-1">
                         <mat-label>Nombre o razón social</mat-label>
                         <input matInput type="text" formControlName="razonSocial">
                     </mat-form-field>
-                </div>
-                <div class="row">
-                    <mat-form-field appearance="outline" class="col-6 my-1">
+                    <mat-form-field appearance="outline" class="col-12 col-md-6 my-1">
                         <mat-label>Nombre del propietario</mat-label>
                         <input matInput type="text" formControlName="nombrePropietario">
                     </mat-form-field>
-                    <mat-form-field appearance="outline" class="col-6 my-1">
+                    <mat-form-field appearance="outline" class="col-12 col-md-6 my-1">
                         <mat-label>Url página web</mat-label>
                         <input matInput type="text" formControlName="paginaWeb">
                     </mat-form-field>
-                </div>
-                <div class="row">
-                    <mat-form-field appearance="outline" class="col-6 my-1">
+                    <mat-form-field appearance="outline" class="col-12 col-md-6 my-1">
                         <mat-label>Correo electronico</mat-label>
                         <input matInput type="email" formControlName="correo">
                     </mat-form-field>
-                    <mat-form-field appearance="outline" class="col-6">
+                    <mat-form-field appearance="outline" class="col-12 col-md-6">
                         <mat-label>Telefono</mat-label>
                         <input matInput type="text" formControlName="telefono">
                     </mat-form-field>
@@ -58,8 +52,8 @@
                         <input matInput type="text" formControlName="direccion">
                     </mat-form-field>
                 </div>
-                <div class="row my-2">
-                    <div class="col-4 text-center">
+                <div class="row">
+                    <div class="order-3 order-md-1 col-12 col-md-4 text-center my-1">
                         <p class="label-pisos">Nº Pisos</p>
                         <div class="d-flex justify-content-between">
                             <button type="button" mat-icon-button (click)="gestionarPisos(false)" [disabled]="form.get('cantidadPisos').value == 1 || form.disabled ">
@@ -71,11 +65,11 @@
                             </button>
                         </div>
                     </div>
-                    <mat-form-field appearance="outline" class="col-4">
+                    <mat-form-field appearance="outline" class="order-1 order-md-2 col-12 col-md-4 my-1">
                         <mat-label>Capacidad carros</mat-label>
                         <input matInput type="number" formControlName="capacidadCarros">
                     </mat-form-field>
-                    <mat-form-field appearance="outline" class="col-4">
+                    <mat-form-field appearance="outline" class="order-2 order-md-3 col-12 col-md-4 my-1">
                         <mat-label>Capacidad Motos</mat-label>
                         <input matInput type="text" formControlName="capacidadMotos">
                     </mat-form-field>
@@ -84,52 +78,55 @@
         </div>
         <div class="row">
             <div class="col-3 d-flex flex-column justify-content-end">
-                <button type="button" class="btn btn-primary mt-2" (click)="visualizarPlano(true)" [disabled]="!form.get('pisos').valid">
+                <button type="button" class="btn btn-primary mt-2" (click)="visualizarPlano(true)" [disabled]="!form.get('pisos').valid && accion !== 'ver'">
                     Visualizar Plano <i class="far fa-eye"></i>
                 </button>
                 <button type="button" class="btn btn-primary mt-2" (click)="guardar()" [disabled]="!form.valid">
                     {{ this.accion | titlecase }}
                 </button>
             </div>
-            <mat-accordion class="col-9">
-                <mat-expansion-panel >
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Plano de parqueadero
-                        </mat-panel-title>
-                        <mat-panel-description>
-                            Asigna Pisos Y Cupos
-                        </mat-panel-description>
-                    </mat-expansion-panel-header>
-
-                    <table class="table">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th class="text-center"> Piso</th>
-                                <th class="text-center"> Nº Carros</th>
-                                <th class="text-center"> Nº Motos</th>
-                            </tr>
-                        </thead>
-                        <tbody formArrayName="pisos">
-                            <tr *ngFor="let control of pisos.controls; let i = index;">
-                                <th class="text-center">{{i+1}}</th>
-                                <td [formGroupName]="i" class="text-center">
-                                    <mat-form-field appearance="outline" class="w-75">
-                                        <mat-label>Nº Carros</mat-label>
-                                        <input matInput type="number" formControlName="cantidadCarros">
-                                    </mat-form-field>
-                                </td>
-                                <td [formGroupName]="i" class="text-center">
-                                    <mat-form-field appearance="outline" class="w-75">
-                                        <mat-label>Nº Motos</mat-label>
-                                        <input matInput type="number" formControlName="cantidadMotos">
-                                    </mat-form-field>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </mat-expansion-panel>
-            </mat-accordion>
+            <div class="order-1 order-md-2 col-12 col-md-9">
+                <mat-accordion class="w-100">
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Plano de parqueadero
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                Asigna Pisos Y Cupos
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div class="table-responsive tabla-edificio">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th class="text-center"> Piso</th>
+                                        <th class="text-center"> Nº Carros</th>
+                                        <th class="text-center"> Nº Motos</th>
+                                    </tr>
+                                </thead>
+                                <tbody formArrayName="pisos">
+                                    <tr *ngFor="let control of pisos.controls; let i = index;">
+                                        <th class="text-center">{{i+1}}</th>
+                                        <td [formGroupName]="i" class="text-center">
+                                            <mat-form-field appearance="outline" class="w-75">
+                                                <mat-label>Nº Carros</mat-label>
+                                                <input matInput type="number" formControlName="cantidadCarros">
+                                            </mat-form-field>
+                                        </td>
+                                        <td [formGroupName]="i" class="text-center">
+                                            <mat-form-field appearance="outline" class="w-75">
+                                                <mat-label>Nº Motos</mat-label>
+                                                <input matInput type="number" formControlName="cantidadMotos">
+                                            </mat-form-field>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
         </div>
     </form>
 </div>

@@ -6,9 +6,6 @@
                     <mat-card-title><img class="w-100" src="../../../../assets/images/logo2.png" alt=""></mat-card-title>
                 </mat-card-header>
             </div>
-            <!-- <button class="btn btn-primary btn-block" (click)="logout()">
-                Cerrar Sesión <i class="fas fa-sign-out-alt"></i>
-            </button> -->
         </mat-card>
 
         <div class="permisos">
@@ -33,9 +30,7 @@
                         </a>  
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <span class="dropdown-item-text text-center">{{usuario.nombre}}</span>
-                            <a class="dropdown-item modal-link pointer " (click)="editarPerfil()">
-                                <i class="fas fa-user-edit"></i> Perfil
-                            </a>
+                            <a class="dropdown-item modal-link" href="#"><i class="fas fa-user-edit"></i> Mi perfil</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item pointer " (click)="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
                         </div>

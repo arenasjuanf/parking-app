@@ -85,6 +85,12 @@ $theme: mat-light-theme($primary, $accent, $warn);
   width: 100% !important;
 }
 
+.mat-dialog-container{
+  max-width: 95vw;
+  max-height: 95vh !important;
+  margin: auto;
+}
+
 @media (min-width: 576px) {
   .w-sm-25 {
     width: 25% !important;
