@@ -81,9 +81,9 @@ export class AuthService {
           uid: result.user.uid,
           email: result.user.email,
           displayName: result.user.displayName,
-          emailVerified: result.user.emailVerified
+          emailVerified: result.user.emailVerified,
+          fechaCreacion: new Date()
         }
-        console.log('usususususuer : ', user);
         this.SetUserData(user, true);
 
       }).catch((error) => {
@@ -139,12 +139,12 @@ export class AuthService {
 
   validarTipoUser(usuario){
     this.dbService.getPorId('usuarios', usuario.uid).snapshotChanges().subscribe(usuario => {
-        const user = usuario[0].payload.doc.data();
-        user['id'] = usuario[0].payload.doc.id;
-        this.guardarLS(Object.assign({}, user));
-        const ruta = `platform/${user['tipoUsuario']}`;
-        this.router.navigateByUrl(ruta);
-      });
+      const user = usuario[0].payload.doc.data();
+      user['id'] = usuario[0].payload.doc.id;
+      this.guardarLS(Object.assign({}, user));
+      const ruta = `platform/${user['tipoUsuario']}`;
+      this.router.navigateByUrl(ruta);
+    });
   }
 
 }
