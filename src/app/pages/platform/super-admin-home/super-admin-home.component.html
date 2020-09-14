@@ -21,7 +21,8 @@
         <nav class="navbar navbar-expand-sm navbar-light bg-white mb-3 shadow-lg d-flex">
             <div class="collapse navbar-collapse d-flex justify-content-between">
                 <button class="btn btn-link" type="button" (click)="drawer.toggle(); panel(drawer)">
-                    <span class="navbar-toggler-icon"></span>
+                   <!--  <span class="navbar-toggler-icon"></span> -->
+                    <i [ngClass]="opened ? 'fas fa-times fa-lg' : 'fas fa-bars fa-lg' " ></i>
                 </button>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
