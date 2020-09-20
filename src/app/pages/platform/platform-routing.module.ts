@@ -7,7 +7,7 @@ import { ClientesHomeComponent } from './clientes-home/clientes-home.component';
 
 const routes: Routes = [
     { path: 'superAdmin', loadChildren: () => import('./super-admin-home/super-admin.module').then(m => m.SuperAdminModule)},
-    { path: 'admin', component: AdminHomeComponent },
+    { path: 'admin', loadChildren: () => import('./admin-home/admin-home.module').then(m => m.AdminHomeModule) },
     { path: 'cliente', component: ClientesHomeComponent }
     //{ path: "", component: AgendaComponent, data: { animation: 'agenda' } },
 ];
