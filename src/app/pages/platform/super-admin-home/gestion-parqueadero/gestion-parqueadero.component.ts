@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { constantes } from 'src/app/constantes';
 import { VistaPlanosComponent } from '../vista-planos/vista-planos.component';
 import { ɵangular_packages_platform_browser_platform_browser_j } from '@angular/platform-browser';
+import { newArray } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-gestion-parqueadero',
@@ -226,7 +227,40 @@ export class GestionParqueaderoComponent implements OnInit {
       default:
         console.log('otro: ', this.accion);
     }
+  }
 
+  configurarPlano(){
+
+    const estructura = {tipo: '', numero: '', orientacion : ''};
+    const cantidadpisos = 3;
+    const columnas = 5;
+    const filas = 3;
+    const plano = [];
+
+    let pisostmp = [
+      {ancho: 3, alto: 5},
+      {ancho: 3, alto: 5},
+      {ancho: 6, alto: 6},
+      {ancho:4, alto: 5},
+    ];
+
+    let cont = 0;
+
+    // tslint:disable-next-line: forin
+    for(let p in pisostmp ){
+      const matriz = [];
+      for (let columna = 0; columna < pisostmp[p]['alto']; columna++) {
+        const tmpFila = [];
+        for (let fila = 0; fila < pisostmp[p]['ancho']; fila++) {
+          tmpFila[fila] = Object.assign({}, estructura);
+          cont++;
+        }
+        matriz[columna] = tmpFila;
+      }
+      plano[p] = matriz;
+    }
+
+    console.log(plano);
   }
 
 
