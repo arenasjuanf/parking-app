@@ -7,26 +7,64 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./vista-planos.component.scss']
 })
 export class VistaPlanosComponent implements OnInit {
-
+  actualTool: string;
+  default = { tipo: '', numero: '', orientacion: '' };
+  color = '#0C21F9';
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<VistaPlanosComponent>,
   ) {
-    this.data.forEach(piso => {
-      let puestos = [];
-      if(!piso.motos && piso.carros){
-        puestos = piso.carros;
-      } else if (!piso.carros && piso.motos){
-        puestos = piso.motos;
-      }else{
-        puestos = piso.carros.concat(piso.motos);
-      }
-      piso.puestos = puestos;
-    });
-    console.log(this.data);
   }
 
   ngOnInit(): void {
   }
 
+  elegirHerramienta(evento){
+    if(evento.value){
+      this.actualTool = evento.value;
+      let cursor = 'auto';
+      switch (this.actualTool) {
+        case 'carro':
+          cursor = 'crosshair';
+          break;
+        case 'moto':
+          cursor = 'crosshair';
+          break;
+        case 'pintar':
+          break;
+        case 'borrar':
+          cursor = 'cell';
+          break;
+      }
+      document.body.style.cursor = cursor;
+    }
+  }
+
+  resetCursor(){
+    document.body.style.cursor = 'auto';
+  }
+
+  gestionar(piso, fila, columna){
+    //console.log({piso,fila,columna});
+    let casilla = this.data[piso][fila][columna];
+    switch (this.actualTool) {
+      case 'carro':
+        casilla['tipo'] = this.actualTool;
+        break;
+      case 'moto':
+        casilla['tipo'] = this.actualTool;
+        break;
+      case 'pintar':
+        casilla['color'] = this.color;
+        break; 
+      case 'borrar':
+        this.data[piso][fila][columna] = Object.assign({}, this.default);
+        break;
+    }
+
+  }
+
+  mostrar(color){
+    console.log(color);
+  }
 }

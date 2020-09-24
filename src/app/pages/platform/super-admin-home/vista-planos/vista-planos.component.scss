@@ -1,5 +1,3 @@
-
-
 .puesto{
     min-height: 115px;
     min-width: 117px;
@@ -20,4 +18,12 @@ mat-tab-group{
             overflow: hidden;
         }
     }
+}
+
+.casilla{
+    width: 90px;
+    height: 90px;
+    border: solid 1px;
+    text-align: center;
+    margin: unset;
 }

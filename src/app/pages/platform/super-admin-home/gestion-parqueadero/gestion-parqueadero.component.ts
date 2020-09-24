@@ -54,8 +54,8 @@ export class GestionParqueaderoComponent implements OnInit {
       pisos: this.fb.array([
         this.fb.group({
           piso: [1, Validators.required],
-          cantidadCarros: ['', Validators.required],
-          cantidadMotos: ['', Validators.required]
+          alto: ['', Validators.required],
+          ancho: ['', Validators.required]
         })
       ]),
       plano:[[], Validators.required]
@@ -63,7 +63,6 @@ export class GestionParqueaderoComponent implements OnInit {
 
     this.form.get('pisos').valueChanges.subscribe(cambios => {
       if (this.form.get('pisos').valid){
-        console.log('entraa');
         this.visualizarPlano();
       }
     });
@@ -127,8 +126,8 @@ export class GestionParqueaderoComponent implements OnInit {
       valor +=1;
       pisos.push(this.fb.group({
         piso: [valor, Validators.required],
-        cantidadCarros: ['', Validators.required],
-        cantidadMotos: ['', Validators.required]
+        alto: ['', Validators.required],
+        ancho: ['', Validators.required]
       }));
 
     }else{
@@ -139,11 +138,9 @@ export class GestionParqueaderoComponent implements OnInit {
   }
 
   visualizarPlano(mostrar?){
-    let plano = [];
-
-
+    const plano = [];
     const pisos = this.form.get('pisos').value;
-
+    return;
     pisos.forEach(element => {
       let cont = 1;
       const objPiso = {};
@@ -174,8 +171,6 @@ export class GestionParqueaderoComponent implements OnInit {
       plano.push(objPiso);
     });
     this.form.get('plano').setValue(plano);
-
-
     if (mostrar) {
       this.dialog.open(VistaPlanosComponent, {
         data: plano,
@@ -185,7 +180,6 @@ export class GestionParqueaderoComponent implements OnInit {
         minWidth: 700 */
       })
     }
-
   }
 
   setearData(){
@@ -194,8 +188,8 @@ export class GestionParqueaderoComponent implements OnInit {
       for (let i = 1; i < this.dataRecibida.pisos.length; i++) {
         this.pisos.push(this.fb.group({
           piso: [i, Validators.required],
-          cantidadCarros: ['', Validators.required],
-          cantidadMotos: ['', Validators.required]
+          alto: ['', Validators.required],
+          ancho: ['', Validators.required]
         }));
       }
 
@@ -232,20 +226,9 @@ export class GestionParqueaderoComponent implements OnInit {
   configurarPlano(){
 
     const estructura = {tipo: '', numero: '', orientacion : ''};
-    const cantidadpisos = 3;
-    const columnas = 5;
-    const filas = 3;
     const plano = [];
-
-    let pisostmp = [
-      {ancho: 3, alto: 5},
-      {ancho: 3, alto: 5},
-      {ancho: 6, alto: 6},
-      {ancho:4, alto: 5},
-    ];
-
+    const pisostmp = this.form.get('pisos').value;
     let cont = 0;
-
     // tslint:disable-next-line: forin
     for(let p in pisostmp ){
       const matriz = [];
@@ -259,8 +242,10 @@ export class GestionParqueaderoComponent implements OnInit {
       }
       plano[p] = matriz;
     }
-
-    console.log(plano);
+    
+    this.dialog.open(VistaPlanosComponent, {
+      data: plano,
+    });
   }
 
 
