@@ -139,6 +139,7 @@ export class AuthService {
 
   validarTipoUser(usuario){
     this.dbService.getPorId('usuarios', usuario.uid).snapshotChanges().subscribe(usuario => {
+        console.log(usuario);
         const user = usuario[0].payload.doc.data();
         user['id'] = usuario[0].payload.doc.id;
         this.guardarLS(Object.assign({}, user));

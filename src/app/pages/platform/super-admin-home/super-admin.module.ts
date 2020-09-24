@@ -20,6 +20,7 @@ import { VistaPlanosComponent } from './vista-planos/vista-planos.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { PerfilComponent } from './perfil/perfil.component';
 import { MatSelectModule } from '@angular/material/select';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { MatSelectModule } from '@angular/material/select';
     ReactiveFormsModule,
     MatExpansionModule,
     MatTooltipModule,
-    MatSelectModule
+    MatSelectModule,
+    MatButtonToggleModule
   ]
 
 })

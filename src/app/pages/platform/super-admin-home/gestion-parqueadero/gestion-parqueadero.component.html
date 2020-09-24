@@ -78,6 +78,10 @@
         </div>
         <div class="row">
             <div class="col-3 d-flex flex-column justify-content-end">
+                <button type="button" class="btn btn-primary mt-2" (click)="configurarPlano()">
+                    Configurar Plano
+                    <i class="far fa-eye"></i>
+                </button>
                 <button type="button" class="btn btn-primary mt-2" (click)="visualizarPlano(true)" [disabled]="!form.get('pisos').valid && accion !== 'ver'">
                     Visualizar Plano <i class="far fa-eye"></i>
                 </button>
@@ -101,8 +105,8 @@
                                 <thead class="thead-dark">
                                     <tr>
                                         <th class="text-center"> Piso</th>
-                                        <th class="text-center"> Nº Carros</th>
-                                        <th class="text-center"> Nº Motos</th>
+                                        <th class="text-center"> Alto</th>
+                                        <th class="text-center"> Ancho</th>
                                     </tr>
                                 </thead>
                                 <tbody formArrayName="pisos">
@@ -110,14 +114,14 @@
                                         <th class="text-center">{{i+1}}</th>
                                         <td [formGroupName]="i" class="text-center">
                                             <mat-form-field appearance="outline" class="w-75">
-                                                <mat-label>Nº Carros</mat-label>
-                                                <input matInput type="number" formControlName="cantidadCarros">
+                                                <mat-label>Alto</mat-label>
+                                                <input matInput type="number" formControlName="alto">
                                             </mat-form-field>
                                         </td>
                                         <td [formGroupName]="i" class="text-center">
                                             <mat-form-field appearance="outline" class="w-75">
-                                                <mat-label>Nº Motos</mat-label>
-                                                <input matInput type="number" formControlName="cantidadMotos">
+                                                <mat-label>Ancho</mat-label>
+                                                <input matInput type="number" formControlName="ancho">
                                             </mat-form-field>
                                         </td>
                                     </tr>

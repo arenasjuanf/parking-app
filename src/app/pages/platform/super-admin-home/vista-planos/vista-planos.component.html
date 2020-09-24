@@ -1,29 +1,40 @@
-<div class="text-right">
+<div class="d-flex justify-content-between">
+    <mat-button-toggle-group aria-label="Herramientas" (change)="elegirHerramienta($event)" > 
+        <mat-button-toggle value="carro" matTooltip="Agregar Carro" matTooltipPosition="above">
+            <i class="fas fa-car"></i>
+        </mat-button-toggle>
+        <mat-button-toggle value="moto" matTooltip="Agregar Moto" matTooltipPosition="above">
+            <i class="fas fa-motorcycle"></i>
+        </mat-button-toggle>
+        <mat-button-toggle value="borrar" matTooltip="Borrar" matTooltipPosition="above">
+            <i class="fas fa-eraser"></i>
+        </mat-button-toggle>
+        <mat-button-toggle value="pintar" matTooltip="Pintar" matTooltipPosition="above">
+            <i class="fas fa-paint-brush"></i>
+        </mat-button-toggle>
+        <input matTooltip="Selecciona color de pincel" matTooltipPosition="above" type="color" [(ngModel)]="color" class="h-100">
+    </mat-button-toggle-group>
     <button class="btn btn-secondary" (click)="dialogRef.close()">
         <i class="fas fa-times"></i>
     </button>
 </div>
 
 <mat-tab-group mat-align-tabs="start" *ngIf="data">
-    <mat-tab label="{{'Piso ' +item.piso}}" *ngFor="let item of data">
-        <div class="row mt-4" *ngIf="item.puestos">
-            
-            <div class="col-6 col-md-4 col-xl-2 mb-4" *ngFor="let casilla of item.puestos">
-                <div class="card bg-light">
-                    <div class="card-body text-center">
-                        <p>{{casilla.puesto}}</p>
-                        <i [ngClass]="casilla.clase == 'carro' ? 'col fas fa-car-side fa-3x' : 'col fas fa-motorcycle fa-3x'"> </i>
+    <mat-tab label="{{'Piso ' + (Npiso+1)}}" *ngFor="let piso of data; let Npiso = index">
+        <div *ngFor="let fila of piso; let Nfila = index">
+            <div class="d-flex justify-content-center">
+               <div class="casilla" 
+                    *ngFor="let casilla of fila; let Ncol = index"
+                    (click)="gestionar(Npiso, Nfila, Ncol)"
+                    [ngStyle]="{'background-color': casilla.color ? casilla.color : '' }"
+                    >
+                    <div *ngIf="casilla.tipo" class="w-100 h-100 d-flex flex-column justify-content-center">
+                        <i [ngClass]="casilla.tipo == 'moto' ? 'fas fa-motorcycle fa-2x' : 'fas fa-car fa-2x'">
+                        </i>
+                        <small>100</small>
                     </div>
                 </div>
-                <!-- <div class="row">
-                    <p class="col">{{casilla.puesto}}</p>
-                </div>
-                <div class="row">
-                    <i [ngClass]="casilla.clase == 'carro' ? 'col fas fa-car-side fa-3x' : 'col fas fa-motorcycle fa-3x'"> </i>
-                </div> -->
-            
             </div>
-        
         </div>
     </mat-tab>
 </mat-tab-group>
