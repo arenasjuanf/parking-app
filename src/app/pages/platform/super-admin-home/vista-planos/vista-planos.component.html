@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-between">
-    <mat-button-toggle-group aria-label="Herramientas" (change)="elegirHerramienta($event)" > 
+    <mat-button-toggle-group [disabled]="data.visualizar" aria-label="Herramientas" (change)="elegirHerramienta($event)" > 
         <mat-button-toggle value="carro" matTooltip="Agregar Carro" matTooltipPosition="above">
             <i class="fas fa-car"></i>
         </mat-button-toggle>
@@ -9,18 +9,33 @@
         <mat-button-toggle value="borrar" matTooltip="Borrar" matTooltipPosition="above">
             <i class="fas fa-eraser"></i>
         </mat-button-toggle>
+        <mat-button-toggle value="numero" matTooltip="Asignar nº casilla" matTooltipPosition="above">
+            <i class="fas fa-sort-numeric-down"></i>
+            <mat-form-field >
+                <input matInput type="number" [(ngModel)]="numero">
+            </mat-form-field>
+        </mat-button-toggle>
         <mat-button-toggle value="pintar" matTooltip="Pintar" matTooltipPosition="above">
             <i class="fas fa-paint-brush"></i>
         </mat-button-toggle>
         <input matTooltip="Selecciona color de pincel" matTooltipPosition="above" type="color" [(ngModel)]="color" class="h-100">
     </mat-button-toggle-group>
-    <button class="btn btn-secondary" (click)="dialogRef.close()">
-        <i class="fas fa-times"></i>
-    </button>
+
+    <div class="btns">
+        <button class="btn btn-secondary" (click)="dialogRef.close()">
+            Cancelar
+            <i class="fas fa-times"></i>
+        </button>
+        <button class="btn btn-primary" [disabled]="data.visualizar" (click)="dialogRef.close(data.plano)">
+            Guardar
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    
 </div>
 
-<mat-tab-group mat-align-tabs="start" *ngIf="data">
-    <mat-tab label="{{'Piso ' + (Npiso+1)}}" *ngFor="let piso of data; let Npiso = index">
+<mat-tab-group mat-align-tabs="start" *ngIf="data.plano">
+    <mat-tab label="{{'Piso ' + (Npiso+1)}}" *ngFor="let piso of data.plano; let Npiso = index">
         <div *ngFor="let fila of piso; let Nfila = index">
             <div class="d-flex justify-content-center">
                <div class="casilla" 
@@ -31,7 +46,7 @@
                     <div *ngIf="casilla.tipo" class="w-100 h-100 d-flex flex-column justify-content-center">
                         <i [ngClass]="casilla.tipo == 'moto' ? 'fas fa-motorcycle fa-2x' : 'fas fa-car fa-2x'">
                         </i>
-                        <small>100</small>
+                        <small *ngIf="casilla.numero">{{casilla.numero}}</small>
                     </div>
                 </div>
             </div>

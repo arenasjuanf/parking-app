@@ -8,8 +8,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class VistaPlanosComponent implements OnInit {
   actualTool: string;
-  default = { tipo: '', numero: '', orientacion: '' };
+  default = { tipo: '', numero: ''};
   color = '#0C21F9';
+  numero = 1;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<VistaPlanosComponent>,
@@ -46,7 +47,7 @@ export class VistaPlanosComponent implements OnInit {
 
   gestionar(piso, fila, columna){
     //console.log({piso,fila,columna});
-    let casilla = this.data[piso][fila][columna];
+    let casilla = this.data.plano[piso][fila][columna];
     switch (this.actualTool) {
       case 'carro':
         casilla['tipo'] = this.actualTool;
@@ -57,14 +58,15 @@ export class VistaPlanosComponent implements OnInit {
       case 'pintar':
         casilla['color'] = this.color;
         break; 
+      case 'numero':
+        casilla['numero'] = this.numero;
+        this.numero++;
+        break;
       case 'borrar':
-        this.data[piso][fila][columna] = Object.assign({}, this.default);
+        this.data.plano[piso][fila][columna] = Object.assign({}, this.default);
         break;
     }
 
   }
 
-  mostrar(color){
-    console.log(color);
-  }
 }

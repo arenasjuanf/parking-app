@@ -7,6 +7,7 @@ import { constantes } from 'src/app/constantes';
 import { VistaPlanosComponent } from '../vista-planos/vista-planos.component';
 import { ɵangular_packages_platform_browser_platform_browser_j } from '@angular/platform-browser';
 import { newArray } from '@angular/compiler/src/util';
+import { observable } from 'rxjs';
 
 @Component({
   selector: 'app-gestion-parqueadero',
@@ -61,12 +62,6 @@ export class GestionParqueaderoComponent implements OnInit {
       plano:[[], Validators.required]
     });
 
-    this.form.get('pisos').valueChanges.subscribe(cambios => {
-      if (this.form.get('pisos').valid){
-        this.visualizarPlano();
-      }
-    });
-
   }
 
   get pisos(){
@@ -95,8 +90,14 @@ export class GestionParqueaderoComponent implements OnInit {
 
   registrarParqueadero(){
     if(this.form.valid){
-      this.dbService.addData('parqueaderos', this.form.value).then(res => {
-        console.log('respuesta agregar parqueadero ',res);
+      const datos = Object.assign({}, this.form.value);
+      // se parsea plano
+      // tslint:disable-next-line: forin
+      datos.plano = JSON.stringify(datos.plano);
+
+      console.log(datos)
+      this.dbService.addData('parqueaderos', datos).then(res => {
+        console.log('respuesta agregar parqueadero ', res);
         console.log(res.id)
         this.registrarAdmin(res.id);
       })
@@ -137,50 +138,6 @@ export class GestionParqueaderoComponent implements OnInit {
     this.form.get('cantidadPisos').setValue(valor);
   }
 
-  visualizarPlano(mostrar?){
-    const plano = [];
-    const pisos = this.form.get('pisos').value;
-    return;
-    pisos.forEach(element => {
-      let cont = 1;
-      const objPiso = {};
-      objPiso['piso'] = element.piso;
-      if (element.cantidadCarros) {
-        const carros = [];
-        for (let i = 1; i <= element.cantidadCarros; i++) {
-          const objPuestoCarro = {};
-          objPuestoCarro['puesto'] = cont + (element.piso * 100);
-          objPuestoCarro['clase'] = 'carro';
-          cont++;
-          carros.push(objPuestoCarro);
-        }
-        objPiso['carros'] = carros;
-      }
-      if (element.cantidadMotos) {
-        const motos = [];
-        for (let i = 1; i <= element.cantidadMotos; i++) {
-          const objPuestoCarro = {};
-          objPuestoCarro['puesto'] = cont + (element.piso * 100);
-          objPuestoCarro['clase'] = 'moto';
-          cont++;
-          motos.push(objPuestoCarro);
-        }
-        objPiso['motos'] = motos;
-      }
-
-      plano.push(objPiso);
-    });
-    this.form.get('plano').setValue(plano);
-    if (mostrar) {
-      this.dialog.open(VistaPlanosComponent, {
-        data: plano,
-        /* maxWidth: 700,
-        maxHeight: 600,
-        minHeight: 600,
-        minWidth: 700 */
-      })
-    }
-  }
 
   setearData(){
     if (this.dataRecibida){
@@ -209,8 +166,12 @@ export class GestionParqueaderoComponent implements OnInit {
         this.registrarParqueadero();
         break;
       case 'modificar':
-        console.log('modificar: ', this.dataRecibida.key);
-        this.dbService.modificar('parqueaderos', this.dataRecibida.key, this.form.value).then(
+
+        const datos = Object.assign({}, this.form.value);
+        // se parsea plano
+        datos.plano = JSON.stringify(datos.plano);
+      
+        this.dbService.modificar('parqueaderos', this.dataRecibida.key, datos).then(
           result => {
             console.log('parqueadero actualizado');
           }
@@ -223,9 +184,9 @@ export class GestionParqueaderoComponent implements OnInit {
     }
   }
 
-  configurarPlano(){
+  configurarPlano(visualizar?){
 
-    const estructura = {tipo: '', numero: '', orientacion : ''};
+    const estructura = {tipo: '', numero: ''};
     const plano = [];
     const pisostmp = this.form.get('pisos').value;
     let cont = 0;
@@ -242,11 +203,22 @@ export class GestionParqueaderoComponent implements OnInit {
       }
       plano[p] = matriz;
     }
-    
-    this.dialog.open(VistaPlanosComponent, {
-      data: plano,
+
+    const data = { 
+      plano: this.form.get('plano').value.length ? this.form.get('plano').value : plano,
+      visualizar
+    };
+    console.log(data);
+    const ref = this.dialog.open(VistaPlanosComponent, {
+      data
+    });
+
+    ref.afterClosed().subscribe(result =>{
+      if(result){
+        console.log('trae datos plano');
+        this.form.get('plano').setValue(result);
+      }
     });
   }
-
 
 }

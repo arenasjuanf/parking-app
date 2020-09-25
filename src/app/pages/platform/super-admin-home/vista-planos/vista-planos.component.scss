@@ -21,9 +21,21 @@ mat-tab-group{
 }
 
 .casilla{
-    width: 90px;
-    height: 90px;
+    width: 70px;
+    height: 70px;
     border: solid 1px;
     text-align: center;
     margin: unset;
+}
+
+mat-form-field{
+    height: 47px;
+    width: 47px;
+    margin-left: 8px;
+}
+
+.btns{
+    button{
+        margin: 5px;
+    }
 }

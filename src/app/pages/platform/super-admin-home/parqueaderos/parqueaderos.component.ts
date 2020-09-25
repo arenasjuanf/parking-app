@@ -45,6 +45,11 @@ export class ParqueaderosComponent implements OnInit {
         return x.map(park => ({  ...park.payload.doc.data(), key: park.payload.doc.id }));
       })
     ).subscribe(result =>{
+      result = result.map(park => {
+        park.plano = JSON.parse(park.plano);
+        return park;
+      });
+      console.log(result);
       this.listaParqueaderos = result;
     });
   }
