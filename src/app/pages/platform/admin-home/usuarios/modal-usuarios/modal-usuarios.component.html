@@ -1,0 +1,75 @@
+<div class="container-fluid">
+
+    <form>
+        <div class="w-100 text-center cont">
+            <div class="buttons">
+                <button  class="btn" type="button" mat-icon-button>
+                    <i class="fas fa-plus-circle"></i>
+                </button>
+                <button class="btn" type="button" mat-icon-button>
+                    <i class="fas fa-minus-circle"></i>
+                </button>
+            </div>
+            <img src="assets/images/sinimagen.jpg" alt="Foto Perfil">
+        </div>
+
+        <div class="row">
+            <mat-form-field appearance="outline" class="col-md-4 col-12">
+                <mat-label>Documento</mat-label>
+                <input matInput type="text">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="col-md-4 col-12">
+                <mat-label>Nombre</mat-label>
+                <input matInput type="text">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="col-md-4 col-12">
+                <mat-label>Telefono</mat-label>
+                <input matInput type="text">
+            </mat-form-field>
+        </div>
+        
+        <div class="row">
+            <mat-form-field appearance="outline" class="col-md-4 col-12">
+                <mat-label>Dirección</mat-label>
+                <input matInput type="text">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="col-md-4 col-12">
+                <mat-label>Correo Electronico</mat-label>
+                <input matInput type="text">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="col-md-4 col-12">
+                <mat-label>Idioma</mat-label>
+                <input matInput type="text">
+            </mat-form-field>
+        </div>
+        
+        <div class="row">
+            <mat-form-field appearance="outline" class="col-md-4 col-12">
+                <mat-label>Contraseña</mat-label>
+                <input matInput [type]="hidden ? 'text' : 'password'">
+                <mat-icon class="pointer" matSuffix (click)="hidden = !hidden">
+                    {{ hidden ? 'visibility' : 'visibility_off' }}
+                </mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="col-md-4 col-12">
+                <mat-label>Confirmar Contraseña</mat-label>
+                <input matInput [type]="hidden ? 'text' : 'password'">
+                <mat-icon class="pointer" matSuffix (click)="hidden = !hidden">
+                    {{ hidden ? 'visibility' : 'visibility_off' }}
+                </mat-icon>
+            </mat-form-field>
+        </div>
+
+        <div class="row justify-content-end">
+            <button class="col-12 col-md-3 btn btn-primary m-1">
+                Guardar Datos
+            </button>
+            <button class="col-12 col-md-3 btn btn-danger m-1">
+                Cancelar
+            </button>
+        </div>
+
+    </form>
+
+    
+</div>

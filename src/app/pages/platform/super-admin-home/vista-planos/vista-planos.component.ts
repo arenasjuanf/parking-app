@@ -9,7 +9,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class VistaPlanosComponent implements OnInit {
   actualTool: string;
   default = { tipo: '', numero: ''};
-  color = '#0C21F9';
+  color = '#C7C8D3';
   numero = 1;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,

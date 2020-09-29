@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { DatabaseService } from '../../services/database.service';
 
 @Component({
   selector: 'app-main',
@@ -8,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class MainComponent implements OnInit {
 
   permisos: object[] = [
-    {nombre: 'registrar ingreso',
+    { nombre: 'registrar ingreso',
       ruta: 'ingreso',
       icono: 'far fa-plus-square fa-7x'
     },
@@ -33,20 +36,37 @@ export class MainComponent implements OnInit {
       icono: 'far fa-credit-card fa-7x'
     },
     {
-      nombre: 'configuracion',
-      ruta: 'configuracion',
+      nombre: 'usuarios',
+      ruta: 'usuarios',
       icono: 'fas fa-user fa-7x'
     },
     {
-      nombre: 'usuarios',
-      ruta: 'usuarios',
-      icono: 'fas fa-cog fa-7x'
+      nombre: 'configuracion',
+      ruta: 'configuracion',
+      icono: 'fas fa-cog fa-7x '
     }
-  ]
+  ];
+  nombreParqueadero: any;
 
-  constructor() { }
+  constructor(private router: Router, private auth: AuthService, private db: DatabaseService) { 
+    this.getDataParqueadero();
+  }
 
   ngOnInit(): void {
+  }
+
+  getDataParqueadero(){
+    const idParqueadero = this.auth.datosUsuario.parqueadero;
+    console.log(idParqueadero);
+    this.db.findDoc('parqueaderos', idParqueadero ).snapshotChanges().subscribe(
+      result => {
+        this.nombreParqueadero = result.payload.get('razonSocial');
+      }
+    )
+  }
+
+  ir(ruta){
+    this.router.navigateByUrl(`/platform/admin/${ruta}`);
   }
 
 }
