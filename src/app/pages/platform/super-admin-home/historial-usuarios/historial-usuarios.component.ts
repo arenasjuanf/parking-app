@@ -11,7 +11,7 @@ export class HistorialUsuariosComponent implements OnInit {
 
   listUsers: Array<object> = [];
 
-  constructor(private dbService: DatabaseService,) {
+  constructor(private dbService: DatabaseService) {
     this.getUsuarios();
   }
 

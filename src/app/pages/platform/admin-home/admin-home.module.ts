@@ -6,6 +6,12 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminHomeComponent } from './admin-home.component';
 import { MainComponent } from './main/main.component';
+import { MatCardModule } from '@angular/material/card';
+import { ModalUsuariosComponent } from './usuarios/modal-usuarios/modal-usuarios.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+
 
 
 
@@ -13,13 +19,18 @@ import { MainComponent } from './main/main.component';
   declarations: [
     AdminHomeComponent,
     UsuariosComponent,
-    MainComponent
+    MainComponent,
+    ModalUsuariosComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatCardModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule
   ]
 
 })

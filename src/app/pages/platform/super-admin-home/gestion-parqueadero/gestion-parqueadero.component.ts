@@ -106,7 +106,7 @@ export class GestionParqueaderoComponent implements OnInit {
 
   registrarAdmin(idParqueadero) {
     const data = {
-      parqueaderos: [idParqueadero],
+      parqueadero: idParqueadero,
       tipoUsuario: 'admin',
       nombre: this.form.get('nombrePropietario').value
     };
@@ -137,7 +137,6 @@ export class GestionParqueaderoComponent implements OnInit {
     }
     this.form.get('cantidadPisos').setValue(valor);
   }
-
 
   setearData(){
     if (this.dataRecibida){
@@ -213,9 +212,8 @@ export class GestionParqueaderoComponent implements OnInit {
       data
     });
 
-    ref.afterClosed().subscribe(result =>{
+    ref.afterClosed().subscribe(result => {
       if(result){
-        console.log('trae datos plano');
         this.form.get('plano').setValue(result);
       }
     });

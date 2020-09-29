@@ -1,1 +1,47 @@
-<p>usuarios works!</p>
+<div class="contenedor">
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-primary m-2" (click)="abrirModal()">
+            <i class="fas fa-user-plus"></i>
+            Crear Usuario
+        </button>
+    </div>
+   <mat-card>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Doc</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario of usuarios">
+                    <th scope="row">{{ usuario.documento ? usuario.documento : '-----' }}</th>
+                    <td>{{ usuario.nombre | titlecase}}</td>
+                    <td>{{ usuario.telefono ? usuario.telefono : '-----' }}</td>
+                    <td>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-wrench"></i>
+                        </button>
+
+                        <button class="btn btn-primary">
+                            <i class="fas fa-edit"></i>
+                        </button>
+
+                        <button class="btn btn-primary">
+                            <i class="fas fa-user-times"></i>
+                        </button>
+
+                        <button class="btn btn-primary">
+                            <i class="fas fa-unlock"></i>
+                        </button>
+
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+   </mat-card>
+</div>
+

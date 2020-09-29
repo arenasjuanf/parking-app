@@ -52,7 +52,7 @@ export class SuperAdminHomeComponent implements OnInit {
       data: {},
       height: '500px',
       width: '600px',
-      disableClose: true
+      disableClose: true,
     });
   }
 

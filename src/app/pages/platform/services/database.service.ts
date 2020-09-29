@@ -64,6 +64,10 @@ export class DatabaseService {
     );
   }
 
+  findDoc(nombre_coleccion, idDoc){
+    return this.afs.collection(nombre_coleccion).doc(idDoc);
+  }
+
 
   // descripción: modifica documento especificando coleccion y id
   // parametros: 
@@ -73,6 +77,5 @@ export class DatabaseService {
   modificar(nombre_coleccion, id, data){
     return this.afs.collection(nombre_coleccion).doc(id).set(data, {merge: true});
   }
-
 
 }
