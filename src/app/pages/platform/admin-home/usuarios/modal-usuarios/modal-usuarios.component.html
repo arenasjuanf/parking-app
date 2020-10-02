@@ -1,52 +1,54 @@
-<div class="container-fluid">
+<div class="container-fluid animate__animated animate__animate__bounceOut animate__fast">
 
-    <form>
+    <form [formGroup]="formulario" (ngSubmit)="submit()">
         <div class="w-100 text-center cont">
             <div class="buttons">
-                <button  class="btn" type="button" mat-icon-button>
+                <button  class="btn" type="button" mat-icon-button (click)="fileInput.click()">
                     <i class="fas fa-plus-circle"></i>
                 </button>
-                <button class="btn" type="button" mat-icon-button>
+                <button class="btn" type="button" mat-icon-button (click)="setImagenDefecto()">
                     <i class="fas fa-minus-circle"></i>
                 </button>
             </div>
-            <img src="assets/images/sinimagen.jpg" alt="Foto Perfil">
+            <img [src]="imagenDefecto" alt="Foto Perfil">
+            <input hidden (change)="subirfoto($event)" #fileInput type="file" id="file" accept=".jpg,.jpeg,.png, .bmp">
+
         </div>
 
         <div class="row">
             <mat-form-field appearance="outline" class="col-md-4 col-12">
                 <mat-label>Documento</mat-label>
-                <input matInput type="text">
+                <input matInput type="text" formControlName="documento">
             </mat-form-field>
             <mat-form-field appearance="outline" class="col-md-4 col-12">
                 <mat-label>Nombre</mat-label>
-                <input matInput type="text">
+                <input matInput type="text" formControlName="nombre">
             </mat-form-field>
             <mat-form-field appearance="outline" class="col-md-4 col-12">
                 <mat-label>Telefono</mat-label>
-                <input matInput type="text">
+                <input matInput type="number" formControlName="telefono">
             </mat-form-field>
         </div>
         
         <div class="row">
             <mat-form-field appearance="outline" class="col-md-4 col-12">
                 <mat-label>Dirección</mat-label>
-                <input matInput type="text">
+                <input matInput type="text" formControlName="direccion">
             </mat-form-field>
             <mat-form-field appearance="outline" class="col-md-4 col-12">
                 <mat-label>Correo Electronico</mat-label>
-                <input matInput type="text">
+                <input matInput type="text" formControlName="email">
             </mat-form-field>
             <mat-form-field appearance="outline" class="col-md-4 col-12">
                 <mat-label>Idioma</mat-label>
-                <input matInput type="text">
+                <input matInput type="text" formControlName="idioma">
             </mat-form-field>
         </div>
         
-        <div class="row">
+        <div class="row" *ngIf="!editar">
             <mat-form-field appearance="outline" class="col-md-4 col-12">
                 <mat-label>Contraseña</mat-label>
-                <input matInput [type]="hidden ? 'text' : 'password'">
+                <input matInput [type]="hidden ? 'text' : 'password'" formControlName="password">
                 <mat-icon class="pointer" matSuffix (click)="hidden = !hidden">
                     {{ hidden ? 'visibility' : 'visibility_off' }}
                 </mat-icon>
@@ -60,11 +62,11 @@
             </mat-form-field>
         </div>
 
-        <div class="row justify-content-end">
-            <button class="col-12 col-md-3 btn btn-primary m-1">
+        <div class="row justify-content-end botones">
+            <button type="submit" class="col-12 col-md-3 btn btn-primary m-1" [disabled]="!formulario.valid">
                 Guardar Datos
             </button>
-            <button class="col-12 col-md-3 btn btn-danger m-1">
+            <button type="button" class="col-12 col-md-3 btn btn-danger m-1" (click)="salir()">
                 Cancelar
             </button>
         </div>

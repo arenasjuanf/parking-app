@@ -11,6 +11,10 @@ import { ModalUsuariosComponent } from './usuarios/modal-usuarios/modal-usuarios
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PlatformModule } from '../platform.module';
+import { SuperAdminModule } from '../super-admin-home/super-admin.module';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
@@ -30,7 +34,12 @@ import { MatIconModule } from '@angular/material/icon';
     MatCardModule,
     MatDialogModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatTooltipModule,
+    PlatformModule,
+    SuperAdminModule
   ]
 
 })

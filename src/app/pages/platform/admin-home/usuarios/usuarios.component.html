@@ -1,5 +1,10 @@
 <div class="contenedor">
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-between">
+        <button class="btn btn-secondary m-2" type="button" (click)="volver()">
+            <i class="fas fa-chevron-left"></i>
+            Regresar
+        </button>
+
         <button class="btn btn-primary m-2" (click)="abrirModal()">
             <i class="fas fa-user-plus"></i>
             Crear Usuario
@@ -21,23 +26,21 @@
                     <td>{{ usuario.nombre | titlecase}}</td>
                     <td>{{ usuario.telefono ? usuario.telefono : '-----' }}</td>
                     <td>
-                        <button class="btn btn-primary">
+                        <button class="btn btn-primary"  matTooltip="Permisos" matTooltipPosition="above">
                             <i class="fas fa-wrench"></i>
                         </button>
 
-                        <button class="btn btn-primary">
+                        <button class="btn btn-primary" matTooltip="Editar" matTooltipPosition="above" (click)="abrirModal(usuario)">
                             <i class="fas fa-edit"></i>
                         </button>
 
-                        <button class="btn btn-primary">
-                            <i class="fas fa-user-times"></i>
+                        <button class="btn btn-primary" [matTooltip]="usuario.estado ? 'Deshabilitar' : 'Habilitar'" matTooltipPosition="above" (click)="cambiarEstado(usuario)">
+                            <i [ngClass]="usuario.estado ? 'fas fa-user-times' : 'fas fa-user-check'"></i>
                         </button>
 
-                        <button class="btn btn-primary">
+                        <button class="btn btn-primary" matTooltip="Cambiar contraseña" matTooltipPosition="above">
                             <i class="fas fa-unlock"></i>
                         </button>
-
-
                     </td>
                 </tr>
             </tbody>

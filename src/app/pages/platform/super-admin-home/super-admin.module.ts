@@ -21,6 +21,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { PerfilComponent } from './perfil/perfil.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { NavbarComponent } from '../navbar/navbar.component';
+import { PlatformModule } from '../platform.module';
 
 
 @NgModule({
@@ -50,7 +52,9 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatExpansionModule,
     MatTooltipModule,
     MatSelectModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+  ], exports:[
+    PerfilComponent
   ]
 
 })
