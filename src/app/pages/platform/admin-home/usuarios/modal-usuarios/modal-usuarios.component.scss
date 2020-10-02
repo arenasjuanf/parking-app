@@ -33,6 +33,7 @@ img{
     flex-direction: column;
     text-align: center;
     align-items: center;
+    margin-bottom: 30px !important
 }
     
 
@@ -43,4 +44,14 @@ img{
     display: flex;
     justify-content: space-between;
 
+}
+
+button{
+    i{
+        color: #ffffff
+    }
+}
+
+.botones{
+    margin-top: 15px;
 }
