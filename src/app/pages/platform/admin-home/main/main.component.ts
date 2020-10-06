@@ -57,7 +57,6 @@ export class MainComponent implements OnInit {
 
   getDataParqueadero(){
     const idParqueadero = this.auth.datosUsuario.parqueadero;
-    console.log(idParqueadero);
     this.db.findDoc('parqueaderos', idParqueadero ).snapshotChanges().subscribe(
       result => {
         this.nombreParqueadero = result.payload.get('razonSocial');
