@@ -1,3 +1,14 @@
+img{
+    width: 60%;
+    text-align: center;
+}
+
+.label-pisos{
+    margin-bottom: 0px;
+    font-size: 10px;
+}
+
+
 mat-form-field ::ng-deep {
     width: calc(50% - 5px);
     height: 54px;
@@ -22,36 +33,10 @@ mat-form-field ::ng-deep {
     }
 }
 
-img{
-    width: 130px;
-    border-radius: 10px;
-}
-
-.cont{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    margin-bottom: 30px !important
-}
-    
-
-.buttons{
-    width: 130px;
-    position: relative;
-    margin-bottom: -40px;
-    display: flex;
-    justify-content: space-between;
-
-}
-
-button{
-    i{
-        color: #ffffff
+mat-accordion{
+    mat-expansion-panel{
+        border-radius: 10px;
+        background-color: #f6f8fb;
     }
 }
 
-.botones{
-    margin-top: 15px;
-}

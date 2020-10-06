@@ -91,6 +91,11 @@ export class GestionParqueaderoComponent implements OnInit {
   registrarParqueadero(){
     if(this.form.valid){
       const datos = Object.assign({}, this.form.value);
+      datos.tarifas = {
+        hora: { carro: 0, moto: 0 },
+        dia: {carro: 0, moto: 0 },
+        mes: { carro: 0, moto: 0 }
+      };
       // se parsea plano
       // tslint:disable-next-line: forin
       datos.plano = JSON.stringify(datos.plano);
