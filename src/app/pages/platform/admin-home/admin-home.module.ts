@@ -15,6 +15,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlatformModule } from '../platform.module';
 import { SuperAdminModule } from '../super-admin-home/super-admin.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ConfiguracionComponent } from './configuracion/configuracion.component';
+import { DatosParqueaderoComponent } from './datos-parqueadero/datos-parqueadero.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 
@@ -24,7 +27,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     AdminHomeComponent,
     UsuariosComponent,
     MainComponent,
-    ModalUsuariosComponent
+    ModalUsuariosComponent,
+    ConfiguracionComponent,
+    DatosParqueaderoComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +44,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ReactiveFormsModule,
     MatTooltipModule,
     PlatformModule,
-    SuperAdminModule
+    SuperAdminModule,
+    MatExpansionModule
   ]
 
 })

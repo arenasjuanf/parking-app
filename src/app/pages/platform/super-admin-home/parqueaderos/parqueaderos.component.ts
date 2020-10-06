@@ -49,7 +49,6 @@ export class ParqueaderosComponent implements OnInit {
         park.plano = JSON.parse(park.plano);
         return park;
       });
-      console.log(result);
       this.listaParqueaderos = result;
     });
   }

@@ -8,26 +8,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class DatabaseService {
 
-  // se definen las colecciones
-  private dataPrueba: AngularFireList<any>;
-  private usuarios: AngularFireList<any>;
-  private vehiculos: AngularFireList<any>;
-  private parqueaderos: AngularFireList<any>;
-
-
-
   constructor(private db: AngularFireDatabase, public afs: AngularFirestore) {
-    // se crea referencia de las colecciones
-    this.crearReferenciasDB();
-  }
-
-
-  // referenciamos las colecciones para poder ser usadas
-  crearReferenciasDB(){
-    this.dataPrueba = this.db.list('/dataPrueba');
-    this.usuarios = this.db.list('/usuarios');
-    this.vehiculos = this.db.list('/vehiculos');
-    this.parqueaderos = this.db.list('/parqueaderos');
   }
 
 
