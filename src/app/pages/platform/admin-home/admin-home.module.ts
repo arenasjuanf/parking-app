@@ -11,16 +11,15 @@ import { ModalUsuariosComponent } from './usuarios/modal-usuarios/modal-usuarios
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-
-
-
+import { MensualidadComponent } from './mensualidad/mensualidad.component';
 
 @NgModule({
   declarations: [
     AdminHomeComponent,
     UsuariosComponent,
     MainComponent,
-    ModalUsuariosComponent
+    ModalUsuariosComponent,
+    MensualidadComponent
   ],
   imports: [
     CommonModule,
