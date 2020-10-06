@@ -11,9 +11,7 @@ import { ModalUsuariosComponent } from './usuarios/modal-usuarios/modal-usuarios
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-<<<<<<< HEAD
 import { MensualidadComponent } from './mensualidad/mensualidad.component';
-=======
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlatformModule } from '../platform.module';
 import { SuperAdminModule } from '../super-admin-home/super-admin.module';
@@ -24,7 +22,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
 
 
 
->>>>>>> 78d14aa81f11190a01a72ffcb197e89009de7485
 
 @NgModule({
   declarations: [
@@ -32,12 +29,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
     UsuariosComponent,
     MainComponent,
     ModalUsuariosComponent,
-<<<<<<< HEAD
-    MensualidadComponent
-=======
+    MensualidadComponent,
     ConfiguracionComponent,
     DatosParqueaderoComponent
->>>>>>> 78d14aa81f11190a01a72ffcb197e89009de7485
   ],
   imports: [
     CommonModule,
