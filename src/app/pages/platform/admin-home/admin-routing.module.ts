@@ -3,18 +3,21 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminHomeComponent } from './admin-home.component';
 import { MainComponent } from './main/main.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { RegisterIncomeComponent } from './register-income/register-income.component';
 
 
 
 const routes: Routes = [
-    { path: '', component: AdminHomeComponent , 
-        children:[
+    {
+        path: '', component: AdminHomeComponent,
+        children: [
             { path: 'main', component: MainComponent },
             { path: 'usuarios', component: UsuariosComponent },
+            { path: 'ingreso', component: RegisterIncomeComponent },
             { path: '**', pathMatch: 'full', redirectTo: 'main' },
         ]
     },
-    { path: '**', pathMatch:'full', redirectTo: ''}
+    { path: '**', pathMatch: 'full', redirectTo: '' }
 ];
 
 @NgModule({

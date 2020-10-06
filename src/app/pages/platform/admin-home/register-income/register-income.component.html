@@ -1,0 +1,43 @@
+<div class="m-2">
+  <form [formGroup]="formRegisterIncome">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-9">
+        <div class="row">
+          <mat-form-field class="d-flex" appearance="outline" class="col-12 col-md-4 my-1">
+            <mat-label>Documento de usuario</mat-label>
+            <input (keyup.enter)="searchDataUser($event)" matInput type="text" formControlName="documentoUsuario">
+            <button mat-icon-button matSuffix>
+              <mat-icon>search</mat-icon>
+            </button>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-12 col-md-4 my-1">
+            <mat-label>Nombre del usuario</mat-label>
+            <input matInput type="text" formControlName="nombreUsuario">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-12 col-md-4 my-1">
+            <mat-label>Placa del vehículo</mat-label>
+            <input matInput type="text" formControlName="placa">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-12 col-md-4 my-1">
+            <mat-label>Selecicone marca</mat-label>
+            <mat-select formControlName="marca">
+              <mat-option>Marcas de vehiculos</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-12 col-md-4 my-1">
+            <mat-label>Tipo de vehículo</mat-label>
+            <mat-select formControlName="tipoVehiculo">
+              <mat-option *ngFor="let item of branchVehicles;" [value]="item['value']">{{ item['view'] }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-12 col-md-4">
+            <mat-label>Seleccione piso</mat-label>
+            <mat-select formControlName="piso">
+              <mat-option>Pisos</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

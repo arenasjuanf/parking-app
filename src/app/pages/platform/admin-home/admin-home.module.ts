@@ -15,6 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlatformModule } from '../platform.module';
 import { SuperAdminModule } from '../super-admin-home/super-admin.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { RegisterIncomeComponent } from './register-income/register-income.component';
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -24,7 +26,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     AdminHomeComponent,
     UsuariosComponent,
     MainComponent,
-    ModalUsuariosComponent
+    ModalUsuariosComponent,
+    RegisterIncomeComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +42,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ReactiveFormsModule,
     MatTooltipModule,
     PlatformModule,
-    SuperAdminModule
+    SuperAdminModule,
+    MatSelectModule,
   ]
 
 })
