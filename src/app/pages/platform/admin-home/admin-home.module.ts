@@ -11,6 +11,7 @@ import { ModalUsuariosComponent } from './usuarios/modal-usuarios/modal-usuarios
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MensualidadComponent } from './mensualidad/mensualidad.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlatformModule } from '../platform.module';
 import { SuperAdminModule } from '../super-admin-home/super-admin.module';
@@ -18,6 +19,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RegisterIncomeComponent } from './register-income/register-income.component';
 import { MatSelectModule } from '@angular/material/select';
 import { ModalUserComponent } from './register-income/modal-user/modal-user.component';
+import { ConfiguracionComponent } from './configuracion/configuracion.component';
+import { DatosParqueaderoComponent } from './datos-parqueadero/datos-parqueadero.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 
@@ -29,7 +33,10 @@ import { ModalUserComponent } from './register-income/modal-user/modal-user.comp
     MainComponent,
     ModalUsuariosComponent,
     RegisterIncomeComponent,
-    ModalUserComponent
+    ModalUserComponent,
+    MensualidadComponent,
+    ConfiguracionComponent,
+    DatosParqueaderoComponent
   ],
   imports: [
     CommonModule,
@@ -46,6 +53,7 @@ import { ModalUserComponent } from './register-income/modal-user/modal-user.comp
     PlatformModule,
     SuperAdminModule,
     MatSelectModule,
+    MatExpansionModule
   ]
 
 })

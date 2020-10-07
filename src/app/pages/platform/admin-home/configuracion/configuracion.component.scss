@@ -1,0 +1,13 @@
+.contenedor{
+    width: 100%;
+    padding: 5px;
+    height: calc( 100% - 56px) ;
+}
+
+th,td{
+    text-align: center;
+}
+
+td > button {
+    margin: 1px;
+}

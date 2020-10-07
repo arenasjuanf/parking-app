@@ -1,0 +1,33 @@
+<div class="contenedor">
+    <div class="d-flex justify-content-between">
+        <button class="btn btn-secondary m-2" type="button" (click)="volver()">
+            <i class="fas fa-chevron-left"></i>
+            Regresar
+        </button>
+    </div>
+    <mat-card>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Tarifa</th>
+                    <th scope="col">Carro</th>
+                    <th scope="col">Moto</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of arrayTarifas">
+                    <th scope="row">{{ item | titlecase}}</th>
+                    <td>{{ tarifas[item]['carro'] }}</td>
+                    <td>{{ tarifas[item]['moto'] }}</td>
+                    <td>
+                        <button class="btn btn-primary" matTooltip="Editar" matTooltipPosition="above"
+                            (click)="abrirModal(tarifa)">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-card>
+</div>
