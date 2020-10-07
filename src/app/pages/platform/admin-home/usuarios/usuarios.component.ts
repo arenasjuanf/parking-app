@@ -6,6 +6,7 @@ import { constantes } from 'src/app/constantes';
 import { AuthService } from '../../services/auth.service';
 import { DatabaseService } from '../../services/database.service';
 import { ModalUsuariosComponent } from './modal-usuarios/modal-usuarios.component';
+import { PermisosComponent } from './permisos/permisos.component';
 
 @Component({
   selector: 'app-usuarios',
@@ -47,7 +48,6 @@ export class UsuariosComponent implements OnInit {
     const dialogRef = this.dialog.open(ModalUsuariosComponent,{
       data: datos,
       width: '700px',
-      height: '450px',
       disableClose: true
     });
   }
@@ -59,6 +59,27 @@ export class UsuariosComponent implements OnInit {
   cambiarEstado(user){
     const estado = !user.estado;
     this.db.modificar('usuarios', user.key, {estado});
+  }
+
+  permisos(usuario){
+    console.log(usuario);
+    const datos = {
+      width: '300px',
+      disableClose: true
+    };
+    if(usuario.permisos){
+      datos['data'] = usuario.permisos;
+    }
+
+
+    this.dialog.open(PermisosComponent, datos).afterClosed().subscribe(permisos => {
+      if(permisos){
+        console.log('result: ', permisos);
+        this.db.modificar('usuarios', usuario.key, {permisos}).then( result => {
+          console.log('reusltado modificaicon; ', result);
+        });
+      }
+    });
   }
 
 }
