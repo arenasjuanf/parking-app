@@ -17,6 +17,7 @@ import { SuperAdminModule } from '../super-admin-home/super-admin.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RegisterIncomeComponent } from './register-income/register-income.component';
 import { MatSelectModule } from '@angular/material/select';
+import { ModalUserComponent } from './register-income/modal-user/modal-user.component';
 
 
 
@@ -27,7 +28,8 @@ import { MatSelectModule } from '@angular/material/select';
     UsuariosComponent,
     MainComponent,
     ModalUsuariosComponent,
-    RegisterIncomeComponent
+    RegisterIncomeComponent,
+    ModalUserComponent
   ],
   imports: [
     CommonModule,
