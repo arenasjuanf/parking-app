@@ -19,6 +19,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ConfiguracionComponent } from './configuracion/configuracion.component';
 import { DatosParqueaderoComponent } from './datos-parqueadero/datos-parqueadero.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { PermisosComponent } from './usuarios/permisos/permisos.component';
+import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 
@@ -31,7 +35,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     ModalUsuariosComponent,
     MensualidadComponent,
     ConfiguracionComponent,
-    DatosParqueaderoComponent
+    DatosParqueaderoComponent,
+    PermisosComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +52,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatTooltipModule,
     PlatformModule,
     SuperAdminModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatListModule,
+    MatDividerModule,
+    MatCheckboxModule
+
   ]
 
 })

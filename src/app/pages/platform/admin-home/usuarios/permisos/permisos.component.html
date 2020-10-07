@@ -1,0 +1,31 @@
+
+    <p class="text-center font-weight-bold">Permisos</p>
+
+<!--     <mat-list-option  [value]="permisos[item]">
+        <p>
+            <i [ngClass]="permisos[item].icono" class="mr-2"></i>{{ item | titlecase}}
+        </p>
+    </mat-list-option> -->
+
+    <mat-list role="list" >
+        
+        <mat-list-item role="listitem" *ngFor="let item of keysPermisos">
+            <p class="w-100">
+                <i [ngClass]="permisos[item].icono" class="mr-2"></i>
+                {{ item | titlecase}}
+            </p>
+            <mat-checkbox [checked]="permisos[item].checked" (change)="agregar(permisos[item],$event)">
+            </mat-checkbox>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+        
+    </mat-list>
+
+    
+
+
+<div class="d-flex justify-content-between mt-1">
+    <button mat-button [mat-dialog-close] class="btn btn-danger"> Cancelar </button>
+    <button mat-button class="btn btn-primary" (click)="guardar()"> Guardar </button>
+</div>
+

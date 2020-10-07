@@ -26,7 +26,7 @@
                     <td>{{ usuario.nombre | titlecase}}</td>
                     <td>{{ usuario.telefono ? usuario.telefono : '-----' }}</td>
                     <td>
-                        <button class="btn btn-primary"  matTooltip="Permisos" matTooltipPosition="above">
+                        <button class="btn btn-primary"  matTooltip="Permisos" matTooltipPosition="above" (click)="permisos(usuario)">
                             <i class="fas fa-wrench"></i>
                         </button>
 
