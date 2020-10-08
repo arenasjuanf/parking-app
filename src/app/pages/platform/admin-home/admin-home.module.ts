@@ -11,7 +11,6 @@ import { ModalUsuariosComponent } from './usuarios/modal-usuarios/modal-usuarios
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MensualidadComponent } from './mensualidad/mensualidad.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlatformModule } from '../platform.module';
 import { SuperAdminModule } from '../super-admin-home/super-admin.module';
@@ -22,6 +21,7 @@ import { ModalUserComponent } from './register-income/modal-user/modal-user.comp
 import { ConfiguracionComponent } from './configuracion/configuracion.component';
 import { DatosParqueaderoComponent } from './datos-parqueadero/datos-parqueadero.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MensualidadComponent } from './mensualidad/mensualidad.component';
 
 
 

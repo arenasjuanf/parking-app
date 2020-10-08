@@ -35,7 +35,7 @@ export class DatabaseService {
     return this.afs.collection(nombre_coleccion).snapshotChanges();
   }
 
-  getPorId(nombre_coleccion, uid){
+  getPorId(nombre_coleccion, uid) {
     return this.afs.collection(nombre_coleccion, ref => ref.where('uid', '==', uid));
   }
 
@@ -45,18 +45,27 @@ export class DatabaseService {
     );
   }
 
-  findDoc(nombre_coleccion, idDoc){
+  findDoc(nombre_coleccion, idDoc) {
     return this.afs.collection(nombre_coleccion).doc(idDoc);
   }
 
+  /* Se le envia el nombre la colección a la que se conectara
+    En el segundo parametro es sobre la propiedad que vamos a ordenar
+    El tercer parametro es el valor que vamos a buscar como coincidencia.
+   */
+  getPorFiltroEntreTexto(nombre_coleccion, propiedadFiltro, valorBuscar, campoCondicion, valorCondicion) {
+    return this.afs.collection(`/${nombre_coleccion}`, ref =>
+      ref.orderBy(propiedadFiltro).startAt(valorBuscar).endAt(valorBuscar + '\uf8ff')
+    );
+  }
 
   // descripción: modifica documento especificando coleccion y id
   // parametros: 
   // nombre_coleccion = nombre de la referencia de la coleccion
   // id = id documento
   // data: nuevos datos a ingresar
-  modificar(nombre_coleccion, id, data){
-    return this.afs.collection(nombre_coleccion).doc(id).set(data, {merge: true});
+  modificar(nombre_coleccion, id, data) {
+    return this.afs.collection(nombre_coleccion).doc(id).set(data, { merge: true });
   }
 
 }

@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminHomeComponent } from './admin-home.component';
 import { ConfiguracionComponent } from './configuracion/configuracion.component';
-import { DatosParqueaderoComponent } from './datos-parqueadero/datos-parqueadero.component';
 import { MainComponent } from './main/main.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { RegisterIncomeComponent } from './register-income/register-income.component';
 import { MensualidadComponent } from './mensualidad/mensualidad.component';
+import { DatosParqueaderoComponent } from './datos-parqueadero/datos-parqueadero.component';
 
 
 

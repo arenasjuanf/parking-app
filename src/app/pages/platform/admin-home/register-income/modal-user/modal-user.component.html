@@ -1,1 +1,62 @@
-<p>modal-user works!</p>
+<div class="m-2" [ngSwitch]="data.tipo">
+  <form *ngSwitchCase="'crear'" [formGroup]="formRegisterUser" (ngSubmit)="saveUser()">
+    <div class="row justify-content-center">
+      <mat-form-field appearance="outline" class="col-12 col-md-12">
+        <mat-label>Documento de usuario</mat-label>
+        <input formControlName="documento" matInput type="text">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-12 col-md-12">
+        <mat-label>Nombre del usuario</mat-label>
+        <input formControlName="nombre" matInput type="text">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-12 col-md-12">
+        <mat-label>Correo electronico</mat-label>
+        <input formControlName="email" matInput type="email">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-12 col-md-12">
+        <mat-label>Teléfono</mat-label>
+        <input formControlName="telefono" matInput type="number">
+      </mat-form-field>
+      <div class="col-12 col-md-12 d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary mt-2">
+          <i class="far fa-edit"></i>Registrar
+        </button>
+        <button (click)="closeDialog()" type="button" class="btn btn-primary mt-2">
+          <i class="fa fa-times"></i> Cancelar
+        </button>
+      </div>
+    </div>
+  </form>
+  <div class="row justify-content-center" *ngSwitchCase="'listar'">
+    <div class="col-12 col-md-11">
+      <div class="contenedor-tabla">
+        <table class="table table-responsive">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col" class="text-center">Nombre</th>
+              <th scope="col" class="text-center">Documento</th>
+              <th scope="col" class="text-center">Email</th>
+              <th scope="col" class="text-center"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of data.datos">
+              <td class="align-middle text-center">{{ item.nombre | titlecase }}</td>
+              <td class="align-middle text-center">{{ item.documento}}</td>
+              <td class="align-middle text-center">{{ item.email }}</td>
+              <td class="align-middle text-center">
+                <button (click)="closeDialog(item)" type="button" class="btn btn-primary my-1 my-md-0 mx-0 mx-md-1"
+                  matTooltipPosition="above">
+                  <i class="fa fa-share"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button (click)="closeDialog()" type="button" class="btn btn-primary mt-2">
+        <i class="fa fa-times"></i>Cancelar
+      </button>
+    </div>
+  </div>
+</div>
