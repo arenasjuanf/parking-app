@@ -11,6 +11,30 @@ export class constantes{
     {
         valor: 'en',
         display: 'Inglés'
-    }]
+    }];
+
+    public static permisos = {
+        'configuracion': {
+            label: 'configuracion'
+        },
+        'datos-parqueadero':{
+            label: 'datos parqueadero'
+        },
+        'informe':{
+            label: 'informe'
+        },
+        'mensualidad':{
+            label: 'mensualidad'
+        },
+        'egreso': {
+            label: 'registrar egreso'
+        },
+        'ingreso':{
+            label: 'Registar ingreso'
+        },
+        'usuarios':{
+            label: 'usuarios'
+        }
+    };
 
 }
