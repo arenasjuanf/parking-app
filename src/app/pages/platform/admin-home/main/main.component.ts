@@ -13,43 +13,6 @@ export class MainComponent implements OnInit {
 
   permisos: Array<any> = [];
   labels = constantes.permisos;
-  /* permisos: object[] = [
-    { nombre: 'registrar ingreso',
-      ruta: 'ingreso',
-      icono: 'far fa-plus-square'
-    },
-    {
-      nombre: 'registrar egreso',
-      ruta: 'egreso',
-      icono: 'fas fa-sign-out-alt'
-    },
-    {
-      nombre: 'datos parqueadero',
-      ruta: 'datos-parqueadero',
-      icono: 'fas fa-pencil-alt'
-    },
-    {
-      nombre: 'informe',
-      ruta: 'informe',
-      icono: 'fas fa-file-alt'
-    },
-    {
-      nombre: 'mensualidad',
-      ruta: 'mensualidad',
-      icono: 'far fa-credit-card'
-    },
-    {
-      nombre: 'usuarios',
-      ruta: 'usuarios',
-      icono: 'fas fa-user'
-    },
-    {
-      nombre: 'configuracion',
-      ruta: 'configuracion',
-      icono: 'fas fa-cog'
-    }
-  ]; */
-
 
   nombreParqueadero: string;
   constructor(private router: Router, private auth: AuthService, private db: DatabaseService) { 
@@ -73,9 +36,8 @@ export class MainComponent implements OnInit {
     this.router.navigateByUrl(`/platform/admin/${ruta}`);
   }
 
- getPermisos(){
-   this.permisos = this.auth.datosUsuario['permisos'];
-   console.log(this.permisos);
- }
+  getPermisos(){
+    this.permisos = this.auth.datosUsuario['permisos'];
+  }
 
 }
