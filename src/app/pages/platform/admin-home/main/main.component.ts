@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { constantes } from 'src/app/constantes';
 import { AuthService } from '../../services/auth.service';
 import { DatabaseService } from '../../services/database.service';
 
@@ -10,7 +11,9 @@ import { DatabaseService } from '../../services/database.service';
 })
 export class MainComponent implements OnInit {
 
-  permisos: object[] = [
+  permisos: Array<any> = [];
+  labels = constantes.permisos;
+  /* permisos: object[] = [
     { nombre: 'registrar ingreso',
       ruta: 'ingreso',
       icono: 'far fa-plus-square'
@@ -45,12 +48,13 @@ export class MainComponent implements OnInit {
       ruta: 'configuracion',
       icono: 'fas fa-cog'
     }
-  ];
+  ]; */
 
 
   nombreParqueadero: string;
   constructor(private router: Router, private auth: AuthService, private db: DatabaseService) { 
     this.getDataParqueadero();
+    this.getPermisos();
   }
 
   ngOnInit(): void {
@@ -68,5 +72,10 @@ export class MainComponent implements OnInit {
   ir(ruta){
     this.router.navigateByUrl(`/platform/admin/${ruta}`);
   }
+
+ getPermisos(){
+   this.permisos = this.auth.datosUsuario['permisos'];
+   console.log(this.permisos);
+ }
 
 }
