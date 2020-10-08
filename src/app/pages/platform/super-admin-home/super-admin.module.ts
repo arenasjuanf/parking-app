@@ -23,6 +23,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { PlatformModule } from '../platform.module';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -53,6 +55,8 @@ import { PlatformModule } from '../platform.module';
     MatTooltipModule,
     MatSelectModule,
     MatButtonToggleModule,
+    MatTableModule,
+    MatPaginatorModule
   ], exports:[
     PerfilComponent
   ]
