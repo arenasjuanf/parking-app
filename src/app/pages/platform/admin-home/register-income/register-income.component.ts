@@ -27,6 +27,8 @@ export class RegisterIncomeComponent implements OnInit {
   branchVehicles: Array<object> = [{ value: 'moto', view: 'Moto' }, { value: 'carro', view: 'Carro' }];
   dataUser;
   floorsParking;
+  userValidData: object;
+  validUser: boolean = false;
 
   ngOnInit(): void {
     this.configForm();
@@ -43,6 +45,16 @@ export class RegisterIncomeComponent implements OnInit {
       seccionPiso: ['', Validators.required],
       parqueadero: [this.dataUser['parqueadero'], Validators.required],
     });
+
+    this.formRegisterIncome.get('documentoUsuario').valueChanges.subscribe(valor => {
+      if (this.userValidData && (valor === this.userValidData['documento'])) {
+        this.validUser = true;
+        this.formRegisterIncome.get('nombreUsuario').setValue(this.userValidData['nombre']);
+      } else {
+        this.validUser = false;
+        this.formRegisterIncome.get('nombreUsuario').reset();
+      }
+    });
   }
 
   getFloorsParking() {
@@ -54,37 +66,58 @@ export class RegisterIncomeComponent implements OnInit {
   }
 
   searchDataUser(evento?) {
-    let valor = evento ? evento.srcElement.value : this.formRegisterIncome.get('documentoUsuario').value;
-    this.dataBaseService.getPorFiltroEntreTexto("usuarios", "documento", valor, 'parqueadero', this.dataUser['parqueadero']).snapshotChanges().pipe(
-      map((options: Array<any>) => {
-        return options.map(option => ({ ...option.payload.doc.data(), key: option.payload.doc.id }))
-      })
-    ).subscribe(respuesta => {
-      if (respuesta.length === 1 && respuesta[0].documento === valor) {
-        this.formRegisterIncome.get('nombreUsuario').setValue(respuesta[0].nombre);
-        this.formRegisterIncome.get('documentoUsuario').setValue(respuesta[0].documento);
-      } else {
-        const referencia = this.dialogComponent.open(ModalUserComponent, {
-          data: {
-            tipo: (respuesta.length ? 'listar' : 'crear'),
-            datos: respuesta,
-            parqueadero: this.dataUser['parqueadero']
-          },
-          maxWidth: (respuesta.length ? 700 : 400),
-          disableClose: true
-        });
-        referencia.afterClosed().subscribe(resultado => {
-          console.log("resultado ", resultado);
-          if (resultado && resultado.nombre) {
-            this.formRegisterIncome.get('nombreUsuario').setValue(resultado.nombre);
-            this.formRegisterIncome.get('documentoUsuario').setValue(resultado.documento);
+    if (!this.validUser) {
+      let valor = evento ? evento.srcElement.value : this.formRegisterIncome.get('documentoUsuario').value;
+      this.dataBaseService.getPorFiltro("usuarios", 'parqueadero', this.dataUser['parqueadero'])
+        .ref.orderBy('documento').startAt(valor).endAt(valor + '\uf8ff')
+        .onSnapshot(respuesta => {
+          const datos = respuesta.docs.map(item => ({
+            ...item.data(), key: item.id
+          }));
+          console.log("Usuario ", this.validUser, datos);
+          if (this.validUser || (datos.length === 1 && datos[0]['documento'] === valor)) {
+            this.setValueData(this.validUser ? this.userValidData : datos[0]);
+          } else {
+            const referencia = this.dialogComponent.open(ModalUserComponent, {
+              data: {
+                tipo: (datos.length ? 'listar' : 'crear'),
+                datos: datos,
+                parqueadero: this.dataUser['parqueadero'],
+                documento: valor
+              },
+              disableClose: true
+            });
+            referencia.afterClosed().subscribe(resultado => {
+              if (resultado && resultado.nombre) {
+                this.setValueData(resultado);
+              }
+            });
           }
+        }, error => {
+          console.log("Error ", error);
         });
-      }
-    }, error => {
-      console.log("Error ", error);
-    });
-    console.log("valor despues de tomado ", valor);
+    } else {
+      const referenciaEditar = this.dialogComponent.open(ModalUserComponent, {
+        data: {
+          tipo: 'crear',
+          datos: this.userValidData,
+          parqueadero: this.dataUser['parqueadero'],
+          editarUsuario: true,
+        },
+        disableClose: true
+      });
+      referenciaEditar.afterClosed().subscribe(resultado => {
+        if (resultado && resultado.nombre) {
+          this.setValueData(resultado);
+        }
+      });
+    }
+  }
+
+  setValueData(resultado) {
+    this.userValidData = resultado;
+    this.formRegisterIncome.get('nombreUsuario').setValue(resultado.nombre);
+    this.formRegisterIncome.get('documentoUsuario').setValue(resultado.documento);
   }
 
   saveDataRegister() {

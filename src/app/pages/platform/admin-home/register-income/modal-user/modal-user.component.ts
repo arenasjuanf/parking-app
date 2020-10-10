@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DatabaseService } from '../../../services/database.service';
 
 @Component({
   selector: 'app-modal-user',
@@ -13,14 +14,19 @@ export class ModalUserComponent implements OnInit {
     public dialogRef: MatDialogRef<ModalUserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
-  ) {
-    console.log("Datatatattata ", data);
-  }
+    private dataBaseService: DatabaseService,
+  ) { }
 
   formRegisterUser: FormGroup;
 
   ngOnInit(): void {
     this.configForm();
+
+    if (this.data.editarUsuario) {
+      this.formRegisterUser.patchValue(this.data.datos);
+    } else {
+      this.formRegisterUser.get('documento').setValue(this.data.documento);
+    }
   }
 
   configForm() {
@@ -40,7 +46,22 @@ export class ModalUserComponent implements OnInit {
 
   saveUser() {
     if (this.formRegisterUser.valid) {
-      console.log("FOrmulario ", this.formRegisterUser.value);
+      if (this.data.editarUsuario) {
+        const datos = Object.assign({}, this.formRegisterUser.value);
+        this.dataBaseService.modificar('usuarios', this.data.datos.key, datos).then(result => {
+          datos['key'] = this.data.datos.key;
+          this.closeDialog(datos);
+        }).catch(error => {
+          console.log('Error modificar usuario :', error);
+        });
+      } else {
+        const datos = Object.assign({}, this.formRegisterUser.value);
+        datos['password'] = datos.documento;
+        this.dataBaseService.addData("usuarios", this.formRegisterUser.value).then(respuesta => {
+          datos['key'] = respuesta.id;
+          this.closeDialog(datos);
+        });
+      }
     } else {
       this.formRegisterUser.markAsTouched();
     }

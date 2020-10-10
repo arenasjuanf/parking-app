@@ -19,7 +19,7 @@
       </mat-form-field>
       <div class="col-12 col-md-12 d-flex justify-content-between">
         <button type="submit" class="btn btn-primary mt-2">
-          <i class="far fa-edit"></i>Registrar
+          <i class="far fa-edit"></i>{{ this.data.editarUsuario ? 'Modificar' : 'Registrar'}}
         </button>
         <button (click)="closeDialog()" type="button" class="btn btn-primary mt-2">
           <i class="fa fa-times"></i> Cancelar

@@ -49,16 +49,6 @@ export class DatabaseService {
     return this.afs.collection(nombre_coleccion).doc(idDoc);
   }
 
-  /* Se le envia el nombre la colección a la que se conectara
-    En el segundo parametro es sobre la propiedad que vamos a ordenar
-    El tercer parametro es el valor que vamos a buscar como coincidencia.
-   */
-  getPorFiltroEntreTexto(nombre_coleccion, propiedadFiltro, valorBuscar, campoCondicion, valorCondicion) {
-    return this.afs.collection(`/${nombre_coleccion}`, ref =>
-      ref.orderBy(propiedadFiltro).startAt(valorBuscar).endAt(valorBuscar + '\uf8ff')
-    );
-  }
-
   // descripción: modifica documento especificando coleccion y id
   // parametros: 
   // nombre_coleccion = nombre de la referencia de la coleccion
