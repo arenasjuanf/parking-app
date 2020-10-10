@@ -22,6 +22,10 @@ import { ConfiguracionComponent } from './configuracion/configuracion.component'
 import { DatosParqueaderoComponent } from './datos-parqueadero/datos-parqueadero.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MensualidadComponent } from './mensualidad/mensualidad.component';
+import { PermisosComponent } from './usuarios/permisos/permisos.component';
+import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 
@@ -36,7 +40,8 @@ import { MensualidadComponent } from './mensualidad/mensualidad.component';
     ModalUserComponent,
     MensualidadComponent,
     ConfiguracionComponent,
-    DatosParqueaderoComponent
+    DatosParqueaderoComponent,
+    PermisosComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +58,12 @@ import { MensualidadComponent } from './mensualidad/mensualidad.component';
     PlatformModule,
     SuperAdminModule,
     MatSelectModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatExpansionModule,
+    MatListModule,
+    MatDividerModule,
+    MatCheckboxModule
+
   ]
 
 })

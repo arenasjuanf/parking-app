@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { constantes } from 'src/app/constantes';
 import { AuthService } from '../../services/auth.service';
 import { DatabaseService } from '../../services/database.service';
 
@@ -10,46 +11,13 @@ import { DatabaseService } from '../../services/database.service';
 })
 export class MainComponent implements OnInit {
 
-  permisos: object[] = [
-    { nombre: 'registrar ingreso',
-      ruta: 'ingreso',
-      icono: 'far fa-plus-square fa-7x'
-    },
-    {
-      nombre: 'registrar egreso',
-      ruta: 'egreso',
-      icono: 'fas fa-sign-out-alt fa-7x'
-    },
-    {
-      nombre: 'datos parqueadero',
-      ruta: 'datos-parqueadero',
-      icono: 'fas fa-pencil-alt fa-7x'
-    },
-    {
-      nombre: 'informe',
-      ruta: 'informe',
-      icono: 'fas fa-file-alt fa-7x'
-    },
-    {
-      nombre: 'mensualidad',
-      ruta: 'mensualidad',
-      icono: 'far fa-credit-card fa-7x'
-    },
-    {
-      nombre: 'usuarios',
-      ruta: 'usuarios',
-      icono: 'fas fa-user fa-7x'
-    },
-    {
-      nombre: 'configuracion',
-      ruta: 'configuracion',
-      icono: 'fas fa-cog fa-7x '
-    }
-  ];
-  nombreParqueadero: any;
+  permisos: Array<any> = [];
+  labels = constantes.permisos;
 
+  nombreParqueadero: string;
   constructor(private router: Router, private auth: AuthService, private db: DatabaseService) { 
     this.getDataParqueadero();
+    this.getPermisos();
   }
 
   ngOnInit(): void {
@@ -66,6 +34,10 @@ export class MainComponent implements OnInit {
 
   ir(ruta){
     this.router.navigateByUrl(`/platform/admin/${ruta}`);
+  }
+
+  getPermisos(){
+    this.permisos = this.auth.datosUsuario['permisos'];
   }
 
 }
