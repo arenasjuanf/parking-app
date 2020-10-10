@@ -195,4 +195,8 @@ export class DatosParqueaderoComponent implements OnInit {
     });
   }
 
+  prueba(){
+    return true;
+  }
+
 }
