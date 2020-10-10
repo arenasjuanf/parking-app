@@ -32,5 +32,9 @@ export class ConfiguracionComponent implements OnInit {
   volver() {
     this.router.navigateByUrl('/platform/admin/main');
   }
-  
+
+  paraProbar(){
+    return true;
+  }
+
 }

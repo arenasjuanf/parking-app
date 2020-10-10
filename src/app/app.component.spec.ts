@@ -1,12 +1,18 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { RouterTestingModule } from '@angular/router/testing';
+
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent
-      ],
+      ],imports:[
+        RouterTestingModule
+      ]
     }).compileComponents();
   }));
 
@@ -16,16 +22,11 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'heroesApp'`, () => {
+  it(`should have as title 'Parking-App'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('heroesApp');
+    expect(app.title).toEqual('Parking-App');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('heroesApp app is running!');
-  });
+
 });
