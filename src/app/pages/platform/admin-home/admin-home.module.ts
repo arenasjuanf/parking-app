@@ -26,6 +26,7 @@ import { PermisosComponent } from './usuarios/permisos/permisos.component';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ModalValueRateComponent } from './configuracion/modal-value-rate/modal-value-rate.component';
 
 
 
@@ -41,7 +42,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MensualidadComponent,
     ConfiguracionComponent,
     DatosParqueaderoComponent,
-    PermisosComponent
+    PermisosComponent,
+    ModalValueRateComponent
   ],
   imports: [
     CommonModule,
