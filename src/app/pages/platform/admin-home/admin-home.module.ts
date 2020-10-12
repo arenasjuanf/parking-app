@@ -26,6 +26,9 @@ import { PermisosComponent } from './usuarios/permisos/permisos.component';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTabsModule } from '@angular/material/tabs';
+import { PlanosAsignacionComponent } from './planos-asignacion/planos-asignacion.component';
+
 
 
 
@@ -41,7 +44,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MensualidadComponent,
     ConfiguracionComponent,
     DatosParqueaderoComponent,
-    PermisosComponent
+    PermisosComponent,
+    PlanosAsignacionComponent,
   ],
   imports: [
     CommonModule,
@@ -62,8 +66,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatExpansionModule,
     MatListModule,
     MatDividerModule,
-    MatCheckboxModule
-
+    MatCheckboxModule,
+    MatTabsModule
   ]
 
 })

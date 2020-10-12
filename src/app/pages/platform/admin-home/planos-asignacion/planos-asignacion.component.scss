@@ -1,0 +1,76 @@
+.pduesto{
+    min-height: 115px;
+    min-width: 117px;
+    float: left ;
+    background-color: #e1e3e4;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.contenedor{
+    overflow-x: hidden;
+}
+
+mat-tab-group{
+
+    ::ng-deep{
+        .mat-tab-body-content{
+            overflow: hidden;
+        }
+    }
+}
+
+.casilla{
+    width: 90px;
+    height: 90px;
+    border: solid 1px #9a9999;
+    text-align: center;
+    margin: unset;
+    margin:1px;
+    
+}
+
+mat-form-field{
+    height: 47px;
+    width: 47px;
+    margin-left: 8px;
+}
+
+.btns{
+    button{
+        margin: 5px;
+    }
+}
+
+.casilla:hover{
+    //margin:0px;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.button11::before,
+.button11::after {
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  content: '';
+  width: 50%;
+  height: 100%;
+  background: #333;
+  transform: scale(0, 1);
+  transition: transform .3s;
+}
+.button11::before {
+  left: 0;
+  transform-origin: left top;
+}
+.button11::after {
+  right: 0;
+  transform-origin: right top;
+}
+.button11:hover::before,
+.button11:hover::after {
+  transform: scale(1, 1);
+}

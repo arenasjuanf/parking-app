@@ -5,6 +5,7 @@ import { DatabaseService } from '../../services/database.service';
 import { map } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalUserComponent } from './modal-user/modal-user.component';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-register-income',
@@ -12,6 +13,7 @@ import { ModalUserComponent } from './modal-user/modal-user.component';
   styleUrls: ['./register-income.component.scss']
 })
 export class RegisterIncomeComponent implements OnInit {
+  pisoSeleccionado: number = 0;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -20,6 +22,7 @@ export class RegisterIncomeComponent implements OnInit {
     public dialogComponent: MatDialog,
   ) {
     this.dataUser = this.authService.datosUsuario;
+    this.getPlano();
     this.getFloorsParking();
   }
 
@@ -28,7 +31,8 @@ export class RegisterIncomeComponent implements OnInit {
   dataUser;
   floorsParking;
   userValidData: object;
-  validUser: boolean = false;
+  validUser: Boolean = false;
+  datosPlano = [];
 
   ngOnInit(): void {
     this.configForm();
@@ -43,12 +47,19 @@ export class RegisterIncomeComponent implements OnInit {
       tipoVehiculo: ['', Validators.required],
       piso: ['', Validators.required],
       seccionPiso: ['', Validators.required],
-      parqueadero: [this.dataUser['parqueadero'], Validators.required],
+      parqueadero: [this.dataUser['parqueadero'], Validators.required]
+    });
+
+    Object.keys(this.formRegisterIncome.value).forEach(elem => {
+      if (elem !== 'documentoUsuario'){
+        this.formRegisterIncome.get(elem).disable();
+      }
     });
 
     this.formRegisterIncome.get('documentoUsuario').valueChanges.subscribe(valor => {
       if (this.userValidData && (valor === this.userValidData['documento'])) {
         this.validUser = true;
+        this.formRegisterIncome.enable();
         this.formRegisterIncome.get('nombreUsuario').setValue(this.userValidData['nombre']);
       } else {
         this.validUser = false;
@@ -65,6 +76,14 @@ export class RegisterIncomeComponent implements OnInit {
     });
   }
 
+  getPlano() {
+    this.dataBaseService.findDoc("parqueaderos", this.dataUser['parqueadero']).snapshotChanges().subscribe(respuesta => {
+      this.datosPlano = JSON.parse(respuesta.payload.get('plano'));
+    }, error => {
+      console.log("Error ", error);
+    });
+  }
+
   searchDataUser(evento?) {
     if (!this.validUser) {
       let valor = evento ? evento.srcElement.value : this.formRegisterIncome.get('documentoUsuario').value;
@@ -74,7 +93,7 @@ export class RegisterIncomeComponent implements OnInit {
           const datos = respuesta.docs.map(item => ({
             ...item.data(), key: item.id
           }));
-          console.log("Usuario ", this.validUser, datos);
+
           if (this.validUser || (datos.length === 1 && datos[0]['documento'] === valor)) {
             this.setValueData(this.validUser ? this.userValidData : datos[0]);
           } else {
@@ -122,10 +141,25 @@ export class RegisterIncomeComponent implements OnInit {
 
   saveDataRegister() {
     if (this.formRegisterIncome.valid) {
-      console.log("Formulario ", this.formRegisterIncome.value);
+      console.log('Formulario ', this.formRegisterIncome.value);
     } else {
       this.formRegisterIncome.markAsTouched();
     }
   }
+
+  cambiarPisosSelect(event: MatSelectChange ){
+    this.pisoSeleccionado = event.value - 1 ;
+  }
+
+  cambiarPiso(valor){
+    this.pisoSeleccionado = valor;
+    this.formRegisterIncome.get('piso').setValue(valor+1);
+  }
+
+  reset(){
+    this.validUser = false;
+    this.formRegisterIncome.reset();
+  }
+
 
 }
