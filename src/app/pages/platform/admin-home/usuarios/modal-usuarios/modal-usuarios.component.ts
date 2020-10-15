@@ -5,6 +5,7 @@ import { auth } from 'firebase';
 import { constantes } from 'src/app/constantes';
 import { AuthService } from '../../../services/auth.service';
 import { DatabaseService } from '../../../services/database.service';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-modal-usuarios',
@@ -22,13 +23,14 @@ export class ModalUsuariosComponent implements OnInit {
     private fb: FormBuilder,
     private auth: AuthService,
     private db: DatabaseService,
+    private notificationService: NotificationService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<ModalUsuariosComponent>
   ) {
 
     this.editar = data ? true : false;
     this.initForm();
-    if(data){
+    if (data) {
       this.formulario.patchValue(data);
       this.imagenDefecto = data.foto ? data.foto : '';
     }
@@ -37,7 +39,7 @@ export class ModalUsuariosComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  initForm(){
+  initForm() {
 
     const passwordValidator = this.editar ? [] : [Validators.required];
 
@@ -47,24 +49,24 @@ export class ModalUsuariosComponent implements OnInit {
       telefono: ['', [Validators.required]],
       direccion: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      idioma : ['', Validators.required],
+      idioma: ['', Validators.required],
       password: ['', passwordValidator],
       foto: ['', Validators.required],
       parqueadero: ['', Validators.required],
       estado: [false],
-      tipoUsuario:['admin']
+      tipoUsuario: ['admin']
     });
     const idParqueadero = this.auth.datosUsuario.parqueadero;
     this.formulario.get('parqueadero').setValue(idParqueadero);
   }
 
-  submit(){
-    if ( this.editar ) {
-      this.db.modificar('usuarios',this.data.key, this.formulario.value).then(
-        result => { 
-          this.dialogRef.close();
-        }
-      ).catch( error => {
+  submit() {
+    if (this.editar) {
+      this.db.modificar('usuarios', this.data.key, this.formulario.value).then(result => {
+        this.dialogRef.close();
+        this.notificationService.notification("success", "Modificado correctamente");
+      }).catch(error => {
+        this.notificationService.notification("error", "Error al modificar");
         console.log('error modificar: ', error);
       });
     } else {
@@ -74,8 +76,10 @@ export class ModalUsuariosComponent implements OnInit {
       const password = this.formulario.get('password').value;
 
       this.auth.registrarAdmin(email, password, data).then(result => {
-       this.dialogRef.close();
+        this.dialogRef.close();
+        this.notificationService.notification("success", "Creado correctamente");
       }).catch(error => {
+        this.notificationService.notification("error", "Error al crear");
         console.log('error registro: ', error);
       });
     }
@@ -101,7 +105,7 @@ export class ModalUsuariosComponent implements OnInit {
     this.imagenDefecto = constantes.logoDefecto;
   }
 
-  salir(){
+  salir() {
     this.dialogRef.close();
   }
 
