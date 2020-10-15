@@ -8,6 +8,7 @@ import { VistaPlanosComponent } from '../vista-planos/vista-planos.component';
 import { ɵangular_packages_platform_browser_platform_browser_j } from '@angular/platform-browser';
 import { newArray } from '@angular/compiler/src/util';
 import { observable } from 'rxjs';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-gestion-parqueadero',
@@ -28,6 +29,7 @@ export class GestionParqueaderoComponent implements OnInit {
     public dialogRef: MatDialogRef<GestionParqueaderoComponent>,
     public auth: AuthService,
     public dialog: MatDialog,
+    private notificationService: NotificationService
   ) {
     this.accion = this.dataRecibida.accion;
     this.initForm();
@@ -104,7 +106,10 @@ export class GestionParqueaderoComponent implements OnInit {
       this.dbService.addData('parqueaderos', datos).then(res => {
         console.log('respuesta agregar parqueadero ', res);
         console.log(res.id)
+        this.notificationService.notification("success", "Parqueadero registrado");
         this.registrarAdmin(res.id);
+      }, error =>{
+        this.notificationService.notification("error", "Error al registrar parqueadero");
       })
     }
   }
@@ -118,8 +123,10 @@ export class GestionParqueaderoComponent implements OnInit {
     const email = this.form.value['correo'];
     const pass = this.form.value['nit'];
     this.auth.registrarAdmin(email, pass, data ).then(result => {
+      this.notificationService.notification("success", "Administrador creado correctamente");
       this.dialogRef.close();
     }).catch(error => {
+      this.notificationService.notification("error", "Error al registrar administrador");
       console.log('error registro: ', error);
     });
   }

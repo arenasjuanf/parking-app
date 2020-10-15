@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DatabaseService } from '../../../services/database.service';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-modal-value-rate',
@@ -15,6 +16,7 @@ export class ModalValueRateComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     private dataBaseService: DatabaseService,
+    private notificationService: NotificationService
   ) {
     this.keysValues = Object.keys(this.data.valores);
   }
@@ -43,7 +45,10 @@ export class ModalValueRateComponent implements OnInit {
       const data = { tarifas: {} }
       data.tarifas[this.data.tiempo] = this.formValues.value;
       this.dataBaseService.modificar('parqueaderos', this.data.parqueadero, data).then(respuesta => {
+        this.notificationService.notification("success", "Tarifas actualizadas");
         this.closeDialog(true);
+      }, error => {
+        this.notificationService.notification("error", "No fue posible guardar los cambios");
       });
     }
   }
