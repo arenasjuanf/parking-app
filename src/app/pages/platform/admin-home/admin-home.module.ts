@@ -26,6 +26,9 @@ import { PermisosComponent } from './usuarios/permisos/permisos.component';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTabsModule } from '@angular/material/tabs';
+import { PlanosAsignacionComponent } from './planos-asignacion/planos-asignacion.component';
+import { MatTableModule } from '@angular/material/table';
 import { ModalValueRateComponent } from './configuracion/modal-value-rate/modal-value-rate.component';
 
 
@@ -43,6 +46,7 @@ import { ModalValueRateComponent } from './configuracion/modal-value-rate/modal-
     ConfiguracionComponent,
     DatosParqueaderoComponent,
     PermisosComponent,
+    PlanosAsignacionComponent,
     ModalValueRateComponent
   ],
   imports: [
@@ -64,8 +68,9 @@ import { ModalValueRateComponent } from './configuracion/modal-value-rate/modal-
     MatExpansionModule,
     MatListModule,
     MatDividerModule,
-    MatCheckboxModule
-
+    MatCheckboxModule,
+    MatTabsModule,
+    MatTableModule
   ]
 
 })

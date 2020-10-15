@@ -1,0 +1,19 @@
+<mat-tab-group mat-align-tabs="center" *ngIf="datosPlano" [selectedIndex]="pisoSeleccionado" (selectedIndexChange)="seleccionarPisoTab($event)">
+    <mat-tab label="{{'Piso ' + (Npiso+1)}}" *ngFor="let piso of datosPlano; let Npiso = index">
+        <div *ngFor="let fila of piso; let Nfila = index" >
+            <div class="d-flex justify-content-center">
+               <div class="casilla animate__animated animate__backInLeft cursor-pointers"
+                    *ngFor="let casilla of fila; let Ncol = index"
+                    (click)="gestionar(Npiso, Nfila, Ncol)"
+                    [ngStyle]="{'background-color': casilla.color ? casilla.color : '' }"
+                >
+                    <div *ngIf="casilla.tipo" class="w-100 h-100 d-flex flex-column justify-content-center" >
+                        <i [ngClass]="casilla.tipo == 'moto' ? 'fas fa-motorcycle fa-2x' : 'fas fa-car fa-2x'">
+                        </i>
+                        <small *ngIf="casilla.numero">{{casilla.numero}}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>

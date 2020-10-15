@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
@@ -8,6 +8,8 @@ import { DatabaseService } from '../../services/database.service';
 import { ModalUsuariosComponent } from './modal-usuarios/modal-usuarios.component';
 import { PermisosComponent } from './permisos/permisos.component';
 import { NotificationService } from '../../services/notification.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-usuarios',
@@ -17,6 +19,9 @@ import { NotificationService } from '../../services/notification.service';
 export class UsuariosComponent implements OnInit {
   usuarios: any[];
   formulario: any;
+  dataSource: MatTableDataSource<any>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  displayedColumns: string[] = ['documento', 'nombre', 'telefono', 'acciones'];
 
   constructor(
     private auth: AuthService,
@@ -41,6 +46,9 @@ export class UsuariosComponent implements OnInit {
         return x.map(user => ({ ...user.payload.doc.data(), key: user.payload.doc.id }));
       })
     ).subscribe(datos => {
+
+      console.log(datos);
+      this.dataSource = new MatTableDataSource(datos);
       this.usuarios = datos;
     });
   }
@@ -89,6 +97,17 @@ export class UsuariosComponent implements OnInit {
         });
       }
     });
+  }
+
+  cambiarClave(usuario){
+    this.auth.recuperarClave(usuario.email).then( result => {
+      console.log({result})
+    })
+  }
+
+  filtrar(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }

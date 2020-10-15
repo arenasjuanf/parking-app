@@ -9,38 +9,6 @@
     </mat-card>
     <mat-card>
         <div class="contenedor-tabla">
-           <!--  <table class="table table-responsive">
-                <thead class="thead-light">
-                    <tr>
-                        <th scope="col" class="text-center" >Logo</th>
-                        <th scope="col" class="text-center" >Documento</th>
-                        <th scope="col" class="text-center" >Nombre</th>
-                        <th scope="col" class="text-center" >Telefono</th>
-                        <th scope="col" class="text-center" >Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of listaParqueaderos">
-                        <td class="logo_container align-middle text-center">
-                            <img class="logo" [src]="item.logo">
-                        </td>
-                        <td class="align-middle text-center">{{ item.nit }}</td>
-                        <td class="align-middle text-center">{{ item.razonSocial | titlecase}}</td>
-                        <td class="align-middle text-center">{{ item.telefono }}</td>
-                        <td class="align-middle text-center">
-                            <button type="button" class="btn btn-primary my-1 my-md-0 mx-0 mx-md-1" matTooltip="Modificar" (click)="abrirModal(item, 'modificar')" matTooltipPosition="above">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button type="button" class="btn btn-secondary my-1 my-md-0 mx-0 mx-md-1" matTooltip="Ver" (click)="abrirModal(item, 'ver')" matTooltipPosition="above">
-                                <i class="far fa-eye"></i>
-                            </button>
-                            <button type="button" class="btn btn-success my-1 my-md-0 mx-0 mx-md-1" [matTooltip]=" item.estado ? 'Deshabilitar' : 'Habilitar' "  matTooltipPosition="above" (click)="cambiarEstado(item)">
-                                <i [ngClass]="item.estado ? 'far fa-check-square' : 'far fa-square'"></i>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table> -->
 
             <mat-form-field >
                 <mat-label>Filtro</mat-label>
