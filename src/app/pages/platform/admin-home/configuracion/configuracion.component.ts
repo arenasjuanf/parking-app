@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { DatabaseService } from '../../services/database.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalValueRateComponent } from './modal-value-rate/modal-value-rate.component';
 
 @Component({
   selector: 'app-configuracion',
@@ -9,19 +11,26 @@ import { DatabaseService } from '../../services/database.service';
   styleUrls: ['./configuracion.component.scss']
 })
 export class ConfiguracionComponent implements OnInit {
+
   tarifas: any;
   arrayTarifas: string[];
+  idParqueadero;
 
-  constructor(private db: DatabaseService, private auth: AuthService, private router: Router) {
+  constructor(
+    private db: DatabaseService,
+    private auth: AuthService,
+    private router: Router,
+    private matDialog: MatDialog,
+  ) {
+    this.idParqueadero = this.auth.datosUsuario.parqueadero;
     this.traertarifas()
   }
 
   ngOnInit(): void {
   }
 
-  traertarifas(){
-    const idParqueadero = this.auth.datosUsuario.parqueadero;
-    this.db.findDoc('parqueaderos', idParqueadero).snapshotChanges().subscribe( result => {
+  traertarifas() {
+    this.db.findDoc('parqueaderos', this.idParqueadero).snapshotChanges().subscribe(result => {
       this.tarifas = result.payload.get('tarifas');
       this.arrayTarifas = Object.keys(this.tarifas);
     }, error => {
@@ -33,8 +42,24 @@ export class ConfiguracionComponent implements OnInit {
     this.router.navigateByUrl('/platform/admin/main');
   }
 
-  paraProbar(){
+  paraProbar() {
     return true;
+  }
+
+  abrirModal(tipoTarifa) {
+    const tarifaSelected = this.tarifas[tipoTarifa];
+    const dialogo = this.matDialog.open(ModalValueRateComponent, {
+      data: {
+        valores: tarifaSelected,
+        tiempo: tipoTarifa,
+        parqueadero: this.idParqueadero
+      },
+      width: '20%',
+      disableClose: true
+    });
+    dialogo.afterClosed().subscribe(respuesta => {
+      if (respuesta) {}
+    });
   }
 
 }

@@ -1,0 +1,19 @@
+<div class="m-2">
+  <form [formGroup]="formValues" (ngSubmit)="saveValuesParking()">
+    <div class="row justify-content-center">
+      <span class="mb-2">Tarifa {{ data.tiempo }}</span>
+      <mat-form-field appearance="outline" class="col-12 col-md-12" *ngFor="let item of keysValues;">
+        <mat-label>{{ item | titlecase }}</mat-label>
+        <input matInput type="number" [formControlName]="item">
+      </mat-form-field>
+      <div class="col-12 col-md-12 d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary mt-2">
+          <i class="far fa-edit">Guardar</i>
+        </button>
+        <button (click)="closeDialog()" type="button" class="btn btn-primary mt-2">
+          <i class="fa fa-times"></i> Cancelar
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

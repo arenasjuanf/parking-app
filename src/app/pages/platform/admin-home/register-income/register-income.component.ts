@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalUserComponent } from './modal-user/modal-user.component';
 import { MatSelectChange } from '@angular/material/select';
+import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-register-income',
@@ -46,26 +47,18 @@ export class RegisterIncomeComponent implements OnInit {
       marca: ['', Validators.required],
       tipoVehiculo: ['', Validators.required],
       piso: ['', Validators.required],
-      seccionPiso: ['', Validators.required],
+      //seccionPiso: ['', Validators.required],
       parqueadero: [this.dataUser['parqueadero'], Validators.required]
     });
 
-    Object.keys(this.formRegisterIncome.value).forEach(elem => {
+    /* Object.keys(this.formRegisterIncome.value).forEach(elem => {
       if (elem !== 'documentoUsuario'){
         this.formRegisterIncome.get(elem).disable();
       }
-    });
+    }); */
 
-    this.formRegisterIncome.get('documentoUsuario').valueChanges.subscribe(valor => {
-      if (this.userValidData && (valor === this.userValidData['documento'])) {
-        this.validUser = true;
-        this.formRegisterIncome.enable();
-        this.formRegisterIncome.get('nombreUsuario').setValue(this.userValidData['nombre']);
-      } else {
-        this.validUser = false;
-        this.formRegisterIncome.get('nombreUsuario').reset();
-      }
-    });
+    this.validarEstadoFormulario();
+    this.permitirAsignar();
   }
 
   getFloorsParking() {
@@ -159,6 +152,27 @@ export class RegisterIncomeComponent implements OnInit {
   reset(){
     this.validUser = false;
     this.formRegisterIncome.reset();
+  }
+
+  validarEstadoFormulario(){
+    this.formRegisterIncome.get('documentoUsuario').valueChanges.subscribe(valor => {
+      if (this.userValidData && (valor === this.userValidData['documento'])) {
+        this.validUser = true;
+        this.formRegisterIncome.get('nombreUsuario').setValue(this.userValidData['nombre']);
+      } else {
+        this.validUser = false;
+        this.formRegisterIncome.get('nombreUsuario').reset();
+      }
+    });
+  }
+
+  permitirAsignar(){
+    this.formRegisterIncome.valueChanges.subscribe(valor => {
+      console.log(this.formRegisterIncome);
+      if(this.formRegisterIncome.valid){
+        console.log('valid')
+      }
+    });
   }
 
 

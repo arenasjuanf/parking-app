@@ -88,12 +88,7 @@ export class AuthService {
   }
 
   recuperarClave(passwordResetEmail) {
-    return this.afAuth.sendPasswordResetEmail(passwordResetEmail)
-      .then(() => {
-        window.alert('Password reset email sent, check your inbox.');
-      }).catch((error) => {
-        window.alert(error);
-      });
+    return this.afAuth.sendPasswordResetEmail(passwordResetEmail);
   }
 
   get estaLoggeado(): boolean {
