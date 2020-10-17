@@ -30,6 +30,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { PlanosAsignacionComponent } from './planos-asignacion/planos-asignacion.component';
 import { MatTableModule } from '@angular/material/table';
 import { ModalValueRateComponent } from './configuracion/modal-value-rate/modal-value-rate.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatStepperModule } from '@angular/material/stepper';
+import { VehiculosComponent } from './register-income/vehiculos/vehiculos.component';
 
 
 
@@ -47,13 +51,16 @@ import { ModalValueRateComponent } from './configuracion/modal-value-rate/modal-
     DatosParqueaderoComponent,
     PermisosComponent,
     PlanosAsignacionComponent,
-    ModalValueRateComponent
+    ModalValueRateComponent,
+    MensualidadComponent,
+    VehiculosComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     MatInputModule,
     MatFormFieldModule,
+    MatNativeDateModule,
     MatCardModule,
     MatDialogModule,
     MatButtonModule,
@@ -70,7 +77,10 @@ import { ModalValueRateComponent } from './configuracion/modal-value-rate/modal-
     MatDividerModule,
     MatCheckboxModule,
     MatTabsModule,
-    MatTableModule
+    MatTableModule,
+    MatDatepickerModule,
+    MatStepperModule
+    
   ]
 
 })

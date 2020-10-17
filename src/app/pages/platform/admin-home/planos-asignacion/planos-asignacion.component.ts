@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, EventEmitter, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-planos-asignacion',
@@ -12,34 +13,61 @@ export class PlanosAsignacionComponent implements OnInit, OnChanges{
   color = '#C7C8D3';
   numero = 1;
   data: any = {};
-  //inputs y outputs
+
+
+  // tslint:disable-next-line: no-input-rename
   @Input('datosPlano') datosPlano : any;
+  // tslint:disable-next-line: no-input-rename
   @Input('pisoSeleccionado') pisoSeleccionado: number;
+  // tslint:disable-next-line: no-input-rename
+
+  // tslint:disable-next-line: ban-types
+  // tslint:disable-next-line: no-input-rename
+  @Input('asignar') asignar: Boolean;
+
   @Output()
   cambiarPiso = new EventEmitter<number>();
-  
-  constructor(
-  ) {
-    
-  }
+
+  @Output()
+  enviarCasilla = new EventEmitter<any>();
+
+
+  constructor(private notificationService: NotificationService) {}
 
   ngOnInit(): void {
   }
 
   // se implementa para que escuche los cambios de los @input
   ngOnChanges(){
+    console.log(this.asignar);
   }
 
   // true: over, false: out
   changeStyle(evento, piso, fila, columna) {
-    let casilla = this.datosPlano[piso][fila][columna];
+    const casilla = this.datosPlano[piso][fila][columna];
     casilla['over'] = evento;
   }
 
   seleccionarPisoTab(valor){
     this.pisoSeleccionado = valor;
     this.cambiarPiso.emit(valor);
+  }
 
+
+  asignarCasilla(piso,fila,columna){
+    const casilla =  this.datosPlano[piso][fila][columna];
+    if(!this.asignar){
+      this.notificationService.notification("error", "Debe llenar los datos para poder asignar casila");
+      return 0;
+    }
+
+    if (casilla.tipo){
+      console.log('puede asignar:', piso, fila, columna);
+      this.enviarCasilla.emit({piso,fila,columna})
+    } else {
+      this.notificationService.notification("error", "No se puede asignar a esta casilla");
+
+    }
   }
 
 }

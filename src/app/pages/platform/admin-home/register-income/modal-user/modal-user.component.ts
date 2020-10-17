@@ -18,9 +18,12 @@ export class ModalUserComponent implements OnInit {
   ) { }
 
   formRegisterUser: FormGroup;
+  branchVehicles: Array<object> = [{ value: 'moto', view: 'Moto' }, { value: 'carro', view: 'Carro' }];
+  formVehiculo: FormGroup;
 
   ngOnInit(): void {
-    this.configForm();
+    this.initUserForm();
+    this.initVehiForm();
 
     if (this.data.editarUsuario) {
       this.formRegisterUser.patchValue(this.data.datos);
@@ -29,13 +32,23 @@ export class ModalUserComponent implements OnInit {
     }
   }
 
-  configForm() {
+  initUserForm() {
     this.formRegisterUser = this.formBuilder.group({
       documento: ['', Validators.required],
       nombre: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       telefono: ['', Validators.required],
       tipo: ['cliente', Validators.required],
+      parqueadero: [this.data['parqueadero'], Validators.required],
+    });
+  }
+
+  initVehiForm() {
+    this.formVehiculo = this.formBuilder.group({
+      placa: ['', Validators.required],
+      marca: ['', Validators.required],
+      color: ['', Validators.required],
+      tipo: ['', Validators.required],
       parqueadero: [this.data['parqueadero'], Validators.required],
     });
   }
@@ -50,7 +63,7 @@ export class ModalUserComponent implements OnInit {
         const datos = Object.assign({}, this.formRegisterUser.value);
         this.dataBaseService.modificar('usuarios', this.data.datos.key, datos).then(result => {
           datos['key'] = this.data.datos.key;
-          this.closeDialog(datos);
+          //this.closeDialog(datos);
         }).catch(error => {
           console.log('Error modificar usuario :', error);
         });
@@ -59,12 +72,23 @@ export class ModalUserComponent implements OnInit {
         datos['password'] = datos.documento;
         this.dataBaseService.addData("usuarios", this.formRegisterUser.value).then(respuesta => {
           datos['key'] = respuesta.id;
-          this.closeDialog(datos);
+          this.saveVehicle(datos);
+
         });
       }
     } else {
       this.formRegisterUser.markAsTouched();
     }
   }
+
+  saveVehicle(datosUsuario){
+    const datosVehiculo = Object.assign({}, this.formVehiculo.value);
+    datosVehiculo['usuario'] = datosUsuario.key;
+    this.dataBaseService.addData('vehiculos', datosVehiculo).then(respuesta => {
+      datosVehiculo['key'] = respuesta.id;
+      this.dialogRef.close({datosUsuario, datosVehiculo});
+    });
+  }
+
 
 }

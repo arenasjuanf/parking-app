@@ -7,17 +7,28 @@ mat-form-field ::ng-deep {
       background-color: #f6f8fb;
   }
   .mat-form-field-flex {
-      height: 45px;
-      display: flex;
-      align-items: center;
-      margin: 0px 10px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    margin: 0px 10px;
   }
 
   .mat-form-field-infix {
-      font-size: 15x;
+    font-size: 15x;
   }
   
   .mat-input-element:disabled{
-      color:black;
+    color:black;
   }
 }
+
+.reset{
+    background-color: #2a542a;
+    color: white;
+}
+
+button{
+    width: 100%;
+}
+
+
