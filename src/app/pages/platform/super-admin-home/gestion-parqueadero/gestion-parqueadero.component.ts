@@ -19,7 +19,7 @@ export class GestionParqueaderoComponent implements OnInit {
 
   form: FormGroup;
   mostrarTabla: boolean = false;
-  imagenDefecto:any = constantes.logoDefecto;
+  imagenDefecto: any = constantes.logoDefecto;
   accion: string;
 
   constructor(
@@ -33,7 +33,7 @@ export class GestionParqueaderoComponent implements OnInit {
   ) {
     this.accion = this.dataRecibida.accion;
     this.initForm();
-    if(this.accion != 'crear'){
+    if (this.accion != 'crear') {
       this.setearData();
     }
   }
@@ -48,7 +48,7 @@ export class GestionParqueaderoComponent implements OnInit {
       razonSocial: ['', Validators.required],
       nombrePropietario: ['', Validators.required],
       paginaWeb: [''],
-      correo: ['',[Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")]],
+      correo: ['', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")]],
       direccion: ['', Validators.required],
       cantidadPisos: [1, Validators.required],
       capacidadCarros: ['', Validators.required],
@@ -61,18 +61,18 @@ export class GestionParqueaderoComponent implements OnInit {
           ancho: ['', Validators.required]
         })
       ]),
-      plano:[[], Validators.required]
+      plano: [[], Validators.required]
     });
 
   }
 
-  get pisos(){
+  get pisos() {
     return this.form.get('pisos') as FormArray;
   }
 
-  async subirfoto(evento){
+  async subirfoto(evento) {
     const file = evento.target.files[0];
-    if(file){
+    if (file) {
       const str = await this.toBase64(file);
       this.imagenDefecto = str;
       this.form.get('logo').setValue(str);
@@ -86,16 +86,16 @@ export class GestionParqueaderoComponent implements OnInit {
     reader.onerror = error => reject(error);
   })
 
-  setImagenDefecto(){
+  setImagenDefecto() {
     this.imagenDefecto = constantes.logoDefecto;
   }
 
-  registrarParqueadero(){
-    if(this.form.valid){
+  registrarParqueadero() {
+    if (this.form.valid) {
       const datos = Object.assign({}, this.form.value);
       datos.tarifas = {
         hora: { carro: 0, moto: 0 },
-        dia: {carro: 0, moto: 0 },
+        dia: { carro: 0, moto: 0 },
         mes: { carro: 0, moto: 0 }
       };
       // se parsea plano
@@ -108,7 +108,7 @@ export class GestionParqueaderoComponent implements OnInit {
         console.log(res.id)
         this.notificationService.notification("success", "Parqueadero registrado");
         this.registrarAdmin(res.id);
-      }, error =>{
+      }, error => {
         this.notificationService.notification("error", "Error al registrar parqueadero");
       })
     }
@@ -122,7 +122,7 @@ export class GestionParqueaderoComponent implements OnInit {
     };
     const email = this.form.value['correo'];
     const pass = this.form.value['nit'];
-    this.auth.registrarAdmin(email, pass, data ).then(result => {
+    this.auth.registrarAdmin(email, pass, data).then(result => {
       this.notificationService.notification("success", "Administrador creado correctamente");
       this.dialogRef.close();
     }).catch(error => {
@@ -131,27 +131,27 @@ export class GestionParqueaderoComponent implements OnInit {
     });
   }
 
-  gestionarPisos(agregar){
+  gestionarPisos(agregar) {
     let pisos = this.form.get('pisos') as FormArray;
     let valor = this.form.get('cantidadPisos').value;
 
-    if(agregar){
-      valor +=1;
+    if (agregar) {
+      valor += 1;
       pisos.push(this.fb.group({
         piso: [valor, Validators.required],
         alto: ['', Validators.required],
         ancho: ['', Validators.required]
       }));
 
-    }else{
-      valor -=1;
-      pisos.removeAt(valor-1);
+    } else {
+      valor -= 1;
+      pisos.removeAt(valor - 1);
     }
     this.form.get('cantidadPisos').setValue(valor);
   }
 
-  setearData(){
-    if (this.dataRecibida){
+  setearData() {
+    if (this.dataRecibida) {
 
       for (let i = 1; i < this.dataRecibida.pisos.length; i++) {
         this.pisos.push(this.fb.group({
@@ -164,15 +164,15 @@ export class GestionParqueaderoComponent implements OnInit {
       this.form.patchValue(this.dataRecibida);
       this.imagenDefecto = this.dataRecibida.logo;
       this.accion = this.dataRecibida.accion;
-      if(this.accion == 'ver'){
+      if (this.accion == 'ver') {
         this.form.disable();
         console.log(this.form)
       }
     }
   }
 
-  guardar(){
-    switch(this.accion){
+  guardar() {
+    switch (this.accion) {
       case 'crear':
         this.registrarParqueadero();
         break;
@@ -181,12 +181,12 @@ export class GestionParqueaderoComponent implements OnInit {
         const datos = Object.assign({}, this.form.value);
         // se parsea plano
         datos.plano = JSON.stringify(datos.plano);
-      
-        this.dbService.modificar('parqueaderos', this.dataRecibida.key, datos).then(
-          result => {
-            console.log('parqueadero actualizado');
-          }
-        ).catch( error => {
+
+        this.dbService.modificar('parqueaderos', this.dataRecibida.key, datos).then(result => {
+          console.log('parqueadero actualizado');
+          this.notificationService.notification("success", "Parqueadero actualizado.");
+        }).catch(error => {
+          this.notificationService.notification("error", "No fue posible guardar los datos.");
           console.log('error modificar :', error);
         });
         break;
@@ -195,14 +195,14 @@ export class GestionParqueaderoComponent implements OnInit {
     }
   }
 
-  configurarPlano(visualizar?){
+  configurarPlano(visualizar?) {
 
-    const estructura = {tipo: '', numero: ''};
+    const estructura = { tipo: '', numero: '' };
     const plano = [];
     const pisostmp = this.form.get('pisos').value;
     let cont = 0;
     // tslint:disable-next-line: forin
-    for(let p in pisostmp ){
+    for (let p in pisostmp) {
       const matriz = [];
       for (let columna = 0; columna < pisostmp[p]['alto']; columna++) {
         const tmpFila = [];
@@ -215,7 +215,7 @@ export class GestionParqueaderoComponent implements OnInit {
       plano[p] = matriz;
     }
 
-    const data = { 
+    const data = {
       plano: this.form.get('plano').value.length ? this.form.get('plano').value : plano,
       visualizar
     };
@@ -225,7 +225,7 @@ export class GestionParqueaderoComponent implements OnInit {
     });
 
     ref.afterClosed().subscribe(result => {
-      if(result){
+      if (result) {
         this.form.get('plano').setValue(result);
       }
     });
