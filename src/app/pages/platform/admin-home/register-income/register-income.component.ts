@@ -278,13 +278,13 @@ export class RegisterIncomeComponent implements OnInit {
 
   reset(){
     this.asignar = false;
-    this.datosCliente = {};
-    this.datosVehiculo = {};
-    this.userValidData = {};
+    this.datosCliente = null;
+    this.datosVehiculo = null;
+    this.userValidData = null;
     this.validUser = false;
     this.formRegisterIncome.reset();
     this.formVehiculo.reset();
-    this.datosSuscripcion = {};
+    this.datosSuscripcion = null;
     this.formRegisterIncome.get('parqueadero').setValue(this.dataUser['parqueadero'])
   }
 
