@@ -33,7 +33,64 @@
           </div>
         </form>
       </mat-step>
-      <mat-step [stepControl]="formVehiculo" >
+      <mat-step>
+        <ng-template matStepLabel>{{ data.editarUsuario ? 'Actualizar' : 'Guardar'}}</ng-template>
+        <p class="text-center">Información Completa.</p>
+        <div class="d-flex justify-content-around">
+          <button mat-button mat-raised-button color="primary" (click)="closeDialog()">
+            <i class="fas fa-window-close"></i>
+            Cancelar
+          </button>
+  
+          <button mat-button class="guardar" style="background-color: #4545e6; color: #ffffff;" (click)="saveUser()">
+            <i class="fas fa-save"></i>
+            {{ data.editarUsuario ? 'Actualizar' : 'Guardar'}}
+          </button>
+
+          <!-- <button mat-button (click)="stepper.reset()">Reset</button>--> 
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+
+  <div class="row justify-content-center" *ngSwitchCase="'listar'">
+
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col" class="text-center">Nombre</th>
+          <th scope="col" class="text-center">Documento</th>
+          <th scope="col" class="text-center">Email</th>
+          <th scope="col" class="text-center"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of data.datos">
+          <td class="align-middle text-center">{{ item.nombre | titlecase }}</td>
+          <td class="align-middle text-center">{{ item.documento}}</td>
+          <td class="align-middle text-center">{{ item.email }}</td>
+          <td class="align-middle text-center">
+            <button (click)="closeDialog({datosUsuario: item})" type="button" class="btn btn-primary my-1 my-md-0 mx-0 mx-md-1"
+              matTooltipPosition="above">
+              <i class="fa fa-share"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="w-100 text-left">
+      <button (click)="closeDialog()" type="button" class="btn btn-primary mt-2">
+        <i class="fa fa-times"></i>Cancelar
+      </button>
+    </div>
+    
+
+  </div>
+</div>
+
+
+
+<!-- <mat-step [stepControl]="formVehiculo" >
         <form [formGroup]="formVehiculo" [ngStyle]="{'margin-top': '15px'}">
           <ng-template matStepLabel>Datos De Vehiculo</ng-template>
           <div class="row justify-content-center">
@@ -64,58 +121,4 @@
             <button class="ml-1" mat-raised-button color="primary" matStepperNext>Siguiente</button>
           </div>
         </form>
-      </mat-step>
-      <mat-step>
-        <ng-template matStepLabel>Guardar</ng-template>
-        <p class="text-center">Información Completa.</p>
-        <div class="d-flex justify-content-around">
-          <button mat-button mat-raised-button color="primary" (click)="closeDialog()">
-            <i class="fas fa-window-close"></i>
-            Cancelar
-          </button>
-  
-          <button mat-button class="guardar" style="background-color: #4545e6; color: #ffffff;" matStepperPrevious (click)="saveUser()">
-            <i class="fas fa-save"></i>
-            Guardar
-          </button>
-
-          <!-- <button mat-button (click)="stepper.reset()">Reset</button>--> 
-        </div>
-      </mat-step>
-    </mat-horizontal-stepper>
-  </div>
-
-  <div class="row justify-content-center" *ngSwitchCase="'listar'">
-
-    <table class="table">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col" class="text-center">Nombre</th>
-          <th scope="col" class="text-center">Documento</th>
-          <th scope="col" class="text-center">Email</th>
-          <th scope="col" class="text-center"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of data.datos">
-          <td class="align-middle text-center">{{ item.nombre | titlecase }}</td>
-          <td class="align-middle text-center">{{ item.documento}}</td>
-          <td class="align-middle text-center">{{ item.email }}</td>
-          <td class="align-middle text-center">
-            <button (click)="closeDialog(item)" type="button" class="btn btn-primary my-1 my-md-0 mx-0 mx-md-1"
-              matTooltipPosition="above">
-              <i class="fa fa-share"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="w-100 text-left">
-      <button (click)="closeDialog()" type="button" class="btn btn-primary mt-2">
-        <i class="fa fa-times"></i>Cancelar
-      </button>
-    </div>
-    
-
-  </div>
-</div>
+      </mat-step> -->

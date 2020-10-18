@@ -34,6 +34,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatStepperModule } from '@angular/material/stepper';
 import { VehiculosComponent } from './register-income/vehiculos/vehiculos.component';
+import { SuscripcionesComponent } from './register-income/suscripciones/suscripciones.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 
@@ -53,7 +55,8 @@ import { VehiculosComponent } from './register-income/vehiculos/vehiculos.compon
     PlanosAsignacionComponent,
     ModalValueRateComponent,
     MensualidadComponent,
-    VehiculosComponent
+    VehiculosComponent,
+    SuscripcionesComponent
   ],
   imports: [
     CommonModule,
@@ -79,8 +82,8 @@ import { VehiculosComponent } from './register-income/vehiculos/vehiculos.compon
     MatTabsModule,
     MatTableModule,
     MatDatepickerModule,
-    MatStepperModule
-    
+    MatStepperModule,
+    MatSlideToggleModule
   ]
 
 })

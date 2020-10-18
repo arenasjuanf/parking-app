@@ -8,6 +8,9 @@ import { ModalUserComponent } from './modal-user/modal-user.component';
 import { MatSelectChange } from '@angular/material/select';
 import { IfStmt } from '@angular/compiler';
 import { VehiculosComponent } from './vehiculos/vehiculos.component';
+import { Router } from '@angular/router';
+import { SuscripcionesComponent } from './suscripciones/suscripciones.component';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-register-income',
@@ -19,12 +22,16 @@ export class RegisterIncomeComponent implements OnInit {
   asignar: boolean = false;
   datosCliente: any;
   datosVehiculo: any;
+  datosSuscripcion: any;
+  modalAbierta: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private dataBaseService: DatabaseService,
     public dialogComponent: MatDialog,
+    private router: Router,
+    private notify: NotificationService
   ) {
     this.dataUser = this.authService.datosUsuario;
     this.getPlano();
@@ -149,8 +156,6 @@ export class RegisterIncomeComponent implements OnInit {
           }
 
         }
-        
-
       });
     }
   }
@@ -165,6 +170,7 @@ export class RegisterIncomeComponent implements OnInit {
 
   setValueVehicle(resultado) {
     this.datosVehiculo = resultado;
+    this.buscarSuscripciones();
     this.formVehiculo.get('placa').setValue(resultado.placa);
     this.formVehiculo.get('tipoVehiculo').setValue(resultado.tipo);
     this.formVehiculo.get('marca').setValue(resultado.marca);
@@ -188,12 +194,6 @@ export class RegisterIncomeComponent implements OnInit {
     this.formRegisterIncome.get('piso').setValue(valor+1);
   }
 
-  reset(){
-    this.validUser = false;
-    this.formRegisterIncome.reset();
-    this.formRegisterIncome.get('parqueadero').setValue(this.dataUser['parqueadero'])
-  }
-
   validarEstadoFormulario(){
     this.formRegisterIncome.get('documentoUsuario').valueChanges.subscribe(valor => {
       if (this.userValidData && (valor === this.userValidData['documento'])) {
@@ -207,7 +207,7 @@ export class RegisterIncomeComponent implements OnInit {
   }
 
   permitirAsignar(){
-    if (this.datosCliente && this.datosVehiculo) {
+    if (this.datosCliente && this.datosVehiculo && this.datosSuscripcion) {
       this.asignar = true;
     } else {
       this.asignar = false;
@@ -215,10 +215,15 @@ export class RegisterIncomeComponent implements OnInit {
   }
 
   asignarCasilla(evento){
+    console.log(this.datosSuscripcion);
+    this.datosPlano[evento.piso][evento.fila][evento.columna]['suscripcion'] = { suscripcion: this.datosSuscripcion.key, vehiculo: this.datosVehiculo };
+    this.dataBaseService.modificar('parqueaderos', this.dataUser['parqueadero'] , {plano :JSON.stringify(this.datosPlano)}).then(x => {
+      this.notify.notification("success", "Suscripción creada");
+      this.reset();
+    }).catch(err => {
+      this.notify.notification("error", "Error al asignar casilla");
+    })
 
-    this.datosPlano[evento.piso][evento.fila][evento.columna]['cliente']= this.formRegisterIncome.get('placa').value;
-    this.dataBaseService.modificar('parqueaderos', this.dataUser['parqueadero'] , {plano :JSON.stringify(this.datosPlano)})
-    console.log(evento);
   }
 
   buscarVehiculo(idUsuario:string){
@@ -231,6 +236,8 @@ export class RegisterIncomeComponent implements OnInit {
 
       if(datos.length == 1){
         this.setValueVehicle(datos[0]);
+      }else{
+        this.verVehiculos();
       }
 
     }, error => {
@@ -238,17 +245,72 @@ export class RegisterIncomeComponent implements OnInit {
     });
   }
 
+  verVehiculos(seleccionar = false){
 
-  verVehiculos(){
+    const data = Object.assign({}, this.datosCliente)
+    data['seleccionar'] = seleccionar;
+    if(!this.modalAbierta){
 
-    console.log(this.datosCliente)
-    this.dialogComponent.open(VehiculosComponent,{
-      data: this.datosCliente,
-      height: '700px',
-      width: '500px'
-    }).afterClosed().subscribe( result => {
-      console.log('result: ', result)
+      const ref = this.dialogComponent.open(VehiculosComponent, {
+        data,
+        height: '500px',
+        width: '400px',
+        disableClose: true
+      })
+
+      ref.afterOpened().subscribe(x=> {
+        this.modalAbierta = true;
+      })
+
+      ref.afterClosed().subscribe(result => {
+        this.modalAbierta = false;
+        if (result) {
+          this.setValueVehicle(result);
+          console.log('result: ', result);
+        }
+      });
+    }
+  }
+
+  regresar() {
+    this.router.navigateByUrl('/platform/admin/main');
+  }
+
+  reset(){
+    this.asignar = false;
+    this.datosCliente = {};
+    this.datosVehiculo = {};
+    this.userValidData = {};
+    this.validUser = false;
+    this.formRegisterIncome.reset();
+    this.formVehiculo.reset();
+    this.datosSuscripcion = {};
+    this.formRegisterIncome.get('parqueadero').setValue(this.dataUser['parqueadero'])
+  }
+
+
+  buscarSuscripciones(){
+    const data = Object.assign({}, { datosVehiculo: this.datosVehiculo, datosCliente: this.datosCliente})
+
+    this.dialogComponent.open(SuscripcionesComponent, {
+      data,
+      height: '500px',
+      width: '400px',
+      disableClose: true
+    }).afterClosed().subscribe(datos => {
+      if ( datos ) {
+        this.setValueSuscripcion(datos);
+      } else {
+        this.datosSuscripcion = null;
+      }
     });
   }
+
+
+  setValueSuscripcion(resultado) {
+    this.datosSuscripcion = resultado;
+    this.permitirAsignar();
+  }
+
 
 }

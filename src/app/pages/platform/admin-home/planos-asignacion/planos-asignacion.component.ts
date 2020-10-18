@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, EventEmitter, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { DatabaseService } from '../../services/database.service';
 import { NotificationService } from '../../services/notification.service';
 
 @Component({
@@ -32,14 +33,19 @@ export class PlanosAsignacionComponent implements OnInit, OnChanges{
   enviarCasilla = new EventEmitter<any>();
 
 
-  constructor(private notificationService: NotificationService) {}
+  constructor(private notificationService: NotificationService, private db: DatabaseService) {}
 
   ngOnInit(): void {
   }
 
   // se implementa para que escuche los cambios de los @input
   ngOnChanges(){
-    console.log(this.asignar);
+    console.log(this.datosPlano);
+
+    if(this.datosPlano){
+      this.buscarSuscripciones();
+    }
+
   }
 
   // true: over, false: out
@@ -69,5 +75,19 @@ export class PlanosAsignacionComponent implements OnInit, OnChanges{
 
     }
   }
+
+  buscarSuscripciones(){
+    console.log(this.datosPlano);
+    this.datosPlano.forEach(piso => {
+      piso.forEach(col => {
+        col.forEach( casilla => {
+          if(casilla.suscripcion){
+            casilla['placa'] = casilla.suscripcion.vehiculo.placa;
+          }
+        });
+      });
+    });
+  }
+
 
 }

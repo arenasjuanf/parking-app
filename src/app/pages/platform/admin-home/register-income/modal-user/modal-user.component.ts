@@ -15,7 +15,9 @@ export class ModalUserComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     private dataBaseService: DatabaseService,
-  ) { }
+  ) { 
+    console.log(data);
+  }
 
   formRegisterUser: FormGroup;
   branchVehicles: Array<object> = [{ value: 'moto', view: 'Moto' }, { value: 'carro', view: 'Carro' }];
@@ -63,7 +65,7 @@ export class ModalUserComponent implements OnInit {
         const datos = Object.assign({}, this.formRegisterUser.value);
         this.dataBaseService.modificar('usuarios', this.data.datos.key, datos).then(result => {
           datos['key'] = this.data.datos.key;
-          //this.closeDialog(datos);
+          this.dialogRef.close({ datosUsuario: datos });
         }).catch(error => {
           console.log('Error modificar usuario :', error);
         });
@@ -72,8 +74,7 @@ export class ModalUserComponent implements OnInit {
         datos['password'] = datos.documento;
         this.dataBaseService.addData("usuarios", this.formRegisterUser.value).then(respuesta => {
           datos['key'] = respuesta.id;
-          this.saveVehicle(datos);
-
+          this.dialogRef.close({ datosUsuario: datos });
         });
       }
     } else {
@@ -89,6 +90,5 @@ export class ModalUserComponent implements OnInit {
       this.dialogRef.close({datosUsuario, datosVehiculo});
     });
   }
-
 
 }

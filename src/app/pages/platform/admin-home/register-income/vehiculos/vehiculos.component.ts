@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatabaseService } from '../../../services/database.service';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-vehiculos',
@@ -15,15 +16,17 @@ export class VehiculosComponent implements OnInit {
     public dialogRef: MatDialogRef<VehiculosComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
-    private dataBaseService: DatabaseService,
+    private db: DatabaseService,
+    private notify: NotificationService
   ) { 
+    this.initVehiForm();
     this.traerVehiculos();
   }
 
   formRegisterUser: FormGroup;
   branchVehicles: Array<object> = [{ value: 'moto', view: 'Moto' }, { value: 'carro', view: 'Carro' }];
   formVehiculo: FormGroup;
-
+  mostrarForm = false;  
   ngOnInit(): void {
     console.log(this.data);
   }
@@ -46,6 +49,7 @@ export class VehiculosComponent implements OnInit {
       color: ['', Validators.required],
       tipo: ['', Validators.required],
       parqueadero: [this.data['parqueadero'], Validators.required],
+      usuario: [this.data['key'], Validators.required]
     });
   }
 
@@ -55,13 +59,14 @@ export class VehiculosComponent implements OnInit {
 
 
   traerVehiculos() {
-    this.dataBaseService.getPorFiltro('vehiculos', 'usuario', this.data.key).snapshotChanges().subscribe(respuesta => {
+    this.db.getPorFiltro('vehiculos', 'usuario', this.data.key).snapshotChanges().subscribe(respuesta => {
       const datos = respuesta.map(item => {
         let x = item.payload.doc.data();
         x['key'] = item.payload.doc.id;
         return x;
       });
 
+      console.log(datos);
       this.vehiculos = datos;
 
     }, error => {
@@ -70,7 +75,23 @@ export class VehiculosComponent implements OnInit {
   }
 
 
+  cerrar(){
+    this.dialogRef.close();
+  }
 
+  guardar(){
+    const data = Object.assign({},this.formVehiculo.value);
+    this.db.addData('vehiculos', data).then(result => {
+      console.log({result});
+      this.mostrarForm = false;
+      this.notify.notification("success", "Vehiculo creado");
+
+    }).catch( error => {
+      console.log({error});
+      this.notify.notification("error", "Error al crear vehiculo");
+    })
+
+  }
 
 
 }

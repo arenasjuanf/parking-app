@@ -1,4 +1,12 @@
 <div class="container-fluid">
+
+  <div class="w-100 text-left">
+    <button class="btn btn-secondary m-2" type="button" (click)="regresar()">
+      <i class="fas fa-chevron-left"></i>
+      Regresar
+    </button>
+  </div>
+
   <div class="row">
     <form [formGroup]="formRegisterIncome" class="col-md-10 col-12">
       <div class="row">
@@ -45,12 +53,12 @@
     
     <div class="col-md-2 col-12 d-flex flex-column justify-content-around">
     
-      <button mat-raised-button class="reset">
+      <button mat-raised-button class="reset full" (click)="reset()">
         <mat-icon>replay</mat-icon>
         Reset Formulario
       </button>
     
-      <button mat-raised-button color="primary" [disabled]="!asignar" (click)="verVehiculos()">
+      <button mat-raised-button color="primary" [disabled]="!datosCliente" (click)="verVehiculos()" class="full">
         <mat-icon>commute</mat-icon>
         Vehiculos De Cliente
       </button>

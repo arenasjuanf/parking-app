@@ -12,8 +12,8 @@
                         <i [ngClass]="casilla.tipo == 'moto' ? 'fas fa-motorcycle fa-2x' : 'fas fa-car fa-2x'">
                         </i>
                         <small *ngIf="casilla.numero">{{casilla.numero}}</small>
-                        <div *ngIf="casilla.cliente" class="text-center">
-                            <div class="placa"> {{casilla.cliente | uppercase}}</div>
+                        <div *ngIf="casilla.placa" class="text-center">
+                            <div class="placa"> {{casilla.placa | uppercase}}</div>
                         </div>
                     </div>
                 </div>
