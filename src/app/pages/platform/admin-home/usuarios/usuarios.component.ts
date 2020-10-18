@@ -85,7 +85,6 @@ export class UsuariosComponent implements OnInit {
       datos['data'] = usuario.permisos;
     }
 
-
     this.dialog.open(PermisosComponent, datos).afterClosed().subscribe(permisos => {
       if (permisos) {
         console.log('result: ', permisos);

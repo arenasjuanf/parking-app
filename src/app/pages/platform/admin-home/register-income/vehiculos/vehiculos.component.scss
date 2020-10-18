@@ -4,7 +4,7 @@ mat-form-field ::ng-deep {
   .mat-form-field-outline-start,
   .mat-form-field-outline-gap,
   .mat-form-field-outline-end {
-      background-color: #f6f8fb;
+    background-color: #f6f8fb;
   }
   .mat-form-field-flex {
     height: 45px;
@@ -22,13 +22,21 @@ mat-form-field ::ng-deep {
   }
 }
 
-.reset{
-  background-color: #2a542a;
-  color: white;
-}
-
-.full{
-  width: 100%;
+h3{
+    margin: 20px;
 }
 
 
+form{
+    margin-top: 20px;
+}
+
+.guardar{
+  background-color: #4545e6;
+  color: #ffffff;
+}
+
+.agregar{
+/*   position: relative;
+  bottom: -260px; */
+}

@@ -1,0 +1,84 @@
+<div class="h-100 animate__animated animate__fadeInLeftBig animate__fast" *ngIf="!mostrarForm">
+  <div class="d-flex justify-content-between">
+    <button mat-raised-button color="primary" class="agregar" (click)="mostrarForm = !mostrarForm">
+      <mat-icon>add</mat-icon>
+      Agregar
+    </button>
+    <button mat-icon-button matTooltip="Cerrar" matTooltipPosition="above" (click)="cerrar()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  
+  <mat-list>
+    <div mat-subheader>Vehiculos</div>
+    <mat-list-item *ngFor="let vh of vehiculos">
+      <mat-icon mat-list-icon>{{ vh.tipo == 'moto' ? 'two_wheeler' : 'directions_car'}}</mat-icon>
+      <div mat-line>{{ vh.placa | uppercase }}</div>
+      <div mat-line> {{ vh.marca | titlecase }} </div>
+
+      <button mat-icon-button matTooltip="Seleccionar" matTooltipPosition="above" [mat-dialog-close]="vh">
+        <mat-icon>check</mat-icon>
+      </button>
+
+      <button mat-icon-button matTooltip="Editar" matTooltipPosition="above">
+        <mat-icon>create</mat-icon>
+      </button>
+
+      <button mat-icon-button matTooltip="Borrar" matTooltipPosition="above">
+        <mat-icon>delete</mat-icon>
+      </button>
+  
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </mat-list>
+  
+
+</div>
+
+<form 
+  (ngSubmit)="guardar()"
+  [formGroup]="formVehiculo" 
+  *ngIf="mostrarForm" 
+  class="animate__animated animate__fadeInRightBig animate__fast"
+>
+  <div class="row justify-content-center">
+    <mat-form-field appearance="outline" class="col-12 col-md-12">
+      <mat-label>Placa</mat-label>
+      <input formControlName="placa" matInput type="text">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-12 col-md-12">
+      <mat-label>Marca</mat-label>
+      <input matInput formControlName="marca" type="text">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-12 col-md-12">
+      <mat-label>Color</mat-label>
+      <input matInput formControlName="color" type="text">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-12 col-md-12">
+      <mat-label>Tipo de vehículo</mat-label>
+      <mat-select formControlName="tipo">
+        <mat-option *ngFor="let item of branchVehicles;" [value]="item['value']">{{ item['view'] }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="d-flex justify-content-around mt-2">
+    <button mat-raised-button color="primary" (click)="mostrarForm = !mostrarForm">
+      <mat-icon>cancel</mat-icon>
+      Cancelar
+    </button>
+  
+    <button mat-raised-button color="primary" type="submit">
+      <mat-icon>save</mat-icon>
+      Guardar
+    </button>
+  </div>
+
+</form>
+
+  
+
+  
+
+
+
