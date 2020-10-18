@@ -58,4 +58,5 @@ export class DatabaseService {
     return this.afs.collection(nombre_coleccion).doc(id).set(data, { merge: true });
   }
 
+
 }

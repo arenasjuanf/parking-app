@@ -167,7 +167,6 @@ export class DatosParqueaderoComponent implements OnInit {
       plano: this.form.get('plano').value.length ? this.form.get('plano').value : plano,
     };
 
-    console.log(data);
     const ref = this.dialog.open(VistaPlanosComponent, {
       data
     });

@@ -1,25 +1,45 @@
-<div class="contenedor">
+<div class="container-fluid">
+
+
   <mat-card>
-    <mat-form-field appearance="fill">
-      <mat-label>Choose a date</mat-label>
-      <input matInput [matDatepicker]="picker">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+
+    <mat-form-field appearance="outline" >
+      <mat-label>Fecha Inicial</mat-label>
+      <input matInput [matDatepicker]="start">
+      <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
+      <mat-datepicker #start></mat-datepicker>
     </mat-form-field>
+    
+    <mat-form-field appearance="outline" >
+      <mat-label>Fecha Final</mat-label>
+      <input matInput [matDatepicker]="end">
+      <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
+      <mat-datepicker #end></mat-datepicker>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline">
+      <mat-label>Filtro</mat-label>
+      <input matInput #input autocomplete="off" placeholder="buscar ..">
+      <mat-icon matSuffix>
+        search
+      </mat-icon>
+    </mat-form-field>
+    
+    
+
+    <button mat-raised-button color="primary">
+      <mat-icon>search</mat-icon>
+      Buscar
+    </button>
+
+    <button mat-raised-button color="warn">
+      <mat-icon>add</mat-icon>
+      Agregar
+    </button>
+
+    
+    
+    
   </mat-card>
-  <mat-card>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Documento</th>
-          <th>Placa</th>
-          <th>Marca</th>
-          <th>Fecha Inicio</th>
-          <th>Fecha Fin</th>
-          <th>Valor</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-    </table>
-  </mat-card>
+  
 </div>

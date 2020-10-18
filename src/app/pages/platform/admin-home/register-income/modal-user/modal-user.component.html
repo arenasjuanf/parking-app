@@ -1,62 +1,124 @@
 <div class="m-2" [ngSwitch]="data.tipo">
-  <form *ngSwitchCase="'crear'" [formGroup]="formRegisterUser" (ngSubmit)="saveUser()">
-    <div class="row justify-content-center">
-      <mat-form-field appearance="outline" class="col-12 col-md-12">
-        <mat-label>Documento de usuario</mat-label>
-        <input formControlName="documento" matInput type="text">
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="col-12 col-md-12">
-        <mat-label>Nombre del usuario</mat-label>
-        <input formControlName="nombre" matInput type="text">
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="col-12 col-md-12">
-        <mat-label>Correo electronico</mat-label>
-        <input formControlName="email" matInput type="email">
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="col-12 col-md-12">
-        <mat-label>Teléfono</mat-label>
-        <input formControlName="telefono" matInput type="number">
-      </mat-form-field>
-      <div class="col-12 col-md-12 d-flex justify-content-between">
-        <button type="submit" class="btn btn-primary mt-2">
-          <i class="far fa-edit"></i>{{ this.data.editarUsuario ? 'Modificar' : 'Registrar'}}
-        </button>
-        <button (click)="closeDialog()" type="button" class="btn btn-primary mt-2">
-          <i class="fa fa-times"></i> Cancelar
-        </button>
-      </div>
+
+  <div *ngSwitchCase="'crear'">
+    <div class="w-10 m-2 text-right">
+      <button mat-button color="primary" (click)="closeDialog()">
+        <i class="far fa-window-close fa-2x"></i>
+      </button>
     </div>
-  </form>
+    <mat-horizontal-stepper linear #stepper>
+      <mat-step [stepControl]="formRegisterUser">
+        <form [formGroup]="formRegisterUser" [ngStyle]="{'margin-top': '15px'}">
+          <ng-template matStepLabel>Datos De Usuario</ng-template>
+          <div class="row ">
+            <mat-form-field appearance="outline" class="col-12 col-md-12">
+              <mat-label>Documento de usuario</mat-label>
+              <input formControlName="documento" matInput type="text">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="col-12 col-md-12">
+              <mat-label>Nombre del usuario</mat-label>
+              <input formControlName="nombre" matInput type="text">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="col-12 col-md-12">
+              <mat-label>Correo electronico</mat-label>
+              <input formControlName="email" matInput type="email">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="col-12 col-md-12">
+              <mat-label>Teléfono</mat-label>
+              <input formControlName="telefono" matInput type="number">
+            </mat-form-field>
+          </div>
+          <div class="m-2">
+            <button mat-raised-button color="primary" matStepperNext >Siguiente</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>{{ data.editarUsuario ? 'Actualizar' : 'Guardar'}}</ng-template>
+        <p class="text-center">Información Completa.</p>
+        <div class="d-flex justify-content-around">
+          <button mat-button mat-raised-button color="primary" (click)="closeDialog()">
+            <i class="fas fa-window-close"></i>
+            Cancelar
+          </button>
+  
+          <button mat-button class="guardar" style="background-color: #4545e6; color: #ffffff;" (click)="saveUser()">
+            <i class="fas fa-save"></i>
+            {{ data.editarUsuario ? 'Actualizar' : 'Guardar'}}
+          </button>
+
+          <!-- <button mat-button (click)="stepper.reset()">Reset</button>--> 
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+
   <div class="row justify-content-center" *ngSwitchCase="'listar'">
-    <div class="col-12 col-md-11">
-      <div class="contenedor-tabla">
-        <table class="table table-responsive">
-          <thead class="thead-light">
-            <tr>
-              <th scope="col" class="text-center">Nombre</th>
-              <th scope="col" class="text-center">Documento</th>
-              <th scope="col" class="text-center">Email</th>
-              <th scope="col" class="text-center"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of data.datos">
-              <td class="align-middle text-center">{{ item.nombre | titlecase }}</td>
-              <td class="align-middle text-center">{{ item.documento}}</td>
-              <td class="align-middle text-center">{{ item.email }}</td>
-              <td class="align-middle text-center">
-                <button (click)="closeDialog(item)" type="button" class="btn btn-primary my-1 my-md-0 mx-0 mx-md-1"
-                  matTooltipPosition="above">
-                  <i class="fa fa-share"></i>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col" class="text-center">Nombre</th>
+          <th scope="col" class="text-center">Documento</th>
+          <th scope="col" class="text-center">Email</th>
+          <th scope="col" class="text-center"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of data.datos">
+          <td class="align-middle text-center">{{ item.nombre | titlecase }}</td>
+          <td class="align-middle text-center">{{ item.documento}}</td>
+          <td class="align-middle text-center">{{ item.email }}</td>
+          <td class="align-middle text-center">
+            <button (click)="closeDialog({datosUsuario: item})" type="button" class="btn btn-primary my-1 my-md-0 mx-0 mx-md-1"
+              matTooltipPosition="above">
+              <i class="fa fa-share"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="w-100 text-left">
       <button (click)="closeDialog()" type="button" class="btn btn-primary mt-2">
         <i class="fa fa-times"></i>Cancelar
       </button>
     </div>
+    
+
   </div>
 </div>
+
+
+
+<!-- <mat-step [stepControl]="formVehiculo" >
+        <form [formGroup]="formVehiculo" [ngStyle]="{'margin-top': '15px'}">
+          <ng-template matStepLabel>Datos De Vehiculo</ng-template>
+          <div class="row justify-content-center">
+            <mat-form-field appearance="outline" class="col-6 col-md-6">
+              <mat-label>Placa</mat-label>
+              <input formControlName="placa" matInput type="text">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="col-6 col-md-6">
+              <mat-label>Marca</mat-label>
+              <input matInput formControlName="marca" type="text">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="col-6 col-md-6">
+              <mat-label>Color</mat-label>
+              <input matInput formControlName="color" type="text">
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" class="col-6 col-md-6" >
+              <mat-label>Tipo de vehículo</mat-label>
+              <mat-select formControlName="tipo">
+                <mat-option *ngFor="let item of branchVehicles;" [value]="item['value']">{{ item['view'] }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          
+          </div>
+          <div class="m-2">
+            <button class="mr-1" mat-raised-button color="primary" matStepperPrevious>Anterior</button>
+            <button class="ml-1" mat-raised-button color="primary" matStepperNext>Siguiente</button>
+          </div>
+        </form>
+      </mat-step> -->

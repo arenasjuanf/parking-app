@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '404', component: Error404Component },
   { path: 'platform', loadChildren: () => import('./pages/platform/platform.module').then(m => m.PlatformModule) },
+  { path: '',  pathMatch:'full', redirectTo: 'login' },
   { path: '**', pathMatch: 'full', redirectTo: '404'}
 ];
 
