@@ -76,5 +76,8 @@ export class PermisosComponent implements OnInit  {
     this.dialogRef.close(this.seleccionados);
   }
 
+  prueba(){
+    return true;
+  }
 
 }

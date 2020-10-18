@@ -6,6 +6,7 @@ import { constantes } from 'src/app/constantes';
 import { AuthService } from '../../services/auth.service';
 import { DatabaseService } from '../../services/database.service';
 import { VistaPlanosComponent } from '../../super-admin-home/vista-planos/vista-planos.component';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-datos-parqueadero',
@@ -24,7 +25,7 @@ export class DatosParqueaderoComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     public dialog: MatDialog,
-
+    private notificationService: NotificationService
   ) {
     this.traerData();
     this.initForm();
@@ -33,7 +34,7 @@ export class DatosParqueaderoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  traerData(){
+  traerData() {
     const idParqueadero = this.auth.datosUsuario.parqueadero;
     this.db.findDoc('parqueaderos', idParqueadero).valueChanges().subscribe((result: object) => {
       result['plano'] = JSON.parse(result['plano']);
@@ -118,12 +119,12 @@ export class DatosParqueaderoComponent implements OnInit {
 
     } else {
       valor -= 1;
-      pisos.removeAt(valor );
+      pisos.removeAt(valor);
     }
     this.form.get('cantidadPisos').setValue(valor);
   }
 
-  regresar(){
+  regresar() {
     this.router.navigateByUrl('/platform/admin/main');
   }
 
@@ -150,11 +151,11 @@ export class DatosParqueaderoComponent implements OnInit {
       plano[p] = matriz;
     }
 
-    
+
 
     const cantidad = this.form.get('plano').value.length;
 
-    if (cantidadPisos > this.form.get('plano').value.length){
+    if (cantidadPisos > this.form.get('plano').value.length) {
       const nuevo = plano.splice(cantidad, plano.length);
       this.form.get('plano').setValue(this.form.get('plano').value.concat(nuevo));
     } else {
@@ -185,14 +186,18 @@ export class DatosParqueaderoComponent implements OnInit {
     // se parsea plano
     datos.plano = JSON.stringify(datos.plano);
     const idParqueadero = this.auth.datosUsuario.parqueadero;
-   
-    this.db.modificar('parqueaderos', idParqueadero , datos).then(
-      result => {
-        console.log('parqueadero actualizado');
-      }
-    ).catch(error => {
+
+    this.db.modificar('parqueaderos', idParqueadero, datos).then(result => {
+      console.log('parqueadero actualizado');
+      this.notificationService.notification("success", "Parqueadero actualizado");
+    }).catch(error => {
       console.log('error modificar :', error);
+      this.notificationService.notification("error", "No fue posible guardar los datos");
     });
+  }
+
+  prueba() {
+    return true;
   }
 
 }

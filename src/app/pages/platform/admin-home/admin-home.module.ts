@@ -11,20 +11,30 @@ import { ModalUsuariosComponent } from './usuarios/modal-usuarios/modal-usuarios
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MensualidadComponent } from './mensualidad/mensualidad.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlatformModule } from '../platform.module';
 import { SuperAdminModule } from '../super-admin-home/super-admin.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { RegisterIncomeComponent } from './register-income/register-income.component';
+import { MatSelectModule } from '@angular/material/select';
+import { ModalUserComponent } from './register-income/modal-user/modal-user.component';
 import { ConfiguracionComponent } from './configuracion/configuracion.component';
 import { DatosParqueaderoComponent } from './datos-parqueadero/datos-parqueadero.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MensualidadComponent } from './mensualidad/mensualidad.component';
 import { PermisosComponent } from './usuarios/permisos/permisos.component';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatTabsModule } from '@angular/material/tabs';
+import { PlanosAsignacionComponent } from './planos-asignacion/planos-asignacion.component';
+import { MatTableModule } from '@angular/material/table';
+import { ModalValueRateComponent } from './configuracion/modal-value-rate/modal-value-rate.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -32,10 +42,14 @@ import { MatNativeDateModule } from '@angular/material/core';
     UsuariosComponent,
     MainComponent,
     ModalUsuariosComponent,
+    RegisterIncomeComponent,
+    ModalUserComponent,
     MensualidadComponent,
     ConfiguracionComponent,
     DatosParqueaderoComponent,
-    PermisosComponent
+    PermisosComponent,
+    PlanosAsignacionComponent,
+    ModalValueRateComponent
   ],
   imports: [
     CommonModule,
@@ -51,12 +65,16 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatTooltipModule,
     PlatformModule,
     SuperAdminModule,
+    MatSelectModule,
+    MatExpansionModule,
     MatExpansionModule,
     MatListModule,
     MatDividerModule,
     MatCheckboxModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTabsModule,
+    MatTableModule
   ]
 
 })

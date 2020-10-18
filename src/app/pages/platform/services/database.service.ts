@@ -35,7 +35,7 @@ export class DatabaseService {
     return this.afs.collection(nombre_coleccion).snapshotChanges();
   }
 
-  getPorId(nombre_coleccion, uid){
+  getPorId(nombre_coleccion, uid) {
     return this.afs.collection(nombre_coleccion, ref => ref.where('uid', '==', uid));
   }
 
@@ -45,18 +45,17 @@ export class DatabaseService {
     );
   }
 
-  findDoc(nombre_coleccion, idDoc){
+  findDoc(nombre_coleccion, idDoc) {
     return this.afs.collection(nombre_coleccion).doc(idDoc);
   }
-
 
   // descripción: modifica documento especificando coleccion y id
   // parametros: 
   // nombre_coleccion = nombre de la referencia de la coleccion
   // id = id documento
   // data: nuevos datos a ingresar
-  modificar(nombre_coleccion, id, data){
-    return this.afs.collection(nombre_coleccion).doc(id).set(data, {merge: true});
+  modificar(nombre_coleccion, id, data) {
+    return this.afs.collection(nombre_coleccion).doc(id).set(data, { merge: true });
   }
 
 }

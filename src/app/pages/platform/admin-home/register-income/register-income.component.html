@@ -1,0 +1,58 @@
+<div class="container">
+  <form [formGroup]="formRegisterIncome">
+    <div class="row">
+      <mat-form-field class="d-flex" appearance="outline" class="col-12 col-md-4 my-1">
+        <mat-label>Documento de usuario</mat-label>
+        <input (keydown.enter)="searchDataUser($event)" matInput type="text" formControlName="documentoUsuario">
+        <button type="button" (click)="searchDataUser()" mat-icon-button matSuffix>
+          <mat-icon>{{ validUser ? 'edit' : 'search'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-12 col-md-4 my-1">
+        <mat-label>Nombre del usuario</mat-label>
+        <input matInput type="text" formControlName="nombreUsuario">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-12 col-md-4 my-1">
+        <mat-label>Placa del vehículo</mat-label>
+        <input matInput type="text" formControlName="placa">
+      </mat-form-field>
+
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline" class="col-12 col-md-4 my-1">
+        <mat-label>Marca del vehiculo</mat-label>
+        <input matInput type="text" formControlName="marca">
+      </mat-form-field>
+     
+      <mat-form-field appearance="outline" class="col-12 col-md-4 my-1">
+        <mat-label>Tipo de vehículo</mat-label>
+        <mat-select formControlName="tipoVehiculo">
+          <mat-option *ngFor="let item of branchVehicles;" [value]="item['value']">{{ item['view'] }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-12 col-md-4">
+        <mat-label>Seleccione piso</mat-label>
+        <mat-select formControlName="piso" (selectionChange)="cambiarPisosSelect($event)">
+          <mat-option *ngFor="let piso of floorsParking;" [value]="piso.piso">{{ piso.piso }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="w-100 text-center">
+      <button class="btn btn-primary m-2" (click)="reset()">
+        Aceptar
+      </button>
+      <button class="btn btn-danger m-2">
+        Cancelar
+      </button>
+    </div>
+
+  </form>
+</div>
+
+<div class="animate__animated animate__fadeIn animate__slow">
+  <app-planos-asignacion [datosPlano]="datosPlano" [pisoSeleccionado]="pisoSeleccionado" (cambiarPiso)="cambiarPiso($event)"></app-planos-asignacion>
+</div>

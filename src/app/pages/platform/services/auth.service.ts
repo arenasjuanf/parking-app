@@ -1,9 +1,10 @@
 import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/auth";
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { DatabaseService } from './database.service';
-import { map } from 'rxjs/operators'
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +19,6 @@ export class AuthService {
     public ngZone: NgZone,
     public router: Router,
     private dbService: DatabaseService
-
   ) {
     // el observable mantiene listo vigilando la sesión
     this.validarSesion();
@@ -88,12 +88,7 @@ export class AuthService {
   }
 
   recuperarClave(passwordResetEmail) {
-    return this.afAuth.sendPasswordResetEmail(passwordResetEmail)
-      .then(() => {
-        window.alert('Password reset email sent, check your inbox.');
-      }).catch((error) => {
-        window.alert(error);
-      });
+    return this.afAuth.sendPasswordResetEmail(passwordResetEmail);
   }
 
   get estaLoggeado(): boolean {
@@ -135,5 +130,6 @@ export class AuthService {
         this.router.navigateByUrl(ruta);
       });
   }
+
 
 }
