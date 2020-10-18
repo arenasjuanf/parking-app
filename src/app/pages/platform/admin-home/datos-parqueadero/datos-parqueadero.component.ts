@@ -188,7 +188,7 @@ export class DatosParqueaderoComponent implements OnInit {
 
     this.db.modificar('parqueaderos', idParqueadero, datos).then(result => {
       console.log('parqueadero actualizado');
-      this.notificationService.notification("success", "Parqueadero actualiado");
+      this.notificationService.notification("success", "Parqueadero actualizado");
     }).catch(error => {
       console.log('error modificar :', error);
       this.notificationService.notification("error", "No fue posible guardar los datos");
