@@ -18,7 +18,7 @@ export class VehiculosComponent implements OnInit {
     private formBuilder: FormBuilder,
     private db: DatabaseService,
     private notify: NotificationService
-  ) { 
+  ) {
     this.initVehiForm();
     this.traerVehiculos();
   }
@@ -26,7 +26,7 @@ export class VehiculosComponent implements OnInit {
   formRegisterUser: FormGroup;
   branchVehicles: Array<object> = [{ value: 'moto', view: 'Moto' }, { value: 'carro', view: 'Carro' }];
   formVehiculo: FormGroup;
-  mostrarForm = false;  
+  mostrarForm = false;
   ngOnInit(): void {
     console.log(this.data);
   }
@@ -75,22 +75,24 @@ export class VehiculosComponent implements OnInit {
   }
 
 
-  cerrar(){
+  cerrar() {
     this.dialogRef.close();
   }
 
-  guardar(){
-    const data = Object.assign({},this.formVehiculo.value);
-    this.db.addData('vehiculos', data).then(result => {
-      console.log({result});
-      this.mostrarForm = false;
-      this.notify.notification("success", "Vehiculo creado");
-
-    }).catch( error => {
-      console.log({error});
-      this.notify.notification("error", "Error al crear vehiculo");
-    })
-
+  guardar() {
+    if (this.formVehiculo.valid) {
+      const data = Object.assign({}, this.formVehiculo.value);
+      this.db.addData('vehiculos', data).then(result => {
+        console.log({ result });
+        this.mostrarForm = false;
+        this.notify.notification("success", "Vehiculo creado");
+      }).catch(error => {
+        console.log({ error });
+        this.notify.notification("error", "Error al crear vehiculo");
+      });
+    } else {
+      this.notify.notification("warning", "Ingrese todos los datos");
+    }
   }
 
 
