@@ -46,7 +46,6 @@ export class AuthService {
       localStorage.setItem('usuario', JSON.stringify(tmp));
     }else{
       localStorage.setItem('usuario', JSON.stringify(datosUsuario));
-
     }
   }
 

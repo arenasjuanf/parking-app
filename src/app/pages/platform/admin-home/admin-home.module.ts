@@ -26,12 +26,12 @@ import { PermisosComponent } from './usuarios/permisos/permisos.component';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { PlanosAsignacionComponent } from './planos-asignacion/planos-asignacion.component';
 import { MatTableModule } from '@angular/material/table';
 import { ModalValueRateComponent } from './configuracion/modal-value-rate/modal-value-rate.component';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
 import { MatStepperModule } from '@angular/material/stepper';
 import { VehiculosComponent } from './register-income/vehiculos/vehiculos.component';
 import { SuscripcionesComponent } from './register-income/suscripciones/suscripciones.component';
@@ -79,6 +79,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatListModule,
     MatDividerModule,
     MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatTabsModule,
     MatTableModule,
     MatDatepickerModule,

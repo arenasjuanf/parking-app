@@ -1,4 +1,4 @@
-<div class="container-fluid animate__animated animate__backInRight animate__fast">
+<!-- <div class="container-fluid animate__animated animate__backInRight animate__fast">
     <div class="text-center animate__animated animate__zoomInDown animate__fast" *ngIf="nombreParqueadero" >
         <h3 class="title">
             {{nombreParqueadero | titlecase}}
@@ -12,5 +12,27 @@
             <p class="col-6 text-center v-c">{{labels[permiso.ruta].label | titlecase}}</p>
         </div>
     </div>
+</div> -->
+<div class="container">
+    <div class="card mt-5">
+        <div class="card-body text-center">
+            <h1>{{nombreParqueadero | titlecase}}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-4 my-3" *ngFor="let permiso of permisos" (click)="ir(permiso.ruta)">
+            <div class="card pointer sombra">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-lg-6 text-center">
+                            <i ngClass="{{permiso.icono+' fa-7x expandir'}}"></i>
+                        </div>
+                        <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center justify-content-lg-start h5 mt-3 mt-lg-0">
+                            {{permiso.nombre}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
