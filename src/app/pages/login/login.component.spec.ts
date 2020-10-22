@@ -21,7 +21,7 @@ describe('AppComponent', () => {
     }).compileComponents();
   }));
 
-  it(`valid email`, () => {
+  it(`valid form`, () => {
     let auth: AuthService
     let comp: LoginComponent = new LoginComponent(auth);
 

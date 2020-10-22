@@ -31,13 +31,6 @@ describe('Error404Component', () => {
   it('should to be zero', () => {
     expect(component.getCero).toBeTruthy()
   });
-/* 
-  it('Probar conexion a internet', async(() => {
-    const service: AuthService = TestBed.get(AuthService);
-    service.checkInternet().subscribe(
-      (response) => expect(response.json()).not.toBeNull(),
-      (error) => fail(error)
-    );
-  })); */
+
 
 });
