@@ -288,7 +288,6 @@ export class RegisterIncomeComponent implements OnInit {
     this.formRegisterIncome.get('parqueadero').setValue(this.dataUser['parqueadero'])
   }
 
-
   buscarSuscripciones(){
     const data = Object.assign({}, { datosVehiculo: this.datosVehiculo, datosCliente: this.datosCliente})
 
@@ -306,11 +305,9 @@ export class RegisterIncomeComponent implements OnInit {
     });
   }
 
-
   setValueSuscripcion(resultado) {
     this.datosSuscripcion = resultado;
     this.permitirAsignar();
   }
-
-
+  
 }

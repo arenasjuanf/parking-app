@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatabaseService } from '../../../services/database.service';
 import { NotificationService } from '../../../services/notification.service';
 import * as moment from 'moment';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 
 @Component({
@@ -19,8 +20,10 @@ export class SuscripcionesComponent implements OnInit {
   branchVehicles: Array<object> = [{ value: 'moto', view: 'Moto' }, { value: 'carro', view: 'Carro' }];
   form: FormGroup;
   mostrarForm = false;
-  suscripcionActiva: boolean = false;
+  suscripcionActiva:any = {};
   inactivas: any[] = [];
+  tipoSubs: string;
+  validadoresHora: Validators[];
 
   constructor(
     public dialogRef: MatDialogRef<SuscripcionesComponent>,
@@ -42,14 +45,22 @@ export class SuscripcionesComponent implements OnInit {
     this.form = this.formBuilder.group({
       tipoSuscripcion: ['', Validators.required],
       fechaInicio: ['', Validators.required],
-      fechaFinal: ['', Validators.required],
+      fechaFinal: ['',],
       estado: [true, Validators.required],
-      valor: [true, Validators.required],
+      valor: [, Validators.required],
       pagado: [false, Validators.required],
       parqueadero: [this.data.datosVehiculo['parqueadero'], Validators.required],
       vehiculo: [this.data.datosVehiculo['key'], Validators.required],
+      hora: ['', this.validadoresHora ],
     });
+
   }
+
+  validadoresDinamicos(){
+    this.form.get('hora').setValidators((this.tipoSubs === 'hora') ? [Validators.required] : []);
+    this.form.get('fechaFinal').setValidators((this.tipoSubs === 'mes') ? [Validators.required] : []);
+  }
+
 
   closeDialog(data?) {
     this.dialogRef.close(data);
@@ -60,19 +71,19 @@ export class SuscripcionesComponent implements OnInit {
   }
 
   guardar() {
+    console.log(this.form);
     if (this.form.valid) {
-      console.log(this.form.value);
       this.db.addData('suscripciones', this.form.value).then(result => {
         console.log({ result });
         this.mostrarForm = false;
-        this.notify.notification("success", "Suscripción creada");
+        this.notify.notification('success', 'Suscripción creada');
 
       }).catch(error => {
         console.log({ error });
-        this.notify.notification("error", "Error al crear suscripción");
+        this.notify.notification('error', 'Error al crear suscripción');
       })
     } else {
-      this.notify.notification("warning", "Ingrese todos los datos");
+      this.notify.notification('error', 'Debe ingresar todos las datos solicitados');
     }
   }
 
@@ -110,7 +121,7 @@ export class SuscripcionesComponent implements OnInit {
         }
       });
       console.log(this.suscripcionActiva);
-      this.mostrarForm = this.suscripcionActiva ? false : true;
+      this.mostrarForm = Object.keys(this.suscripcionActiva).length ? false : true;
     })
   }
 
@@ -120,13 +131,36 @@ export class SuscripcionesComponent implements OnInit {
     }
   }
 
-  tiempoRestante(final) {
+  tiempoRestante(final, valid) {
+
     if (final) {
       const start = moment(new Date());
       const end = moment(new Date(final.seconds * 1000))
-
       return end.diff(start, 'days') + ' días';
+    } else if (!final && valid && this.suscripcionActiva.fechaInicio){
+
+      const start = moment(new Date());
+      const end = moment(new Date(this.suscripcionActiva.fechaInicio.seconds * 1000 )).endOf('day');
+      return end.diff(start, 'hours') + ' horas';
     }
+  }
+
+  calcularFechaFin(evento){
+    switch (this.form.get('tipoSuscripcion').value){
+      case 'mes':
+        console.log(this.form.get('fechaInicio').value)
+        const fechaFinal = new Date(moment(evento.value).add(1, 'month').format());
+        this.form.get('fechaFinal').setValue(fechaFinal);
+        break;
+      default:
+        break;
+    }
+  }
+
+
+  selectTipo($evento){
+    this.tipoSubs = $evento.value;
+    this.validadoresDinamicos();
   }
 
 }

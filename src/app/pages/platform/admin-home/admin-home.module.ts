@@ -36,6 +36,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { VehiculosComponent } from './register-income/vehiculos/vehiculos.component';
 import { SuscripcionesComponent } from './register-income/suscripciones/suscripciones.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { ModalSuscripcionesComponent } from './mensualidad/modal-suscripciones/modal-suscripciones.component';
 
 
 
@@ -56,7 +58,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     ModalValueRateComponent,
     MensualidadComponent,
     VehiculosComponent,
-    SuscripcionesComponent
+    SuscripcionesComponent,
+    ModalSuscripcionesComponent
   ],
   imports: [
     CommonModule,
@@ -85,7 +88,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatTableModule,
     MatDatepickerModule,
     MatStepperModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    NgxMaterialTimepickerModule
   ]
 
 })
