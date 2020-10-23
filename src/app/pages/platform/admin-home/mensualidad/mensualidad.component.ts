@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalSuscripcionesComponent } from './modal-suscripciones/modal-suscripciones.component';
 
 @Component({
   selector: 'app-mensualidad',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MensualidadComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
+  }
+
+  abrirModal(){
+    this.dialog.open(ModalSuscripcionesComponent, {
+      data: {},
+     
+    })
   }
 
 }

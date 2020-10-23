@@ -1,0 +1,62 @@
+<div class="container-fluid">
+  <div class="w-100 text-right">
+    <button mat-button color="primary"  [mat-dialog-close]>
+      <i class="far fa-window-close fa-2x"></i>
+    </button>
+  </div>
+
+  <div class="row">
+    <form  [formGroup]="formCliente" class="col-md-10 col-12">
+      <div class="row">
+        <mat-form-field class="d-flex" appearance="legacy" class="col-12 col-md-4 my-1">
+          <mat-label>Documento de usuario</mat-label>
+          <input (keydown.enter)="searchDataUser($event)" matInput type="text" formControlName="documentoUsuario">
+          <button type="button" (click)="searchDataUser()" mat-icon-button matSuffix>
+            <mat-icon>{{ validUser ? 'edit' : 'search'}}</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="col-12 col-md-4 my-1">
+          <mat-label>Nombre del usuario</mat-label>
+          <input matInput type="text" formControlName="nombreUsuario">
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="col-12 col-md-4 my-1" [formGroup]="formVehiculo">
+          <mat-label>Placa del vehículo</mat-label>
+          <input matInput type="text" formControlName="placa">
+        </mat-form-field>
+
+      </div>
+      <div class="row">
+        <mat-form-field appearance="legacy" class="col-12 col-md-4 my-1" [formGroup]="formVehiculo">
+          <mat-label>Marca del vehiculo</mat-label>
+          <input matInput type="text" formControlName="marca">
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" class="col-12 col-md-4 my-1" [formGroup]="formVehiculo">
+          <mat-label>Tipo de vehículo</mat-label>
+          <mat-select formControlName="tipoVehiculo">
+            <mat-option *ngFor="let item of branchVehicles;" [value]="item['value']">{{ item['view'] }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+
+        <button mat-raised-button class="reset" (click)="reset()">
+          <mat-icon>replay</mat-icon>
+          Reset Formulario
+        </button>
+
+        <button mat-raised-button color="primary" [disabled]="!datosCliente" (click)="verVehiculos()" class="reset">
+          <mat-icon>commute</mat-icon>
+          Vehiculos
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
