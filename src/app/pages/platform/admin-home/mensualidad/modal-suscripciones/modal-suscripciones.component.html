@@ -1,5 +1,12 @@
 <div class="container-fluid">
-  <div class="w-100 text-right">
+  <div class="w-100  d-flex justify-content-between">
+
+    <p class="park-info ">
+      <b>Parqueadero:</b>
+      {{ nombreParqueadero | titlecase}}
+    </p>
+
+
     <button mat-button color="primary"  [mat-dialog-close]>
       <i class="far fa-window-close fa-2x"></i>
     </button>
