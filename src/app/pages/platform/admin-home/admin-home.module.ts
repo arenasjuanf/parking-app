@@ -38,7 +38,8 @@ import { SuscripcionesComponent } from './register-income/suscripciones/suscripc
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { ModalSuscripcionesComponent } from './mensualidad/modal-suscripciones/modal-suscripciones.component';
-
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 
 
@@ -89,7 +90,10 @@ import { ModalSuscripcionesComponent } from './mensualidad/modal-suscripciones/m
     MatDatepickerModule,
     MatStepperModule,
     MatSlideToggleModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    MatPaginatorModule
+  ], exports:[
+    MatSortModule
   ]
 
 })

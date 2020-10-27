@@ -23,7 +23,7 @@ export class ModalSuscripcionesComponent implements OnInit {
   datosVehiculo: any;
   datosSuscripcion: any;
   modalAbierta: boolean = false;
-
+  nombreParqueadero: string = '';
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService, 
@@ -32,6 +32,14 @@ export class ModalSuscripcionesComponent implements OnInit {
   ) {
     this.dataUser = this.authService.datosUsuario;
     this.initForms();
+    this.getDataParqueadero();
+  }
+
+  getDataParqueadero() {
+    const idParqueadero = this.authService.datosUsuario.parqueadero;
+    this.db.findDoc('parqueaderos', idParqueadero).snapshotChanges().subscribe(result => {
+      this.nombreParqueadero = result.payload.get('razonSocial');
+    });
   }
 
   ngOnInit(): void {
