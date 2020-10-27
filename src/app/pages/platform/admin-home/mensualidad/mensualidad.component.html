@@ -1,5 +1,12 @@
 <div class="container-fluid">
 
+  <div class="d-flex justify-content-between">
+    <button class="btn btn-secondary m-2" type="button" (click)="regresar()">
+      <i class="fas fa-chevron-left"></i>
+      Regresar
+    </button>
+  </div>
+
 
   <mat-card class="row">
 
@@ -25,8 +32,6 @@
       </mat-icon>
     </mat-form-field>
     
-    
-
     <button class="2" mat-raised-button color="primary" >
       <mat-icon>search</mat-icon>
       Buscar
@@ -38,6 +43,8 @@
     </button>
   </mat-card>
 
+
+ 
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort class="w-100">
     

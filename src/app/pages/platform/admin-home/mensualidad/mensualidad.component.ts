@@ -9,6 +9,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mensualidad',
@@ -40,7 +41,8 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
     public dialog: MatDialog,
     private db: DatabaseService, 
     private auth: AuthService,
-    public afs: AngularFirestore
+    public afs: AngularFirestore,
+    private router: Router
   ) {
     this.getSubscripciones$();
     this.getVehiculos$();
@@ -130,13 +132,10 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
       }
 
     });
-
-    console.log(this.suscripciones);
     this.dataSource = new MatTableDataSource(this.suscripciones);
     this.dataSource.filterPredicate = this.predicadoBusqueda;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-
   }
 
   calcularfecha(fechaEnSegundos: number){
@@ -152,6 +151,10 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
   filtrar(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  regresar() {
+    this.router.navigateByUrl('/platform/admin/main');
   }
 
 }

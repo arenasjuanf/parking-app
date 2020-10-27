@@ -55,7 +55,6 @@ export class PerfilComponent implements OnInit {
   })
 
   setearDatos(){
-    console.log(this.auth.datosUsuario);
     if(this.auth.datosUsuario){
       this.form.patchValue(this.auth.datosUsuario);
     }
