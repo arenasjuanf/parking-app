@@ -11,6 +11,7 @@ import { VehiculosComponent } from './vehiculos/vehiculos.component';
 import { Router } from '@angular/router';
 import { SuscripcionesComponent } from './suscripciones/suscripciones.component';
 import { NotificationService } from '../../services/notification.service';
+import { EgresoComponent } from './egreso/egreso.component';
 
 @Component({
   selector: 'app-register-income',
@@ -24,6 +25,7 @@ export class RegisterIncomeComponent implements OnInit {
   datosVehiculo: any;
   datosSuscripcion: any;
   modalAbierta: boolean = false;
+  mostrarEgreso: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -44,7 +46,7 @@ export class RegisterIncomeComponent implements OnInit {
   dataUser;
   floorsParking;
   userValidData: object;
-  validUser: Boolean = false;
+  validUser: boolean = false;
   datosPlano = [];
 
   ngOnInit(): void {
@@ -84,6 +86,7 @@ export class RegisterIncomeComponent implements OnInit {
   getPlano() {
     this.dataBaseService.findDoc('parqueaderos', this.dataUser['parqueadero']).snapshotChanges().subscribe(respuesta => {
       this.datosPlano = JSON.parse(respuesta.payload.get('plano'));
+      console.log(this.datosPlano)
     }, error => {
       console.log("Error ", error);
     });
@@ -214,19 +217,51 @@ export class RegisterIncomeComponent implements OnInit {
     }
   }
 
-  asignarCasilla(evento){
-    console.log(this.datosSuscripcion);
-    this.datosPlano[evento.piso][evento.fila][evento.columna]['suscripcion'] = { suscripcion: this.datosSuscripcion.key, vehiculo: this.datosVehiculo };
+  asignarCasilla(evento, idlog){
+
+    // tslint:disable-next-line: max-line-length
+    this.datosPlano[evento.piso][evento.fila][evento.columna]['suscripcion'] = { suscripcion: this.datosSuscripcion.key, vehiculo: this.datosVehiculo, idlog };
     this.dataBaseService.modificar('parqueaderos', this.dataUser['parqueadero'] , {plano :JSON.stringify(this.datosPlano)}).then(x => {
-      this.notify.notification("success", "Suscripción creada");
+      this.notify.notification('success', 'Suscripción creada');
       this.reset();
     }).catch(err => {
-      this.notify.notification("error", "Error al asignar casilla");
+      this.notify.notification('error', 'Error al asignar casilla');
     })
 
   }
 
-  buscarVehiculo(idUsuario:string){
+  guardarRegistro(evento){
+
+    //puesto, terminar ?: boolean
+    const registroLog: any = {
+      parqueadero: this.dataUser['parqueadero'],
+      suscripcion: this.datosSuscripcion['key'],
+      datosSuscripcion: this.datosSuscripcion,
+      cliente: this.datosCliente['key'],
+      datosCliente: this.datosCliente,
+      vehiculo: this.datosVehiculo['key'],
+      datosVehiculo: this.datosVehiculo,
+      usuarioEntrada: this.dataUser['nombre'],
+      fechaEntrada: new Date(),
+      puesto: evento
+    };
+
+    this.dataBaseService.addData('logs', registroLog).then(result => {
+
+      if(result){
+        const idLog = result.id;
+        this.asignarCasilla(evento, idLog);
+      }
+
+      console.log({ result });
+    }).catch(error => {
+      console.log({ error });
+      this.notify.notification('error', 'Error al crear suscripción');
+    })
+
+  }
+
+  buscarVehiculo(idUsuario: string){
     this.dataBaseService.getPorFiltro('vehiculos', 'usuario', idUsuario).snapshotChanges().subscribe(respuesta => {
       const datos = respuesta.map(item => {
         let x = item.payload.doc.data();
@@ -309,5 +344,43 @@ export class RegisterIncomeComponent implements OnInit {
     this.datosSuscripcion = resultado;
     this.permitirAsignar();
   }
-  
+
+  buscarPlaca(placaVehiculo: string){
+
+    let datos: {casilla: object, suscripcion: any};
+    // tslint:disable-next-line: forin
+    for(const piso in this.datosPlano){
+      // tslint:disable-next-line: forin
+      for (const fila in this.datosPlano[piso]){
+
+        // tslint:disable-next-line: forin
+        for (const casilla in this.datosPlano[piso][fila]){
+
+          const puesto = this.datosPlano[piso][fila][casilla];
+          if (puesto.suscripcion) {
+            const suscripcion = puesto.suscripcion;
+            if (suscripcion.vehiculo.placa === placaVehiculo) {
+              datos = {
+                casilla: {piso, fila , casilla},
+                suscripcion
+              };
+            }
+          }
+
+        }
+      }
+    }
+
+    if(datos){
+      const referencia = this.dialogComponent.open(EgresoComponent, {
+        data: datos,
+        disableClose: true,
+        restoreFocus: false,
+        height: '650px',
+        width: '450px'
+      });
+    }
+
+  }
+
 }

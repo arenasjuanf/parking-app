@@ -23,6 +23,7 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
   vehiculos: any[];
   displayedColumns: string[] = ['documento','cliente' ,'placa', 'marca', 'tipo', 'fechaInicio', 'fechaFinal', 'valor', 'acciones'];
   dataSource: MatTableDataSource<any>;
+
   predicadoBusqueda = (data, filter:string) => {
     return data['usuario']['documento'].trim().toLowerCase().indexOf(filter) != -1 ||
       data['usuario']['nombre'].trim().toLowerCase().indexOf(filter) != -1 ||
