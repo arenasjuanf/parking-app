@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="w-100 text-left">
-    <button class="btn btn-secondary m-2" type="button" (click)="regresar()">
+    <button class="btn btn-secondary m-2" type="button" (click)="regresar()" i18n>
       <i class="fas fa-chevron-left"></i>
       Regresar
     </button>
@@ -10,70 +10,65 @@
     <form [formGroup]="formRegisterIncome" class="col-md-10 col-12">
       <div class="row">
         <mat-form-field class="d-flex" appearance="outline" class="col-12 col-md-4 my-1">
-          <mat-label>Documento de usuario</mat-label>
+          <mat-label i18n>Documento de usuario</mat-label>
           <input (keydown.enter)="searchDataUser($event)" matInput type="text" formControlName="documentoUsuario">
           <button type="button" (click)="searchDataUser()" mat-icon-button matSuffix>
             <mat-icon>{{ validUser ? 'edit' : 'search'}}</mat-icon>
           </button>
         </mat-form-field>
-    
+
         <mat-form-field appearance="outline" class="col-12 col-md-4 my-1">
-          <mat-label>Nombre del usuario</mat-label>
+          <mat-label i18n>Nombre del usuario</mat-label>
           <input matInput type="text" formControlName="nombreUsuario">
         </mat-form-field>
-    
+
         <mat-form-field appearance="outline" class="col-12 col-md-4 my-1" [formGroup]="formVehiculo">
-          <mat-label>Placa del vehículo</mat-label>
+          <mat-label i18n>Placa del vehículo</mat-label>
           <input matInput type="text" formControlName="placa">
         </mat-form-field>
-    
+
       </div>
       <div class="row">
         <mat-form-field appearance="outline" class="col-12 col-md-4 my-1" [formGroup]="formVehiculo">
-          <mat-label>Marca del vehiculo</mat-label>
+          <mat-label i18n>Marca del vehiculo</mat-label>
           <input matInput type="text" formControlName="marca">
         </mat-form-field>
-    
+
         <mat-form-field appearance="outline" class="col-12 col-md-4 my-1" [formGroup]="formVehiculo">
-          <mat-label>Tipo de vehículo</mat-label>
+          <mat-label i18n>Tipo de vehículo</mat-label>
           <mat-select formControlName="tipoVehiculo">
             <mat-option *ngFor="let item of branchVehicles;" [value]="item['value']">{{ item['view'] }}</mat-option>
           </mat-select>
         </mat-form-field>
-    
+
         <mat-form-field appearance="outline" class="col-12 col-md-4">
-          <mat-label>Seleccione piso</mat-label>
+          <mat-label i18n>Seleccione piso</mat-label>
           <mat-select formControlName="piso" (selectionChange)="cambiarPisosSelect($event)">
             <mat-option *ngFor="let piso of floorsParking;" [value]="piso.piso">{{ piso.piso }}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
     </form>
-    
+
     <div class="col-md-2 col-12 d-flex flex-column justify-content-around">
-    
-      <button mat-raised-button class="reset full" (click)="reset()">
+
+      <button mat-raised-button class="reset full" (click)="reset()" i18n>
         <mat-icon>replay</mat-icon>
         Reset Formulario
       </button>
-    
-      <button mat-raised-button color="primary" [disabled]="!datosCliente" (click)="verVehiculos()" class="full">
+
+      <button mat-raised-button color="primary" [disabled]="!datosCliente" (click)="verVehiculos()" class="full" i18n>
         <mat-icon>commute</mat-icon>
         Vehiculos
       </button>
-    
+
     </div>
   </div>
-  
+
 </div>
 
 <div class="animate__animated animate__fadeIn animate__slow">
-  <app-planos-asignacion 
-    [datosPlano]="datosPlano"
-    [asignar]="asignar"
-    [pisoSeleccionado]="pisoSeleccionado"
-    (enviarCasilla)="asignarCasilla($event)"
-    (cambiarPiso)="cambiarPiso($event)"
-  >
+  <app-planos-asignacion [datosPlano]="datosPlano" [asignar]="asignar" [pisoSeleccionado]="pisoSeleccionado"
+    (enviarCasilla)="asignarCasilla($event)" (cambiarPiso)="cambiarPiso($event)">
   </app-planos-asignacion>
 </div>

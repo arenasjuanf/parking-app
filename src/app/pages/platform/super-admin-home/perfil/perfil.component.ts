@@ -5,6 +5,7 @@ import { constantes } from 'src/app/constantes';
 import { MatDialogRef } from '@angular/material/dialog';
 import { DatabaseService } from '../../services/database.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
@@ -18,7 +19,8 @@ export class PerfilComponent implements OnInit {
   constructor(
     private auth: AuthService, private fb: FormBuilder,
     public dialogRef: MatDialogRef<PerfilComponent>,
-    private db: DatabaseService
+    private db: DatabaseService,
+    private router: Router
   ) {
     this.initForm();
     this.setearDatos();
@@ -27,7 +29,7 @@ export class PerfilComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  initForm(){
+  initForm() {
     this.form = this.fb.group({
       documento: ['', Validators.required],
       nombre: ['', Validators.required],
@@ -60,23 +62,23 @@ export class PerfilComponent implements OnInit {
     }
   }
 
-  quitarFoto(){
+  quitarFoto() {
     this.form.get('foto').setValue('');
   }
 
-  guardar(){
+  guardar() {
     console.log(this.auth.datosUsuario);
 
     this.db.modificar('usuarios', this.auth.datosUsuario.id, this.form.value).then(r => {
-        console.log('datos actualizados');
-        // se actualizan datos de local storage
-        this.auth.guardarLS(this.form.value, true);
-        this.dialogRef.close();
-      }
-    );
+      console.log('datos actualizados');
+      // se actualizan datos de local storage
+      this.auth.guardarLS(this.form.value, true);
+      this.dialogRef.close();
+    });
+  }
 
-
-
+  languageSelected(evento) {
+    this.router.navigateByUrl(`/${evento.value}/`);
   }
 
 }

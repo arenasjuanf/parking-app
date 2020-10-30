@@ -1,12 +1,14 @@
 <div class="contenedor">
   <mat-card class="d-flex justify-content-between">
-    <h3>Historial Usuarios</h3>
+    <h3 i18n>Historial Usuarios</h3>
   </mat-card>
   <mat-card>
     <div class="input-group">
-      <input type="text" autofocus class="form-control" placeholder="Documento o nombre del usuario" aria-label="Documento o nombre del usuario" aria-describedby="button-addon2">
+      <input type="text" autofocus class="form-control" placeholder="Documento o nombre del usuario"
+        aria-label="Documento o nombre del usuario" aria-describedby="button-addon2">
       <div class="input-group-append">
-        <button class="btn btn-secondary" type="button" id="button-addon2"><i class="fas fa-search"></i> Buscar</button>
+        <button class="btn btn-secondary" type="button" id="button-addon2" i18n><i class="fas fa-search"></i>
+          Buscar</button>
       </div>
     </div>
     <!-- <div class="container-options d-flex align-items-center justify-content-center">
@@ -25,22 +27,22 @@
   </mat-card>
 
   <div class="contenedor-lista">
-    <div class="item-lista" >
+    <div class="item-lista">
       <mat-accordion class="example-headers-align">
-        <mat-expansion-panel *ngFor="let item of listUsers" >
+        <mat-expansion-panel *ngFor="let item of listUsers">
           <mat-expansion-panel-header>
             <mat-panel-title>{{ item['email'] }}</mat-panel-title>
-            <mat-panel-description>
+            <mat-panel-description i18n>
               Tipo de usuario: {{ item['tipoUsuario'] }}
             </mat-panel-description>
           </mat-expansion-panel-header>
           <div class="container-info-parking" *ngIf="item['datos']">
             <div class="header">
-              <span class="item">Parqueadero</span>
-              <span class="item">Vehiculo</span>
-              <span class="item">Fecha</span>
-              <span class="item">Hora ingreso</span>
-              <span class="item">Hora salida</span>
+              <span class="item" i18n>Parqueadero</span>
+              <span class="item" i18n>Vehiculo</span>
+              <span class="item" i18n>Fecha</span>
+              <span class="item" i18n>Hora ingreso</span>
+              <span class="item" i18n>Hora salida</span>
               <span></span>
               <span></span>
             </div>
@@ -58,7 +60,7 @@
               </span>
             </div>
           </div>
-          <div class="container-info-parking text-center" *ngIf="!item['datos']">
+          <div class="container-info-parking text-center" *ngIf="!item['datos']" i18n>
             No hay registros
           </div>
         </mat-expansion-panel>

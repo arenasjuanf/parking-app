@@ -8,7 +8,7 @@
             </div>
             <div class="col-md-4 col-12">
                 <div class="form-container">
-                    <h3 class="text-center mb-3">
+                    <h3 class="text-center mb-3" i18n>
                         Iniciar Sesión
                     </h3>
                     <form (ngSubmit)="login(formulario)" #formulario="ngForm">
@@ -23,13 +23,13 @@
                         </div> -->
                         <div class="form-label-group">
                             <input type="email" class="form-control" placeholder="Usuario" name="email" ngModel required autofocus>
-                            <label for="email">Usuario</label>
+                            <label for="email" i18n>Usuario</label>
                         </div>
                         <div class="form-label-group">
                             <input type="password" class="form-control" placeholder="Contraseña" name="password" ngModel required>
-                            <label for="password">Contraseña</label>
+                            <label for="password" i18n>Contraseña</label>
                         </div>                        
-                        <button type="submit" class="btn btn-danger btn-block">
+                        <button type="submit" class="btn btn-danger btn-block" i18n>
                             <i class="fa fa-sign-in" aria-hidden="true"></i>
                             Ingresar
                         </button>
