@@ -163,8 +163,6 @@ export class SuscripcionesComponent implements OnInit {
       this.form.get('fechaInicio').setValue(new Date());
       this.form.get('fechaFinal').reset();
 
-    } else {
-      this.form.get('hora').reset();
     }
     this.validadoresDinamicos();
   }
