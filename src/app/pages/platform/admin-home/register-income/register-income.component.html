@@ -4,9 +4,18 @@
       <i class="fas fa-chevron-left"></i>
       Regresar
     </button>
+
+    <h3>
+      {{ mostrarEgreso ? 'Egreso' : 'Ingreso' }} De Vehiculos
+    </h3>
+    
+    <button class="btn io m-2" type="button" (click)="mostrarEgreso = !mostrarEgreso">
+      {{ mostrarEgreso ? 'Ingreso' : 'Egreso' }}
+    </button>
+
   </div>
 
-  <div class="row">
+  <div class="row  animate__animated animate__bounceInLeft animate__fast" *ngIf="!mostrarEgreso">
     <form [formGroup]="formRegisterIncome" class="col-md-10 col-12">
       <div class="row">
         <mat-form-field class="d-flex" appearance="outline" class="col-12 col-md-4 my-1">
@@ -65,10 +74,25 @@
     </div>
   </div>
 
+  <div class="w-100 text-center animate__animated animate__bounceInRight animate__fast" *ngIf="mostrarEgreso">
+    <mat-form-field appearance="outline" class="my-1">
+      <mat-label>Placa de vehiculo</mat-label>
+      <input #inputPlaca matInput type="text" (keyup.enter)="buscarPlaca(inputPlaca.value)">
+      <button type="button" (click)="buscarPlaca(inputPlaca.value)" mat-icon-button matSuffix>
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  
 </div>
 
 <div class="animate__animated animate__fadeIn animate__slow">
-  <app-planos-asignacion [datosPlano]="datosPlano" [asignar]="asignar" [pisoSeleccionado]="pisoSeleccionado"
-    (enviarCasilla)="asignarCasilla($event)" (cambiarPiso)="cambiarPiso($event)">
+  <app-planos-asignacion 
+    [datosPlano]="datosPlano"
+    [asignar]="asignar"
+    [pisoSeleccionado]="pisoSeleccionado"
+    (enviarCasilla)="guardarRegistro($event)"
+    (cambiarPiso)="cambiarPiso($event)"
+  >
   </app-planos-asignacion>
 </div>

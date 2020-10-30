@@ -1,0 +1,158 @@
+<div class="w-100 text-right">
+    <button mat-icon-button color="primary" [mat-dialog-close]="{cerrar:false}">
+        <mat-icon>clear</mat-icon>
+    </button>
+</div>
+<hr>
+<div mat-dialog-content *ngIf="datosParqueadero">
+    <p class="text-center">
+        <b> {{ datosParqueadero['razonSocial'] | uppercase}} </b>
+    </p>
+
+    <div class="w-100 d-flex">
+        
+        <div class="col-3">
+            <img class="w-100" [src]="datosParqueadero['logo']" alt="">
+        </div>
+
+        <div class="w-70 d-flex justify-content-center text-center flex-column">
+            
+            <div class="no-margin">Dirección: {{ datosParqueadero['direccion'] | titlecase }} </div>
+            <div class="no-margin">Nit: {{ datosParqueadero.nit}}</div>
+            
+        </div>
+
+    </div>
+
+    <div class="w-100 cuerpo-factura">
+
+        <!-- datos cliente -->
+        <div class="seccion">
+            <div class="row">
+                <div class="col-6">
+                    <b>Nombre:</b>
+                </div>
+            
+                <div class="col-6">
+                    {{ datosLog?.datosCliente?.nombre | titlecase }}
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-6">
+                    <b>Tipo Vehiculo:</b>
+                </div>
+            
+                <div class="col-6">
+                    {{ datosLog?.datosVehiculo?.tipo | titlecase }}
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-6">
+                    <b>Placa:</b>
+                </div>
+            
+                <div class="col-6">
+                    {{ datosLog?.datosVehiculo?.placa | uppercase }}
+                </div>
+            </div>
+        </div>
+
+        <!-- datos ingreso/egreso -->
+        <div class="seccion">
+            <div class="row">
+                <div class="col-6">
+                    <b>Ingreso:</b>
+                </div>
+            
+                <div class="col-6">
+                    <small>{{ parsearFecha(datosLog?.fechaEntrada?.seconds) }}</small>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-6">
+                    <b>Egreso:</b>
+                </div>
+            
+                <div class="col-6">
+                    <small>{{ parsearFecha() }}</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- suscripcion -->
+        <div class="seccion">
+            <div class="row">
+                <div class="col-6">
+                    <b>Tipo Suscripcion:</b>
+                </div>
+
+                <div class="col-6">
+                   {{ datosSuscripcion?.tipoSuscripcion | titlecase }}
+                </div>
+            </div>
+
+            <div class="row" *ngIf="cantidadHoras">
+
+                <div class="col-6">
+                    <b>Cantidad Horas:</b>
+                </div>
+
+                <div class="col-6">
+                    {{ cantidadHoras }}
+                </div>
+                
+            </div>
+
+            <div class="row" *ngIf="datosSuscripcion?.tipoSuscripcion !== 'hora'">
+                <div class="col-6">
+                    <b>Inicio:</b>
+                </div>
+
+                <div class="col-6">
+                    <small>{{ parsearFecha(datosSuscripcion?.fechaInicio?.seconds, 'll') }}</small>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="datosSuscripcion?.tipoSuscripcion !== 'hora'">
+                <div class="col-6">
+                    <b>Fin:</b>
+                </div>
+            
+                <div class="col-6">
+                    <small>{{ parsearFecha(datosSuscripcion?.fechaFinal?.seconds, 'll') }}</small>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Total A pagar -->
+        <div class="seccion">
+            <div class="row">
+                <div class="col-6">
+                    <b>Total a pagar</b>
+                </div>
+        
+                <div class="col-6">
+                    <b>${{ totalPagar }}</b>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+</div>
+<div mat-dialog-actions class="d-flex justify-content-center">
+  <!-- <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button> -->
+
+    <button mat-raised-button color="primary" [mat-dialog-close]="{cerrar:false}" >Cancelar</button>
+
+    <button mat-raised-button class="aceptar" (click)="egresar()">Aceptar</button>
+    
+    <button mat-icon-button>
+        <mat-icon>print</mat-icon>
+    </button>
+</div>
