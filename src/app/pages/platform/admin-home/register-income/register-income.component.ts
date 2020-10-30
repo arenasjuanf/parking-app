@@ -86,7 +86,6 @@ export class RegisterIncomeComponent implements OnInit {
   getPlano() {
     this.dataBaseService.findDoc('parqueaderos', this.dataUser['parqueadero']).snapshotChanges().subscribe(respuesta => {
       this.datosPlano = JSON.parse(respuesta.payload.get('plano'));
-      console.log(this.datosPlano)
     }, error => {
       console.log("Error ", error);
     });
@@ -253,7 +252,6 @@ export class RegisterIncomeComponent implements OnInit {
         this.asignarCasilla(evento, idLog);
       }
 
-      console.log({ result });
     }).catch(error => {
       console.log({ error });
       this.notify.notification('error', 'Error al crear suscripción');
@@ -301,7 +299,6 @@ export class RegisterIncomeComponent implements OnInit {
         this.modalAbierta = false;
         if (result) {
           this.setValueVehicle(result);
-          console.log('result: ', result);
         }
       });
     }
@@ -364,10 +361,20 @@ export class RegisterIncomeComponent implements OnInit {
                 casilla: {piso, fila , casilla},
                 suscripcion
               };
+              break;
             }
           }
 
+
         }
+
+        if (datos) {
+          break;
+        }
+      }
+
+      if (datos) {
+        break;
       }
     }
 
@@ -378,9 +385,40 @@ export class RegisterIncomeComponent implements OnInit {
         restoreFocus: false,
         height: '650px',
         width: '450px'
+      }).afterClosed().subscribe((cerrar: {cerrar: boolean, valor: number}) => {
+
+        if(cerrar.cerrar){
+          this.vaciarCasilla(datos.casilla, datos.suscripcion.idlog, cerrar.valor);
+        }
       });
     }
+  }
 
+
+  vaciarCasilla(puesto, idLog, valor){
+
+    delete this.datosPlano[puesto.piso][puesto.fila][puesto.casilla]['suscripcion'];
+    delete this.datosPlano[puesto.piso][puesto.fila][puesto.casilla]['placa'];
+    this.dataBaseService.modificar(
+      'parqueaderos', 
+      this.dataUser['parqueadero'], 
+      { plano: JSON.stringify(this.datosPlano) }
+    ).then(x => {
+      this.notify.notification('success', 'Egreso Exitoso');
+      this.cerrarLog(idLog, valor);
+    });
+
+  }
+
+  cerrarLog(idLog, valor){
+    const data = {
+      fechaSalida: new Date(),
+      usuarioSalida :this.dataUser['nombre'],
+      valor
+    };
+    this.dataBaseService.modificar('logs',idLog, data).then( x => {
+      this.notify.notification('success', 'Registro Guardado')
+    });
   }
 
 }

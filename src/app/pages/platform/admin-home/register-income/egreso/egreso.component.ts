@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from '../../../services/auth.service';
 import { DatabaseService } from '../../../services/database.service';
 import * as moment from 'moment';
@@ -15,13 +15,14 @@ export class EgresoComponent implements OnInit {
   datosSuscripcion: object;
   datosLog: object;
   totalPagar: number = 0;
+  cantidadHoras: number;
   constructor( 
     private auth: AuthService,
     private db: DatabaseService,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
-    console.log(this.data);
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<EgresoComponent>,
 
+  ) {
     this.traerDatosParqueadero();
   }
 
@@ -45,7 +46,6 @@ export class EgresoComponent implements OnInit {
     const idSuscripcion = this.data['suscripcion']['suscripcion'];
     this.db.findDoc('suscripciones', idSuscripcion).valueChanges().subscribe(
       (result: object) => {
-        console.log('suscripcion: ', result);
         this.datosSuscripcion = result;
         this.calcularPago();
       }
@@ -56,7 +56,6 @@ export class EgresoComponent implements OnInit {
     const idLog = this.data['suscripcion']['idlog'];
     this.db.findDoc('logs', idLog).valueChanges().subscribe(
       (result: object) => {
-        console.log('log: ',result);
         this.datosLog = result;
         this.getSuscripcion();
       }
@@ -74,12 +73,17 @@ export class EgresoComponent implements OnInit {
 
     if(this.datosSuscripcion['tipoSuscripcion'] == 'hora'){
       const ingreso = new Date(this.datosLog['fechaEntrada']['seconds'] * 1000);
-      const cantidadHoras = Math.ceil(moment(new Date()).diff(ingreso, 'hours', true));
-      if (cantidadHoras > 1){
-        this.totalPagar = cantidadHoras * this.datosSuscripcion['valor'];
+      this.cantidadHoras = Math.ceil(moment(new Date()).diff(ingreso, 'hours', true));
+      if (this.cantidadHoras > 1){
+        this.totalPagar = this.cantidadHoras * this.datosSuscripcion['valor'];
       }
     }
 
+  }
+
+
+  egresar(){
+    this.dialogRef.close({cerrar:true , valor:this.totalPagar});
   }
 
 }

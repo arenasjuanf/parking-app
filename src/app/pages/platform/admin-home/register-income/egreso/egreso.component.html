@@ -1,5 +1,5 @@
 <div class="w-100 text-right">
-    <button mat-icon-button color="primary" [mat-dialog-close]>
+    <button mat-icon-button color="primary" [mat-dialog-close]="{cerrar:false}">
         <mat-icon>clear</mat-icon>
     </button>
 </div>
@@ -94,6 +94,18 @@
                 </div>
             </div>
 
+            <div class="row" *ngIf="cantidadHoras">
+
+                <div class="col-6">
+                    <b>Cantidad Horas:</b>
+                </div>
+
+                <div class="col-6">
+                    {{ cantidadHoras }}
+                </div>
+                
+            </div>
+
             <div class="row" *ngIf="datosSuscripcion?.tipoSuscripcion !== 'hora'">
                 <div class="col-6">
                     <b>Inicio:</b>
@@ -136,9 +148,9 @@
   <!-- <button mat-button (click)="onNoClick()">No Thanks</button>
   <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button> -->
 
-    <button mat-raised-button color="primary" [mat-dialog-close] >Cancelar</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="{cerrar:false}" >Cancelar</button>
 
-    <button mat-raised-button class="aceptar">Aceptar</button>
+    <button mat-raised-button class="aceptar" (click)="egresar()">Aceptar</button>
     
     <button mat-icon-button>
         <mat-icon>print</mat-icon>
