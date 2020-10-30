@@ -17,8 +17,7 @@
                 <div class="row d-flex justify-content-around">
                     <input hidden (change)="subirfoto($event)" #fileInput type="file" id="file"
                         accept=".jpg,.jpeg,.png, .bmp">
-                    <button  type="button" class="btn btn-primary rounded-circle"
-                        (click)="fileInput.click()">
+                    <button type="button" class="btn btn-primary rounded-circle" (click)="fileInput.click()">
                         <i class="fas fa-plus"></i>
                     </button>
                     <button type="button" class="btn btn-primary rounded-circle" (click)="quitarFoto()">
@@ -29,33 +28,33 @@
             <div class="col-md-9 col-sm-12">
                 <div class="row">
                     <mat-form-field appearance="outline" class="col-md-6 col-sm-12">
-                        <mat-label>Documento</mat-label>
+                        <mat-label i18n>Documento</mat-label>
                         <input matInput type="text" formControlName="documento">
                     </mat-form-field>
                     <mat-form-field appearance="outline" class="col-md-6 col-sm-12">
-                        <mat-label>Nombre</mat-label>
+                        <mat-label i18n>Nombre</mat-label>
                         <input matInput type="text" formControlName="nombre">
                     </mat-form-field>
                 </div>
                 <div class="row">
                     <mat-form-field appearance="outline" class="col-md-6 col-sm-12">
-                        <mat-label>Telefono</mat-label>
+                        <mat-label i18n>Telefono</mat-label>
                         <input matInput type="text" formControlName="telefono">
                     </mat-form-field>
                     <mat-form-field appearance="outline" class="col-md-6 col-sm-12">
-                        <mat-label>Dirección</mat-label>
+                        <mat-label i18n>Dirección</mat-label>
                         <input matInput type="text" formControlName="direccion">
                     </mat-form-field>
                 </div>
                 <div class="row">
                     <mat-form-field appearance="outline" class="col-md-6 col-sm-12">
-                        <mat-label>Correo electronico</mat-label>
+                        <mat-label i18n>Correo electronico</mat-label>
                         <input matInput type="email" formControlName="email">
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" class="col-md-6 col-sm-12">
-                        <mat-label>Idioma</mat-label>
-                        <mat-select formControlName="idioma">
+                        <mat-label i18n>Idioma</mat-label>
+                        <mat-select (selectionChange)="languageSelected($event)" formControlName="idioma">
                             <mat-option *ngFor="let idioma of idiomas" [value]="idioma.valor">
                                 {{idioma.display}}
                             </mat-option>
@@ -73,6 +72,6 @@
                 Guardar
             </button>
         </div>
-        
+
     </form>
 </div>

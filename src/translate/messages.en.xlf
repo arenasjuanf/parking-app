@@ -1,0 +1,1236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="16b49f9cbd866827813da8bcc96cd2f0cac7695c" datatype="html">
+        <source>Iniciar Sesión</source>
+        <target>Log in</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/login/login.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9f2fa13d37e4d24b6f994a7dbde4a19a9b09c8f7" datatype="html">
+        <source>Usuario</source>
+        <target>User</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/login/login.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e369e13629132e32dcd958b82261059243f21d58" datatype="html">
+        <source>Contraseña</source>
+        <target>Password</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/login/login.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/usuarios/modal-usuarios/modal-usuarios.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c79e2a2c9267f5d9ce1bbc734294938a2aae0c7b" datatype="html">
+        <source>
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>Ingresar</source>
+        <target>Start</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/login/login.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f4e4d4381d2d51bd65fdae270ddc80170f63c187" datatype="html">
+        <source>
+    Ir a inicio <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+  </source>
+  <target>Go Home</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/error404/error404.component.html</context>
+          <context context-type="linenumber">627</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9cace5412ea1c9c6ba70bcd59d0cb6a1cb0ef578" datatype="html">
+        <source>Documento</source>
+        <target>Document</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/perfil/perfil.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/usuarios/modal-usuarios/modal-usuarios.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/modal-user/modal-user.component.html</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dd2a11ebc737589080ed400dacc33a8c8c84728b" datatype="html">
+        <source>Nombre</source>
+        <target>Name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/perfil/perfil.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/usuarios/modal-usuarios/modal-usuarios.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/modal-user/modal-user.component.html</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7c38873769d52761357ee184abd9925abb88c695" datatype="html">
+        <source>Telefono</source>
+        <target>Phone</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/perfil/perfil.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/gestion-parqueadero/gestion-parqueadero.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/usuarios/modal-usuarios/modal-usuarios.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/datos-parqueadero/datos-parqueadero.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="662afc70bc71dc969527402db77814797ef8a446" datatype="html">
+        <source>Dirección</source>
+        <target>Address</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/perfil/perfil.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/gestion-parqueadero/gestion-parqueadero.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/usuarios/modal-usuarios/modal-usuarios.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/datos-parqueadero/datos-parqueadero.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7d8477fb5794c7d0e8874d89058468f328822f41" datatype="html">
+        <source>Correo electronico</source>
+        <target>Email</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/perfil/perfil.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/gestion-parqueadero/gestion-parqueadero.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/modal-user/modal-user.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/datos-parqueadero/datos-parqueadero.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="24c50f7617a545e6ebc78da6c82212154045c3a6" datatype="html">
+        <source>Idioma</source>
+        <target>Language</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/perfil/perfil.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/usuarios/modal-usuarios/modal-usuarios.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3a203adb4acf061738009f935f092ba9ccc92399" datatype="html">
+        <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Cerrar
+                        Sesión</source>
+                        <target>Sign off</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/navbar/navbar.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1c12ddcd8c831ac7bda99d0b4e7a5fe276d92a82" datatype="html">
+        <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Cerrar Sesión</source>
+        <target>Sign off</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/super-admin-home.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6dbb0656e0efa89c56c9a5ae83c139da79309e62" datatype="html">
+        <source>
+            Cancelar
+            <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+        </source>
+        <target>Cancel</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/vista-planos/vista-planos.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="665f874212b2b9e81e3a4e5da530a9ec5bfe843c" datatype="html">
+        <source>
+            Guardar
+            <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+        </source>
+        <target>Save</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/vista-planos/vista-planos.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="23fbd2143d709eb7d5a2cf5f0d14b7590c1d250c" datatype="html">
+        <source>Nit</source>
+        <target>Nit</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/gestion-parqueadero/gestion-parqueadero.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/datos-parqueadero/datos-parqueadero.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="33448183c89d669f27fbca7608c9e22d0bee5031" datatype="html">
+        <source>Nombre o razón social</source>
+        <target>Name or social reason</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/gestion-parqueadero/gestion-parqueadero.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/datos-parqueadero/datos-parqueadero.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0530400aec1812f644c83369b242962d557afa77" datatype="html">
+        <source>Nombre del propietario</source>
+        <target>Name of property</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/gestion-parqueadero/gestion-parqueadero.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/datos-parqueadero/datos-parqueadero.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="05c13737091c03f0a46fa881b482ddd69e429c39" datatype="html">
+        <source>Url página web</source>
+        <target>Url web page</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/gestion-parqueadero/gestion-parqueadero.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/datos-parqueadero/datos-parqueadero.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="93eaf3cb833291317761564c0e03cb097363ff51" datatype="html">
+        <source>Capacidad carros</source>
+        <target>Car capacity</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/gestion-parqueadero/gestion-parqueadero.component.html</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/datos-parqueadero/datos-parqueadero.component.html</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e22bd80e1ac55fd06f3a37ace8153ecf8e060233" datatype="html">
+        <source>Capacidad Motos</source>
+        <target>Motorcycles capacity</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/gestion-parqueadero/gestion-parqueadero.component.html</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/datos-parqueadero/datos-parqueadero.component.html</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d0233a852f04c6d6bd654b04b1c4c429fa113c38" datatype="html">
+        <source>
+                    Configurar Plano
+                    <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+                </source>
+                <target>Set up plane</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/gestion-parqueadero/gestion-parqueadero.component.html</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/datos-parqueadero/datos-parqueadero.component.html</context>
+          <context context-type="linenumber">86</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6188104408fe5c3b2d785ea656b2ceb2cf3c76ed" datatype="html">
+        <source>
+                    Visualizar Plano <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+                </source>
+                <target>View Plan</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/gestion-parqueadero/gestion-parqueadero.component.html</context>
+          <context context-type="linenumber">92</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6c0b0a77734c2175096b3c8cd452f42ee204fb19" datatype="html">
+        <source>
+                                Plano de parqueadero
+                            </source>
+                            <target>Parking plan</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/gestion-parqueadero/gestion-parqueadero.component.html</context>
+          <context context-type="linenumber">103</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/datos-parqueadero/datos-parqueadero.component.html</context>
+          <context context-type="linenumber">102</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5136dab8970e61e16df3b7a2c21f6ee067155334" datatype="html">
+        <source>
+                                Asigna Pisos Y Cupos
+                            </source>
+                            <target>Assign floors and quotas</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/gestion-parqueadero/gestion-parqueadero.component.html</context>
+          <context context-type="linenumber">106</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/datos-parqueadero/datos-parqueadero.component.html</context>
+          <context context-type="linenumber">105</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e2213a84f0b9e98461b9bcb9f8225198e4822cde" datatype="html">
+        <source> Piso</source>
+        <target>Floor</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/gestion-parqueadero/gestion-parqueadero.component.html</context>
+          <context context-type="linenumber">114</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/datos-parqueadero/datos-parqueadero.component.html</context>
+          <context context-type="linenumber">113</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7431c046b7a7af9d3ff4ca12de357cd02d09d9f0" datatype="html">
+        <source> Alto</source>
+        <target>High</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/gestion-parqueadero/gestion-parqueadero.component.html</context>
+          <context context-type="linenumber">115</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/datos-parqueadero/datos-parqueadero.component.html</context>
+          <context context-type="linenumber">114</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="887c2aed04734e831d8c174cc86ce1a457f17b80" datatype="html">
+        <source> Ancho</source>
+        <target>Width</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/gestion-parqueadero/gestion-parqueadero.component.html</context>
+          <context context-type="linenumber">116</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/datos-parqueadero/datos-parqueadero.component.html</context>
+          <context context-type="linenumber">115</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="001a2759069d066c90ac90b1e3284c6e35f5cdc3" datatype="html">
+        <source>Alto</source>
+        <target>High</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/gestion-parqueadero/gestion-parqueadero.component.html</context>
+          <context context-type="linenumber">124</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/datos-parqueadero/datos-parqueadero.component.html</context>
+          <context context-type="linenumber">123</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6908feb522efe935090a981d2a216eb26377321c" datatype="html">
+        <source>Ancho</source>
+        <target>Width</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/gestion-parqueadero/gestion-parqueadero.component.html</context>
+          <context context-type="linenumber">130</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/datos-parqueadero/datos-parqueadero.component.html</context>
+          <context context-type="linenumber">129</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bd918de8b6f95bcd349b5cc1d14c9df12d297452" datatype="html">
+        <source>Parqueaderos </source>
+        <target>Parkings</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/parqueaderos/parqueaderos.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="29f7a3e796428db2333a6a4b6dfb1c64ebc9565e" datatype="html">
+        <source>
+            <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+            Agregar Parqueadero
+        </source>
+        <target>Add Parking</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/parqueaderos/parqueaderos.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aecd892d766c0198e047661e8e5c327c300f2fcb" datatype="html">
+        <source>Filtro</source>
+        <target>Filter</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/parqueaderos/parqueaderos.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/usuarios/usuarios.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/mensualidad/mensualidad.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cd15fb4e2c3f761baeb6d6e5b113388fdddc1087" datatype="html">
+        <source> Logo </source>
+        <target>Logo</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/parqueaderos/parqueaderos.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="be33ddf66a2abdacee0bb707ad9a63806a7b2ca1" datatype="html">
+        <source> Documento </source>
+        <target>Document</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/parqueaderos/parqueaderos.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/usuarios/usuarios.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/mensualidad/mensualidad.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9c9d9716c8071a73d1f2e4cd04c969adf52fb8d3" datatype="html">
+        <source> Nombre </source>
+        <target>Name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/parqueaderos/parqueaderos.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/usuarios/usuarios.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="db4401eb6944545b932993893fb6870c8584e708" datatype="html">
+        <source> Telefono </source>
+        <target>Phone</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/parqueaderos/parqueaderos.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/usuarios/usuarios.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bbf5b28eddd72f7bb6b17c2ac5dfe49945d364d6" datatype="html">
+        <source> Acciones </source>
+        <target>Actions</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/parqueaderos/parqueaderos.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/usuarios/usuarios.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/mensualidad/mensualidad.component.html</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="00d54724f36d0837d4a186f02a7e28e79ba136b2" datatype="html">
+        <source>Historial Usuarios</source>
+        <target>User History</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/historial-usuarios/historial-usuarios.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5dbe72a68ed80a09b3b6ce23a28229043415c363" datatype="html">
+        <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+          Buscar</source>
+          <target>Search</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/historial-usuarios/historial-usuarios.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b6d075a841ee1639123ed1c8b3407f7cbb81c67d" datatype="html">
+        <source>
+              Tipo de usuario: <x id="INTERPOLATION" equiv-text="{{ item[&apos;tipoUsuario&apos;] }}"/>
+            </source>
+            <target>Type of user</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/historial-usuarios/historial-usuarios.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="68223db36551f0fd58062f85f90e984c19af3660" datatype="html">
+        <source>Parqueadero</source>
+        <target>Parking</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/historial-usuarios/historial-usuarios.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1a2c9f4324544faa44978a532fa33b924b2a2c33" datatype="html">
+        <source>Vehiculo</source>
+        <target>Vehicle</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/historial-usuarios/historial-usuarios.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b173ec5192470d6b2da768338bc24a965d7e001c" datatype="html">
+        <source>Fecha</source>
+        <target>Date</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/historial-usuarios/historial-usuarios.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="92e7e3ccb28e07a7e32fe488f18d5b242000b407" datatype="html">
+        <source>Hora ingreso</source>
+        <target>Entry time</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/historial-usuarios/historial-usuarios.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="46d221b59077a3b5d8ea59a109e43b0c8fa3644d" datatype="html">
+        <source>Hora salida</source>
+        <target>Departure time</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/historial-usuarios/historial-usuarios.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="72d7e4f51b01ad88e372bd5f29cd85ce7b28a699" datatype="html">
+        <source>
+            No hay registros
+          </source>
+          <target>No records</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/historial-usuarios/historial-usuarios.component.html</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="23715eb48b71c11fb2571b21ba0f60f43c92b077" datatype="html">
+        <source>Correo Electronico</source>
+        <target>Email</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/usuarios/modal-usuarios/modal-usuarios.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e9cc77c4fa98ba5c6ab46835cf4dec3f6b751ae7" datatype="html">
+        <source>Confirmar Contraseña</source>
+        <target>Confirm Password</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/usuarios/modal-usuarios/modal-usuarios.component.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="85602ade45c9e7fdef26cdf6f50a3042d1d7f44c" datatype="html">
+        <source>
+                Guardar Datos
+            </source>
+            <target>Save Data</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/usuarios/modal-usuarios/modal-usuarios.component.html</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="919df0f2e83891152019353d4566986a7c5aa383" datatype="html">
+        <source>
+                Cancelar
+            </source>
+            <target>Cancel</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/usuarios/modal-usuarios/modal-usuarios.component.html</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3308a57d265c79ae282126b34d2b632556d2cf4e" datatype="html">
+        <source>Permisos</source>
+        <target>Permits</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/usuarios/permisos/permisos.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="566dbfeaea96d5cf33f1ee69b87fdc7004e7ffbd" datatype="html">
+        <source> Cancelar </source>
+        <target>Cancel</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/usuarios/permisos/permisos.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4146ee917bd73b80d43a3b03877e534d87d9f688" datatype="html">
+        <source> Guardar </source>
+        <target>Save</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/usuarios/permisos/permisos.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7cdacec4dbfb496157e8c2580a39a915bcb9dec3" datatype="html">
+        <source>
+            <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+            Regresar
+        </source>
+        <target>Return</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/usuarios/usuarios.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/configuracion/configuracion.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/datos-parqueadero/datos-parqueadero.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7c711641045d4fd6c1c9df8d9904a92f96622c2b" datatype="html">
+        <source>
+            <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+            Crear Usuario
+        </source>
+        <target>Add user</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/usuarios/usuarios.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="efaae539be271e23af64afaccfd3e67a52267307" datatype="html">
+        <source>Datos De Usuario</source>
+        <target>Data of user</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/modal-user/modal-user.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8cca19cfcfe07063d7a1e8872b4e03aefb452ff3" datatype="html">
+        <source>Documento de usuario</source>
+        <target>Document of user</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/modal-user/modal-user.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/register-income.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/mensualidad/modal-suscripciones/modal-suscripciones.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="75b525eb4eb7cf7e36997dad7beb0a722483982a" datatype="html">
+        <source>Nombre del usuario</source>
+        <target>Name of user</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/modal-user/modal-user.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/register-income.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/mensualidad/modal-suscripciones/modal-suscripciones.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="415cca8b6932b706442d0681714ad680ed11b4b6" datatype="html">
+        <source>Teléfono</source>
+        <target>Phone</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/modal-user/modal-user.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e68c631365c7cf7a3676b0e99e77867aad9ce339" datatype="html">
+        <source>Información Completa.</source>
+        <target>Complete information</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/modal-user/modal-user.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="02d0640a2ed6bd13321dc705a120d81f6c4449ef" datatype="html">
+        <source>
+            <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+            Cancelar
+          </source>
+          <target>Cancel</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/modal-user/modal-user.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="244aae9346da82b0922506c2d2581373a15641cc" datatype="html">
+        <source>Email</source>
+        <target>Email</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/modal-user/modal-user.component.html</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="522c587c334253d66e02d0ede9f5acb9a60829af" datatype="html">
+        <source>
+        <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>Cancelar
+      </source>
+      <target>Cancel</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/modal-user/modal-user.component.html</context>
+          <context context-type="linenumber">82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c5b5ccd0e9adcb2b2d8f58736f5fc3566ec93d5c" datatype="html">
+        <source>
+      <x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon&gt;"/>add<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon&gt;"/>
+      Agregar
+    </source>
+    <target>Add</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/vehiculos/vehiculos.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/mensualidad/mensualidad.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9f3542c83ec600513864d390adb532a2f52d3946" datatype="html">
+        <source>Vehiculos</source>
+        <target>Vehicles</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/vehiculos/vehiculos.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f28e31421075ae50961bce3e325658f0229ebe12" datatype="html">
+        <source>Placa</source>
+        <target>License plate</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/vehiculos/vehiculos.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0c0a3c761e4ce790ad757ecee3a30cb68abe40f7" datatype="html">
+        <source>Marca</source>
+        <target>Brand</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/vehiculos/vehiculos.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8fa4d523f7b91df4390120b85ed0406138273e1a" datatype="html">
+        <source>Color</source>
+        <target>Colour</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/vehiculos/vehiculos.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c7cb7a1bba67c4fbe6e91739bb3118fe484bb2c0" datatype="html">
+        <source>Tipo de vehículo</source>
+        <target>Type of Vehicle</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/vehiculos/vehiculos.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/register-income.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/mensualidad/modal-suscripciones/modal-suscripciones.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a4ecf4ce1cf07c0c76076a40afddb9e3652c3736" datatype="html">
+        <source>
+      <x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon&gt;"/>cancel<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon&gt;"/>
+      Cancelar
+    </source>
+    <target>Cancel</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/vehiculos/vehiculos.component.html</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/suscripciones/suscripciones.component.html</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ab2753d5b28e05989571bd2f353b925b67144900" datatype="html">
+        <source>
+      <x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon&gt;"/>save<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon&gt;"/>
+      Guardar
+    </source>
+    <target>Save</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/vehiculos/vehiculos.component.html</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/suscripciones/suscripciones.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="40483c4cae430bb1b0f461db379ef3fbb26b5b0c" datatype="html">
+        <source> Datos Suscripción </source>
+        <target>Subscription Data</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/suscripciones/suscripciones.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2808dfdeea0e596a6a555d57d6735d9d01b18dd3" datatype="html">
+        <source>Tipo De suscripción</source>
+        <target>Subscription type</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/suscripciones/suscripciones.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0cc07a38a2d5065d32cc7933f1aaf6d21d5e2c7c" datatype="html">
+        <source>Valor</source>
+        <target>Value</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/suscripciones/suscripciones.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6ad3e1ed3a4c6ffd51d4f2128d69dae805869d7b" datatype="html">
+        <source>Fecha Inicio</source>
+        <target>Start date</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/suscripciones/suscripciones.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9bbff6e81418999f58e5a052a05cc0deefe847fe" datatype="html">
+        <source>Fecha Final</source>
+        <target>Final Date</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/suscripciones/suscripciones.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/mensualidad/mensualidad.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8c8eb551fb5da55e1f461bdb7a40282106687fb9" datatype="html">
+        <source>hora</source>
+        <target>Time</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/suscripciones/suscripciones.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f43ed1a2421422ee97e11cc74012c029432e4872" datatype="html">
+        <source>
+      Suscripción Activa
+      <x id="START_SMALL_TEXT" ctype="x-small" equiv-text="&lt;small&gt;"/>
+        <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Tipo: <x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>
+        <x id="INTERPOLATION" equiv-text="{{suscripcionActiva.tipoSuscripcion | titlecase }}"/>
+      <x id="CLOSE_SMALL_TEXT" ctype="x-small" equiv-text="&lt;/small&gt;"/>
+    </source>
+    <target>Subscription Active</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/suscripciones/suscripciones.component.html</context>
+          <context context-type="linenumber">83</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1900277b03c9e17eed6e27fc5154871d66a417a1" datatype="html">
+        <source>
+        Fecha inicial
+      </source>
+      <target>Start Date</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/suscripciones/suscripciones.component.html</context>
+          <context context-type="linenumber">92</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bc91d3b5f6ddd656b9a52d295e16dbbace9f6fdb" datatype="html">
+        <source>
+        Fecha Final
+      </source>
+      <target>Final Date</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/suscripciones/suscripciones.component.html</context>
+          <context context-type="linenumber">102</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2d53662473c96c348129aff19f42ceed4e44598b" datatype="html">
+        <source>
+        Tiempo restante
+      </source>
+      <target>Time remaining</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/suscripciones/suscripciones.component.html</context>
+          <context context-type="linenumber">112</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5d6e2342e48d75e405f0fc141ab3e4a93c872dbb" datatype="html">
+        <source>Editar</source>
+        <target>Edit</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/suscripciones/suscripciones.component.html</context>
+          <context context-type="linenumber">123</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="35ad82bbaa7e8b24c1bdf03f3260422c5910a1fb" datatype="html">
+        <source>Aceptar</source>
+        <target>Accept</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/suscripciones/suscripciones.component.html</context>
+          <context context-type="linenumber">127</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/suscripciones/suscripciones.component.html</context>
+          <context context-type="linenumber">138</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ef368a507948e74e26a40105012535f1124b8a4c" datatype="html">
+        <source>
+        Este vehiculo ya tiene una suscripción activa
+      </source>
+      <target>This Vehicle already has an active Subscription</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/suscripciones/suscripciones.component.html</context>
+          <context context-type="linenumber">133</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0427b12420dbdc058b07f1de3f96c37a55e1a826" datatype="html">
+        <source>
+          Inicio
+        </source>
+        <target>Home</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/suscripciones/suscripciones.component.html</context>
+          <context context-type="linenumber">148</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f99ca0e7261d93260eae9f275dbc8ffe013f5978" datatype="html">
+        <source>
+          Fin
+        </source>
+        <target>End</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/suscripciones/suscripciones.component.html</context>
+          <context context-type="linenumber">151</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5cb3678ea270e5689d9fd9d1f0df0977e014fad0" datatype="html">
+        <source>
+          Valor
+        </source>
+        <target>Value</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/suscripciones/suscripciones.component.html</context>
+          <context context-type="linenumber">154</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a6a08490a694decb2d33ce0990992b41ea859c30" datatype="html">
+        <source>
+      <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
+      Regresar
+    </source>
+    <target>Return</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/register-income.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7437f75a49e3965c9f61d1755bedc899b444cbe2" datatype="html">
+        <source>Placa del vehículo</source>
+        <target>Vehicle Plate</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/register-income.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/mensualidad/modal-suscripciones/modal-suscripciones.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a4a31f429e5006d8dd22abf2c7d21aaf43839dda" datatype="html">
+        <source>Marca del vehiculo</source>
+        <target>Vehicle brand</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/register-income.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/mensualidad/modal-suscripciones/modal-suscripciones.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f23b172a4db48536941d4ad15d92efb794e88f90" datatype="html">
+        <source>Seleccione piso</source>
+        <target>Select floor</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/register-income.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c4a09ba3692253c2bba81567623a31992a1a2bad" datatype="html">
+        <source>
+        <x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon&gt;"/>replay<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon&gt;"/>
+        Reset Formulario
+      </source>
+      <target>Reset Form</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/register-income.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="85e683617a36288366833c11acbc0deae7a33b5f" datatype="html">
+        <source>
+        <x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon&gt;"/>commute<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon&gt;"/>
+        Vehiculos
+      </source>
+      <target>Vehicles</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/register-income.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f7eb20a00e675c7bf1a04bcf65403d2d11328311" datatype="html">
+        <source>Parqueadero:</source>
+        <target>Parking:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/mensualidad/modal-suscripciones/modal-suscripciones.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f031c69df95e7c761454956a47b5d2def1539813" datatype="html">
+        <source>
+          <x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon&gt;"/>replay<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon&gt;"/>
+          Reset Formulario
+        </source>
+        <target>Reset Form</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/mensualidad/modal-suscripciones/modal-suscripciones.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="78cff2532e4ff4d25a68a8cb178243f7ca5aef11" datatype="html">
+        <source>
+          <x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon&gt;"/>commute<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon&gt;"/>
+          Vehiculos
+        </source>
+        <target>Vehicles</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/mensualidad/modal-suscripciones/modal-suscripciones.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dcdd34535fbef6b8c636bd28d34345cd1cda12e1" datatype="html">
+        <source>Fecha Inicial</source>
+        <target>Start Date</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/mensualidad/mensualidad.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6f1f11cb6fdff502d624c90c448711fd0e3ff167" datatype="html">
+        <source>
+      <x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon&gt;"/>search<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon&gt;"/>
+      Buscar
+    </source>
+    <target>Search</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/mensualidad/mensualidad.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3a1820a89c12b7c245ceec134579a2085301b78f" datatype="html">
+        <source> Cliente </source>
+        <target>Client</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/mensualidad/mensualidad.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="af9ea8254183cc32a09e1230add7c07afbfc49ef" datatype="html">
+        <source> Placa </source>
+        <target>License Plate</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/mensualidad/mensualidad.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="edb81a2fcc9b86d666949c110079ce067d9f5575" datatype="html">
+        <source> Marca </source>
+        <target>Brand</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/mensualidad/mensualidad.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bfe302169eb2a9f631f99d4df144a0f4b965362e" datatype="html">
+        <source> Tipo </source>
+        <target>Type</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/mensualidad/mensualidad.component.html</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="df01a7f5688f9a0aa4fcb1ef248c52f080f88995" datatype="html">
+        <source> Fecha Inicial </source>
+        <target>Start Date</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/mensualidad/mensualidad.component.html</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="857e0abf9e1c94e477c9f40167a9f1950a1b7e34" datatype="html">
+        <source> Fecha Final </source>
+        <target>Final Date</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/mensualidad/mensualidad.component.html</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7c501de1754515c2c8b0dd666352e841dab5e7cf" datatype="html">
+        <source> Valor </source>
+        <target>Value</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/mensualidad/mensualidad.component.html</context>
+          <context context-type="linenumber">80</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="33e1c0a71d8e7efdb748e4cada3d5b7bf9d58baa" datatype="html">
+        <source>No hay resultados para: &quot;<x id="INTERPOLATION" equiv-text="{{input.value}}"/>&quot;</source>
+        <target>No results for:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/mensualidad/mensualidad.component.html</context>
+          <context context-type="linenumber">103</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cd0a6db828faca511e9857582f9d1a52e918a6a8" datatype="html">
+        <source>Tarifa <x id="INTERPOLATION" equiv-text="{{ data.tiempo }}"/></source>
+        <target>Rate</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/configuracion/modal-value-rate/modal-value-rate.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6943588fb2c336651c23e60f0c146379ad49a0a4" datatype="html">
+        <source>Guardar</source>
+        <target>Save</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/configuracion/modal-value-rate/modal-value-rate.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6166e4ecfda2ad8a4f92eef81a8039af10e404ce" datatype="html">
+        <source>
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Cancelar
+        </source>
+        <target>Cancel</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/configuracion/modal-value-rate/modal-value-rate.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fcd4aac24122a897ef4376bf99cda75f87036f2b" datatype="html">
+        <source>Tarifa</source>
+        <target>Rate</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/configuracion/configuracion.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e1f4ff969d37ec8e1f82bd724a96625df3d60784" datatype="html">
+        <source>Carro</source>
+        <target>Car</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/configuracion/configuracion.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="46799cb432d51793218778206773ddbab67d2984" datatype="html">
+        <source>Moto</source>
+        <target>Motorcycle</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/configuracion/configuracion.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9922c762b7c572b56dfa01bece905c0e07e41fb6" datatype="html">
+        <source>Acciones</source>
+        <target>Actions</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/configuracion/configuracion.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="09bdec801f01025f13961917f2703e269f7024c5" datatype="html">
+        <source>Nº Pisos</source>
+        <target>Nº Floors</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/datos-parqueadero/datos-parqueadero.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="29e9fb7379e2739e3e3006ad8097001a55c66f4d" datatype="html">
+        <source>
+                    Actualizar
+                </source>
+                <target>Update</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/datos-parqueadero/datos-parqueadero.component.html</context>
+          <context context-type="linenumber">94</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
