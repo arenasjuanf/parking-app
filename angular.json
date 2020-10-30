@@ -18,7 +18,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -64,6 +64,20 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "es": {
+              "aot": true,
+              "i18nFile": "src/translate/messages.es.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "es",
+              "i18nMissingTranslation": "error"    
+            },
+            "en": {
+              "aot": true,
+              "i18nFile": "src/translate/messages.en.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "en",
+              "i18nMissingTranslation": "error"    
             }
           }
         },
@@ -75,7 +89,9 @@
           "configurations": {
             "production": {
               "browserTarget": "parkingApp:build:production"
-            }
+            },
+            "es": {      "browserTarget": "parkingApp:build:es"    },
+            "en": {      "browserTarget": "parkingApp:build:en"    }
           }
         },
         "extract-i18n": {

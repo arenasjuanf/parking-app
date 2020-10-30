@@ -6,18 +6,18 @@
 <hr>
 <div mat-dialog-content *ngIf="datosParqueadero">
     <p class="text-center">
-        <b> {{ datosParqueadero.razonSocial | uppercase}} </b>
+        <b> {{ datosParqueadero['razonSocial'] | uppercase}} </b>
     </p>
 
     <div class="w-100 d-flex">
         
         <div class="col-3">
-            <img class="w-100" [src]="datosParqueadero.logo" alt="">
+            <img class="w-100" [src]="datosParqueadero['logo']" alt="">
         </div>
 
         <div class="w-70 d-flex justify-content-center text-center flex-column">
             
-            <div class="no-margin">Dirección: {{ datosParqueadero.direccion | titlecase }} </div>
+            <div class="no-margin">Dirección: {{ datosParqueadero['direccion'] | titlecase }} </div>
             <div class="no-margin">Nit: {{ datosParqueadero.nit}}</div>
             
         </div>

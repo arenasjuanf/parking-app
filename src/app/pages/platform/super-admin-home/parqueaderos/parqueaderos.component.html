@@ -1,49 +1,49 @@
-
 <div class="contenedor">
     <mat-card class="d-flex flex-column flex-md-row flex-row justify-content-between">
-        <h3>Parqueaderos </h3>
-        <button class="btn btn-primary" mat-raised-button (click)="abrirModal()">
-            <i class="fas fa-plus"></i> 
+        <h3 i18n>Parqueaderos </h3>
+        <button class="btn btn-primary" mat-raised-button (click)="abrirModal()" i18n>
+            <i class="fas fa-plus"></i>
             Agregar Parqueadero
         </button>
     </mat-card>
     <mat-card>
         <div class="contenedor-tabla">
 
-            <mat-form-field >
-                <mat-label>Filtro</mat-label>
+            <mat-form-field>
+                <mat-label i18n>Filtro</mat-label>
                 <input matInput (keyup)="filtrar($event)" #input autocomplete="off" placeholder="buscar ..">
                 <mat-icon matSuffix>
                     search
                 </mat-icon>
             </mat-form-field>
-            
+
             <table mat-table [dataSource]="dataSource">
-            
+
                 <ng-container matColumnDef="logo">
-                    <th mat-header-cell *matHeaderCellDef class="text-center foto"> Logo </th>
-                    <td mat-cell *matCellDef="let element" class="logo_container align-middle text-center"> 
+                    <th mat-header-cell *matHeaderCellDef class="text-center foto" i18n> Logo </th>
+                    <td mat-cell *matCellDef="let element" class="logo_container align-middle text-center">
                         <img class="logo m-1" [src]="element.logo">
                     </td>
                 </ng-container>
-            
+
                 <ng-container matColumnDef="documento">
-                    <th mat-header-cell *matHeaderCellDef class="text-center"> Documento </th>
+                    <th mat-header-cell *matHeaderCellDef class="text-center" i18n> Documento </th>
                     <td mat-cell *matCellDef="let element" class="text-center"> {{ element.nit }} </td>
                 </ng-container>
-            
+
                 <ng-container matColumnDef="nombre">
-                    <th mat-header-cell *matHeaderCellDef class="text-center"> Nombre </th>
-                    <td mat-cell *matCellDef="let element" class="text-center"> {{ element.razonSocial | titlecase }} </td>
+                    <th mat-header-cell *matHeaderCellDef class="text-center" i18n> Nombre </th>
+                    <td mat-cell *matCellDef="let element" class="text-center"> {{ element.razonSocial | titlecase }}
+                    </td>
                 </ng-container>
-            
+
                 <ng-container matColumnDef="telefono">
-                    <th mat-header-cell *matHeaderCellDef class="text-center"> Telefono </th>
+                    <th mat-header-cell *matHeaderCellDef class="text-center" i18n> Telefono </th>
                     <td mat-cell *matCellDef="let element" class="text-center"> {{ element.telefono }} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="acciones">
-                    <th mat-header-cell *matHeaderCellDef class="text-center"> Acciones </th>
+                    <th mat-header-cell *matHeaderCellDef class="text-center" i18n> Acciones </th>
                     <td mat-cell *matCellDef="let item" class="text-center">
 
                         <button type="button" class="btn btn-primary my-1 my-md-0 mx-0 mx-md-1" matTooltip="Modificar"
@@ -62,7 +62,7 @@
 
                     </td>
                 </ng-container>
-            
+
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>

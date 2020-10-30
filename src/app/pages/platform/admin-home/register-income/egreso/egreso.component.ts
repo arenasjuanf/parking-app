@@ -11,9 +11,9 @@ import * as moment from 'moment';
 })
 export class EgresoComponent implements OnInit {
 
-  datosParqueadero: object;
-  datosSuscripcion: object;
-  datosLog: object;
+  datosParqueadero: any;
+  datosSuscripcion: any;
+  datosLog: any;
   totalPagar: number = 0;
   cantidadHoras: number;
   constructor( 
