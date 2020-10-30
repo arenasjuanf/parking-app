@@ -73,7 +73,7 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
           ...suscr.payload.doc.data(),
           key: suscr.payload.doc.id , 
           fechaInicio: this.calcularfecha(suscr.payload.doc.data().fechaInicio.seconds),
-          fechaFinal: this.calcularfecha(suscr.payload.doc.data().fechaFinal.seconds),
+          fechaFinal: this.calcularfecha(suscr.payload.doc.data().fechaFinal ? suscr.payload.doc.data().fechaFinal.seconds : 0),
         }));
       })
     ).subscribe(r => {

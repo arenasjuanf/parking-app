@@ -24,6 +24,8 @@ export class ModalSuscripcionesComponent implements OnInit {
   datosSuscripcion: any;
   modalAbierta: boolean = false;
   nombreParqueadero: string = '';
+  branchVehicles: Array<object> = [{ value: 'moto', view: 'Moto' }, { value: 'carro', view: 'Carro' }];
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService, 
