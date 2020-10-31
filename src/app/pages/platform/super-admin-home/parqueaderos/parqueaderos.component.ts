@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GestionParqueaderoComponent } from '../gestion-parqueadero/gestion-parqueadero.component';
 import { DatabaseService } from '../../services/database.service';
@@ -7,6 +7,7 @@ import { AuthService } from '../../services/auth.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { NotificationService } from '../../services/notification.service';
+import { timer } from 'rxjs';
 
 
 @Component({
@@ -14,14 +15,15 @@ import { NotificationService } from '../../services/notification.service';
   templateUrl: './parqueaderos.component.html',
   styleUrls: ['./parqueaderos.component.scss']
 })
-export class ParqueaderosComponent implements OnInit {
+export class ParqueaderosComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns: string[] = ['logo', 'documento', 'nombre', 'telefono', 'acciones'];
   dataSource: MatTableDataSource<any>;
 
 
   listaParqueaderos: object[];
-
+  isTrue = true;
+  subs: any;
   constructor(
     public dialog: MatDialog,
     private dbService: DatabaseService,
@@ -32,8 +34,11 @@ export class ParqueaderosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //this.subs = this.t.subscribe(console.log); 
   }
 
+  ngOnDestroy(){
+  }
 
 
   abrirModal(datos?, accion = 'crear') {

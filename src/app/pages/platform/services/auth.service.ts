@@ -28,10 +28,8 @@ export class AuthService {
   async validarSesion(){
     this.afAuth.authState.subscribe(user => {
       if (user && localStorage.getItem('usuario')) {
-        console.log('hay una sesión activa');
         this.sesionActiva = true;
       } else{
-        console.log('sesion cerrada');
         localStorage.setItem('usuario', null);
         this.sesionActiva = false;
         this.router.navigateByUrl('/login');

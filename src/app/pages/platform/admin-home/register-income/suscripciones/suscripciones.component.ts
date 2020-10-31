@@ -44,21 +44,20 @@ export class SuscripcionesComponent implements OnInit {
   initForm() {
     this.form = this.formBuilder.group({
       tipoSuscripcion: ['', Validators.required],
-      fechaInicio: ['', Validators.required],
+      fechaInicio: ['',],
       fechaFinal: ['',],
       estado: [true, Validators.required],
       valor: [, Validators.required],
       pagado: [false, Validators.required],
       parqueadero: [this.data.datosVehiculo['parqueadero'], Validators.required],
       vehiculo: [this.data.datosVehiculo['key'], Validators.required],
-      hora: ['', this.validadoresHora ],
     });
 
   }
 
   validadoresDinamicos(){
-    this.form.get('hora').setValidators((this.tipoSubs === 'hora') ? [Validators.required] : []);
-    this.form.get('fechaFinal').setValidators((this.tipoSubs === 'mes') ? [Validators.required] : []);
+    this.form.get('fechaInicio').setValidators(this.tipoSubs === 'hora' ? [] : [Validators.required]);
+    this.form.get('fechaFinal').setValidators(this.tipoSubs === 'mes' ? [Validators.required] : []);
   }
 
 
@@ -123,11 +122,11 @@ export class SuscripcionesComponent implements OnInit {
       console.log(this.suscripcionActiva);
       this.mostrarForm = Object.keys(this.suscripcionActiva).length ? false : true;
     })
-  }
+  }s
 
-  toDate(hora) {
+  toDate(hora, format = 'll') {
     if (hora) {
-      return moment(new Date(hora.seconds * 1000)).locale('es').format('ll');
+      return moment(new Date(hora.seconds * 1000)).locale('en').format(format);
     }
   }
 
@@ -160,6 +159,11 @@ export class SuscripcionesComponent implements OnInit {
 
   selectTipo($evento){
     this.tipoSubs = $evento.value;
+    if(this.tipoSubs === 'hora'){
+      this.form.get('fechaInicio').setValue(new Date());
+      this.form.get('fechaFinal').reset();
+
+    }
     this.validadoresDinamicos();
   }
 

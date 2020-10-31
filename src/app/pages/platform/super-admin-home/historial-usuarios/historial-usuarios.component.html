@@ -26,12 +26,12 @@
 
   <div class="contenedor-lista">
     <div class="item-lista" >
-      <mat-accordion class="example-headers-align">
+      <mat-accordion >
         <mat-expansion-panel *ngFor="let item of listUsers" >
-          <mat-expansion-panel-header>
-            <mat-panel-title>{{ item['email'] }}</mat-panel-title>
-            <mat-panel-description>
-              Tipo de usuario: {{ item['tipoUsuario'] }}
+          <mat-expansion-panel-header class="row" >
+            <mat-panel-title class="col-6">{{ item['email'] }}</mat-panel-title>
+            <mat-panel-description class="col-6">
+              Tipo de usuario: {{ ' '+ item['tipoUsuario'] | titlecase }}
             </mat-panel-description>
           </mat-expansion-panel-header>
           <div class="container-info-parking" *ngIf="item['datos']">

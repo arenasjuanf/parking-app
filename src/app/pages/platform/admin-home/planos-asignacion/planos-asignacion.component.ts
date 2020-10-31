@@ -40,7 +40,6 @@ export class PlanosAsignacionComponent implements OnInit, OnChanges{
 
   // se implementa para que escuche los cambios de los @input
   ngOnChanges(){
-    console.log(this.datosPlano);
 
     if(this.datosPlano){
       this.buscarSuscripciones();
@@ -68,7 +67,6 @@ export class PlanosAsignacionComponent implements OnInit, OnChanges{
     }
 
     if (casilla.tipo){
-      console.log('puede asignar:', piso, fila, columna);
       this.enviarCasilla.emit({piso,fila,columna})
     } else {
       this.notificationService.notification("error", "No se puede asignar a esta casilla");
@@ -77,7 +75,6 @@ export class PlanosAsignacionComponent implements OnInit, OnChanges{
   }
 
   buscarSuscripciones(){
-    console.log(this.datosPlano);
     this.datosPlano.forEach(piso => {
       piso.forEach(col => {
         col.forEach( casilla => {

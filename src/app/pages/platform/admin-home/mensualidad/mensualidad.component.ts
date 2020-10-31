@@ -23,6 +23,7 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
   vehiculos: any[];
   displayedColumns: string[] = ['documento','cliente' ,'placa', 'marca', 'tipo', 'fechaInicio', 'fechaFinal', 'valor', 'acciones'];
   dataSource: MatTableDataSource<any>;
+
   predicadoBusqueda = (data, filter:string) => {
     return data['usuario']['documento'].trim().toLowerCase().indexOf(filter) != -1 ||
       data['usuario']['nombre'].trim().toLowerCase().indexOf(filter) != -1 ||
@@ -72,7 +73,7 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
           ...suscr.payload.doc.data(),
           key: suscr.payload.doc.id , 
           fechaInicio: this.calcularfecha(suscr.payload.doc.data().fechaInicio.seconds),
-          fechaFinal: this.calcularfecha(suscr.payload.doc.data().fechaFinal.seconds),
+          fechaFinal: this.calcularfecha(suscr.payload.doc.data().fechaFinal ? suscr.payload.doc.data().fechaFinal.seconds : 0),
         }));
       })
     ).subscribe(r => {
