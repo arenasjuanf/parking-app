@@ -121,6 +121,7 @@ export class RegisterIncomeComponent implements OnInit {
             });
             referencia.afterClosed().subscribe(resultado => {
               if ( resultado ) {
+
                 if (resultado.datosUsuario) {
                   this.setValueData(resultado.datosUsuario);
                 }
@@ -266,7 +267,7 @@ export class RegisterIncomeComponent implements OnInit {
         x['key'] = item.payload.doc.id;
         return x;
       });
-
+      debugger;
       if(datos.length == 1){
         this.setValueVehicle(datos[0]);
       }else{
@@ -349,14 +350,12 @@ export class RegisterIncomeComponent implements OnInit {
     for(const piso in this.datosPlano){
       // tslint:disable-next-line: forin
       for (const fila in this.datosPlano[piso]){
-
         // tslint:disable-next-line: forin
         for (const casilla in this.datosPlano[piso][fila]){
-
           const puesto = this.datosPlano[piso][fila][casilla];
           if (puesto.suscripcion) {
             const suscripcion = puesto.suscripcion;
-            if (suscripcion.vehiculo.placa === placaVehiculo) {
+            if (suscripcion.vehiculo.placa.toLowerCase() === placaVehiculo.toLowerCase() ) {
               datos = {
                 casilla: {piso, fila , casilla},
                 suscripcion
@@ -364,15 +363,11 @@ export class RegisterIncomeComponent implements OnInit {
               break;
             }
           }
-
-
         }
-
         if (datos) {
           break;
         }
       }
-
       if (datos) {
         break;
       }
@@ -383,10 +378,9 @@ export class RegisterIncomeComponent implements OnInit {
         data: datos,
         disableClose: true,
         restoreFocus: false,
-        height: '650px',
-        width: '450px'
+        height: '700px',
+        width: '500px'
       }).afterClosed().subscribe((cerrar: {cerrar: boolean, valor: number}) => {
-
         if(cerrar.cerrar){
           this.vaciarCasilla(datos.casilla, datos.suscripcion.idlog, cerrar.valor);
         }
@@ -400,7 +394,7 @@ export class RegisterIncomeComponent implements OnInit {
     delete this.datosPlano[puesto.piso][puesto.fila][puesto.casilla]['suscripcion'];
     delete this.datosPlano[puesto.piso][puesto.fila][puesto.casilla]['placa'];
     this.dataBaseService.modificar(
-      'parqueaderos', 
+      'parqueaderos',
       this.dataUser['parqueadero'], 
       { plano: JSON.stringify(this.datosPlano) }
     ).then(x => {

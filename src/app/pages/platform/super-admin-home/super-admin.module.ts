@@ -25,6 +25,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { PlatformModule } from '../platform.module';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { InformeComponent } from './informe/informe.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     HistorialUsuariosComponent,
     GestionParqueaderoComponent,
     VistaPlanosComponent,
-    PerfilComponent
+    PerfilComponent,
+    InformeComponent
   ],
   imports: [
     CommonModule,
