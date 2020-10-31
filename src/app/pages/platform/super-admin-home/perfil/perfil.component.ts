@@ -20,7 +20,7 @@ export class PerfilComponent implements OnInit {
     private auth: AuthService, private fb: FormBuilder,
     public dialogRef: MatDialogRef<PerfilComponent>,
     private db: DatabaseService,
-    private router: Router
+    public router: Router
   ) {
     this.initForm();
     this.setearDatos();
@@ -75,10 +75,6 @@ export class PerfilComponent implements OnInit {
       this.auth.guardarLS(this.form.value, true);
       this.dialogRef.close();
     });
-  }
-
-  languageSelected(evento) {
-    this.router.navigateByUrl(`/${evento.value}/`);
   }
 
 }
