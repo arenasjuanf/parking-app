@@ -18,25 +18,22 @@ import { Router } from '@angular/router';
 })
 export class MensualidadComponent implements OnInit, AfterViewInit  {
 
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   usuarios: any[];
   suscripciones: any[];
   vehiculos: any[];
   displayedColumns: string[] = ['documento','cliente' ,'placa', 'marca', 'tipo', 'fechaInicio', 'fechaFinal', 'valor', 'acciones'];
   dataSource: MatTableDataSource<any>;
 
-  predicadoBusqueda = (data, filter:string) => {
-    return data['usuario']['documento'].trim().toLowerCase().indexOf(filter) != -1 ||
-      data['usuario']['nombre'].trim().toLowerCase().indexOf(filter) != -1 ||
-      data['vehiculo']['placa'].trim().toLowerCase().indexOf(filter) != -1 ||
-      data['vehiculo']['marca'].trim().toLowerCase().indexOf(filter) != -1 ||
-      data['fechaInicio'].trim().toLowerCase().indexOf(filter) != -1 ||
-      data['fechaFinal'].trim().toLowerCase().indexOf(filter) != -1 
-
+  predicadoBusqueda = (data, filter: string ) => {
+    return data.usuario.documento.trim().toLowerCase().indexOf(filter) !== -1
+    || data.usuario.nombre.trim().toLowerCase().indexOf(filter) !== -1
+    || data.vehiculo.placa.trim().toLowerCase().indexOf(filter) !== -1
+    || data.vehiculo.marca.trim().toLowerCase().indexOf(filter) !== -1
+    || data.fechaInicio.trim().toLowerCase().indexOf(filter) !== -1
+    || data.fechaFinal.trim().toLowerCase().indexOf(filter) !== -1;
   }
-
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  
 
   constructor(
     public dialog: MatDialog,
@@ -48,14 +45,12 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
     this.getSubscripciones$();
     this.getVehiculos$();
     this.getUsuarios$();
-
   }
 
   ngOnInit(): void {
   }
 
   ngAfterViewInit(): void {
-    //this.dataSource.sort = this.sort;
   }
 
   abrirModal(){
@@ -121,14 +116,14 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
       });
 
       if(posVh !== -1){
-        suscripcion['vehiculo'] = this.vehiculos[posVh];
+        suscripcion.vehiculo = this.vehiculos[posVh];
 
         const posUsr = this.usuarios.findIndex(usr => {
-          return usr.key === this.vehiculos[posVh]['usuario'];
+          return usr.key === this.vehiculos[posVh].usuario;
         });
 
         if (posUsr !== -1) {
-          suscripcion['usuario'] = this.usuarios[posUsr];
+          suscripcion.usuario = this.usuarios[posUsr];
         }
       }
 
@@ -140,14 +135,11 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
   }
 
   calcularfecha(fechaEnSegundos: number){
-
     if(!fechaEnSegundos){
-      return '---'
+      return '---';
     }
-
     return moment(new Date(fechaEnSegundos * 1000)).locale('es').format('l');
   }
-
 
   filtrar(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

@@ -1,0 +1,45 @@
+.contenedor{
+  width: 100%;
+  padding: 5px;
+  height: calc( 100% - 56px) ;
+
+  form{
+    padding: 0px 15px 15px 15px !important ;
+  }
+}
+
+mat-form-field ::ng-deep {
+  width: calc(50% - 5px);
+  height: 54px;
+  .mat-form-field-outline-start,
+  .mat-form-field-outline-gap,
+  .mat-form-field-outline-end {
+      background-color: #f6f8fb;
+  }
+  .mat-form-field-flex {
+    height: 45px;
+    display: flex;
+    align-items: center;
+    margin: 0px 10px;
+  }
+
+  .mat-form-field-infix {
+    font-size: 15x;
+  }
+  
+  .mat-input-element:disabled{
+    color:black;
+  }
+}
+
+.xls{
+  background-color: #1c6f11;
+  color: #fff;
+}
+
+.botones{
+  padding:0px 0px 0px 25px;
+  button{
+    width: 40%;
+  }
+}

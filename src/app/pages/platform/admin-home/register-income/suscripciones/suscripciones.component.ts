@@ -5,6 +5,7 @@ import { DatabaseService } from '../../../services/database.service';
 import { NotificationService } from '../../../services/notification.service';
 import * as moment from 'moment';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { constantes } from 'src/app/constantes';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class SuscripcionesComponent implements OnInit {
   vehiculos: any[];
   tarifas: any;
   arrayTarifas: string[];
-  branchVehicles: Array<object> = [{ value: 'moto', view: 'Moto' }, { value: 'carro', view: 'Carro' }];
+  branchVehicles: Array<object> = constantes.branchVehicles;
   form: FormGroup;
   mostrarForm = false;
   suscripcionActiva:any = {};
