@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from '../../services/database.service';
 import { map } from 'rxjs/operators';
+import { constantes } from 'src/app/constantes';
 
 @Component({
   selector: 'app-historial-usuarios',
@@ -10,6 +11,9 @@ import { map } from 'rxjs/operators';
 export class HistorialUsuariosComponent implements OnInit {
 
   listUsers: Array<object> = [];
+  cargando: boolean = false;
+  configLoader = constantes.coloresLoader;
+
 
   constructor(private dbService: DatabaseService) {
     this.getUsuarios();
@@ -18,14 +22,16 @@ export class HistorialUsuariosComponent implements OnInit {
   ngOnInit(): void { }
 
   getUsuarios() {
+    this.cargando = true;
     this.dbService.getData("usuarios").pipe(
-      map((x:any[]) => {
+      map((x: any[]) => {
         return x.map(park => ({  ...park.payload.doc.data(), key: park.payload.doc.id }));
       })
     ).subscribe(usuarios => {
       this.listUsers = usuarios;
-      console.log("Usuarios user ", usuarios);
+      this.cargando = false;
     }, error => {
+      this.cargando = false;
       console.log("Error ", error);
     });
   }

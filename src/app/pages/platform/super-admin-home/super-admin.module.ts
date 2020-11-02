@@ -25,6 +25,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { PlatformModule } from '../platform.module';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { NgxLoadingModule } from 'ngx-loading';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatSelectModule,
     MatButtonToggleModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    NgxLoadingModule.forRoot({})
   ], exports:[
     PerfilComponent
   ]

@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatabaseService } from '../../../services/database.service';
 import { NotificationService } from '../../../services/notification.service';
+import { constantes } from 'src/app/constantes';
 
 @Component({
   selector: 'app-vehiculos',
@@ -24,7 +25,7 @@ export class VehiculosComponent implements OnInit {
   }
 
   formRegisterUser: FormGroup;
-  branchVehicles: Array<object> = [{ value: 'moto', view: 'Moto' }, { value: 'carro', view: 'Carro' }];
+  branchVehicles: Array<object> = constantes.branchVehicles;
   formVehiculo: FormGroup;
   mostrarForm = false;
   ngOnInit(): void {

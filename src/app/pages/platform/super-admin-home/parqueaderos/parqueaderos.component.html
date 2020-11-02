@@ -1,4 +1,5 @@
 <div class="contenedor">
+
     <mat-card class="d-flex flex-column flex-md-row flex-row justify-content-between">
         <h3 i18n>Parqueaderos </h3>
         <button class="btn btn-primary" mat-raised-button (click)="abrirModal()" i18n>
@@ -69,7 +70,5 @@
             <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
         </div>
     </mat-card>
-
-
-
 </div>
+<ngx-loading [show]="cargando" [config]="configLoader"></ngx-loading>

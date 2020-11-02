@@ -43,8 +43,6 @@ export class PermisosComponent implements OnInit  {
   }
 
   agregar(item, evento){
-  /*     console.log(item);
-    console.log(evento); */
 
     if(evento.source.checked){
       this.seleccionados.push(item);

@@ -16,6 +16,7 @@ export class EgresoComponent implements OnInit {
   datosLog: any;
   totalPagar: number = 0;
   cantidadHoras: number;
+  cantidadDias: number;
   constructor( 
     private auth: AuthService,
     private db: DatabaseService,
@@ -68,22 +69,98 @@ export class EgresoComponent implements OnInit {
   }
 
   calcularPago(){
+    if (this.datosSuscripcion['pagado']){
+      this.totalPagar = 0;
+    } else {
 
-    this.totalPagar = this.datosSuscripcion['pagado'] ? 0 : this.datosSuscripcion['valor'];
+      const tipoSubs = this.datosSuscripcion['tipoSuscripcion'];
+      const ingreso = new Date(this.datosSuscripcion['fechaInicio']['seconds'] * 1000);
 
-    if(this.datosSuscripcion['tipoSuscripcion'] == 'hora'){
-      const ingreso = new Date(this.datosLog['fechaEntrada']['seconds'] * 1000);
-      this.cantidadHoras = Math.ceil(moment(new Date()).diff(ingreso, 'hours', true));
-      if (this.cantidadHoras > 1){
-        this.totalPagar = this.cantidadHoras * this.datosSuscripcion['valor'];
+      if (tipoSubs === 'hora') {
+        this.cantidadHoras = Math.ceil(moment(new Date()).diff(ingreso, 'hours', true));
+        this.totalPagar = this.retornarvalor(this.cantidadHoras);
+      } else if (tipoSubs === 'dia' ){
+        this.cantidadDias = Math.ceil(moment(new Date()).diff(ingreso, 'days', true));
+        this.totalPagar = this.retornarvalor(this.cantidadDias);
+      } else {
+        this.totalPagar = this.datosSuscripcion['valor']
       }
     }
+  }
 
+  retornarvalor(cantidad: number){
+    return cantidad * this.datosSuscripcion['valor'];
   }
 
 
   egresar(){
-    this.dialogRef.close({cerrar:true , valor:this.totalPagar});
+    if (this.datosSuscripcion.tipoSuscripcion !== 'mes'){
+      this.finalizarSuscripcion(this.data['suscripcion']['suscripcion']);
+    } else {
+      this.dialogRef.close({ cerrar: true, valor: this.totalPagar });
+    }
+  }
+
+  print(){
+    let factura = document.getElementById('factura');
+    let printWindow = window.open(' ', 'popimpr');
+    let estilos: string = `
+    <head>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    <style>
+      .no-margin{
+        margin: 0px;
+      }
+
+      body{
+        width: 370px;
+        border: 1px solid;
+        border-radius: 5px;
+        margin: 5px;
+      }
+
+      img{
+        width: 150px;
+      }
+
+      .w-30{
+        width: 30% !important;
+      }
+
+      .w-70{
+        width: 70% !important;
+      }
+
+      .cuerpo-factura{
+        padding: 10px;
+      }
+
+      .seccion{
+        border-radius: 10px;
+        border: 1px solid #b3acac;
+        padding: 10px;
+        margin: 5px;
+        background-color: #fbfaf9;
+      }
+
+      .aceptar{
+        background-color: #104407;
+        color: white;
+      }
+
+    </style>`;
+    printWindow.document.write(estilos + factura.innerHTML);
+    printWindow.document.close();
+    printWindow.print();
+    printWindow.close();
+  }
+
+  finalizarSuscripcion(idSuscripcion: string){
+    this.db.modificar('suscripciones', idSuscripcion,{estado: false}).then(() => {
+      console.log('susripción cerrada');
+      this.dialogRef.close({ cerrar: true, valor: this.totalPagar });
+    });
   }
 
 }
