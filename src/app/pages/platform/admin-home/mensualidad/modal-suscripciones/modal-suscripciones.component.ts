@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { constantes } from 'src/app/constantes';
 import { AuthService } from '../../../services/auth.service';
 import { DatabaseService } from '../../../services/database.service';
 import { ModalUserComponent } from '../../register-income/modal-user/modal-user.component';
@@ -24,7 +25,7 @@ export class ModalSuscripcionesComponent implements OnInit {
   datosSuscripcion: any;
   modalAbierta: boolean = false;
   nombreParqueadero: string = '';
-  branchVehicles: Array<object> = [{ value: 'moto', view: 'Moto' }, { value: 'carro', view: 'Carro' }];
+  branchVehicles: Array<object> = constantes.branchVehicles;
 
   constructor(
     private formBuilder: FormBuilder,

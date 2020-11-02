@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatabaseService } from '../../../services/database.service';
+import { constantes } from 'src/app/constantes';
 
 @Component({
   selector: 'app-modal-user',
@@ -20,7 +21,7 @@ export class ModalUserComponent implements OnInit {
   }
 
   formRegisterUser: FormGroup;
-  branchVehicles: Array<object> = [{ value: 'moto', view: 'Moto' }, { value: 'carro', view: 'Carro' }];
+  branchVehicles: Array<object> = constantes.branchVehicles;
   formVehiculo: FormGroup;
 
   ngOnInit(): void {

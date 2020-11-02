@@ -8,6 +8,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { NotificationService } from '../../services/notification.service';
 import { timer } from 'rxjs';
+import { constantes } from 'src/app/constantes';
+import { ngxLoadingAnimationTypes } from 'ngx-loading';
 
 
 @Component({
@@ -19,11 +21,13 @@ export class ParqueaderosComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns: string[] = ['logo', 'documento', 'nombre', 'telefono', 'acciones'];
   dataSource: MatTableDataSource<any>;
-
-
+  // tslint:disable-next-line: max-line-length
+  configLoader = constantes.coloresLoader;
   listaParqueaderos: object[];
   isTrue = true;
   subs: any;
+  cargando: boolean = false;
+
   constructor(
     public dialog: MatDialog,
     private dbService: DatabaseService,
@@ -34,12 +38,10 @@ export class ParqueaderosComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    //this.subs = this.t.subscribe(console.log); 
   }
 
   ngOnDestroy(){
   }
-
 
   abrirModal(datos?, accion = 'crear') {
     console.log(datos);
@@ -56,6 +58,7 @@ export class ParqueaderosComponent implements OnInit, OnDestroy {
   }
 
   getParqueaderos() {
+    this.cargando = true;
     this.dbService.getData('parqueaderos').pipe(
       map((x: any[]) => {
         return x.map(park => ({ ...park.payload.doc.data(), key: park.payload.doc.id }));
@@ -67,6 +70,7 @@ export class ParqueaderosComponent implements OnInit, OnDestroy {
       });
       this.dataSource = new MatTableDataSource(result);
       this.dataSource.paginator = this.paginator;
+      this.cargando = false;
     });
   }
 

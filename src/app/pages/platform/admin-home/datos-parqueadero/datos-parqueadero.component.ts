@@ -18,6 +18,9 @@ export class DatosParqueaderoComponent implements OnInit {
   imagenDefecto: any = constantes.logoDefecto;
   data: object = {};
   form: FormGroup;
+  configLoader = constantes.coloresLoader;
+  cargando: boolean = false;
+
 
   constructor(
     private auth: AuthService,
@@ -35,6 +38,7 @@ export class DatosParqueaderoComponent implements OnInit {
   }
 
   traerData() {
+    this.cargando = true;
     const idParqueadero = this.auth.datosUsuario.parqueadero;
     this.db.findDoc('parqueaderos', idParqueadero).valueChanges().subscribe((result: object) => {
       result['plano'] = JSON.parse(result['plano']);
@@ -83,6 +87,7 @@ export class DatosParqueaderoComponent implements OnInit {
 
     this.form.patchValue(datos);
     this.imagenDefecto = datos.logo;
+    this.cargando = false;
   }
 
   async subirfoto(evento) {

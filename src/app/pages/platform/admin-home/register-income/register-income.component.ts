@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { SuscripcionesComponent } from './suscripciones/suscripciones.component';
 import { NotificationService } from '../../services/notification.service';
 import { EgresoComponent } from './egreso/egreso.component';
+import { constantes } from 'src/app/constantes';
 
 @Component({
   selector: 'app-register-income',
@@ -26,6 +27,9 @@ export class RegisterIncomeComponent implements OnInit {
   datosSuscripcion: any;
   modalAbierta: boolean = false;
   mostrarEgreso: boolean = false;
+  configLoader = constantes.coloresLoader;
+  cargando: boolean = false;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,7 +46,7 @@ export class RegisterIncomeComponent implements OnInit {
 
   formRegisterIncome: FormGroup;
   formVehiculo: FormGroup;
-  branchVehicles: Array<object> = [{ value: 'moto', view: 'Moto' }, { value: 'carro', view: 'Carro' }];
+  branchVehicles: Array<object> = constantes.branchVehicles;
   dataUser;
   floorsParking;
   userValidData: object;
@@ -84,8 +88,10 @@ export class RegisterIncomeComponent implements OnInit {
   }
 
   getPlano() {
+    this.cargando = true;
     this.dataBaseService.findDoc('parqueaderos', this.dataUser['parqueadero']).snapshotChanges().subscribe(respuesta => {
       this.datosPlano = JSON.parse(respuesta.payload.get('plano'));
+      this.cargando = false;
     }, error => {
       console.log("Error ", error);
     });

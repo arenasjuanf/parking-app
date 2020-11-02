@@ -1,9 +1,6 @@
 
 <div class="contenedor">
 
-    <div *ngIf="isTrue;then userB">all</div>
-    <ng-template #userB>bob</ng-template>
-    <ng-template #gBlock>castor</ng-template>
     <mat-card class="d-flex flex-column flex-md-row flex-row justify-content-between">
         <h3>Parqueaderos </h3>
         <button class="btn btn-primary" mat-raised-button (click)="abrirModal()">
@@ -73,7 +70,5 @@
             <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
         </div>
     </mat-card>
-
-
-
 </div>
+<ngx-loading [show]="cargando" [config]="configLoader"></ngx-loading>

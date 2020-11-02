@@ -11,7 +11,6 @@
         </button>
     </div>
    <mat-card>
-
         <mat-form-field>
             <mat-label>Filtro</mat-label>
             <input matInput (keyup)="filtrar($event)" #input autocomplete="off" placeholder="buscar ..">
@@ -68,4 +67,6 @@
    
     </mat-card>
 </div>
+<ngx-loading [show]="cargando" [config]="configLoader">
+</ngx-loading>
 

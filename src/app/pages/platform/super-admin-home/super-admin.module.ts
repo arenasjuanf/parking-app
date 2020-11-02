@@ -25,7 +25,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { PlatformModule } from '../platform.module';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { InformeComponent } from './informe/informe.component';
+import { NgxLoadingModule } from 'ngx-loading';
 
 
 @NgModule({
@@ -35,8 +35,7 @@ import { InformeComponent } from './informe/informe.component';
     HistorialUsuariosComponent,
     GestionParqueaderoComponent,
     VistaPlanosComponent,
-    PerfilComponent,
-    InformeComponent
+    PerfilComponent
   ],
   imports: [
     CommonModule,
@@ -58,7 +57,8 @@ import { InformeComponent } from './informe/informe.component';
     MatSelectModule,
     MatButtonToggleModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    NgxLoadingModule.forRoot({})
   ], exports:[
     PerfilComponent
   ]
