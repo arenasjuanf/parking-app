@@ -10,6 +10,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
+import { constantes } from 'src/app/constantes';
 
 @Component({
   selector: 'app-mensualidad',
@@ -25,6 +26,8 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
   vehiculos: any[];
   displayedColumns: string[] = ['documento','cliente' ,'placa', 'marca', 'tipo', 'fechaInicio', 'fechaFinal', 'valor', 'acciones'];
   dataSource: MatTableDataSource<any>;
+  configLoader = constantes.coloresLoader;
+  cargando: boolean = false;
 
   predicadoBusqueda = (data, filter: string ) => {
     return data.usuario.documento.trim().toLowerCase().indexOf(filter) !== -1
@@ -61,6 +64,7 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
 
   // tslint:disable-next-line: align
   getSubscripciones$(){
+    this.cargando = true;
     const idParqueadero: string = this.auth.datosUsuario.parqueadero;
     this.db.getPorFiltro('suscripciones', 'parqueadero', idParqueadero).snapshotChanges().pipe(
       map((x: any[]) => {
@@ -132,6 +136,8 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
     this.dataSource.filterPredicate = this.predicadoBusqueda;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.cargando = false;
+
   }
 
   calcularfecha(fechaEnSegundos: number){

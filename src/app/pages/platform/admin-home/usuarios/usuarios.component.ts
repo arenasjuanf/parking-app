@@ -22,6 +22,8 @@ export class UsuariosComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns: string[] = ['documento', 'nombre', 'telefono', 'acciones'];
+  configLoader = constantes.coloresLoader;
+  cargando: boolean = false;
 
   constructor(
     private auth: AuthService,
@@ -39,17 +41,18 @@ export class UsuariosComponent implements OnInit {
 
   getUsers() {
     const idParqueadero = this.auth.datosUsuario.parqueadero;
-
+    this.cargando = true;
     this.db.afs.collection(`/usuarios`, ref => ref.where('parqueadero', '==', idParqueadero).where('tipoUsuario', '==', 'admin')
     ).snapshotChanges().pipe(
       map((x: any[]) => {
         return x.map(user => ({ ...user.payload.doc.data(), key: user.payload.doc.id }));
       })
     ).subscribe(datos => {
-
-      console.log(datos);
+      this.cargando = false;
       this.dataSource = new MatTableDataSource(datos);
       this.usuarios = datos;
+    }, error => {
+      console.log({error})
     });
   }
 

@@ -1,4 +1,15 @@
+import { ngxLoadingAnimationTypes } from 'ngx-loading';
+
 export class constantes{
+
+    public static coloresLoader = {
+        primaryColour: '#b28420',
+        secondaryColour: '#a62326',
+        tertiaryColour: '#262425',
+        backdropBorderRadius: '3px',
+        backdropBackgroundColour: '#000000b5',
+        animationType: ngxLoadingAnimationTypes.wanderingCubes
+    }
 
 
     public static branchVehicles: Array<object> = [{ value: 'moto', view: 'Moto' }, { value: 'carro', view: 'Carro' }];

@@ -42,8 +42,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { EgresoComponent } from './register-income/egreso/egreso.component';
 import { InformeComponent } from './informe/informe.component';
-
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; 
+import { NgxLoadingModule } from 'ngx-loading';
 
 @NgModule({
   declarations: [
@@ -95,7 +95,9 @@ import { InformeComponent } from './informe/informe.component';
     MatStepperModule,
     MatSlideToggleModule,
     NgxMaterialTimepickerModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    NgxLoadingModule.forRoot({})
   ], exports:[
     MatSortModule
   ]

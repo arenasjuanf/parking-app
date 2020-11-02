@@ -27,6 +27,9 @@ export class RegisterIncomeComponent implements OnInit {
   datosSuscripcion: any;
   modalAbierta: boolean = false;
   mostrarEgreso: boolean = false;
+  configLoader = constantes.coloresLoader;
+  cargando: boolean = false;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -85,8 +88,10 @@ export class RegisterIncomeComponent implements OnInit {
   }
 
   getPlano() {
+    this.cargando = true;
     this.dataBaseService.findDoc('parqueaderos', this.dataUser['parqueadero']).snapshotChanges().subscribe(respuesta => {
       this.datosPlano = JSON.parse(respuesta.payload.get('plano'));
+      this.cargando = false;
     }, error => {
       console.log("Error ", error);
     });
