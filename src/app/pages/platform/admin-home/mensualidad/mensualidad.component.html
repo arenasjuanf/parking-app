@@ -4,11 +4,8 @@
     <button class="btn btn-secondary m-2" type="button" (click)="regresar()">
       <i class="fas fa-chevron-left"></i>
       Regresar
-    </button>
-
-    
+    </button>    
   </div>
-
 
   <mat-card class="row animate__animated animate__bounceInLeft animate__fast">
 
@@ -44,7 +41,6 @@
       Agregar
     </button>
   </mat-card>
-
 
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort class="w-100">
@@ -114,5 +110,7 @@
 
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   </div>
-
 </div>
+<ngx-loading [show]="cargando" [config]="configLoader">
+</ngx-loading>
+

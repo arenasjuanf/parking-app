@@ -4,7 +4,7 @@
     </button>
 </div>
 <hr>
-<div mat-dialog-content *ngIf="datosParqueadero">
+<div id="factura" mat-dialog-content *ngIf="datosParqueadero">
     <p class="text-center">
         <b> {{ datosParqueadero['razonSocial'] | uppercase}} </b>
     </p>
@@ -29,31 +29,31 @@
         <!-- datos cliente -->
         <div class="seccion">
             <div class="row">
-                <div class="col-6">
+                <div class="col-5">
                     <b>Nombre:</b>
                 </div>
             
-                <div class="col-6">
+                <div class="col-7">
                     {{ datosLog?.datosCliente?.nombre | titlecase }}
                 </div>
             </div>
             
             <div class="row">
-                <div class="col-6">
+                <div class="col-5">
                     <b>Tipo Vehiculo:</b>
                 </div>
             
-                <div class="col-6">
+                <div class="col-7">
                     {{ datosLog?.datosVehiculo?.tipo | titlecase }}
                 </div>
             </div>
             
             <div class="row">
-                <div class="col-6">
+                <div class="col-5">
                     <b>Placa:</b>
                 </div>
             
-                <div class="col-6">
+                <div class="col-7">
                     {{ datosLog?.datosVehiculo?.placa | uppercase }}
                 </div>
             </div>
@@ -62,21 +62,21 @@
         <!-- datos ingreso/egreso -->
         <div class="seccion">
             <div class="row">
-                <div class="col-6">
+                <div class="col-5">
                     <b>Ingreso:</b>
                 </div>
             
-                <div class="col-6">
+                <div class="col-7">
                     <small>{{ parsearFecha(datosLog?.fechaEntrada?.seconds) }}</small>
                 </div>
             </div>
             
             <div class="row">
-                <div class="col-6">
+                <div class="col-5">
                     <b>Egreso:</b>
                 </div>
             
-                <div class="col-6">
+                <div class="col-7">
                     <small>{{ parsearFecha() }}</small>
                 </div>
             </div>
@@ -85,43 +85,43 @@
         <!-- suscripcion -->
         <div class="seccion">
             <div class="row">
-                <div class="col-6">
+                <div class="col-5">
                     <b>Tipo Suscripcion:</b>
                 </div>
 
-                <div class="col-6">
+                <div class="col-7">
                    {{ datosSuscripcion?.tipoSuscripcion | titlecase }}
                 </div>
             </div>
 
-            <div class="row" *ngIf="cantidadHoras">
+            <div class="row" *ngIf="cantidadHoras || cantidadDias">
 
-                <div class="col-6">
-                    <b>Cantidad Horas:</b>
+                <div class="col-5">
+                    <b>Cantidad {{ cantidadDias ? 'Días' : 'Horas' }}:</b>
                 </div>
 
-                <div class="col-6">
-                    {{ cantidadHoras }}
+                <div class="col-7">
+                    {{ cantidadHoras ? cantidadHoras : cantidadDias }}
                 </div>
                 
             </div>
 
             <div class="row" *ngIf="datosSuscripcion?.tipoSuscripcion !== 'hora'">
-                <div class="col-6">
+                <div class="col-5">
                     <b>Inicio:</b>
                 </div>
 
-                <div class="col-6">
+                <div class="col-7">
                     <small>{{ parsearFecha(datosSuscripcion?.fechaInicio?.seconds, 'll') }}</small>
                 </div>
             </div>
 
             <div class="row" *ngIf="datosSuscripcion?.tipoSuscripcion !== 'hora'">
-                <div class="col-6">
+                <div class="col-5">
                     <b>Fin:</b>
                 </div>
             
-                <div class="col-6">
+                <div class="col-7">
                     <small>{{ parsearFecha(datosSuscripcion?.fechaFinal?.seconds, 'll') }}</small>
                 </div>
             </div>
@@ -131,11 +131,11 @@
         <!-- Total A pagar -->
         <div class="seccion">
             <div class="row">
-                <div class="col-6">
+                <div class="col-5">
                     <b>Total a pagar</b>
                 </div>
         
-                <div class="col-6">
+                <div class="col-7">
                     <b>${{ totalPagar }}</b>
                 </div>
             </div>
@@ -152,7 +152,7 @@
 
     <button mat-raised-button class="aceptar" (click)="egresar()">Aceptar</button>
     
-    <button mat-icon-button>
+    <button mat-icon-button (click)="print()">
         <mat-icon>print</mat-icon>
     </button>
 </div>
