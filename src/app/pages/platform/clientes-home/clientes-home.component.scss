@@ -14,6 +14,10 @@
     }
 }
 
+.container{
+    height: calc( 100% - 48px);
+}
+
 
 .title {
     font-size: 4rem;
@@ -23,17 +27,17 @@
     background: linear-gradient(to bottom, #945900 0%, #ff99cc 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+
 }
 
 
-/* Sombra para los cuadros con una animacion con efecto de 0.5s con box box-shadow*/
 .sombra{
     border-radius: 20px;
     -webkit-box-shadow: 6px 7px 5px 0px rgba(189,189,189,1);
     -moz-box-shadow: 6px 7px 5px 0px rgba(189,189,189,1);
     box-shadow: 6px 7px 5px 0px rgba(189,189,189,1);
     transition-property: box-shadow;
-    transition-duration: 0.5s;
+    transition-duration: 0.3s;
 }
   
 .sombra:hover{
@@ -44,5 +48,28 @@
 }
 
 .titulo{
-    border-radius: 10px;
+    border-radius: 20px;
+    -webkit-box-shadow: -6px 9px 16px 3px rgba(0,0,0,0.31);
+    -moz-box-shadow: -6px 9px 16px 3px rgba(0,0,0,0.31);
+    box-shadow: -6px 9px 16px 3px rgba(0,0,0,0.31);
+    z-index: 1;
 }
+
+mat-drawer-container{
+    ::ng-deep{
+        mat-drawer-content{
+            overflow: hidden;
+        }
+    }
+    
+
+    mat-drawer{
+        width: 200px;
+    }
+}
+
+.p-container{
+    overflow-y: auto;
+    height: calc( 100% - 155px) !important;
+}
+

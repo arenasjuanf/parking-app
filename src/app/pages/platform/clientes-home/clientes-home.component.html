@@ -1,1 +1,53 @@
-<p>clientes-home works!</p>
+<mat-drawer-container class="h-100" autosize>
+
+    <mat-toolbar class="w-100 d-flex justify-content-between">
+        <button  mat-icon-button >
+            <mat-icon>account_circle</mat-icon>
+        </button>
+
+        <span>Parking Mcqueen</span>
+    
+        <button mat-icon-button class="example-icon" (click)="cerrarSesion()">
+            <mat-icon>logout</mat-icon>
+        </button>
+    
+    </mat-toolbar>
+
+<!-- 
+    <mat-drawer #drawer mode="over" [(opened)]="opened">
+        <mat-card>
+            Juan Felipe Arenas
+        </mat-card>
+        <mat-divider></mat-divider>
+
+    </mat-drawer> -->
+
+
+    <div class="container">
+        <div class="card titulo mt-5">
+            <div class="card-body text-center">
+                <h1> Juan F. Arenas</h1>
+            </div>
+        </div>
+        <div class="row p-container">
+            <div class="col-12 col-md-6 col-lg-4 my-3" *ngFor="let num of [1,2,3]" (click)="ir(permiso.ruta)">
+                <div class="card pointer sombra">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-lg-6 text-center">
+                                <i ngClass="fas fa-ad fa-7x expandir"></i>
+                            </div>
+                            <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center justify-content-lg-start h5 mt-3 mt-lg-0">
+                                {{ 'Parqueadero '+ num }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</mat-drawer-container>

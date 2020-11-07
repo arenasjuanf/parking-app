@@ -11,6 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
 import { constantes } from 'src/app/constantes';
+import { merge, Observable, zip } from 'rxjs';
 
 @Component({
   selector: 'app-mensualidad',
@@ -95,14 +96,28 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
 
   getUsuarios$() {
     const idParqueadero: string = this.auth.datosUsuario.parqueadero;
-    return this.db.getPorFiltro('usuarios', 'parqueadero', idParqueadero).snapshotChanges().pipe(
+
+    const contains$: Observable<any> = this.afs.collection(`/usuarios`, ref =>
+      ref.where('parqueadero', 'array-contains', idParqueadero)
+    ).snapshotChanges().pipe(
       map((x: any[]) => {
         return x.map(user => ({ ...user.payload.doc.data(), key: user.payload.doc.id }));
       })
-    ).subscribe(r => {
-      this.usuarios = r;
+    );
+
+    const equal$: Observable<any> = this.db.getPorFiltro('usuarios', 'parqueadero', idParqueadero).snapshotChanges().pipe(
+      map((x: any[]) => {
+        return x.map(user => ({ ...user.payload.doc.data(), key: user.payload.doc.id }));
+      })
+    );
+
+    zip(equal$, contains$).pipe(
+      map(([equal, contains]) => [...equal, ...contains])
+    ).subscribe((result: any[]) => {
+      this.usuarios = result;
       this.validardatos();
-   });
+    });
+
   }
 
   validardatos(){
@@ -132,6 +147,7 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
       }
 
     });
+
     this.dataSource = new MatTableDataSource(this.suscripciones);
     this.dataSource.filterPredicate = this.predicadoBusqueda;
     this.dataSource.paginator = this.paginator;

@@ -59,16 +59,16 @@
                 <mat-icon>search</mat-icon>
             </button>
 
-            <button mat-raised-button class="xls" (click)="exportAsExcel()">
+            <button mat-raised-button class="xls" (click)="exporter.exportTable('xlsx')">
                 XLS
                 <mat-icon>article</mat-icon>
             </button>
         </div>
     </form>
 
-    <div class="mat-elevation-z8" #TABLE>
+    <div class="mat-elevation-z8" >
 
-        <table mat-table [dataSource]="dataSource" matSort class="w-100">
+        <table mat-table [dataSource]="dataSource" matSort class="w-100" matTableExporter  #exporter="matTableExporter" >
     
             <ng-container matColumnDef="documento">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Documento </th>
