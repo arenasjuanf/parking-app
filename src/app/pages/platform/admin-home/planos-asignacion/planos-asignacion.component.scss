@@ -27,7 +27,7 @@ mat-tab-group{
     text-align: center;
     margin: unset;
     margin:1px;
-    
+    border-radius: 7px;
 }
 
 mat-form-field{
@@ -44,6 +44,7 @@ mat-form-field{
 
 .casilla:hover{
     //margin:0px;
+    
 }
 
 .cursor-pointer{
@@ -52,31 +53,6 @@ mat-form-field{
 
 .not{
     cursor: not-allowed;
-}
-
-.button11::before,
-.button11::after {
-  position: absolute;
-  top: 0;
-  z-index: -1;
-  content: '';
-  width: 50%;
-  height: 100%;
-  background: #333;
-  transform: scale(0, 1);
-  transition: transform .3s;
-}
-.button11::before {
-  left: 0;
-  transform-origin: left top;
-}
-.button11::after {
-  right: 0;
-  transform-origin: right top;
-}
-.button11:hover::before,
-.button11:hover::after {
-  transform: scale(1, 1);
 }
 
 .placa{

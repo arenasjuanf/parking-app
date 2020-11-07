@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatabaseService } from '../../../services/database.service';
 import { NotificationService } from '../../../services/notification.service';
 import { constantes } from 'src/app/constantes';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-vehiculos',
@@ -12,14 +14,18 @@ import { constantes } from 'src/app/constantes';
 })
 export class VehiculosComponent implements OnInit {
   vehiculos: any[];
+  dataUser: any;
 
   constructor(
     public dialogRef: MatDialogRef<VehiculosComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     private db: DatabaseService,
-    private notify: NotificationService
+    private notify: NotificationService,
+    private afs: AngularFirestore,
+    private authService: AuthService,
   ) {
+    this.dataUser = this.authService.datosUsuario;
     this.initVehiForm();
     this.traerVehiculos();
   }
@@ -29,7 +35,7 @@ export class VehiculosComponent implements OnInit {
   formVehiculo: FormGroup;
   mostrarForm = false;
   ngOnInit(): void {
-    console.log(this.data);
+    
   }
 
   initUserForm() {
@@ -41,6 +47,7 @@ export class VehiculosComponent implements OnInit {
       tipo: ['cliente', Validators.required],
       parqueadero: [this.data['parqueadero'], Validators.required],
     });
+    console.log(this.formRegisterUser);
   }
 
   initVehiForm() {
@@ -60,16 +67,16 @@ export class VehiculosComponent implements OnInit {
 
 
   traerVehiculos() {
-    this.db.getPorFiltro('vehiculos', 'usuario', this.data.key).snapshotChanges().subscribe(respuesta => {
+
+    this.afs.collection(`/vehiculos`, ref =>
+      ref.where('usuario', '==', this.data.key).where('parqueadero', '==', this.dataUser['parqueadero'])
+    ).snapshotChanges().subscribe(respuesta => {
       const datos = respuesta.map(item => {
         let x = item.payload.doc.data();
         x['key'] = item.payload.doc.id;
         return x;
       });
-
-      console.log(datos);
       this.vehiculos = datos;
-
     }, error => {
       console.log("Error ", error);
     });
