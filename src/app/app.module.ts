@@ -14,15 +14,16 @@ import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
-import { ClientesHomeComponent } from './pages/platform/clientes-home/clientes-home.component';
 
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
+import { ClientesHomeComponent } from './pages/platform/clientes-home/clientes-home.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     Error404Component,
-    ClientesHomeComponent,
+    ClientesHomeComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +38,7 @@ import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
     HttpClientModule,
     MatTableModule,
     MatSortModule,
-    NgxLoadingModule.forRoot({})
+    NgxLoadingModule.forRoot({}),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -28,10 +28,10 @@ export class InformeComponent implements OnInit, AfterViewInit  {
   branchVehicles: Array<object> = constantes.branchVehicles;
   displayedColumns: Array<string> = ['documento', 'placa', 'marca', 'piso', 'fechaIngreso', 'horaIngreso', 'fechaSalida', 'horaSalida'];
   logs: any[];
-  ItemsPerPage: number = 5;
-  currentPage: number = 0; 
+  ItemsPerPage = 5;
+  currentPage = 0;
   totalLogs: number;
-  cargando: boolean = false;
+  cargando = false;
   configLoader = constantes.coloresLoader;
 
   constructor(
@@ -54,11 +54,12 @@ export class InformeComponent implements OnInit, AfterViewInit  {
     this.router.navigateByUrl('/platform/admin/main');
   }
 
- /*  getLogs(){
+  getLogs() {
+    this.cargando = true;
     const idParqueadero: string = this.auth.datosUsuario.parqueadero;
     const obs$ = this.db.getPorFiltro('logs', 'parqueadero', idParqueadero).valueChanges().pipe(
       map( logs => {
-        logs.map( ( x : any ) => {
+        logs.map( ( x: any ) => {
           x.datosCliente.documento = parseInt(x.datosCliente.documento);
           x.horaEntrada = this.parsearFecha(x?.fechaEntrada?.seconds, 'LT');
           x.horaSalida = this.parsearFecha(x?.fechaSalida?.seconds, 'LT');
@@ -69,23 +70,23 @@ export class InformeComponent implements OnInit, AfterViewInit  {
         return logs;
       })
     ).subscribe( logs => {
-      console.log(logs);
-      if(logs){
+      if (logs) {
         obs$.unsubscribe();
         this.logs = logs;
         this.dataSource = new MatTableDataSource(this.logs);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.cargando = false;
       }
     });
-  } */
+  }
 
   parsearFecha(seconds, format: string = 'LL') {
     return seconds ? moment(new Date(seconds * 1000)).format(format) : '- - - -';
   }
 
   exportAsExcel() {
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.table.nativeElement);//converts a DOM TABLE element to a worksheet
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.table.nativeElement); // converts a DOM TABLE element to a worksheet
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
@@ -93,7 +94,7 @@ export class InformeComponent implements OnInit, AfterViewInit  {
     XLSX.writeFile(wb, 'Informes.xlsx');
   }
 
-  cambiosPaginator(evento){
+  cambiosPaginator(evento) {
 
     this.ItemsPerPage = evento.pageSize;
     this.currentPage = evento.pageIndex;
@@ -102,7 +103,7 @@ export class InformeComponent implements OnInit, AfterViewInit  {
 
   }
 
-  getLogs(){
+  /* getLogs(){
     this.cargando = true;
     const idParqueadero: string = this.auth.datosUsuario.parqueadero;
     const cantidad = this.currentPage ? ((this.currentPage + 1) * this.ItemsPerPage) : this.ItemsPerPage;
@@ -134,20 +135,20 @@ export class InformeComponent implements OnInit, AfterViewInit  {
       }
     });
 
-  }
+  } */
 
   countLogs(): void {
     const idParqueadero: string = this.auth.datosUsuario.parqueadero;
     const obs$ = this.db.getPorFiltro('logs', 'parqueadero', idParqueadero).valueChanges().subscribe(
       (result: any) => {
-        console.log('counttt: ', result)
-        if(result){
+        console.log('counttt: ', result);
+        if (result) {
           this.totalLogs = result.length;
           this.paginator.length = result.length;
           obs$.unsubscribe();
         }
       }
-    )
+    );
   }
 
 }

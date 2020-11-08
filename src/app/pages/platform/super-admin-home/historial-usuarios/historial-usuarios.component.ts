@@ -28,6 +28,7 @@ export class HistorialUsuariosComponent implements OnInit {
         return x.map(park => ({  ...park.payload.doc.data(), key: park.payload.doc.id }));
       })
     ).subscribe(usuarios => {
+      console.log(usuarios);
       this.listUsers = usuarios;
       this.cargando = false;
     }, error => {

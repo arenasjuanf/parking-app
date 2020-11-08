@@ -13,13 +13,16 @@ import { SuscripcionesComponent } from './suscripciones/suscripciones.component'
 import { NotificationService } from '../../services/notification.service';
 import { EgresoComponent } from './egreso/egreso.component';
 import { constantes } from 'src/app/constantes';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { ModalClientesComponent } from './modal-clientes/modal-clientes.component';
+const firebase = require('firebase/app');
 
 @Component({
   selector: 'app-register-income',
   templateUrl: './register-income.component.html',
   styleUrls: ['./register-income.component.scss']
 })
-export class RegisterIncomeComponent implements OnInit {
+export class RegisterIncomeComponent implements OnInit, OnDestroy {
   pisoSeleccionado: number = 0;
   asignar: boolean = false;
   datosCliente: any;
@@ -37,7 +40,8 @@ export class RegisterIncomeComponent implements OnInit {
     private dataBaseService: DatabaseService,
     public dialogComponent: MatDialog,
     private router: Router,
-    private notify: NotificationService
+    private notify: NotificationService,
+    public afs: AngularFirestore
   ) {
     this.dataUser = this.authService.datosUsuario;
     this.getPlano();
@@ -55,6 +59,10 @@ export class RegisterIncomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.configForm();
+  }
+
+  ngOnDestroy(){
+    console.log('destroy');
   }
 
   configForm() {
@@ -90,7 +98,7 @@ export class RegisterIncomeComponent implements OnInit {
   getPlano() {
     this.cargando = true;
     this.dataBaseService.findDoc('parqueaderos', this.dataUser['parqueadero']).snapshotChanges().subscribe(respuesta => {
-      this.datosPlano = JSON.parse(respuesta.payload.get('plano'));
+      this.datosPlano = respuesta ? JSON.parse(respuesta.payload.get('plano')) : [];
       this.cargando = false;
     }, error => {
       console.log("Error ", error);
@@ -99,50 +107,76 @@ export class RegisterIncomeComponent implements OnInit {
 
   searchDataUser(evento?) {
     if (!this.validUser) {
-      let valor = evento ? evento.srcElement.value : this.formRegisterIncome.get('documentoUsuario').value;
-      this.dataBaseService.getPorFiltro("usuarios", 'parqueadero', this.dataUser['parqueadero'])
-        .ref.orderBy('documento').startAt(valor).endAt(valor + '\uf8ff')
-        .onSnapshot(respuesta => {
+      const valor = evento ? evento.srcElement.value : this.formRegisterIncome.get('documentoUsuario').value;
 
-          const datos = respuesta.docs.map(item => ({
-            ...item.data(), key: item.id
-          }));
+      this.afs.collection(`/usuarios`, ref =>
+        ref.where('parqueadero', 'array-contains', this.dataUser['parqueadero']).orderBy('documento').startAt(valor).endAt(valor + '\uf8ff')
+      ).snapshotChanges().pipe(
+        map((x: any[]) => {
+          return x.map(user => ({ ...user.payload.doc.data(), key: user.payload.doc.id }));
+        })
+      ).subscribe((datos: any) => {
+        debugger;
+        if (this.validUser || (datos.length === 1 && datos[0]['documento'] === valor)) {
+          this.setValueData(this.validUser ? this.userValidData : datos[0]);
+          this.buscarVehiculo(datos[0].key);
+        } else {
+          if ( !datos.length ) {
+            this.cargando = true;
+            // tslint:disable-next-line: no-shadowed-variable
+            const obsCliente$ = this.buscarCliente(valor).subscribe( ( datos: any) => {
+              if (datos.length > 0) {
+                this.cargando = false;
+                this.dialogComponent.open(ModalClientesComponent, {
+                  data: datos,
+                  disableClose: true,
+                  restoreFocus: false,
+                  height: '400px',
+                  width: '550px'
+                }).afterClosed().subscribe( result => {
+                  if(result){
+                    console.log(result);
+                    this.addParkingToClient(result.key);
+                    obsCliente$.unsubscribe();
+                  }
+                })
 
-          if (this.validUser || (datos.length === 1 && datos[0]['documento'] === valor)) {
-            this.setValueData(this.validUser ? this.userValidData : datos[0]);
-            this.buscarVehiculo(datos[0].key);
+              } else {
+                this.cargando = false;
+                this.dialogComponent.open(ModalUserComponent, {
+                  data: {
+                    tipo: (datos.length ? 'listar' : 'crear'),
+                    datos,
+                    parqueadero: this.dataUser['parqueadero'],
+                    documento: valor
+                  },
+                  disableClose: true,
+                  restoreFocus: false,
+                  height: '500px',
+                  width: '700px'
+                }).afterClosed().subscribe(resultado => {
+                  if (resultado) {
 
-          } else {
-            const referencia = this.dialogComponent.open(ModalUserComponent, {
-              data: {
-                tipo: (datos.length ? 'listar' : 'crear'),
-                datos,
-                parqueadero: this.dataUser['parqueadero'],
-                documento: valor
-              },
-              disableClose: true,
-              restoreFocus: false,
-              height: '500px',
-              width: '700px'
-            });
-            referencia.afterClosed().subscribe(resultado => {
-              if ( resultado ) {
+                    if (resultado.datosUsuario) {
+                      this.setValueData(resultado.datosUsuario);
+                    }
 
-                if (resultado.datosUsuario) {
-                  this.setValueData(resultado.datosUsuario);
-                }
+                    if (resultado.datosVehiculo) {
+                      this.setValueVehicle(resultado.datosVehiculo);
+                    }
 
-                if (resultado.datosVehiculo) {
-                  this.setValueVehicle(resultado.datosVehiculo);
-                }
-
+                  }
+                });
               }
             });
           }
-        }, error => {
-          console.log("Error ", error);
-        });
+
+        }
+      }, error => {
+        console.log("Error ", error);
+      });
     } else {
+
       this.dialogComponent.open(ModalUserComponent, {
         data: {
           tipo: 'crear',
@@ -169,8 +203,26 @@ export class RegisterIncomeComponent implements OnInit {
     }
   }
 
+  addParkingToClient(idCliente){
+    this.afs.collection('usuarios').doc(idCliente).update({
+      parqueadero: firebase.firestore.FieldValue.arrayUnion(this.dataUser['parqueadero'])
+    }).then(console.log)
+  }
+
+  buscarCliente(documento){
+    return this.dataBaseService.getPorFiltro('usuarios', 'documento', documento).snapshotChanges().pipe(
+      map((x: any[]) => {
+        return x.map(suscr => ({
+          ...suscr.payload.doc.data(),
+          key: suscr.payload.doc.id
+        }));
+      })
+    );
+  }
+
   setValueData(resultado) {
     this.datosCliente = resultado;
+    this.datosCliente.parqueadero = this.dataUser['parqueadero'];
     this.userValidData = resultado;
     this.formRegisterIncome.get('nombreUsuario').setValue(resultado.nombre);
     this.formRegisterIncome.get('documentoUsuario').setValue(resultado.documento);
@@ -179,6 +231,7 @@ export class RegisterIncomeComponent implements OnInit {
 
   setValueVehicle(resultado) {
     this.datosVehiculo = resultado;
+    this.datosVehiculo.parqueadero = this.dataUser['parqueadero'];
     this.buscarSuscripciones();
     this.formVehiculo.get('placa').setValue(resultado.placa);
     this.formVehiculo.get('tipoVehiculo').setValue(resultado.tipo);
@@ -267,16 +320,20 @@ export class RegisterIncomeComponent implements OnInit {
   }
 
   buscarVehiculo(idUsuario: string){
-    this.dataBaseService.getPorFiltro('vehiculos', 'usuario', idUsuario).snapshotChanges().subscribe(respuesta => {
+
+    this.afs.collection(`/vehiculos`, ref =>
+      ref.where('usuario', '==', idUsuario).where('parqueadero', '==', this.dataUser['parqueadero'])
+    ).snapshotChanges().subscribe(respuesta => {
+      debugger;
       const datos = respuesta.map(item => {
         let x = item.payload.doc.data();
         x['key'] = item.payload.doc.id;
         return x;
       });
-      debugger;
-      if(datos.length == 1){
+
+      if(datos.length === 1){
         this.setValueVehicle(datos[0]);
-      }else{
+      } else {
         this.verVehiculos();
       }
 
@@ -287,7 +344,8 @@ export class RegisterIncomeComponent implements OnInit {
 
   verVehiculos(seleccionar = false){
 
-    const data = Object.assign({}, this.datosCliente)
+    const data = Object.assign({}, this.datosCliente);
+    data.parqueadero = this.dataUser['parqueadero'];
     data['seleccionar'] = seleccionar;
     if(!this.modalAbierta){
 
@@ -329,7 +387,6 @@ export class RegisterIncomeComponent implements OnInit {
 
   buscarSuscripciones(){
     const data = Object.assign({}, { datosVehiculo: this.datosVehiculo, datosCliente: this.datosCliente})
-
     this.dialogComponent.open(SuscripcionesComponent, {
       data,
       height: '500px',

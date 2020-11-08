@@ -1,0 +1,50 @@
+<div class="w-100 h-100">
+
+  <div class="w-100 text-center mt-2" >
+    <h5>Cliente Encontrado en otro parqueadero</h5>
+  </div>
+
+  <div class="w-100 mt-5 h-50">
+
+    <div class="row mt-3">
+      <div class="col-4">
+        Nombre:
+      </div>
+      <div class="col-8 text-end">
+        {{ datosCliente.nombre | titlecase }}
+      </div>
+    </div>
+    
+    <div class="row mt-3">
+      <div class="col-4">
+        Documento:
+      </div>
+      <div class="col-8 text-end">
+        {{ datosCliente.documento | titlecase }}
+      </div>
+    </div>
+    
+    <div class="row mt-3">
+      <div class="col-4">
+        Email:
+      </div>
+      <div class="col-8 text-end">
+        {{ datosCliente.email | titlecase }}
+      </div>
+    </div>
+  </div>
+
+  <div class="w-100 d-flex justify-content-around">
+
+    <button class="btn btn-danger btn-lg" [mat-dialog-close]>
+      <i class="fas fa-window-close"></i>
+      Cancelar
+    </button>
+
+    <button class="btn btn-primary btn-lg" (click)="seleccionarCliente()">
+      <i class="fas fa-check-square"></i>
+      Aceptar
+    </button>
+  </div>
+
+</div>

@@ -44,7 +44,8 @@ import { EgresoComponent } from './register-income/egreso/egreso.component';
 import { InformeComponent } from './informe/informe.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; 
 import { NgxLoadingModule } from 'ngx-loading';
-
+import { MatTableExporterModule } from 'mat-table-exporter';
+import { ModalClientesComponent } from './register-income/modal-clientes/modal-clientes.component';
 @NgModule({
   declarations: [
     AdminHomeComponent,
@@ -64,7 +65,8 @@ import { NgxLoadingModule } from 'ngx-loading';
     SuscripcionesComponent,
     ModalSuscripcionesComponent,
     EgresoComponent,
-    InformeComponent
+    InformeComponent,
+    ModalClientesComponent
   ],
   imports: [
     CommonModule,
@@ -97,7 +99,8 @@ import { NgxLoadingModule } from 'ngx-loading';
     NgxMaterialTimepickerModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
-    NgxLoadingModule.forRoot({})
+    NgxLoadingModule.forRoot({}),
+    MatTableExporterModule
   ], exports:[
     MatSortModule
   ]
