@@ -1,6 +1,6 @@
 <div class="m-3">
     <div class="d-flex justify-content-between">
-        <button class="btn btn-secondary m-2" type="button" (click)="regresar()">
+        <button class="btn btn-secondary m-2" type="button" (click)="regresar()" i18n>
             <i class="fas fa-chevron-left"></i>
             Regresar
         </button>
@@ -26,54 +26,55 @@
             <div class="col-12 col-md-9">
                 <div class="row">
                     <mat-form-field appearance="outline" class="col-12 col-md-6 my-1">
-                        <mat-label>Nit</mat-label>
+                        <mat-label i18n>Nit</mat-label>
                         <input matInput type="text" formControlName="nit">
                     </mat-form-field>
                     <mat-form-field appearance="outline" class="col-12 col-md-6 my-1">
-                        <mat-label>Nombre o razón social</mat-label>
+                        <mat-label i18n>Nombre o razón social</mat-label>
                         <input matInput type="text" formControlName="razonSocial">
                     </mat-form-field>
                     <mat-form-field appearance="outline" class="col-12 col-md-6 my-1">
-                        <mat-label>Nombre del propietario</mat-label>
+                        <mat-label i18n>Nombre del propietario</mat-label>
                         <input matInput type="text" formControlName="nombrePropietario">
                     </mat-form-field>
                     <mat-form-field appearance="outline" class="col-12 col-md-6 my-1">
-                        <mat-label>Url página web</mat-label>
+                        <mat-label i18n>Url página web</mat-label>
                         <input matInput type="text" formControlName="paginaWeb">
                     </mat-form-field>
                     <mat-form-field appearance="outline" class="col-12 col-md-6 my-1">
-                        <mat-label>Correo electronico</mat-label>
+                        <mat-label i18n>Correo electronico</mat-label>
                         <input matInput type="email" formControlName="correo">
                     </mat-form-field>
                     <mat-form-field appearance="outline" class="col-12 col-md-6">
-                        <mat-label>Telefono</mat-label>
+                        <mat-label i18n>Telefono</mat-label>
                         <input matInput type="text" formControlName="telefono">
                     </mat-form-field>
                     <mat-form-field appearance="outline" class="col-12 my-1">
-                        <mat-label>Dirección</mat-label>
+                        <mat-label i18n>Dirección</mat-label>
                         <input matInput type="text" formControlName="direccion">
                     </mat-form-field>
                 </div>
                 <div class="row">
                     <div class="order-3 order-md-1 col-12 col-md-4 text-center my-1">
-                        <p class="label-pisos">Nº Pisos</p>
+                        <p class="label-pisos" i18n>Nº Pisos</p>
                         <div class="d-flex justify-content-between">
                             <button type="button" mat-icon-button (click)="gestionarPisos(false)"
                                 [disabled]="form.get('cantidadPisos').value == 1 || form.disabled ">
                                 <mat-icon>remove</mat-icon>
                             </button>
                             <p class="m-auto">{{ form.get('cantidadPisos').value }}</p>
-                            <button [disabled]="form.disabled" type="button" mat-icon-button (click)="gestionarPisos(true)">
+                            <button [disabled]="form.disabled" type="button" mat-icon-button
+                                (click)="gestionarPisos(true)">
                                 <mat-icon>add</mat-icon>
                             </button>
                         </div>
                     </div>
                     <mat-form-field appearance="outline" class="order-1 order-md-2 col-12 col-md-4 my-1">
-                        <mat-label>Capacidad carros</mat-label>
+                        <mat-label i18n>Capacidad carros</mat-label>
                         <input matInput type="number" formControlName="capacidadCarros">
                     </mat-form-field>
                     <mat-form-field appearance="outline" class="order-2 order-md-3 col-12 col-md-4 my-1">
-                        <mat-label>Capacidad Motos</mat-label>
+                        <mat-label i18n>Capacidad Motos</mat-label>
                         <input matInput type="text" formControlName="capacidadMotos">
                     </mat-form-field>
                 </div>
@@ -82,7 +83,7 @@
         <div class="row">
             <div class="col-3 d-flex flex-column justify-content-start">
                 <button type="button" class="btn btn-primary mt-2" (click)="configurarPlano()"
-                    [disabled]="!form.get('pisos').valid">
+                    [disabled]="!form.get('pisos').valid" i18n>
                     Configurar Plano
                     <i class="far fa-eye"></i>
                 </button>
@@ -90,7 +91,7 @@
                     [disabled]="!form.get('plano').valid && accion !== 'ver'">
                     Visualizar Plano <i class="far fa-eye"></i>
                 </button> -->
-                <button type="button" class="btn btn-primary mt-2" (click)="guardar()" [disabled]="!form.valid">
+                <button type="button" class="btn btn-primary mt-2" (click)="guardar()" [disabled]="!form.valid" i18n>
                     Actualizar
                 </button>
             </div>
@@ -98,10 +99,10 @@
                 <mat-accordion class="w-100">
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>
-                            <mat-panel-title>
+                            <mat-panel-title i18n>
                                 Plano de parqueadero
                             </mat-panel-title>
-                            <mat-panel-description>
+                            <mat-panel-description i18n>
                                 Asigna Pisos Y Cupos
                             </mat-panel-description>
                         </mat-expansion-panel-header>
@@ -109,9 +110,9 @@
                             <table class="table">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th class="text-center"> Piso</th>
-                                        <th class="text-center"> Alto</th>
-                                        <th class="text-center"> Ancho</th>
+                                        <th class="text-center" i18n> Piso</th>
+                                        <th class="text-center" i18n> Alto</th>
+                                        <th class="text-center" i18n> Ancho</th>
                                     </tr>
                                 </thead>
                                 <tbody formArrayName="pisos">
@@ -119,13 +120,13 @@
                                         <th class="text-center">{{i+1}}</th>
                                         <td [formGroupName]="i" class="text-center">
                                             <mat-form-field appearance="outline" class="w-75">
-                                                <mat-label>Alto</mat-label>
+                                                <mat-label i18n>Alto</mat-label>
                                                 <input matInput type="number" formControlName="alto">
                                             </mat-form-field>
                                         </td>
                                         <td [formGroupName]="i" class="text-center">
                                             <mat-form-field appearance="outline" class="w-75">
-                                                <mat-label>Ancho</mat-label>
+                                                <mat-label i18n>Ancho</mat-label>
                                                 <input matInput type="number" formControlName="ancho">
                                             </mat-form-field>
                                         </td>

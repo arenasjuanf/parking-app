@@ -14,6 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { ClientesHomeComponent } from './pages/platform/clientes-home/clientes-home.component';
 

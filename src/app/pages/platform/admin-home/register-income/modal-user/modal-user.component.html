@@ -9,22 +9,22 @@
     <mat-horizontal-stepper linear #stepper>
       <mat-step [stepControl]="formRegisterUser">
         <form [formGroup]="formRegisterUser" [ngStyle]="{'margin-top': '15px'}">
-          <ng-template matStepLabel>Datos De Usuario</ng-template>
+          <ng-template matStepLabel i18n>Datos De Usuario</ng-template>
           <div class="row ">
             <mat-form-field appearance="outline" class="col-12 col-md-12">
-              <mat-label>Documento de usuario</mat-label>
+              <mat-label i18n>Documento de usuario</mat-label>
               <input formControlName="documento" matInput type="text">
             </mat-form-field>
             <mat-form-field appearance="outline" class="col-12 col-md-12">
-              <mat-label>Nombre del usuario</mat-label>
+              <mat-label i18n>Nombre del usuario</mat-label>
               <input formControlName="nombre" matInput type="text">
             </mat-form-field>
             <mat-form-field appearance="outline" class="col-12 col-md-12">
-              <mat-label>Correo electronico</mat-label>
+              <mat-label i18n>Correo electronico</mat-label>
               <input formControlName="email" matInput type="email">
             </mat-form-field>
             <mat-form-field appearance="outline" class="col-12 col-md-12">
-              <mat-label>Teléfono</mat-label>
+              <mat-label i18n>Teléfono</mat-label>
               <input formControlName="telefono" matInput type="number">
             </mat-form-field>
           </div>
@@ -35,9 +35,9 @@
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>{{ data.editarUsuario ? 'Actualizar' : 'Guardar'}}</ng-template>
-        <p class="text-center">Información Completa.</p>
+        <p class="text-center" i18n>Información Completa.</p>
         <div class="d-flex justify-content-around">
-          <button mat-button mat-raised-button color="primary" (click)="closeDialog()">
+          <button mat-button mat-raised-button color="primary" (click)="closeDialog()" i18n>
             <i class="fas fa-window-close"></i>
             Cancelar
           </button>
@@ -58,9 +58,9 @@
     <table class="table">
       <thead class="thead-light">
         <tr>
-          <th scope="col" class="text-center">Nombre</th>
-          <th scope="col" class="text-center">Documento</th>
-          <th scope="col" class="text-center">Email</th>
+          <th scope="col" class="text-center" i18n>Nombre</th>
+          <th scope="col" class="text-center" i18n>Documento</th>
+          <th scope="col" class="text-center" i18n>Email</th>
           <th scope="col" class="text-center"></th>
         </tr>
       </thead>
@@ -79,7 +79,7 @@
       </tbody>
     </table>
     <div class="w-100 text-left">
-      <button (click)="closeDialog()" type="button" class="btn btn-primary mt-2">
+      <button (click)="closeDialog()" type="button" class="btn btn-primary mt-2" i18n>
         <i class="fa fa-times"></i>Cancelar
       </button>
     </div>
