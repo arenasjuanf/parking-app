@@ -10,15 +10,17 @@ export class ClientesHomeComponent implements OnInit {
 
   opened: boolean = false;
   datosParqueadero: any;
-  constructor(private auth: AuthService) { 
+  constructor(private auth: AuthService) {
     console.log(this.auth.datosUsuario);
   }
 
   ngOnInit(): void {
   }
 
-  cerrarSesion(){
+  cerrarSesion() {
     this.auth.cerrarSesion();
   }
+
+  ir(ruta) { }
 
 }

@@ -17,8 +17,8 @@
 
         <div class="w-70 d-flex justify-content-center text-center flex-column">
             
-            <div class="no-margin">Dirección: {{ datosParqueadero.direccion | titlecase }} </div>
-            <div class="no-margin">Nit: {{ datosParqueadero.nit}}</div>
+            <div class="no-margin" i18n>Dirección: {{ datosParqueadero.direccion | titlecase }} </div>
+            <div class="no-margin" i18n>Nit: {{ datosParqueadero.nit}}</div>
             
         </div>
 
@@ -30,7 +30,7 @@
         <div class="seccion">
             <div class="row">
                 <div class="col-5">
-                    <b>Nombre:</b>
+                    <b i18n>Nombre:</b>
                 </div>
             
                 <div class="col-7">
@@ -40,7 +40,7 @@
             
             <div class="row">
                 <div class="col-5">
-                    <b>Tipo Vehiculo:</b>
+                    <b i18n>Tipo Vehiculo:</b>
                 </div>
             
                 <div class="col-7">
@@ -50,7 +50,7 @@
             
             <div class="row">
                 <div class="col-5">
-                    <b>Placa:</b>
+                    <b i18n>Placa:</b>
                 </div>
             
                 <div class="col-7">
@@ -63,7 +63,7 @@
         <div class="seccion">
             <div class="row">
                 <div class="col-5">
-                    <b>Ingreso:</b>
+                    <b i18n>Ingreso:</b>
                 </div>
             
                 <div class="col-7">
@@ -73,7 +73,7 @@
             
             <div class="row">
                 <div class="col-5">
-                    <b>Egreso:</b>
+                    <b i18n>Egreso:</b>
                 </div>
             
                 <div class="col-7">
@@ -86,7 +86,7 @@
         <div class="seccion">
             <div class="row">
                 <div class="col-5">
-                    <b>Tipo Suscripcion:</b>
+                    <b i18n>Tipo Suscripcion:</b>
                 </div>
 
                 <div class="col-7">
@@ -97,7 +97,7 @@
             <div class="row" *ngIf="cantidadHoras || cantidadDias">
 
                 <div class="col-5">
-                    <b>Cantidad {{ cantidadDias ? 'Días' : 'Horas' }}:</b>
+                    <b i18n>Cantidad {{ cantidadDias ? 'Días' : 'Horas' }}:</b>
                 </div>
 
                 <div class="col-7">
@@ -108,7 +108,7 @@
 
             <div class="row" *ngIf="datosSuscripcion?.tipoSuscripcion !== 'hora'">
                 <div class="col-5">
-                    <b>Inicio:</b>
+                    <b i18n>Inicio:</b>
                 </div>
 
                 <div class="col-7">
@@ -118,7 +118,7 @@
 
             <div class="row" *ngIf="datosSuscripcion?.tipoSuscripcion !== 'hora'">
                 <div class="col-5">
-                    <b>Fin:</b>
+                    <b i18n>Fin:</b>
                 </div>
             
                 <div class="col-7">
@@ -132,7 +132,7 @@
         <div class="seccion">
             <div class="row">
                 <div class="col-5">
-                    <b>Total a pagar</b>
+                    <b i18n>Total a pagar</b>
                 </div>
         
                 <div class="col-7">
@@ -148,9 +148,9 @@
   <!-- <button mat-button (click)="onNoClick()">No Thanks</button>
   <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button> -->
 
-    <button mat-raised-button color="primary" [mat-dialog-close]="{cerrar:false}" >Cancelar</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="{cerrar:false}" i18n>Cancelar</button>
 
-    <button mat-raised-button class="aceptar" (click)="egresar()">Aceptar</button>
+    <button mat-raised-button class="aceptar" (click)="egresar()" i18n>Aceptar</button>
     
     <button mat-icon-button (click)="print()">
         <mat-icon>print</mat-icon>

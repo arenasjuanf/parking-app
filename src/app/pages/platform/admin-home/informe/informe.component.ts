@@ -33,6 +33,7 @@ export class InformeComponent implements OnInit, AfterViewInit  {
   totalLogs: number;
   cargando = false;
   configLoader = constantes.coloresLoader;
+  input;
 
   constructor(
     private router: Router,
