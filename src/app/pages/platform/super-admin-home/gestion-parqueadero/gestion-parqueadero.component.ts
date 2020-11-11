@@ -185,6 +185,7 @@ export class GestionParqueaderoComponent implements OnInit {
         this.dbService.modificar('parqueaderos', this.dataRecibida.key, datos).then(result => {
           console.log('parqueadero actualizado');
           this.notificationService.notification("success", "Parqueadero actualizado.");
+          this.dialogRef.close();
         }).catch(error => {
           this.notificationService.notification("error", "No fue posible guardar los datos.");
           console.log('error modificar :', error);
@@ -219,7 +220,6 @@ export class GestionParqueaderoComponent implements OnInit {
       plano: this.form.get('plano').value.length ? this.form.get('plano').value : plano,
       visualizar
     };
-    console.log(data);
     const ref = this.dialog.open(VistaPlanosComponent, {
       data
     });

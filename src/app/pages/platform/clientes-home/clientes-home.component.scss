@@ -38,6 +38,7 @@
     box-shadow: 6px 7px 5px 0px rgba(189,189,189,1);
     transition-property: box-shadow;
     transition-duration: 0.3s;
+    height: 200px;
 }
   
 .sombra:hover{
@@ -45,6 +46,7 @@
     -webkit-box-shadow: 6px 7px 5px 0px rgba(87,86,87,1);
     -moz-box-shadow: 6px 7px 5px 0px rgba(87,86,87,1);
     box-shadow: 6px 7px 5px 0px rgba(87,86,87,1);
+    margin-top: 5px;
 }
 
 .titulo{
@@ -70,6 +72,10 @@ mat-drawer-container{
 
 .p-container{
     overflow-y: auto;
-    height: calc( 100% - 155px) !important;
+    height: calc( 100% - 250px) !important;
+}
+
+img{
+    width: 160px;
 }
 

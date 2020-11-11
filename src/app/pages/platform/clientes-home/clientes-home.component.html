@@ -26,19 +26,19 @@
     <div class="container">
         <div class="card titulo mt-5">
             <div class="card-body text-center">
-                <h1> Juan F. Arenas</h1>
+                <h1> {{ datosParqueadero.nombre | titlecase }} </h1>
             </div>
         </div>
         <div class="row p-container">
-            <div class="col-12 col-md-6 col-lg-4 my-3" *ngFor="let num of [1,2,3]" (click)="ir(num.ruta)">
+            <div class="col-12 col-md-6 col-lg-4 my-3" *ngFor="let parqueadero of parqueaderos">
                 <div class="card pointer sombra">
-                    <div class="card-body">
+                    <div class="card-body d-flex justify-content-center flex-column">
                         <div class="row">
                             <div class="col-12 col-lg-6 text-center">
-                                <i ngClass="fas fa-ad fa-7x expandir"></i>
+                                <img [src]="parqueadero.logo" alt="">
                             </div>
-                            <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center justify-content-lg-start h5 mt-3 mt-lg-0">
-                                {{ 'Parqueadero '+ num }}
+                            <div class="font-weight-bold col-12 col-lg-6 d-flex align-items-center justify-content-center justify-content-lg-start h5 mt-3 mt-lg-0">
+                                {{ parqueadero.razonSocial | titlecase }}
                             </div>
                         </div>
                     </div>
@@ -47,7 +47,6 @@
         </div>
     </div>
 
-
-
-
 </mat-drawer-container>
+<ngx-loading [show]="cargando" [config]="configLoader">
+</ngx-loading>

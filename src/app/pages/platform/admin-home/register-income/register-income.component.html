@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="w-100 text-left">
+  <div class="w-100 d-flex justify-content-around">
     <button class="btn btn-secondary m-2" type="button" (click)="regresar()" i18n>
       <i class="fas fa-chevron-left"></i>
       Regresar
@@ -10,7 +10,7 @@
     </h3>
     
     <button class="btn io m-2" type="button" (click)="mostrarEgreso = !mostrarEgreso">
-      {{ mostrarEgreso ? 'Ingreso' : 'Egreso' }}
+      {{ mostrarEgreso ? 'Ingreso' : 'Egreso' }} <i [class]="mostrarEgreso ? 'fas fa-arrow-left' : 'fas fa-arrow-right'"></i>
     </button>
 
   </div>
@@ -74,8 +74,8 @@
     </div>
   </div>
 
-  <div class="w-100 text-center animate__animated animate__bounceInRight animate__fast" *ngIf="mostrarEgreso">
-    <mat-form-field appearance="outline" class="my-1">
+  <div class="text-center animate__animated animate__bounceInRight animate__fast" *ngIf="mostrarEgreso">
+    <mat-form-field appearance="outline" class="my-1" class="w-25">
       <mat-label i18n>Placa de vehiculo</mat-label>
       <input #inputPlaca matInput type="text" (keyup.enter)="buscarPlaca(inputPlaca.value)">
       <button type="button" (click)="buscarPlaca(inputPlaca.value)" mat-icon-button matSuffix>
