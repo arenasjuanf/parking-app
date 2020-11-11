@@ -141,7 +141,6 @@ export class InformeComponent implements OnInit, AfterViewInit  {
     const idParqueadero: string = this.auth.datosUsuario.parqueadero;
     const obs$ = this.db.getPorFiltro('logs', 'parqueadero', idParqueadero).valueChanges().subscribe(
       (result: any) => {
-        console.log('counttt: ', result);
         if (result) {
           this.totalLogs = result.length;
           this.paginator.length = result.length;
