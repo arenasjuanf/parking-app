@@ -32,7 +32,14 @@ export class RegisterIncomeComponent implements OnInit, OnDestroy {
   mostrarEgreso: boolean = false;
   configLoader = constantes.coloresLoader;
   cargando: boolean = false;
-
+  formRegisterIncome: FormGroup;
+  formVehiculo: FormGroup;
+  branchVehicles: Array<object> = constantes.branchVehicles;
+  dataUser;
+  floorsParking;
+  userValidData: object;
+  validUser: boolean = false;
+  datosPlano = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -47,15 +54,6 @@ export class RegisterIncomeComponent implements OnInit, OnDestroy {
     this.getPlano();
     this.getFloorsParking();
   }
-
-  formRegisterIncome: FormGroup;
-  formVehiculo: FormGroup;
-  branchVehicles: Array<object> = constantes.branchVehicles;
-  dataUser;
-  floorsParking;
-  userValidData: object;
-  validUser: boolean = false;
-  datosPlano = [];
 
   ngOnInit(): void {
     this.configForm();
@@ -108,20 +106,21 @@ export class RegisterIncomeComponent implements OnInit, OnDestroy {
   searchDataUser(evento?) {
     if (!this.validUser) {
       const valor = evento ? evento.srcElement.value : this.formRegisterIncome.get('documentoUsuario').value;
-
-      this.afs.collection(`/usuarios`, ref =>
+      const $obsUser = this.afs.collection(`/usuarios`, ref =>
         ref.where('parqueadero', 'array-contains', this.dataUser['parqueadero']).orderBy('documento').startAt(valor).endAt(valor + '\uf8ff')
       ).snapshotChanges().pipe(
         map((x: any[]) => {
           return x.map(user => ({ ...user.payload.doc.data(), key: user.payload.doc.id }));
         })
       ).subscribe((datos: any) => {
+        // tslint:disable-next-line: no-debugger
         debugger;
         if (this.validUser || (datos.length === 1 && datos[0]['documento'] === valor)) {
           this.setValueData(this.validUser ? this.userValidData : datos[0]);
           this.buscarVehiculo(datos[0].key);
+          $obsUser.unsubscribe();
         } else {
-          if ( !datos.length ) {
+          if ( datos.length === 0) {
             this.cargando = true;
             // tslint:disable-next-line: no-shadowed-variable
             const obsCliente$ = this.buscarCliente(valor).subscribe( ( datos: any) => {
@@ -137,6 +136,8 @@ export class RegisterIncomeComponent implements OnInit, OnDestroy {
                   if(result){
                     console.log(result);
                     this.addParkingToClient(result.key);
+                    obsCliente$.unsubscribe();
+                  } else {
                     obsCliente$.unsubscribe();
                   }
                 })
@@ -167,11 +168,13 @@ export class RegisterIncomeComponent implements OnInit, OnDestroy {
 
                   }
                 });
+                obsCliente$.unsubscribe();
               }
             });
           }
-
+          $obsUser.unsubscribe();
         }
+        $obsUser.unsubscribe();
       }, error => {
         console.log("Error ", error);
       });
@@ -324,7 +327,6 @@ export class RegisterIncomeComponent implements OnInit, OnDestroy {
     this.afs.collection(`/vehiculos`, ref =>
       ref.where('usuario', '==', idUsuario).where('parqueadero', '==', this.dataUser['parqueadero'])
     ).snapshotChanges().subscribe(respuesta => {
-      debugger;
       const datos = respuesta.map(item => {
         let x = item.payload.doc.data();
         x['key'] = item.payload.doc.id;

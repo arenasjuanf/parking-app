@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-vista-planos',
@@ -11,10 +12,14 @@ export class VistaPlanosComponent implements OnInit {
   default = { tipo: '', numero: ''};
   color = '#C7C8D3';
   numero = 1;
+  permitirEditar: boolean = true;;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<VistaPlanosComponent>,
+    private notificationService: NotificationService
+
   ) {
+    this.validarEditar();
   }
 
   ngOnInit(): void {
@@ -67,6 +72,27 @@ export class VistaPlanosComponent implements OnInit {
         break;
     }
 
+  }
+
+  validarEditar(){
+    this.data.plano.forEach(piso => {
+      piso.forEach(columna => {
+        columna.forEach(casilla => {
+          if(casilla.suscripcion){
+            console.log('casilla');
+            this.permitirEditar = false;
+          }
+        });
+      });
+    });
+  }
+
+  cerrar(datos){
+    if(this.permitirEditar){
+      this.dialogRef.close(datos);
+    }else{
+      this.notificationService.notification("error", "No se puede editar parqueaderos,  hay clientes en este momento");
+    }
   }
 
 }
