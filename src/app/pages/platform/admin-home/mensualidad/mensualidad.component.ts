@@ -29,6 +29,9 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
   dataSource: MatTableDataSource<any>;
   configLoader = constantes.coloresLoader;
   cargando: boolean = false;
+  filtered: any[];
+  fechaFinal:string = '';
+  fechaInicio: string = '';
 
   predicadoBusqueda = (data, filter: string ) => {
     return data.usuario.documento.trim().toLowerCase().indexOf(filter) !== -1
@@ -78,6 +81,7 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
       })
     ).subscribe(r => {
       this.suscripciones = r;
+      this.filtered = r;
       this.validardatos();
     });
   }
@@ -129,7 +133,7 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
   ordenarData(){
 
     this.suscripciones.forEach(suscripcion => {
-
+      console.log(suscripcion);
       const posVh = this.vehiculos.findIndex(vh => {
         return vh.key === suscripcion.vehiculo;
       });
@@ -158,9 +162,9 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
 
   calcularfecha(fechaEnSegundos: number){
     if(!fechaEnSegundos){
-      return '---';
+      return '-------';
     }
-    return moment(new Date(fechaEnSegundos * 1000)).locale('es').format('l');
+    return moment(new Date(fechaEnSegundos * 1000)).format('l');
   }
 
   filtrar(event: Event) {
@@ -170,6 +174,37 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
 
   regresar() {
     this.router.navigateByUrl('/platform/admin/main');
+  }
+
+
+  fecha(evento, tipo){
+    const fecha = evento.value;
+
+    const f = {
+      fechaInicio: 'isAfter',
+      fechaFinal: 'isBefore',
+    }
+
+    this.filtered = this.filtered.filter((element: any) => {
+
+      return moment(new Date(element[tipo]))[f[tipo]](fecha);
+
+    });
+
+    this.dataSource = new MatTableDataSource(this.filtered );
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  resetFilters(){
+    this.filtered = this.suscripciones;
+    this.fechaInicio = '';
+    this.fechaFinal = '';
+
+    this.dataSource = new MatTableDataSource(this.suscripciones);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+
   }
 
 }
