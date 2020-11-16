@@ -57,8 +57,18 @@ export class SuscripcionesComponent implements OnInit {
   }
 
   validadoresDinamicos(){
-    this.form.get('fechaInicio').setValidators(this.tipoSubs === 'hora' ? [] : [Validators.required]);
-    this.form.get('fechaFinal').setValidators(this.tipoSubs === 'mes' ? [Validators.required] : []);
+    if (this.tipoSubs === 'hora'){
+      this.form.get('fechaInicio').setValidators([]);
+    } else {
+      this.form.get('fechaInicio').setValidators([Validators.required]);
+    }
+
+    if (this.tipoSubs === 'mes') {
+      this.form.get('fechaFinal').setValidators([Validators.required]);
+    } else {
+      this.form.get('fechaInicio').setValidators([]);
+    }
+
   }
 
 

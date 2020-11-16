@@ -105,7 +105,7 @@
     </div>
 
 
-    <div class="row w-100 text-center my-2">
+    <div class="row w-100 text-center my-2"  *ngIf="suscripcionActiva.tipoSuscripcion =='mes' || suscripcionActiva.tipoSuscripcion =='dia'">
       <div class="col" i18n>
         Tiempo restante
       </div>
