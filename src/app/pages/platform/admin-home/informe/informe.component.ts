@@ -26,7 +26,7 @@ export class InformeComponent implements OnInit, AfterViewInit  {
   @ViewChild('TABLE') table: ElementRef;
   dataSource: MatTableDataSource<any>;
   branchVehicles: Array<object> = constantes.branchVehicles;
-  // tslint:disable-next-line: max-line-lengthb
+  // tslint:disable-next-line: max-line-length
   displayedColumns: Array<string> = ['cliente', 'documento', 'placa', 'marca', 'piso', 'fechaIngreso', 'horaIngreso', 'fechaSalida', 'horaSalida'];
   logs: any[];
   ItemsPerPage = 5;
