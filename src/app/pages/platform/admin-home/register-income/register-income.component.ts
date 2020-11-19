@@ -15,6 +15,7 @@ import { EgresoComponent } from './egreso/egreso.component';
 import { constantes } from 'src/app/constantes';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ModalClientesComponent } from './modal-clientes/modal-clientes.component';
+import { createVoid } from 'typescript';
 const firebase = require('firebase/app');
 
 @Component({
@@ -39,7 +40,8 @@ export class RegisterIncomeComponent implements OnInit, OnDestroy {
   floorsParking;
   userValidData: object;
   validUser: boolean = false;
-  datosPlano = [];
+  datosPlano: any[] = [];
+  clientesActivos: any[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -97,6 +99,8 @@ export class RegisterIncomeComponent implements OnInit, OnDestroy {
     this.cargando = true;
     this.dataBaseService.findDoc('parqueaderos', this.dataUser['parqueadero']).snapshotChanges().subscribe(respuesta => {
       this.datosPlano = respuesta ? JSON.parse(respuesta.payload.get('plano')) : [];
+      this.clientesActivos = respuesta.payload.get('clientesActivos');
+      console.log('cientes Activos: ', this.clientesActivos);
       this.cargando = false;
     }, error => {
       console.log("Error ", error);
@@ -113,8 +117,7 @@ export class RegisterIncomeComponent implements OnInit, OnDestroy {
           return x.map(user => ({ ...user.payload.doc.data(), key: user.payload.doc.id }));
         })
       ).subscribe((datos: any) => {
-        // tslint:disable-next-line: no-debugger
-        debugger;
+
         if (this.validUser || (datos.length === 1 && datos[0]['documento'] === valor)) {
           this.setValueData(this.validUser ? this.userValidData : datos[0]);
           this.buscarVehiculo(datos[0].key);
@@ -280,10 +283,15 @@ export class RegisterIncomeComponent implements OnInit, OnDestroy {
   }
 
   asignarCasilla(evento, idlog){
-
     // tslint:disable-next-line: max-line-length
     this.datosPlano[evento.piso][evento.fila][evento.columna]['suscripcion'] = { suscripcion: this.datosSuscripcion.key, vehiculo: this.datosVehiculo, idlog };
-    this.dataBaseService.modificar('parqueaderos', this.dataUser['parqueadero'] , {plano :JSON.stringify(this.datosPlano)}).then(x => {
+    if ( this.clientesActivos ) {
+      this.clientesActivos.push(this.datosCliente['key']);
+    } else {
+      this.clientesActivos = [this.datosCliente['key']];
+    }
+
+    this.dataBaseService.modificar('parqueaderos', this.dataUser['parqueadero'] , { plano: JSON.stringify(this.datosPlano), clientesActivos: this.clientesActivos}).then(x => {
       this.notify.notification('success', 'Suscripción creada');
       this.reset();
     }).catch(err => {
@@ -307,19 +315,36 @@ export class RegisterIncomeComponent implements OnInit, OnDestroy {
       fechaEntrada: new Date(),
       puesto: evento
     };
+    
+    const permitirAsignacion = this.buscarVehiculoActivo();
 
-    this.dataBaseService.addData('logs', registroLog).then(result => {
+    if (evento.tipo === this.datosVehiculo.tipo && permitirAsignacion){
 
-      if(result){
-        const idLog = result.id;
-        this.asignarCasilla(evento, idLog);
-      }
+      this.dataBaseService.addData('logs', registroLog).then(result => {
 
-    }).catch(error => {
-      console.log({ error });
-      this.notify.notification('error', 'Error al crear suscripción');
-    })
+        if (result) {
+          const idLog = result.id;
+          this.asignarCasilla(evento, idLog);
+        }
 
+      }).catch(error => {
+        console.log({ error });
+        this.dataBaseService.addData('logs', registroLog).then(result => {
+
+          if (result) {
+            const idLog = result.id;
+            this.asignarCasilla(evento, idLog);
+          }
+
+        }).catch(error => {
+          console.log({ error });
+          this.notify.notification('error', 'Placa no encontrada');
+        })
+      })
+    } else {
+
+      this.notify.notification('error', permitirAsignacion ? 'El tipo de vehiculo no coincide' : 'vehiculo ya esta en parqueadero');
+    }
   }
 
   buscarVehiculo(idUsuario: string){
@@ -369,6 +394,29 @@ export class RegisterIncomeComponent implements OnInit, OnDestroy {
         }
       });
     }
+  }
+
+
+  buscarVehiculoActivo(){
+
+    for (const piso in this.datosPlano) {
+      // tslint:disable-next-line: forin
+      for (const fila in this.datosPlano[piso]) {
+        // tslint:disable-next-line: forin
+        for (const casilla in this.datosPlano[piso][fila]) {
+          const puesto = this.datosPlano[piso][fila][casilla];
+          if (puesto.suscripcion) {
+            const suscripcion = puesto.suscripcion;
+            if (suscripcion.vehiculo.placa.toLowerCase() === this.datosVehiculo.placa.toLowerCase()) {
+              return false;
+            }
+          }
+        }
+      }
+
+    }
+
+    return true;
   }
 
   regresar() {
@@ -447,21 +495,31 @@ export class RegisterIncomeComponent implements OnInit, OnDestroy {
         width: '500px'
       }).afterClosed().subscribe((cerrar: {cerrar: boolean, valor: number}) => {
         if(cerrar.cerrar){
-          this.vaciarCasilla(datos.casilla, datos.suscripcion.idlog, cerrar.valor);
+          this.vaciarCasilla(datos.casilla, datos.suscripcion.idlog, cerrar.valor, datos?.suscripcion?.vehiculo?.usuario);
         }
       });
+    } else {
+      this.notify.notification('error', 'Registro Guardado')
     }
   }
 
-
-  vaciarCasilla(puesto, idLog, valor){
+  vaciarCasilla(puesto, idLog, valor, usuario){
 
     delete this.datosPlano[puesto.piso][puesto.fila][puesto.casilla]['suscripcion'];
     delete this.datosPlano[puesto.piso][puesto.fila][puesto.casilla]['placa'];
+
+    if(usuario){
+      const pos = this.clientesActivos.findIndex( user => user === usuario);
+      if(pos != -1){
+        this.clientesActivos.splice(pos, 1);
+      }
+    }
+
+
     this.dataBaseService.modificar(
       'parqueaderos',
       this.dataUser['parqueadero'], 
-      { plano: JSON.stringify(this.datosPlano) }
+      { plano: JSON.stringify(this.datosPlano) , clientesActivos: this.clientesActivos}
     ).then(x => {
       this.notify.notification('success', 'Egreso Exitoso');
       this.cerrarLog(idLog, valor);
@@ -472,10 +530,10 @@ export class RegisterIncomeComponent implements OnInit, OnDestroy {
   cerrarLog(idLog, valor){
     const data = {
       fechaSalida: new Date(),
-      usuarioSalida :this.dataUser['nombre'],
+      usuarioSalida: this.dataUser['nombre'],
       valor
     };
-    this.dataBaseService.modificar('logs',idLog, data).then( x => {
+    this.dataBaseService.modificar('logs', idLog, data).then( x => {
       this.notify.notification('success', 'Registro Guardado')
     });
   }

@@ -35,11 +35,28 @@ export class ClientesHomeComponent implements OnInit {
   traerParqueaderos(ids: string[]){
     this.cargando = true;
     const observables = [];
-    ids.forEach(id => {
-      observables.push( this.afs.collection('parqueaderos').doc(id).valueChanges() );
+
+    this.afs.collection(`/parqueaderos`, ref => 
+      ref.where('clientesActivos', 'array-contains', this.auth.datosUsuario.key)
+    ).valueChanges().pipe(
+      map( x => x.map( p => {
+        return {
+          razonSocial: p['razonSocial'],
+          logo: p['logo'],
+          direccion: p['direccion']
+        };
+      }))
+    ).subscribe((result: any) => {
+      this.parqueaderos = result;
+      this.cargando = false;
     });
 
-    zip(...observables).pipe(
+
+  /*   ids.forEach(id => {
+      observables.push( this.afs.collection('parqueaderos').doc(id).valueChanges() );
+    }); */
+
+   /*  zip(...observables).pipe(
       map( elem => elem.map(x => {
         return {
           razonSocial: x['razonSocial'],
@@ -51,6 +68,6 @@ export class ClientesHomeComponent implements OnInit {
       console.log(result);
       this.parqueaderos = result;
       this.cargando = false;
-    });
+    }); */
   }
 }

@@ -67,7 +67,7 @@ export class PlanosAsignacionComponent implements OnInit, OnChanges{
     }
 
     if (casilla.tipo){
-      this.enviarCasilla.emit({piso,fila,columna})
+      this.enviarCasilla.emit({ piso, fila, columna, tipo: casilla['tipo']})
     } else {
       this.notificationService.notification("error", "No se puede asignar a esta casilla");
 
