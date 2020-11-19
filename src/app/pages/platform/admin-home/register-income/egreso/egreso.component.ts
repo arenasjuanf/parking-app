@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from '../../../services/auth.service';
 import { DatabaseService } from '../../../services/database.service';
@@ -22,6 +22,7 @@ export class EgresoComponent implements OnInit {
     private db: DatabaseService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<EgresoComponent>,
+    private cd: ChangeDetectorRef
 
   ) {
     this.traerDatosParqueadero();
@@ -36,7 +37,6 @@ export class EgresoComponent implements OnInit {
       if(result){
         this.datosParqueadero = result;
         this.getlog();
-        
       }
     }, error => {
       console.log('error: ', error);
@@ -91,7 +91,6 @@ export class EgresoComponent implements OnInit {
   retornarvalor(cantidad: number){
     return cantidad * this.datosSuscripcion['valor'];
   }
-
 
   egresar(){
     if (this.datosSuscripcion.tipoSuscripcion !== 'mes'){

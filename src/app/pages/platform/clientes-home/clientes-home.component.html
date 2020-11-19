@@ -26,11 +26,11 @@
     <div class="container">
         <div class="card titulo mt-5">
             <div class="card-body text-center">
-                <h1> {{ datosParqueadero.nombre | titlecase }} </h1>
+                <h4> {{ datosParqueadero.nombre | titlecase }} </h4>
             </div>
         </div>
-        <div class="row p-container">
-            <div class="col-12 col-md-6 col-lg-4 my-3" *ngFor="let parqueadero of parqueaderos">
+        <div class="row p-container" *ngIf="parqueaderos.length > 0">
+            <div class="col-12 col-md-6 col-lg-4 my-1" *ngFor="let parqueadero of parqueaderos">
                 <div class="card pointer sombra">
                     <div class="card-body d-flex justify-content-center flex-column">
                         <div class="row">
@@ -44,6 +44,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row p-container" *ngIf="parqueaderos.length == 0">
+            <h5 class="w-100 text-center mt-2"> No tienes vehiculos activos en Parking Mcqueen</h5>
         </div>
     </div>
 

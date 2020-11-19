@@ -26,7 +26,8 @@ export class InformeComponent implements OnInit, AfterViewInit  {
   @ViewChild('TABLE') table: ElementRef;
   dataSource: MatTableDataSource<any>;
   branchVehicles: Array<object> = constantes.branchVehicles;
-  displayedColumns: Array<string> = ['documento', 'placa', 'marca', 'piso', 'fechaIngreso', 'horaIngreso', 'fechaSalida', 'horaSalida'];
+  // tslint:disable-next-line: max-line-length
+  displayedColumns: Array<string> = ['cliente', 'documento', 'placa', 'marca', 'piso', 'fechaIngreso', 'horaIngreso', 'fechaSalida', 'horaSalida'];
   logs: any[];
   ItemsPerPage = 5;
   currentPage = 0;
@@ -71,6 +72,7 @@ export class InformeComponent implements OnInit, AfterViewInit  {
       })
     ).subscribe( logs => {
       if (logs) {
+
         obs$.unsubscribe();
         this.logs = logs;
         this.dataSource = new MatTableDataSource(this.logs);

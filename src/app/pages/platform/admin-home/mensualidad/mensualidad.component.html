@@ -11,17 +11,22 @@
 
     <mat-form-field appearance="outline" class="col-2">
       <mat-label i18n>Fecha Inicial</mat-label>
-      <input matInput [matDatepicker]="start">
-      <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
+      <input matInput [matDatepicker]="start" (dateChange)="fecha($event, 'fechaInicio')" [(ngModel)]="fechaInicio">
+      <mat-datepicker-toggle  matSuffix [for]="start"></mat-datepicker-toggle>
       <mat-datepicker #start></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="col-2">
       <mat-label i18n>Fecha Final</mat-label>
-      <input matInput [matDatepicker]="end">
+      <input matInput [matDatepicker]="end" (dateChange)="fecha($event, 'fechaFinal')" [(ngModel)]="fechaFinal">
       <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
       <mat-datepicker #end></mat-datepicker>
     </mat-form-field>
+
+    <button class="2" mat-raised-button color="primary" i18n (click)="resetFilters()">
+      <mat-icon>search</mat-icon>
+      Reset
+    </button>
 
     <mat-form-field appearance="outline" class="col-4">
       <mat-label i18n>Filtro</mat-label>
@@ -30,11 +35,6 @@
         search
       </mat-icon>
     </mat-form-field>
-
-    <button class="2" mat-raised-button color="primary" i18n>
-      <mat-icon>search</mat-icon>
-      Buscar
-    </button>
 
     <button class="2" mat-raised-button color="warn" (click)="abrirModal()" i18n>
       <mat-icon>add</mat-icon>

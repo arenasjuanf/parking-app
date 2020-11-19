@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { DatabaseService } from './database.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -61,11 +62,13 @@ export class AuthService {
   }
 
   loginCliente(email, password){
-    console.log(arguments);
-
     this.afs.collection('usuarios', ref => {
       return ref.where('email', '==', email).where('password', '==', password);
-    }).valueChanges().subscribe( cliente => {
+    }).snapshotChanges().pipe(
+      map((x: any[]) => {
+        return x.map(user => ({ ...user.payload.doc.data(), key: user.payload.doc.id }));
+      })
+    ).subscribe( cliente => {
       if(cliente[0]){
         const datos: any = cliente[0];
         delete datos['password'];
