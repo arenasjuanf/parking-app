@@ -5,7 +5,7 @@
             <mat-icon>account_circle</mat-icon>
         </button>
 
-        <span>Parking Mcqueen</span>
+        <!-- <span>Parking Mcqueen</span> -->
     
         <button mat-icon-button class="example-icon" (click)="cerrarSesion()">
             <mat-icon>logout</mat-icon>
@@ -24,13 +24,11 @@
 
 
     <div class="container">
-        <div class="card titulo mt-5">
-            <div class="card-body text-center">
-                <h4> {{ datosParqueadero.nombre | titlecase }} </h4>
-            </div>
+        <div class="header mt-5">
+            <h4> {{ datosParqueadero.nombre | titlecase }} </h4>
         </div>
-        <div class="row p-container" *ngIf="parqueaderos.length > 0">
-            <div class="col-12 col-md-6 col-lg-4 my-1" *ngFor="let parqueadero of parqueaderos">
+        <div class="row p-container" *ngIf="parqueaderos.length > 0 && !mostrarParking">
+            <div class="col-12 col-md-6 col-lg-4 my-1" *ngFor="let parqueadero of parqueaderos" (click)="seleccionarParqueadero(parqueadero)">
                 <div class="card pointer sombra">
                     <div class="card-body d-flex justify-content-center flex-column">
                         <div class="row">
@@ -45,8 +43,68 @@
                 </div>
             </div>
         </div>
+
+        <div *ngIf="mostrarParking" class="row d-flex justify-content-center">
+            <div class="col text-left my-1">
+                <button class="btn btn-primary">
+                    <i class="fas fa-arrow-left"></i>
+                    Regresar
+                </button>
+            </div>
+            <div class="card-content">
+                
+                <div class="col text-center">
+                    <i class="fas fa-car fa-3x"></i>
+                </div>
+                <div class="col d-flex justify-content-center">
+                    <div class="placa">
+                        JMZ16B
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <span class="col-4">
+                        Marca :
+                    </span>
+                    <span class="col-8 text-right">
+                        Yamaha
+                    </span>
+                </div>
+                <div class="row mt-1" >
+                    <span class="col-4">
+                        Ingreso :
+                    </span>
+                    <span class="col-8 text-right" >
+                        10/11/2020 12:04 pm
+                    </span> 
+                </div>
+                <div class="row mt-1">
+                    <span class="col-4">
+                        Tiempo :
+                    </span>
+
+                    <span class="col-8 text-right">
+                        00:00
+                    </span>
+                    
+                </div>
+                <div class="row mt-1">
+                    <span class="col-4">
+                        Valor :
+                    </span>
+                
+                    <span class="col-8 text-right">
+                        $50000
+                    </span>
+                
+                </div>
+
+            </div>
+            
+        </div>
+
+
         <div class="row p-container" *ngIf="parqueaderos.length == 0">
-            <h5 class="w-100 text-center mt-2"> No tienes vehiculos activos en Parking Mcqueen</h5>
+            <h5 class="w-100 text-center mt-3"> No tienes vehiculos activos en Parking Mcqueen</h5>
         </div>
     </div>
 

@@ -30,6 +30,30 @@
 
 }
 
+.card-content{
+    width: 80%;
+    margin-top: 40px;
+    padding: 20px;
+    border: 1px solid #b9b7b7;
+    border-radius: 15px;
+    background-color: whitesmoke;
+
+    .placa{
+        width: 100px;
+        text-align: center;
+        border: 2px solid;
+        border-radius: 5px;
+        font-size: larger;
+        font-weight: bold;
+        background-color: #e3e137;
+    }
+}
+
+.header{
+    text-align:center;
+    font-weight: bold;
+}
+
 
 .sombra{
     border-radius: 20px;
