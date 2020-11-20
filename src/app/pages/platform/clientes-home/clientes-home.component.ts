@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { zip } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { interval, Observable, Observer, timer, zip } from 'rxjs';
+import { map, mapTo, tap } from 'rxjs/operators';
 import { constantes } from 'src/app/constantes';
 import { AuthService } from '../services/auth.service';
 import { DatabaseService } from '../services/database.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-clientes-home',
   templateUrl: './clientes-home.component.html',
-  styleUrls: ['./clientes-home.component.scss']
+  styleUrls: ['./clientes-home.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class ClientesHomeComponent implements OnInit {
 
@@ -19,7 +21,10 @@ export class ClientesHomeComponent implements OnInit {
   configLoader = constantes.coloresLoader;
   cargando: boolean = false;
   mostrarParking: boolean = false;
-
+  logs: any[];
+  tiempos: any[] = [];
+  nada: string;
+  intervals: any[] = [];
 
   constructor(private auth: AuthService, private afs: AngularFirestore, private db: DatabaseService) {
     this.datosParqueadero = this.auth.datosUsuario;
@@ -88,7 +93,61 @@ export class ClientesHomeComponent implements OnInit {
       });
     });
 
-    console.log(suscripciones)
+    this.getInfo(suscripciones);
 
   }
+
+  getInfo(suscripciones: any[]){
+    const logs: any[] = [];
+    suscripciones.forEach(element => {
+      logs.push(this.afs.collection('logs').doc(element.idlog).valueChanges());
+    });
+
+    zip(...logs).pipe(
+      map(
+        (items: any[]) => items.map(
+          (x: any) => {
+            x.fechaReferencia = x.fechaEntrada.seconds,
+
+            x.tiempo = new Observable<string>((observer: Observer<any>) => {
+              // tslint:disable-next-line: max-line-length
+              const interval = setInterval(() => {
+                const segRef = moment(new Date()).diff(new Date(x.fechaReferencia * 1000), 'seconds');
+                const horas = Math.floor(segRef / 3600);
+                const minutos = Math.floor(((segRef / 3600) % 1) * 60);
+                const segundos = Math.floor(((((segRef / 3600) % 1 ) * 60 ) % 1 ) * 60 );
+                observer.next( `${horas}:${minutos}:${segundos}`);
+              }, 1000);
+              this.intervals.push(interval);
+            });
+            x.fechaEntrada = this.parsearFecha(x.fechaEntrada.seconds);
+            return x;
+          }
+        )
+      )
+    ).subscribe( (logs: any) => {
+      this.logs = logs;
+    });
+
+  }
+
+  parsearFecha(seconds, format: string = 'D/M/Y, h:mm:ss a') {
+    return seconds ? moment(new Date(seconds * 1000)).format(format) : '- - - -';
+  }
+
+  atras(){
+    this.limpiarIntervals();
+    this.mostrarParking = false;
+  }
+
+  getTiempo(obs: Observable<any>, pos: number){
+    obs.subscribe( x => this.tiempos[pos] = x );
+  }
+
+  limpiarIntervals(){
+    this.intervals.forEach((interval: any) => {
+      clearInterval(interval);
+    })
+  }
+
 }
