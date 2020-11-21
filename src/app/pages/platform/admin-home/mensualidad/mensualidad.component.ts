@@ -25,7 +25,8 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
   usuarios: any[];
   suscripciones: any[];
   vehiculos: any[];
-  displayedColumns: string[] = ['documento','cliente' ,'placa', 'marca', 'tipo', 'fechaInicio', 'fechaFinal', 'valor', 'acciones'];
+  // tslint:disable-next-line: max-line-length
+  displayedColumns: string[] = ['documento', 'cliente', 'placa', 'marca', 'tipo', 'fechaInicio', 'fechaFinal', 'valor', 'estado', 'acciones'];
   dataSource: MatTableDataSource<any>;
   configLoader = constantes.coloresLoader;
   cargando: boolean = false;
@@ -131,9 +132,7 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
   }
 
   ordenarData(){
-
     this.suscripciones.forEach(suscripcion => {
-      console.log(suscripcion);
       const posVh = this.vehiculos.findIndex(vh => {
         return vh.key === suscripcion.vehiculo;
       });
@@ -152,6 +151,8 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
 
     });
 
+    console.log(this.suscripciones);
+
     this.dataSource = new MatTableDataSource(this.suscripciones);
     this.dataSource.filterPredicate = this.predicadoBusqueda;
     this.dataSource.paginator = this.paginator;
@@ -162,7 +163,7 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
 
   calcularfecha(fechaEnSegundos: number){
     if(!fechaEnSegundos){
-      return '-------';
+      return '---------';
     }
     return moment(new Date(fechaEnSegundos * 1000)).format('l');
   }

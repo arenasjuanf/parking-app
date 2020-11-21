@@ -156,7 +156,7 @@ export class EgresoComponent implements OnInit {
   }
 
   finalizarSuscripcion(idSuscripcion: string){
-    this.db.modificar('suscripciones', idSuscripcion,{estado: false}).then(() => {
+    this.db.modificar('suscripciones', idSuscripcion,{estado: false, fechaFinal: new Date()}).then(() => {
       console.log('susripción cerrada');
       this.dialogRef.close({ cerrar: true, valor: this.totalPagar });
     });
