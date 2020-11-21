@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { interval, Observable, Observer, timer, zip } from 'rxjs';
 import { map, mapTo, tap } from 'rxjs/operators';
@@ -13,7 +13,7 @@ import * as moment from 'moment';
   styleUrls: ['./clientes-home.component.scss'],
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class ClientesHomeComponent implements OnInit {
+export class ClientesHomeComponent implements OnInit, OnDestroy {
 
   opened: boolean = false;
   datosParqueadero: any;
@@ -32,6 +32,10 @@ export class ClientesHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(){
+    this.limpiarIntervals();
   }
 
   cerrarSesion(){
@@ -132,7 +136,6 @@ export class ClientesHomeComponent implements OnInit {
         )
       )
     ).subscribe( (logs: any) => {
-      console.log(logs);
       this.cargando = false;
       this.logs = logs;
     });
@@ -153,6 +156,8 @@ export class ClientesHomeComponent implements OnInit {
   }
 
   limpiarIntervals(){
+    console.log('limpia intervalos');
+    // tslint:disable-next-line: no-shadowed-variable
     this.intervals.forEach(( interval: any) => {
       clearInterval(interval);
     })
