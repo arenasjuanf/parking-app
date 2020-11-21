@@ -11,6 +11,7 @@ import * as XLSX from 'xlsx';
 import { map } from 'rxjs/operators';
 import { AfterViewInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 type NewType = number;
 
@@ -19,7 +20,7 @@ type NewType = number;
   templateUrl: './informe.component.html',
   styleUrls: ['./informe.component.scss']
 })
-export class InformeComponent implements OnInit, AfterViewInit  {
+export class InformeComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -29,20 +30,25 @@ export class InformeComponent implements OnInit, AfterViewInit  {
   // tslint:disable-next-line: max-line-length
   displayedColumns: Array<string> = ['cliente', 'documento', 'placa', 'marca', 'piso', 'fechaIngreso', 'horaIngreso', 'fechaSalida', 'horaSalida'];
   logs: any[];
+  dataFilter: any[];
   ItemsPerPage = 5;
   currentPage = 0;
   totalLogs: number;
   cargando = false;
   configLoader = constantes.coloresLoader;
   input;
+  formFilter: FormGroup;
+  floors: any[];
 
   constructor(
     private router: Router,
     private auth: AuthService,
     private db: DatabaseService,
-    public afs: AngularFirestore
+    public afs: AngularFirestore,
+    private builder: FormBuilder
   ) {
     this.getLogs();
+    this.getFloors();
   }
 
   ngAfterViewInit() {
@@ -50,6 +56,7 @@ export class InformeComponent implements OnInit, AfterViewInit  {
   }
 
   ngOnInit(): void {
+    this.createForm();
   }
 
   volver() {
@@ -60,8 +67,8 @@ export class InformeComponent implements OnInit, AfterViewInit  {
     this.cargando = true;
     const idParqueadero: string = this.auth.datosUsuario.parqueadero;
     const obs$ = this.db.getPorFiltro('logs', 'parqueadero', idParqueadero).valueChanges().pipe(
-      map( logs => {
-        logs.map( ( x: any ) => {
+      map(logs => {
+        logs.map((x: any) => {
           x.datosCliente.documento = parseInt(x.datosCliente.documento);
           x.horaEntrada = this.parsearFecha(x?.fechaEntrada?.seconds, 'LT');
           x.horaSalida = this.parsearFecha(x?.fechaSalida?.seconds, 'LT');
@@ -71,14 +78,14 @@ export class InformeComponent implements OnInit, AfterViewInit  {
         });
         return logs;
       })
-    ).subscribe( logs => {
+    ).subscribe(logs => {
       if (logs) {
 
         obs$.unsubscribe();
         this.logs = logs;
-        this.dataSource = new MatTableDataSource(this.logs);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+        console.log("THis logs ", this.logs);
+        this.dataFilter = logs;
+        this.configTable(this.logs);
         this.cargando = false;
       }
     });
@@ -151,6 +158,64 @@ export class InformeComponent implements OnInit, AfterViewInit  {
         }
       }
     );
+  }
+
+  searchDate(evento, tipoFecha) {
+    const fecha = evento.value;
+    const f = {
+      fechaEntrada: 'isSameOrAfter',
+      fechaSalida: 'isSameOrBefore',
+    }
+    this.dataFilter = this.logs.filter((element: any) => {
+      return moment(new Date(element[tipoFecha]))[f[tipoFecha]](fecha);
+    });
+    this.configTable(this.dataFilter);
+  }
+
+  configTable(list) {
+    this.dataSource = new MatTableDataSource(list);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  createForm() {
+    this.formFilter = <FormGroup>this.builder.group({
+      documento: [],
+      placa: [],
+      marca: [],
+      piso: [],
+      tipo: []
+    });
+
+    this.formFilter.valueChanges.subscribe(respuesta => {
+      let bandera = false;
+      Object.keys(respuesta).forEach(item => {
+        if (respuesta[item] && respuesta[item] !== "") {
+          bandera = true;
+          this.dataFilter = this.logs.filter(log => {
+            let dato = log[item] + "";
+            if (log.datosCliente[item]) {
+              dato = log.datosCliente[item] + "";
+            } else if (log.datosVehiculo[item]) {
+              dato = log.datosVehiculo[item] + "";
+            } else if (log.puesto[item]) {
+              dato = log.puesto[item] + "";
+            }
+            return dato.toLowerCase().includes(respuesta[item].toLowerCase());
+          });
+        }
+      });
+      console.log("item ", bandera);
+      this.configTable(bandera ? this.dataFilter : this.logs);
+    });
+  }
+
+  getFloors() {
+    this.db.findDoc('parqueaderos', this.auth.datosUsuario.parqueadero).snapshotChanges().subscribe(respuesta => {
+      this.floors = respuesta.payload.get('pisos');
+    }, error => {
+      console.log("Error ", error);
+    });
   }
 
 }
