@@ -46,7 +46,7 @@
             </div>
         </div>
 
-        <div *ngIf="mostrarParking" class="row d-flex flex-column justify-content-center">
+        <div *ngIf="mostrarParking && parqueaderos.length > 0" class="row d-flex flex-column justify-content-center">
             <div class="col text-left my-1 back-container">
                 <button class="btn btn-primary" (click)="atras()">
                     <i class="fas fa-arrow-left"></i>
@@ -54,34 +54,42 @@
                 </button>
             </div>
             
-            <div class="card-content my-2" *ngFor="let item of logs; let i = index">
+            <div class="card-content  shadow my-2" *ngFor="let item of logs; let i = index">
                 <div class="col text-center">
-                    <i class="fas fa-car fa-3x"></i>
+                    <i class="{{ item?.datosVehiculo.tipo == 'carro' ? 'fas fa-car' : 'fas fa-motorcycle'}} fa-3x"></i>
                 </div>
                 <div class="col d-flex justify-content-center">
                     <div class="placa">
                         {{ item?.datosVehiculo?.placa | uppercase}}
                     </div>
                 </div>
-                <div class="row mt-1">
+                <div class="row mt-1 border-bottom">
                     <span class="col-4">
-                        Marca :
+                        Marca 
                     </span>
                     <span class="col-8 text-right">
                         {{ item?.datosVehiculo?.marca | uppercase}}
                     </span>
                 </div>
-                <div class="row mt-1">
+                <div class="row mt-1 border-bottom">
                     <span class="col-4">
-                        Ingreso :
+                        Suscripción 
+                    </span>
+                    <span class="col-8 text-right">
+                        {{ item?.datosSuscripcion?.tipoSuscripcion | titlecase}}
+                    </span>
+                </div>
+                <div class="row mt-1 border-bottom">
+                    <span class="col-4">
+                        Ingreso 
                     </span>
                     <span class="col-8 text-right">
                         {{ item?.fechaEntrada }}
                     </span>
                 </div>
-                <div class="row mt-1">
+                <div class="row mt-1 border-bottom">
                     <span class="col-4">
-                        Tiempo :
+                        Tiempo 
                     </span>
             
                     <span class="col-8 text-right">
@@ -89,13 +97,13 @@
                     </span>
             
                 </div>
-                <div class="row mt-1">
+                <div class="row mt-1 border-bottom">
                     <span class="col-4">
-                        Valor :
+                        Valor 
                     </span>
             
                     <span class="col-8 text-right">
-                        $50000
+                       {{ item.valor }}
                     </span>
             
                 </div>
@@ -104,7 +112,7 @@
         </div>
 
         <div class="row p-container" *ngIf="parqueaderos.length == 0">
-            <h5 class="w-100 text-center mt-3"> No tienes vehiculos activos en Parking Mcqueen</h5>
+            <h5 class="w-100 text-center mt-3 p-2"> No tienes vehiculos activos en Parking Mcqueen</h5>
         </div>
     </div>
 

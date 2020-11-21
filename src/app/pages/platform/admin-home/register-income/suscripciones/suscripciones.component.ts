@@ -134,12 +134,11 @@ export class SuscripcionesComponent implements OnInit, AfterViewInit {
           this.suscripcionActiva = s;
         }
       });
-      console.log(this.suscripcionActiva);
       this.mostrarForm = Object.keys(this.suscripcionActiva).length ? false : true;
     })
   }s
 
-  toDate(hora, format = 'll') {
+  toDate(hora, format = 'LLL') {
     if (hora) {
       return moment(new Date(hora.seconds * 1000)).locale('en').format(format);
     }

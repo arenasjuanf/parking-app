@@ -63,6 +63,7 @@ export class ClientesHomeComponent implements OnInit {
 
 
   seleccionarParqueadero(parqueadero){
+    this.cargando = true;
     this.mostrarParking = true;
     const idParqueadero = parqueadero.key;
 
@@ -72,6 +73,7 @@ export class ClientesHomeComponent implements OnInit {
         this.getSubs(plano);
       }
     }, error => {
+      this.cargando = true;
       console.log('error: ', error);
     });
   }
@@ -116,8 +118,12 @@ export class ClientesHomeComponent implements OnInit {
                 const horas = Math.floor(segRef / 3600);
                 const minutos = Math.floor(((segRef / 3600) % 1) * 60);
                 const segundos = Math.floor(((((segRef / 3600) % 1 ) * 60 ) % 1 ) * 60 );
-                observer.next( `${horas}:${minutos}:${segundos}`);
+
+                x.valor = this.calcularPago(x);
+                // tslint:disable-next-line: max-line-length
+                observer.next(`${horas < 10 ? '0' : ''}${horas}:${minutos < 10 ? '0' : ''}${minutos}:${segundos < 10 ? '0' : ''}${segundos}`);
               }, 1000);
+
               this.intervals.push(interval);
             });
             x.fechaEntrada = this.parsearFecha(x.fechaEntrada.seconds);
@@ -126,6 +132,8 @@ export class ClientesHomeComponent implements OnInit {
         )
       )
     ).subscribe( (logs: any) => {
+      console.log(logs);
+      this.cargando = false;
       this.logs = logs;
     });
 
@@ -145,9 +153,35 @@ export class ClientesHomeComponent implements OnInit {
   }
 
   limpiarIntervals(){
-    this.intervals.forEach((interval: any) => {
+    this.intervals.forEach(( interval: any) => {
       clearInterval(interval);
     })
+  }
+
+  calcularPago(datos) {
+    let totalPagar = 0;
+    let cantidadHoras = 0;
+
+    if (!datos.datosSuscripcion['pagado']) {
+
+      const tipoSubs = datos.datosSuscripcion['tipoSuscripcion'];
+      const ingreso = new Date(datos.datosSuscripcion['fechaInicio']['seconds'] * 1000);
+
+      if (tipoSubs === 'hora') {
+        cantidadHoras = Math.ceil(moment(new Date()).diff(ingreso, 'hours', true));
+        totalPagar = this.retornarvalor(cantidadHoras, datos.datosSuscripcion.valor);
+      } else if (tipoSubs === 'dia') {
+        const cantidadDias = Math.ceil(moment(new Date()).diff(ingreso, 'days', true));
+        totalPagar = this.retornarvalor(cantidadDias, datos.datosSuscripcion.valor);
+      } else {
+        totalPagar = datos.datosSuscripcion['valor']
+      }
+    }
+    return `$ ${totalPagar}`;
+  }
+
+  retornarvalor(cantidad: number, valor) {
+    return cantidad * valor;
   }
 
 }

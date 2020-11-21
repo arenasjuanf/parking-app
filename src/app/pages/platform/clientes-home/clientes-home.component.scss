@@ -15,7 +15,8 @@
 }
 
 .container{
-    height: calc( 100% - 48px);
+    height: calc( 100% - 115px);
+    overflow-y: scroll;
 
     mat-tab-group{
         width: 80%;
@@ -50,8 +51,8 @@
     width: 90%;
     margin-top: 40px;
     padding: 20px;
-    border: 1px solid #b9b7b7;
-    border-radius: 15px;
+    border: 2px solid #b9b7b7;
+    border-radius: 34px;
     background-color: whitesmoke;
     margin: auto;
 
@@ -96,7 +97,7 @@
     -webkit-box-shadow: 6px 7px 5px 0px rgba(87,86,87,1);
     -moz-box-shadow: 6px 7px 5px 0px rgba(87,86,87,1);
     box-shadow: 6px 7px 5px 0px rgba(87,86,87,1);
-    margin-top: 5px;
+    //margin-top: 5px;
 }
 
 .titulo{
@@ -127,5 +128,9 @@ mat-drawer-container{
 
 img{
     width: 160px;
+}
+
+.border-bottom{
+    font-weight: bold !important;
 }
 
