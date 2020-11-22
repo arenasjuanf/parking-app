@@ -2,10 +2,28 @@
   border: 1px solid black;
   padding: 5px;
 }
-mat-form-field {
-  width: 80%;
-  margin-top: 10px !important;
-  margin-right: 5px;
+mat-form-field ::ng-deep {
+  width: calc(50% - 5px);
+  height: 54px;
+  .mat-form-field-outline-start,
+  .mat-form-field-outline-gap,
+  .mat-form-field-outline-end {
+      background-color: #f6f8fb;
+  }
+  .mat-form-field-flex {
+    height: 45px;
+    display: flex;
+    align-items: center;
+    margin: 0px 10px;
+  }
+
+  .mat-form-field-infix {
+    font-size: 15x;
+  }
+  
+  .mat-input-element:disabled{
+    color:black;
+  }
 }
 .mat-form-field-flex {
   height: 50px !important;

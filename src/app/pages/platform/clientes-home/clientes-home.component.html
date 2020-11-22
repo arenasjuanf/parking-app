@@ -48,7 +48,7 @@
 
         <div *ngIf="mostrarParking && parqueaderos.length > 0" class="row d-flex flex-column justify-content-center">
             <div class="col text-left my-1 back-container">
-                <button class="btn btn-primary" (click)="atras()">
+                <button class="btn btn-primary" (click)="atras()" i18n>
                     <i class="fas fa-arrow-left"></i>
                     Regresar
                 </button>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div class="row mt-1 border-bottom">
-                    <span class="col-4">
+                    <span class="col-4" i18n>
                         Marca 
                     </span>
                     <span class="col-8 text-right">
@@ -72,7 +72,7 @@
                     </span>
                 </div>
                 <div class="row mt-1 border-bottom">
-                    <span class="col-4">
+                    <span class="col-4" i18n>
                         Suscripción 
                     </span>
                     <span class="col-8 text-right">
@@ -80,7 +80,7 @@
                     </span>
                 </div>
                 <div class="row mt-1 border-bottom">
-                    <span class="col-4">
+                    <span class="col-4" i18n>
                         Ingreso 
                     </span>
                     <span class="col-8 text-right">
@@ -88,7 +88,7 @@
                     </span>
                 </div>
                 <div class="row mt-1 border-bottom">
-                    <span class="col-4">
+                    <span class="col-4" i18n>
                         Tiempo 
                     </span>
             
@@ -98,7 +98,7 @@
             
                 </div>
                 <div class="row mt-1 border-bottom">
-                    <span class="col-4">
+                    <span class="col-4" i18n>
                         Valor 
                     </span>
             
@@ -112,7 +112,7 @@
         </div>
 
         <div class="row p-container" *ngIf="parqueaderos.length == 0">
-            <h5 class="w-100 text-center mt-3 p-2"> No tienes vehiculos activos en Parking Mcqueen</h5>
+            <h5 class="w-100 text-center mt-3 p-2" i18n> No tienes vehiculos activos en Parking Mcqueen</h5>
         </div>
     </div>
 

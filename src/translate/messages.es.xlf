@@ -1533,6 +1533,66 @@
           <context context-type="linenumber">79</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="d88c6477b0bb14385a431d3d69e587ad8fc56432" datatype="html">
+        <source>
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>Regresar
+        </source>
+        <target>
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>Regresar
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/clientes-home/clientes-home.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2a8fb186b74b1861372d70a8970b2eb6ed72e8f3" datatype="html">
+        <source>Marca </source>
+        <target>Marca </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/clientes-home/clientes-home.component.html</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f7efb34180a390c4881fc46f4716e8ca9b1da44f" datatype="html">
+        <source>Suscripción</source>
+        <target>Suscripción </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/clientes-home/clientes-home.component.html</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0fb838e56387169a788ee9b8c361090b3d000525" datatype="html">
+        <source>Ingreso</source>
+        <target>Ingreso</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/clientes-home/clientes-home.component.html</context>
+          <context context-type="linenumber">83</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="273ae4754c15915d916ee7528e15386ee9e1f149" datatype="html">
+        <source>Tiempo </source>
+        <target>Tiempo </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/clientes-home/clientes-home.component.html</context>
+          <context context-type="linenumber">91</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f70aa8dd0065bb9614cbc7b20a3fb39d866ad2a1" datatype="html">
+        <source>Valor </source>
+        <target>Valor </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/clientes-home/clientes-home.component.html</context>
+          <context context-type="linenumber">101</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="912621697da84a909df861d6ceac75c846598abb" datatype="html">
+        <source> No tienes vehiculos activos en Parking Mcqueen</source>
+        <target>No tienes vehiculos activos en Parking Mcqueen </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/clientes-home/clientes-home.component.html</context>
+          <context context-type="linenumber">115</context>
+        </context-group>
+      </trans-unit>
     </body>
   </file>
 </xliff>
