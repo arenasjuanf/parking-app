@@ -499,7 +499,7 @@ export class RegisterIncomeComponent implements OnInit, OnDestroy {
         }
       });
     } else {
-      this.notify.notification('error', 'Registro Guardado')
+      this.notify.notification('error', 'placa no encontrada')
     }
   }
 
