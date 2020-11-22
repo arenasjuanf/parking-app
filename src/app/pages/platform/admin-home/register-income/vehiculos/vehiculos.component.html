@@ -1,6 +1,6 @@
 <div class="h-100 animate__animated animate__fadeInLeftBig animate__fast" *ngIf="!mostrarForm">
   <div class="d-flex justify-content-between">
-    <button mat-raised-button color="primary" class="agregar" (click)="mostrarForm = !mostrarForm" i18n>
+    <button mat-raised-button class="agregar btn btn-primary" (click)="mostrarForm = !mostrarForm" i18n>
       <mat-icon>add</mat-icon>
       Agregar
     </button>
@@ -64,7 +64,7 @@
       Cancelar
     </button>
 
-    <button mat-raised-button color="primary" type="submit" i18n>
+    <button mat-raised-button class="btn btn-primary" type="submit" i18n>
       <mat-icon>save</mat-icon>
       Guardar
     </button>

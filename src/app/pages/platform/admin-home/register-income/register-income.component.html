@@ -1,23 +1,29 @@
 <div class="container-fluid">
-  <div class="w-100 d-flex justify-content-around">
-    <button class="btn btn-secondary m-2" type="button" (click)="regresar()" i18n>
-      <i class="fas fa-chevron-left"></i>
-      Regresar
-    </button>
-
-    <h3>
-      {{ mostrarEgreso ? 'Egreso' : 'Ingreso' }} De Vehiculos
-    </h3>
-    
-    <button class="btn io m-2" type="button" (click)="mostrarEgreso = !mostrarEgreso">
-      {{ mostrarEgreso ? 'Ingreso' : 'Egreso' }} <i [class]="mostrarEgreso ? 'fas fa-arrow-left' : 'fas fa-arrow-right'"></i>
-    </button>
-
+  <div class="row">
+    <div class="col-3">
+      <button class="btn btn-secondary m-2" type="button" (click)="regresar()" i18n>
+        <i class="fas fa-chevron-left"></i>
+        Regresar
+      </button>
+    </div>
+    <div class="col-6 text-center align-self-center">
+      <h3 class="">
+        {{ mostrarEgreso ? 'Egreso' : 'Ingreso' }} De Vehiculos
+      </h3>
+    </div>
+    <div class="col-3 text-right">
+      <button class="btn btn-info m-2" type="button" (click)="mostrarEgreso = !mostrarEgreso">
+        {{ mostrarEgreso ? 'Ingreso' : 'Egreso' }} <i [class]="mostrarEgreso ? 'fas fa-arrow-left' : 'fas fa-arrow-right'"></i>
+      </button>
+    </div>
   </div>
+
+  <hr>
 
   <div class="row  animate__animated animate__bounceInLeft animate__fast" *ngIf="!mostrarEgreso">
     <form [formGroup]="formRegisterIncome" class="col-md-10 col-12">
       <div class="row">
+        
         <mat-form-field class="d-flex" appearance="outline" class="col-12 col-md-4 my-1">
           <mat-label i18n>Documento de usuario</mat-label>
           <input (keydown.enter)="searchDataUser($event)" matInput type="text" formControlName="documentoUsuario">
@@ -66,8 +72,8 @@
         Reset Formulario
       </button>
     
-      <button mat-raised-button color="primary" [disabled]="!datosCliente" (click)="verVehiculos()" class="full shadow" i18n>
-        <mat-icon>commute</mat-icon>
+      <button [disabled]="!datosCliente" (click)="verVehiculos()" class="full shadow btn btn-primary" i18n>
+        <i class="fas fa-car"></i>
         Vehiculos
       </button>
 
@@ -85,6 +91,8 @@
   </div>
   
 </div>
+
+<hr>
 
 <div class="animate__animated animate__fadeIn animate__slow">
   <app-planos-asignacion 
