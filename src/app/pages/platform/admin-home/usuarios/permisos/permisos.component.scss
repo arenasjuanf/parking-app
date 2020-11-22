@@ -1,13 +1,11 @@
-
-
-mat-list-option{
-    ::ng-deep{
-        .mat-pseudo-checkbox-checked{
-            background-color: #28a745 !important;
+mat-list-option {
+     ::ng-deep {
+        .mat-pseudo-checkbox-checked {
+            background-color: #007bff !important;
         }
     }
 }
 
-mat-list-item:hover{
+mat-list-item:hover {
     background-color: whitesmoke;
 }

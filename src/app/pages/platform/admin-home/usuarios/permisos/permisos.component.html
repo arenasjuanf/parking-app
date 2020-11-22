@@ -1,31 +1,19 @@
+<p class="text-center font-weight-bold" i18n><i class="fas fa-wrench"></i> Permisos</p>
 
-    <p class="text-center font-weight-bold" i18n>Permisos</p>
+<mat-list role="list">
 
-<!--     <mat-list-option  [value]="permisos[item]">
-        <p>
-            <i [ngClass]="permisos[item].icono" class="mr-2"></i>{{ item | titlecase}}
-        </p>
-    </mat-list-option> -->
+    <mat-list-item role="listitem" *ngFor="let item of keysPermisos">
+        <mat-divider></mat-divider>
+        <span class="w-100">
+            <i [ngClass]="permisos[item].icono" class="mr-2"></i> {{ item | titlecase}}
+        </span>
+        <mat-checkbox [checked]="permisos[item].checked" color="accent" (change)="agregar(permisos[item],$event)">
+        </mat-checkbox>
+    </mat-list-item>
 
-    <mat-list role="list" >
-        
-        <mat-list-item role="listitem" *ngFor="let item of keysPermisos">
-            <p class="w-100">
-                <i [ngClass]="permisos[item].icono" class="mr-2"></i>
-                {{ item | titlecase}}
-            </p>
-            <mat-checkbox [checked]="permisos[item].checked" (change)="agregar(permisos[item],$event)">
-            </mat-checkbox>
-            <mat-divider></mat-divider>
-        </mat-list-item>
-        
-    </mat-list>
-
-    
-
+</mat-list>
 
 <div class="d-flex justify-content-between mt-1">
-    <button mat-button [mat-dialog-close] class="btn btn-danger" i18n> Cancelar </button>
-    <button mat-button class="btn btn-primary" (click)="guardar()" i18n> Guardar </button>
+    <button mat-button [mat-dialog-close] class="btn btn-danger" i18n><i class="fas fa-times"></i> Cancelar </button>
+    <button mat-button class="btn btn-primary" (click)="guardar()" i18n><i class="fas fa-save"></i> Guardar </button>
 </div>
-

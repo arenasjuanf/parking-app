@@ -1,4 +1,3 @@
-
 <div class="contenedor">
     <div class="text-left">
         <button class="btn btn-secondary m-2" type="button" (click)="volver()">
@@ -7,8 +6,10 @@
         </button>
     </div>
 
-    <form  class="row w-100 animate__animated animate__bounceInLeft animate__fast">
-        
+    <hr>
+
+    <form class="row w-100 animate__animated animate__bounceInLeft animate__fast">
+
         <mat-form-field appearance="outline" class="col-12 col-md-3">
             <mat-label>Fecha Ingreso</mat-label>
             <input matInput [matDatepicker]="ingreso">
@@ -38,15 +39,15 @@
             <mat-label>Marca</mat-label>
             <input matInput type="text">
         </mat-form-field>
-    
-        <mat-form-field appearance="outline" class="col-12 col-md-3" >
+
+        <mat-form-field appearance="outline" class="col-12 col-md-3">
             <mat-label>Tipo de vehículo</mat-label>
             <mat-select>
                 <mat-option value=""></mat-option>
                 <mat-option *ngFor="let item of branchVehicles" [value]="item['value']">{{ item['view'] }}</mat-option>
             </mat-select>
         </mat-form-field>
-        
+
         <mat-form-field appearance="outline" class="col-12 col-md-3">
             <mat-label>Piso</mat-label>
             <input matInput type="number">
@@ -54,7 +55,7 @@
 
         <div class="col-12 col-md-3 d-flex justify-content-between m-auto botones">
 
-            <button mat-raised-button color="primary">
+            <button mat-raised-button class="btn btn-primary">
                 Buscar
                 <mat-icon>search</mat-icon>
             </button>
@@ -68,60 +69,60 @@
 
     <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" matSort class="w-100" matTableExporter #exporter="matTableExporter">
-        
+
             <ng-container matColumnDef="cliente">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Documento </th>
                 <td mat-cell *matCellDef="let row"> {{ row?.datosCliente?.nombre | titlecase }} </td>
             </ng-container>
-        
+
             <ng-container matColumnDef="documento">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Documento </th>
                 <td mat-cell *matCellDef="let row"> {{ row?.datosCliente?.documento }} </td>
             </ng-container>
-        
+
             <ng-container matColumnDef="placa">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Placa </th>
                 <td mat-cell *matCellDef="let row"> {{ row?.datosVehiculo?.placa | uppercase }} </td>
             </ng-container>
-        
+
             <ng-container matColumnDef="marca">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Marca </th>
                 <td mat-cell *matCellDef="let row"> {{ row?.datosVehiculo?.marca | titlecase }} </td>
             </ng-container>
-        
+
             <ng-container matColumnDef="piso">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Piso </th>
                 <td mat-cell *matCellDef="let row"> {{ row?.puesto?.piso + 1 }} </td>
             </ng-container>
-        
+
             <ng-container matColumnDef="fechaIngreso">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Ingreso </th>
                 <td mat-cell *matCellDef="let row"> {{ row?.fechaEntrada }} </td>
             </ng-container>
-        
+
             <ng-container matColumnDef="horaIngreso">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Hora Ingreso </th>
                 <td mat-cell *matCellDef="let row"> {{ row?.horaEntrada }} </td>
             </ng-container>
-        
+
             <ng-container matColumnDef="fechaSalida">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Salida </th>
                 <td mat-cell *matCellDef="let row"> {{ row?.fechaSalida }} </td>
             </ng-container>
-        
+
             <ng-container matColumnDef="horaSalida">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Hora Salida </th>
                 <td mat-cell *matCellDef="let row"> {{ row?.horaSalida }} </td>
             </ng-container>
-        
+
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        
+
             <tr class="mat-row" *matNoDataRow>
                 <td class="mat-cell" colspan="4">No hay resultados</td>
             </tr>
         </table>
-        <mat-paginator (page)="cambiosPaginator($event)" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>        
+        <mat-paginator (page)="cambiosPaginator($event)" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     </div>
 </div>
 <ngx-loading *ngIf="cargando" [config]="configLoader"></ngx-loading>
