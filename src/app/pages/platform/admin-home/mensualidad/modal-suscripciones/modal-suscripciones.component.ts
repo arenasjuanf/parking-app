@@ -194,9 +194,11 @@ export class ModalSuscripcionesComponent implements OnInit {
   }
 
   verVehiculos(seleccionar = false) {
-
-    const data = Object.assign({}, this.datosCliente)
+    console.log(this.dataUser);
+    const data = Object.assign({}, this.datosCliente);
+    data.parqueadero = this.dataUser['parqueadero'];
     data['seleccionar'] = seleccionar;
+
     if (!this.modalAbierta) {
 
       const ref = this.dialog.open(VehiculosComponent, {

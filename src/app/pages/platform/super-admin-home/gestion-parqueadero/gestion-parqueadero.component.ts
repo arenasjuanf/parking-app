@@ -52,8 +52,6 @@ export class GestionParqueaderoComponent implements OnInit {
       correo: ['', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")]],
       direccion: ['', Validators.required],
       cantidadPisos: [1, Validators.required],
-      capacidadCarros: ['', Validators.required],
-      capacidadMotos: ['', Validators.required],
       telefono: ['', Validators.required],
       pisos: this.fb.array([
         this.fb.group({
@@ -116,7 +114,8 @@ export class GestionParqueaderoComponent implements OnInit {
     const data = {
       parqueadero: idParqueadero,
       tipoUsuario: 'admin',
-      nombre: this.form.get('nombrePropietario').value
+      nombre: this.form.get('nombrePropietario').value,
+      permisos: constantes.permisosAdmin
     };
     const email = this.form.value['correo'];
     const pass = this.form.value['nit'];

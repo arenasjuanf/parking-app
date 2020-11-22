@@ -100,7 +100,6 @@ export class RegisterIncomeComponent implements OnInit, OnDestroy {
     this.dataBaseService.findDoc('parqueaderos', this.dataUser['parqueadero']).snapshotChanges().subscribe(respuesta => {
       this.datosPlano = respuesta ? JSON.parse(respuesta.payload.get('plano')) : [];
       this.clientesActivos = respuesta.payload.get('clientesActivos');
-      console.log('cientes Activos: ', this.clientesActivos);
       this.cargando = false;
     }, error => {
       console.log("Error ", error);
@@ -137,7 +136,6 @@ export class RegisterIncomeComponent implements OnInit, OnDestroy {
                   width: '550px'
                 }).afterClosed().subscribe( result => {
                   if(result){
-                    console.log(result);
                     this.addParkingToClient(result.key);
                     obsCliente$.unsubscribe();
                   } else {
