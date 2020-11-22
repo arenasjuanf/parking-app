@@ -53,4 +53,38 @@ export class constantes{
         }
     };
 
+    public static permisosAdmin = [
+        {
+            incono: 'fas fa-file-alt',
+            nombre: 'informe',
+            ruta: 'informe'
+        },
+        {
+            icono: 'fas fa-cog',
+            nombre: 'configuración',
+            ruta: 'configuracion'
+        }, 
+        {
+            icono: 'fas fa-pencil-alt',
+            nombre: 'datos parqueadero',
+            ruta: 'datos-parqueadero'
+        }, 
+        {
+            icono: 'far fa-plus-square',
+            nombre: 'Ingreso / Egreso',
+            ruta: 'ingreso'
+        }, 
+        {
+            icono: 'far fa-credit-card',
+            nombre: 'suscripciones',
+            ruta: 'mensualidad'
+        },
+        {
+
+            icono: 'fas fa-user',
+            nombre: 'Usuarios',
+            ruta: 'usuarios'
+        }
+    ];
+
 }

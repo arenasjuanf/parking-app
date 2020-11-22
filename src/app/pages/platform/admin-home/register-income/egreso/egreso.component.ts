@@ -50,8 +50,6 @@ export class EgresoComponent implements OnInit {
     this.db.findDoc('suscripciones', idSuscripcion).valueChanges().subscribe(
       (result: object) => {
         this.datosSuscripcion = result;
-        console.log(this.datosSuscripcion);
-
         this.calcularPago();
       }
     );

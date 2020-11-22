@@ -17,7 +17,7 @@
                         (click)="fileInput.click()">
                         <i class="fas fa-plus"></i>
                     </button>
-                    <button [disabled]="form.disabled" type="button" class="btn btn-primary rounded-circle"
+                    <button [disabled]="form.disabled" type="button" class="btn btn-danger rounded-circle"
                         (click)="setImagenDefecto()">
                         <i class="fas fa-minus"></i>
                     </button>
@@ -69,14 +69,7 @@
                             </button>
                         </div>
                     </div>
-                    <mat-form-field appearance="outline" class="order-1 order-md-2 col-12 col-md-4 my-1">
-                        <mat-label i18n>Capacidad carros</mat-label>
-                        <input matInput type="number" formControlName="capacidadCarros">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="order-2 order-md-3 col-12 col-md-4 my-1">
-                        <mat-label i18n>Capacidad Motos</mat-label>
-                        <input matInput type="text" formControlName="capacidadMotos">
-                    </mat-form-field>
+                    
                 </div>
             </div>
         </div>
@@ -84,14 +77,15 @@
             <div class="col-3 d-flex flex-column justify-content-start">
                 <button type="button" class="btn btn-primary mt-2" (click)="configurarPlano()"
                     [disabled]="!form.get('pisos').valid" i18n>
-                    Configurar Plano
                     <i class="far fa-eye"></i>
+                    Configurar Plano
                 </button>
                 <!-- <button type="button" class="btn btn-primary mt-2" (click)="configurarPlano(true)"
                     [disabled]="!form.get('plano').valid && accion !== 'ver'">
                     Visualizar Plano <i class="far fa-eye"></i>
                 </button> -->
-                <button type="button" class="btn btn-primary mt-2" (click)="guardar()" [disabled]="!form.valid" i18n>
+                <button type="button" class="btn btn-success mt-2" (click)="guardar()" [disabled]="!form.valid" i18n>
+                    <i class="fas fa-save"></i>
                     Actualizar
                 </button>
             </div>

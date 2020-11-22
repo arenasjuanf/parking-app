@@ -151,7 +151,6 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
 
     });
 
-    console.log(this.suscripciones);
 
     this.dataSource = new MatTableDataSource(this.suscripciones);
     this.dataSource.filterPredicate = this.predicadoBusqueda;
