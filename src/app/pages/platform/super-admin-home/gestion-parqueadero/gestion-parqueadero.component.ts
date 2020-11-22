@@ -9,6 +9,7 @@ import { ɵangular_packages_platform_browser_platform_browser_j } from '@angular
 import { newArray } from '@angular/compiler/src/util';
 import { observable } from 'rxjs';
 import { NotificationService } from '../../services/notification.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-gestion-parqueadero',
@@ -102,10 +103,7 @@ export class GestionParqueaderoComponent implements OnInit {
       // tslint:disable-next-line: forin
       datos.plano = JSON.stringify(datos.plano);
 
-      console.log(datos)
       this.dbService.addData('parqueaderos', datos).then(res => {
-        console.log('respuesta agregar parqueadero ', res);
-        console.log(res.id)
         this.notificationService.notification("success", "Parqueadero registrado");
         this.registrarAdmin(res.id);
       }, error => {
@@ -229,6 +227,73 @@ export class GestionParqueaderoComponent implements OnInit {
         this.form.get('plano').setValue(result);
       }
     });
+  }
+
+  configurarPlanoTxt(plano:any){
+
+    const estructura = { tipo: '', numero: '' };
+    const pisostmp = this.form.get('pisos').value;
+    const pisos = [];
+
+    console.log('plano: ', plano);
+    let contP = 0;
+    plano.forEach( piso => {
+      pisos[contP] = {};
+      pisos[contP]['alto'] = piso.length;
+      pisos[contP]['ancho'] = piso[0].length;
+      contP++;
+    })
+
+    const data = {
+      plano
+    };
+    const ref = this.dialog.open(VistaPlanosComponent, {
+      data
+    });
+
+    ref.afterClosed().subscribe(result => {
+      if (result) {
+        this.form.get('plano').setValue(result);
+      }
+    });
+
+
+  }
+
+  exportarTxt(){
+
+    const data: any[] = [...this.form.get('plano').value]
+    data.forEach( piso => {
+      piso.forEach( fila => {
+        fila.forEach( casilla => {
+          if(casilla.suscripcion){
+            delete casilla.suscripcion;
+          }
+          if(casilla.placa){
+            delete casilla.placa;
+          }
+        });
+      });
+    });
+
+    const blob = new Blob([JSON.stringify(data)], { type: "text/plain;charset=utf-8" })
+    saveAs(blob, `${new Date().getTime()}.txt`);
+  }
+
+  async subirPlano(evento) {
+    const file = evento.target.files[0];
+    if (file) {
+      let reader = new FileReader();
+      reader.onload = () => {
+        // this 'text' is the content of the file
+        let text:any = reader.result;
+        let plano = JSON.parse(text);
+        if(plano.length > 0){
+          this.configurarPlanoTxt(plano);
+        }
+      }
+      reader.readAsText(file);
+    }
   }
 
 }

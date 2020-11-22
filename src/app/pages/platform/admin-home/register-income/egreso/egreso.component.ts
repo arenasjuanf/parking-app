@@ -17,6 +17,8 @@ export class EgresoComponent implements OnInit {
   totalPagar: number = 0;
   cantidadHoras: number;
   cantidadDias: number;
+  pagado: boolean = false;
+
   constructor( 
     private auth: AuthService,
     private db: DatabaseService,
@@ -48,6 +50,8 @@ export class EgresoComponent implements OnInit {
     this.db.findDoc('suscripciones', idSuscripcion).valueChanges().subscribe(
       (result: object) => {
         this.datosSuscripcion = result;
+        console.log(this.datosSuscripcion);
+
         this.calcularPago();
       }
     );
@@ -95,7 +99,9 @@ export class EgresoComponent implements OnInit {
   egresar(){
     if (this.datosSuscripcion.tipoSuscripcion !== 'mes'){
       this.finalizarSuscripcion(this.data['suscripcion']['suscripcion']);
-    } else {
+    } else if ( this.datosSuscripcion.tipoSuscripcion == 'mes' && this.pagado){
+      this.finalizarSuscripcion(this.data['suscripcion']['suscripcion'],true);
+    }else {
       this.dialogRef.close({ cerrar: true, valor: this.totalPagar });
     }
   }
@@ -155,11 +161,22 @@ export class EgresoComponent implements OnInit {
     printWindow.close();
   }
 
-  finalizarSuscripcion(idSuscripcion: string){
-    this.db.modificar('suscripciones', idSuscripcion,{estado: false, fechaFinal: new Date()}).then(() => {
-      console.log('susripción cerrada');
-      this.dialogRef.close({ cerrar: true, valor: this.totalPagar });
-    });
+  finalizarSuscripcion(idSuscripcion: string, soloPagar: boolean = false){
+    let propSubs = {};
+    if(!soloPagar){
+      propSubs = { estado: false, fechaFinal: new Date(), pagado: this.pagado ? true : false };
+      this.db.modificar('suscripciones', idSuscripcion, propSubs).then(() => {
+        console.log('susripción cerrada');
+        this.dialogRef.close({ cerrar: true, valor: this.totalPagar });
+      });
+    }else{
+      propSubs = { pagado: true };
+      this.db.modificar('suscripciones', idSuscripcion, propSubs).then(() => {
+        console.log('susripción pagada');
+        this.dialogRef.close({ cerrar: true, valor: this.totalPagar });
+      });
+    }
+    
   }
 
 }

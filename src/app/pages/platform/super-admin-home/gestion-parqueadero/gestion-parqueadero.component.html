@@ -70,19 +70,25 @@
                             </button>
                         </div>
                     </div>
-                    <mat-form-field appearance="outline" class="order-1 order-md-2 col-12 col-md-4 my-1">
-                        <mat-label i18n>Capacidad carros</mat-label>
-                        <input matInput type="number" formControlName="capacidadCarros">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="order-2 order-md-3 col-12 col-md-4 my-1">
-                        <mat-label i18n>Capacidad Motos</mat-label>
-                        <input matInput type="text" formControlName="capacidadMotos">
-                    </mat-form-field>
+                    
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-3 d-flex flex-column justify-content-end">
+
+                <button class="btn btn-secondary" (click)="planoInput.click()" >
+                    <i class="far fa-file-alt"></i>
+                    Import .TXT
+                </button>
+                <input hidden (change)="subirPlano($event)" #planoInput type="file" id="file" accept=".txt">
+
+
+                <button class="btn btn-secondary mt-1" (click)="exportarTxt()" [disabled]="form.get('plano').value.length == 0">
+                    <i class="far fa-file-alt"></i>
+                    Export .TXT
+                </button>
+
                 <button type="button" class="btn btn-primary mt-2" (click)="configurarPlano()"
                     [disabled]="!form.get('pisos').valid" i18n>
                     Configurar Plano
@@ -141,3 +147,13 @@
         </div>
     </form>
 </div>
+
+
+<!-- <mat-form-field appearance="outline" class="order-1 order-md-2 col-12 col-md-4 my-1">
+    <mat-label i18n>Capacidad carros</mat-label>
+    <input matInput type="number" formControlName="capacidadCarros">
+</mat-form-field>
+<mat-form-field appearance="outline" class="order-2 order-md-3 col-12 col-md-4 my-1">
+    <mat-label i18n>Capacidad Motos</mat-label>
+    <input matInput type="text" formControlName="capacidadMotos">
+</mat-form-field> -->
