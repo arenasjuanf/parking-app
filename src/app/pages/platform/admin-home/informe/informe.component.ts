@@ -80,10 +80,8 @@ export class InformeComponent implements OnInit, AfterViewInit {
       })
     ).subscribe(logs => {
       if (logs) {
-
         obs$.unsubscribe();
         this.logs = logs;
-        console.log("THis logs ", this.logs);
         this.dataFilter = logs;
         this.configTable(this.logs);
         this.cargando = false;
@@ -160,18 +158,6 @@ export class InformeComponent implements OnInit, AfterViewInit {
     );
   }
 
-  searchDate(evento, tipoFecha) {
-    const fecha = evento.value;
-    const f = {
-      fechaEntrada: 'isSameOrAfter',
-      fechaSalida: 'isSameOrBefore',
-    }
-    this.dataFilter = this.logs.filter((element: any) => {
-      return moment(new Date(element[tipoFecha]))[f[tipoFecha]](fecha);
-    });
-    this.configTable(this.dataFilter);
-  }
-
   configTable(list) {
     this.dataSource = new MatTableDataSource(list);
     this.dataSource.paginator = this.paginator;
@@ -180,6 +166,8 @@ export class InformeComponent implements OnInit, AfterViewInit {
 
   createForm() {
     this.formFilter = <FormGroup>this.builder.group({
+      fechaEntrada: [],
+      fechaSalida: [],
       documento: [],
       placa: [],
       marca: [],
@@ -187,26 +175,35 @@ export class InformeComponent implements OnInit, AfterViewInit {
       tipo: []
     });
 
-    this.formFilter.valueChanges.subscribe(respuesta => {
-      let bandera = false;
+    this.formFilter.valueChanges.subscribe(cambios => {
+      const respuesta = Object.assign({}, cambios);
+      let bandera = 0;
+      const f = {
+        fechaEntrada: 'isSameOrAfter',
+        fechaSalida: 'isSameOrBefore',
+      }
       Object.keys(respuesta).forEach(item => {
         if (respuesta[item] && respuesta[item] !== "") {
-          bandera = true;
-          this.dataFilter = this.logs.filter(log => {
+          this.dataFilter = this[(bandera < 1 ? 'logs' : 'dataFilter')].filter(log => {
             let dato = log[item] + "";
-            if (log.datosCliente[item]) {
-              dato = log.datosCliente[item] + "";
+            if (typeof respuesta[item] === 'object') {
+              return moment(new Date(log[item]))[f[item]](respuesta[item]);
             } else if (log.datosVehiculo[item]) {
               dato = log.datosVehiculo[item] + "";
-            } else if (log.puesto[item]) {
+            } else if (log.datosCliente[item]) {
+              dato = log.datosCliente[item] + "";
+            } else if (log.puesto[item] >= 0) {
               dato = log.puesto[item] + "";
             }
             return dato.toLowerCase().includes(respuesta[item].toLowerCase());
           });
+          bandera++;
         }
       });
-      console.log("item ", bandera);
-      this.configTable(bandera ? this.dataFilter : this.logs);
+      this.configTable(bandera > 0 ? this.dataFilter : this.logs);
+      if (bandera < 1) {
+        this.dataFilter = this.logs;
+      }
     });
   }
 
