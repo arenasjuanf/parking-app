@@ -139,6 +139,7 @@ export class ModalSuscripcionesComponent implements OnInit {
   setValueData(resultado) {
     this.datosCliente = resultado;
     this.userValidData = resultado;
+    this.datosCliente.parqueadero = this.dataUser['parqueadero'];
     this.formCliente.get('nombreUsuario').setValue(resultado.nombre);
     this.formCliente.get('documentoUsuario').setValue(resultado.documento);
 
@@ -146,6 +147,7 @@ export class ModalSuscripcionesComponent implements OnInit {
 
   setValueVehicle(resultado) {
     this.datosVehiculo = resultado;
+    this.datosVehiculo.parqueadero = this.dataUser['parqueadero'];
     this.buscarSuscripciones();
     this.formVehiculo.get('placa').setValue(resultado.placa);
     this.formVehiculo.get('tipoVehiculo').setValue(resultado.tipo);
