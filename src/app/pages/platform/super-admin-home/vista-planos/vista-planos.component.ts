@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NotificationService } from '../../services/notification.service';
 
@@ -7,7 +7,7 @@ import { NotificationService } from '../../services/notification.service';
   templateUrl: './vista-planos.component.html',
   styleUrls: ['./vista-planos.component.scss']
 })
-export class VistaPlanosComponent implements OnInit {
+export class VistaPlanosComponent implements OnInit, OnDestroy {
   actualTool: string;
   default = { tipo: '', numero: ''};
   color = '#C7C8D3';
@@ -24,6 +24,11 @@ export class VistaPlanosComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  ngOnDestroy(){
+    this.resetCursor();
+  }
+
 
   elegirHerramienta(evento){
     if(evento.value){
@@ -53,6 +58,7 @@ export class VistaPlanosComponent implements OnInit {
   gestionar(piso, fila, columna){
     //console.log({piso,fila,columna});
     let casilla = this.data.plano[piso][fila][columna];
+
     switch (this.actualTool) {
       case 'carro':
         casilla['tipo'] = this.actualTool;
@@ -64,7 +70,11 @@ export class VistaPlanosComponent implements OnInit {
         casilla['color'] = this.color;
         break; 
       case 'numero':
-        casilla['numero'] = this.numero;
+        if(casilla.tipo){
+          casilla['numero'] = this.numero;
+        }else{
+          this.notificationService.notification("error", "Casilla vacía no puede tener número");
+        }
         this.numero++;
         break;
       case 'borrar':
