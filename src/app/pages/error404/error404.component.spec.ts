@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from '../platform/services/auth.service';
@@ -11,7 +11,7 @@ describe('Error404Component', () => {
   let component: Error404Component;
   let fixture: ComponentFixture<Error404Component>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ Error404Component ],
     })
