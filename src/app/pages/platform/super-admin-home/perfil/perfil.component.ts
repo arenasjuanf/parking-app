@@ -79,8 +79,4 @@ export class PerfilComponent implements OnInit {
     });
   }
 
-  languageSelected(evento) {
-    this.router.navigateByUrl(`/${evento.value}/`);
-  }
-
 }

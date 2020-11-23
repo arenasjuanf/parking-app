@@ -82,7 +82,7 @@
 
   <div class="text-center animate__animated animate__bounceInRight animate__fast" *ngIf="mostrarEgreso">
     <mat-form-field appearance="outline" class="my-1" class="w-25">
-      <mat-label>Placa de vehiculo</mat-label>
+      <mat-label i18n>Placa de vehiculo</mat-label>
       <input #inputPlaca matInput type="text" (keyup.enter)="buscarPlaca(inputPlaca.value)">
       <button type="button" (click)="buscarPlaca(inputPlaca.value)" mat-icon-button matSuffix>
         <mat-icon>search</mat-icon>

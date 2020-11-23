@@ -54,9 +54,9 @@
 
                     <mat-form-field appearance="outline" class="col-md-6 col-sm-12">
                         <mat-label i18n>Idioma</mat-label>
-                        <mat-select (selectionChange)="languageSelected($event)" formControlName="idioma">
+                        <mat-select formControlName="idioma">
                             <mat-option *ngFor="let idioma of idiomas" [value]="idioma.valor">
-                                {{idioma.display}}
+                                <a class="text-dark" href="/{{idioma.valor}}/">{{idioma.display}}</a>
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -68,7 +68,7 @@
             </div>
         </div>
         <div class="text-right">
-            <button class="btn btn-primary" [disabled]="!form.valid" type="submit">
+            <button class="btn btn-primary" [disabled]="!form.valid" type="submit" i18n>
                 Guardar
             </button>
         </div>

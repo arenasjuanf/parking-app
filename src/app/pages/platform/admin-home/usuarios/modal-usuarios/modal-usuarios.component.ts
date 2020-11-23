@@ -18,6 +18,7 @@ export class ModalUsuariosComponent implements OnInit {
   formulario: FormGroup;
   imagenDefecto: any = constantes.logoDefecto;
   editar: boolean = false;
+  idiomas = constantes.idiomas;
 
   constructor(
     private fb: FormBuilder,

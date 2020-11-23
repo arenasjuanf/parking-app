@@ -1231,6 +1231,368 @@
           <context context-type="linenumber">94</context>
         </context-group>
       </trans-unit>
+
+      <trans-unit id="32c5950a2adcd98251a8eae474659ad7173cb1c0" datatype="html">
+        <source>Fecha Ingreso</source>
+        <target>Admission Date</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/informe/informe.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ad81db466db3e344b90086e027126325c0fb07d1" datatype="html">
+        <source>Fecha salida</source>
+        <target>Departure Date</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/informe/informe.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8efe6b1704a19052b095b00be91556a6e13a71e7" datatype="html">
+        <source>Documento de cliente</source>
+        <target>Document of client</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/informe/informe.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f33728d34425d0f83fad0be8fe4cbe8a5e447f62" datatype="html">
+        <source>Piso</source>
+        <target>Floor</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/informe/informe.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4e0d312c5bd1b66cdfb8cbb8203e0dfff79e4f73" datatype="html">
+        <source>
+                Buscar
+                <x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon&gt;"/>search<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon&gt;"/>
+            </source>
+            <target>Search</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/informe/informe.component.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b69cfee13864f8a10ae0db0097c058c4320d725a" datatype="html">
+        <source> Piso </source>
+        <target>Floor</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/informe/informe.component.html</context>
+          <context context-type="linenumber">89</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9e7ecff6d7b03885de55bea164d554573c2b1f06" datatype="html">
+        <source> Fecha Ingreso </source>
+        <target>Admission Date</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/informe/informe.component.html</context>
+          <context context-type="linenumber">94</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9d716577efb5c0d5ddf1eabe48b00f9c4295c0e0" datatype="html">
+        <source> Hora Ingreso </source>
+        <target>Admission hour</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/informe/informe.component.html</context>
+          <context context-type="linenumber">99</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6d2968f7e8244a077907d42641600df92f0323e8" datatype="html">
+        <source> Fecha Salida </source>
+        <target>Departure Date</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/informe/informe.component.html</context>
+          <context context-type="linenumber">104</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8edeedb8db0c1512185b682d467a9abb1510c50b" datatype="html">
+        <source> Hora Salida </source>
+        <target>Departure hour</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/informe/informe.component.html</context>
+          <context context-type="linenumber">109</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2a86ddf50aca12a1de9b6a2c849f8f1fd16a547e" datatype="html">
+        <source>
+          Tipo de usuario: <x id="INTERPOLATION" equiv-text="{{ &apos; &apos;+ (item[&apos;tipoUsuario&apos;] ? item[&apos;tipoUsuario&apos;] : item[&apos;tipo&apos;] ) | titlecase }}"/>
+        </source>
+        <target>
+          Type of user: <x id="INTERPOLATION" equiv-text="{{ &apos; &apos;+ (item[&apos;tipoUsuario&apos;] ? item[&apos;tipoUsuario&apos;] : item[&apos;tipo&apos;] ) | titlecase }}"/>
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/historial-usuarios/historial-usuarios.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="25436b3b07891b428e0b3c416b006457dd0f87ad" datatype="html">
+        <source>Guardar</source>
+        <target>Save</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/super-admin-home/perfil/perfil.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b5194d75423875f27f0987a9e222bad5dbe8ff0f" datatype="html">
+        <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Mi perfil</source>
+        <target>
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> My profile
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/navbar/navbar.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12ad63045b21e2f7d71ea8389fc4bd7553c2d591" datatype="html">
+        <source>Pagado</source>
+        <target>Paid out</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/suscripciones/suscripciones.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e8d22cdef9f5780e31395340125d873f9df518c3" datatype="html">
+        <source>Cancelar</source>
+        <target>Cancel</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/egreso/egreso.component.html</context>
+          <context context-type="linenumber">151</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="313caa04555d25510d5b2f6d9c3af68396b0c0ec" datatype="html">
+        <source>Dirección: <x id="INTERPOLATION" equiv-text="{{ datosParqueadero.direccion | titlecase }}"/> </source>
+        <target>Address: <x id="INTERPOLATION" equiv-text="{{ datosParqueadero.direccion | titlecase }}"/> </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/egreso/egreso.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="64c40148597d078ca64197d8b7333a2f3496aa0c" datatype="html">
+        <source>Nit: <x id="INTERPOLATION" equiv-text="{{ datosParqueadero.nit}}"/></source>
+        <target>Nit: <x id="INTERPOLATION" equiv-text="{{ datosParqueadero.nit}}"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/egreso/egreso.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="20de7814985da87fe6648630d9e14b67324ddd2b" datatype="html">
+        <source>Nombre:</source>
+        <target>Name:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/egreso/egreso.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9c6dcb46373281071c80cc71ab2dbed44dfdf056" datatype="html">
+        <source>Tipo Vehiculo:</source>
+        <target>Type vehicle:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/egreso/egreso.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b0e24ee7417e118777d5f417d96f8ea620aa0cad" datatype="html">
+        <source>Placa:</source>
+        <target>License Plate:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/egreso/egreso.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5f5ff992748ee82cd2fe10060b50e3b708891107" datatype="html">
+        <source>Ingreso:</source>
+        <target>Entry:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/egreso/egreso.component.html</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f8489c1d5c853504be772c8fbba52805b0c44f00" datatype="html">
+        <source>Egreso:</source>
+        <target>Exit:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/egreso/egreso.component.html</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4f336a134d727513876bf7202d5f3e06e90a7ca9" datatype="html">
+        <source>Tipo Suscripcion:</source>
+        <target>Subscription type:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/egreso/egreso.component.html</context>
+          <context context-type="linenumber">89</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c543f3eb037ac004b6c9b8ebc0928b927042c27f" datatype="html">
+        <source>Total a pagar</source>
+        <target>Total to pay</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/egreso/egreso.component.html</context>
+          <context context-type="linenumber">135</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="99f653e312602bca09e89061a5e4a85c1a0772fb" datatype="html">
+        <source>Cantidad <x id="INTERPOLATION" equiv-text="{{ cantidadDias ? &apos;Días&apos; : &apos;Horas&apos; }}"/>:</source>
+        <target>Quantity <x id="INTERPOLATION" equiv-text="{{ cantidadDias ? &apos;Días&apos; : &apos;Horas&apos; }}"/>:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/egreso/egreso.component.html</context>
+          <context context-type="linenumber">100</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="771959e29d0e18e0a6277647ab4b02323cff7632" datatype="html">
+        <source>Inicio:</source>
+        <target>Start:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/egreso/egreso.component.html</context>
+          <context context-type="linenumber">111</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="73f3caf1c8f5ead52037a1b1d1ad5a8feadb2909" datatype="html">
+        <source>Fin:</source>
+        <target>End:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/egreso/egreso.component.html</context>
+          <context context-type="linenumber">121</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="31be2daba401025cba26ef1f8031373851d7a6f3" datatype="html">
+        <source>Cliente Encontrado en otro parqueadero</source>
+        <target>Customer find in another Parking</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/modal-clientes/modal-clientes.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b4b20af697370f2b952436da307228ae5afffd37" datatype="html">
+        <source>Nombre:</source>
+        <target>Name:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/modal-clientes/modal-clientes.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cb403152ec34d42d4ecd4e43c3b84d63b8e727a5" datatype="html">
+        <source>Documento:</source>
+        <target>Document:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/modal-clientes/modal-clientes.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="eafff6169300c5c812d63b938d6c3e0b7d80375f" datatype="html">
+        <source>Email:</source>
+        <target>Email:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/modal-clientes/modal-clientes.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="963192bfeccb724afc3f9d22922922d15c03d3d7" datatype="html">
+        <source>
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>Cancelar
+        </source>
+        <target>
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>Cancel
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/modal-clientes/modal-clientes.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0e2b30c0652fe9dd6a2f0fcaff993777923273b4" datatype="html">
+        <source>
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>Aceptar
+        </source>
+        <target>
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>Accept
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/modal-clientes/modal-clientes.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0600aa0b2f42f8d84a64b735709917062ccfd8cb" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ mostrarEgreso ? &apos;Egreso&apos; : &apos;Ingreso&apos; }}"/> De Vehiculos
+        </source>
+        <target>
+          <x id="INTERPOLATION" equiv-text="{{ mostrarEgreso ? &apos;Egreso&apos; : &apos;Ingreso&apos; }}"/> of Vehicles
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/register-income.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="59c5f161e8a11f5ed23b505cb9649a44173713b1" datatype="html">
+        <source>Placa de vehiculo</source>
+        <target>Vehicle Plate</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/admin-home/register-income/register-income.component.html</context>
+          <context context-type="linenumber">79</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d88c6477b0bb14385a431d3d69e587ad8fc56432" datatype="html">
+        <source>
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>Regresar
+        </source>
+        <target>
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>Back
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/clientes-home/clientes-home.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2a8fb186b74b1861372d70a8970b2eb6ed72e8f3" datatype="html">
+        <source>Marca </source>
+        <target>Brand </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/clientes-home/clientes-home.component.html</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f7efb34180a390c4881fc46f4716e8ca9b1da44f" datatype="html">
+        <source>Suscripción</source>
+        <target>Subscription </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/clientes-home/clientes-home.component.html</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0fb838e56387169a788ee9b8c361090b3d000525" datatype="html">
+        <source>Ingreso</source>
+        <target>Entry</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/clientes-home/clientes-home.component.html</context>
+          <context context-type="linenumber">83</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="273ae4754c15915d916ee7528e15386ee9e1f149" datatype="html">
+        <source>Tiempo </source>
+        <target>Time </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/clientes-home/clientes-home.component.html</context>
+          <context context-type="linenumber">91</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f70aa8dd0065bb9614cbc7b20a3fb39d866ad2a1" datatype="html">
+        <source>Valor </source>
+        <target>Value </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/clientes-home/clientes-home.component.html</context>
+          <context context-type="linenumber">101</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="912621697da84a909df861d6ceac75c846598abb" datatype="html">
+        <source> No tienes vehiculos activos en Parking Mcqueen</source>
+        <target> You haven't active vehicles in Parking Mcqueen </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/platform/clientes-home/clientes-home.component.html</context>
+          <context context-type="linenumber">115</context>
+        </context-group>
+      </trans-unit>
     </body>
   </file>
 </xliff>

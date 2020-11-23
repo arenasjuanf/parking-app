@@ -41,7 +41,11 @@
             </mat-form-field>
             <mat-form-field appearance="outline" class="col-md-4 col-12">
                 <mat-label i18n>Idioma</mat-label>
-                <input matInput type="text" formControlName="idioma">
+                <mat-select formControlName="idioma">
+                    <mat-option *ngFor="let idioma of idiomas" [value]="idioma.valor">
+                        <a class="text-dark" href="/{{idioma.valor}}/">{{idioma.display}}</a>
+                    </mat-option>
+                </mat-select>
             </mat-form-field>
         </div>
 

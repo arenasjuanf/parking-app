@@ -26,6 +26,9 @@ import { PlatformModule } from '../platform.module';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgxLoadingModule } from 'ngx-loading';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatTableExporterModule } from 'mat-table-exporter';
 
 
 @NgModule({
@@ -58,7 +61,10 @@ import { NgxLoadingModule } from 'ngx-loading';
     MatButtonToggleModule,
     MatTableModule,
     MatPaginatorModule,
-    NgxLoadingModule.forRoot({})
+    NgxLoadingModule.forRoot({}),
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTableExporterModule
   ], exports:[
     PerfilComponent
   ]
