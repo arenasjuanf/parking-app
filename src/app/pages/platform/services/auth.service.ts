@@ -6,6 +6,7 @@ import { DatabaseService } from './database.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { NotificationService } from './notification.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +20,8 @@ export class AuthService {
     public afAuth: AngularFireAuth,
     public ngZone: NgZone,
     public router: Router,
-    private dbService: DatabaseService
+    private dbService: DatabaseService,
+    private notify: NotificationService
   ) {
     // el observable mantiene listo vigilando la sesión
     this.validarSesion();
@@ -55,7 +57,6 @@ export class AuthService {
           this.validarTipoUser(result.user);
         }
       }).catch((error) => {
-        console.warn(error);
         this.loginCliente(email, password)
       }
     );
@@ -75,6 +76,8 @@ export class AuthService {
         this.guardarLS(Object.assign({}, datos));
         const ruta = `platform/${datos.tipo}`;
         this.router.navigateByUrl(ruta);
+      }else{
+        this.notify.notification("error", "usuario o contraseña Incorrecto");
       }
     });
   }
