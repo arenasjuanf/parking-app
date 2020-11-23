@@ -5,19 +5,21 @@ import { DatabaseService } from '../../../services/database.service';
 import { constantes } from 'src/app/constantes';
 
 @Component({
-  selector: 'app-modal-user',
-  templateUrl: './modal-user.component.html',
-  styleUrls: ['./modal-user.component.scss']
+  selector: 'app-modal-clientes',
+  templateUrl: './modal-clientes.component.html',
+  styleUrls: ['./modal-clientes.component.scss']
 })
-export class ModalUserComponent implements OnInit {
+export class ModalClientesComponent implements OnInit {
+
+  datosCliente: any;
 
   constructor(
-    public dialogRef: MatDialogRef<ModalUserComponent>,
+    public dialogRef: MatDialogRef<ModalClientesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     private dataBaseService: DatabaseService,
-  ) { 
-    console.log(data);
+  ) {
+    this.datosCliente = data[0];
   }
 
   formRegisterUser: FormGroup;
@@ -25,14 +27,7 @@ export class ModalUserComponent implements OnInit {
   formVehiculo: FormGroup;
 
   ngOnInit(): void {
-    this.initUserForm();
-    this.initVehiForm();
 
-    if (this.data.editarUsuario) {
-      this.formRegisterUser.patchValue(this.data.datos);
-    } else {
-      this.formRegisterUser.get('documento').setValue(this.data.documento);
-    }
   }
 
   initUserForm() {
@@ -83,13 +78,9 @@ export class ModalUserComponent implements OnInit {
     }
   }
 
-  saveVehicle(datosUsuario){
-    const datosVehiculo = Object.assign({}, this.formVehiculo.value);
-    datosVehiculo['usuario'] = datosUsuario.key;
-    this.dataBaseService.addData('vehiculos', datosVehiculo).then(respuesta => {
-      datosVehiculo['key'] = respuesta.id;
-      this.dialogRef.close({datosUsuario, datosVehiculo});
-    });
+
+  seleccionarCliente(){
+    this.closeDialog(this.datosCliente);
   }
 
 }

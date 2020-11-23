@@ -6,6 +6,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { DatabaseService } from '../../services/database.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-perfil',
@@ -20,7 +21,9 @@ export class PerfilComponent implements OnInit {
     private auth: AuthService, private fb: FormBuilder,
     public dialogRef: MatDialogRef<PerfilComponent>,
     private db: DatabaseService,
-    private router: Router
+    private router: Router,
+    private notify: NotificationService
+
   ) {
     this.initForm();
     this.setearDatos();
@@ -67,10 +70,9 @@ export class PerfilComponent implements OnInit {
   }
 
   guardar() {
-    console.log(this.auth.datosUsuario);
 
     this.db.modificar('usuarios', this.auth.datosUsuario.id, this.form.value).then(r => {
-      console.log('datos actualizados');
+      this.notify.notification("success", "Datos Actualizados");
       // se actualizan datos de local storage
       this.auth.guardarLS(this.form.value, true);
       this.dialogRef.close();

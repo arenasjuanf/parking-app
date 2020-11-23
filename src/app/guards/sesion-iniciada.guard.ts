@@ -17,7 +17,7 @@ export class SesionIniciadaGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
  
     if (this.auth.datosUsuario) {
-      const tipoUsuario = this.auth.datosUsuario.tipoUsuario;
+      const tipoUsuario = this.auth.datosUsuario.tipoUsuario || this.auth.datosUsuario.tipo;
       if (tipoUsuario){
         const ruta = `platform/${tipoUsuario}`;
         this.router.navigateByUrl(ruta);

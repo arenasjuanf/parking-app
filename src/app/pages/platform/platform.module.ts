@@ -6,9 +6,7 @@ import { PlatformComponent } from './platform.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
-
 
 
 @NgModule({
@@ -23,8 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
-    MatCardModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   exports:[
     NavbarComponent

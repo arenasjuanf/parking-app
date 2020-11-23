@@ -105,7 +105,7 @@
     </div>
 
 
-    <div class="row w-100 text-center my-2">
+    <div class="row w-100 text-center my-2"  *ngIf="suscripcionActiva.tipoSuscripcion =='mes' || suscripcionActiva.tipoSuscripcion =='dia'">
       <div class="col" i18n>
         Tiempo restante
       </div>
@@ -116,12 +116,12 @@
 
 
     <div class="my-3 row w-100" *ngIf="!data.soloMostrar">
-      <div class="col-6 text-center">
+      <!--<div class="col-6 text-center">
         <button mat-raised-button color="accent" i18n>Editar</button>
-      </div>
+      </div>-->
 
-      <div class="col-6 text-center">
-        <button mat-raised-button color="primary" [mat-dialog-close]="suscripcionActiva" i18n>Aceptar</button>
+      <div class="col-12 text-center">
+        <button mat-raised-button class="btn btn-primary" [mat-dialog-close]="suscripcionActiva" i18n>Aceptar</button>
       </div>
     </div>
 

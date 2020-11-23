@@ -11,6 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
 import { constantes } from 'src/app/constantes';
+import { merge, Observable, zip } from 'rxjs';
 
 @Component({
   selector: 'app-mensualidad',
@@ -24,10 +25,14 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
   usuarios: any[];
   suscripciones: any[];
   vehiculos: any[];
-  displayedColumns: string[] = ['documento','cliente' ,'placa', 'marca', 'tipo', 'fechaInicio', 'fechaFinal', 'valor', 'acciones'];
+  // tslint:disable-next-line: max-line-length
+  displayedColumns: string[] = ['documento', 'cliente', 'placa', 'marca', 'tipo', 'fechaInicio', 'fechaFinal', 'valor', 'estado', 'acciones'];
   dataSource: MatTableDataSource<any>;
   configLoader = constantes.coloresLoader;
   cargando: boolean = false;
+  filtered: any[];
+  fechaFinal:string = '';
+  fechaInicio: string = '';
 
   predicadoBusqueda = (data, filter: string ) => {
     return data.usuario.documento.trim().toLowerCase().indexOf(filter) !== -1
@@ -77,6 +82,7 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
       })
     ).subscribe(r => {
       this.suscripciones = r;
+      this.filtered = r;
       this.validardatos();
     });
   }
@@ -95,14 +101,28 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
 
   getUsuarios$() {
     const idParqueadero: string = this.auth.datosUsuario.parqueadero;
-    return this.db.getPorFiltro('usuarios', 'parqueadero', idParqueadero).snapshotChanges().pipe(
+
+    const contains$: Observable<any> = this.afs.collection(`/usuarios`, ref =>
+      ref.where('parqueadero', 'array-contains', idParqueadero)
+    ).snapshotChanges().pipe(
       map((x: any[]) => {
         return x.map(user => ({ ...user.payload.doc.data(), key: user.payload.doc.id }));
       })
-    ).subscribe(r => {
-      this.usuarios = r;
+    );
+
+    const equal$: Observable<any> = this.db.getPorFiltro('usuarios', 'parqueadero', idParqueadero).snapshotChanges().pipe(
+      map((x: any[]) => {
+        return x.map(user => ({ ...user.payload.doc.data(), key: user.payload.doc.id }));
+      })
+    );
+
+    zip(equal$, contains$).pipe(
+      map(([equal, contains]) => [...equal, ...contains])
+    ).subscribe((result: any[]) => {
+      this.usuarios = result;
       this.validardatos();
-   });
+    });
+
   }
 
   validardatos(){
@@ -112,9 +132,7 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
   }
 
   ordenarData(){
-
     this.suscripciones.forEach(suscripcion => {
-
       const posVh = this.vehiculos.findIndex(vh => {
         return vh.key === suscripcion.vehiculo;
       });
@@ -132,6 +150,8 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
       }
 
     });
+
+
     this.dataSource = new MatTableDataSource(this.suscripciones);
     this.dataSource.filterPredicate = this.predicadoBusqueda;
     this.dataSource.paginator = this.paginator;
@@ -142,9 +162,9 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
 
   calcularfecha(fechaEnSegundos: number){
     if(!fechaEnSegundos){
-      return '---';
+      return '---------';
     }
-    return moment(new Date(fechaEnSegundos * 1000)).locale('es').format('l');
+    return moment(new Date(fechaEnSegundos * 1000)).format('l');
   }
 
   filtrar(event: Event) {
@@ -154,6 +174,37 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
 
   regresar() {
     this.router.navigateByUrl('/platform/admin/main');
+  }
+
+
+  fecha(evento, tipo){
+    const fecha = evento.value;
+
+    const f = {
+      fechaInicio: 'isAfter',
+      fechaFinal: 'isBefore',
+    }
+
+    this.filtered = this.filtered.filter((element: any) => {
+
+      return moment(new Date(element[tipo]))[f[tipo]](fecha);
+
+    });
+
+    this.dataSource = new MatTableDataSource(this.filtered );
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  resetFilters(){
+    this.filtered = this.suscripciones;
+    this.fechaInicio = '';
+    this.fechaFinal = '';
+
+    this.dataSource = new MatTableDataSource(this.suscripciones);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+
   }
 
 }

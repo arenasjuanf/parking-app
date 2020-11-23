@@ -9,6 +9,7 @@ import { ɵangular_packages_platform_browser_platform_browser_j } from '@angular
 import { newArray } from '@angular/compiler/src/util';
 import { observable } from 'rxjs';
 import { NotificationService } from '../../services/notification.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-gestion-parqueadero',
@@ -51,8 +52,6 @@ export class GestionParqueaderoComponent implements OnInit {
       correo: ['', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")]],
       direccion: ['', Validators.required],
       cantidadPisos: [1, Validators.required],
-      capacidadCarros: ['', Validators.required],
-      capacidadMotos: ['', Validators.required],
       telefono: ['', Validators.required],
       pisos: this.fb.array([
         this.fb.group({
@@ -102,10 +101,7 @@ export class GestionParqueaderoComponent implements OnInit {
       // tslint:disable-next-line: forin
       datos.plano = JSON.stringify(datos.plano);
 
-      console.log(datos)
       this.dbService.addData('parqueaderos', datos).then(res => {
-        console.log('respuesta agregar parqueadero ', res);
-        console.log(res.id)
         this.notificationService.notification("success", "Parqueadero registrado");
         this.registrarAdmin(res.id);
       }, error => {
@@ -118,7 +114,8 @@ export class GestionParqueaderoComponent implements OnInit {
     const data = {
       parqueadero: idParqueadero,
       tipoUsuario: 'admin',
-      nombre: this.form.get('nombrePropietario').value
+      nombre: this.form.get('nombrePropietario').value,
+      permisos: constantes.permisosAdmin
     };
     const email = this.form.value['correo'];
     const pass = this.form.value['nit'];
@@ -185,6 +182,7 @@ export class GestionParqueaderoComponent implements OnInit {
         this.dbService.modificar('parqueaderos', this.dataRecibida.key, datos).then(result => {
           console.log('parqueadero actualizado');
           this.notificationService.notification("success", "Parqueadero actualizado.");
+          this.dialogRef.close();
         }).catch(error => {
           this.notificationService.notification("error", "No fue posible guardar los datos.");
           console.log('error modificar :', error);
@@ -219,7 +217,6 @@ export class GestionParqueaderoComponent implements OnInit {
       plano: this.form.get('plano').value.length ? this.form.get('plano').value : plano,
       visualizar
     };
-    console.log(data);
     const ref = this.dialog.open(VistaPlanosComponent, {
       data
     });
@@ -229,6 +226,73 @@ export class GestionParqueaderoComponent implements OnInit {
         this.form.get('plano').setValue(result);
       }
     });
+  }
+
+  configurarPlanoTxt(plano:any){
+
+    const estructura = { tipo: '', numero: '' };
+    const pisostmp = this.form.get('pisos').value;
+    const pisos = [];
+
+    console.log('plano: ', plano);
+    let contP = 0;
+    plano.forEach( piso => {
+      pisos[contP] = {};
+      pisos[contP]['alto'] = piso.length;
+      pisos[contP]['ancho'] = piso[0].length;
+      contP++;
+    })
+
+    const data = {
+      plano
+    };
+    const ref = this.dialog.open(VistaPlanosComponent, {
+      data
+    });
+
+    ref.afterClosed().subscribe(result => {
+      if (result) {
+        this.form.get('plano').setValue(result);
+      }
+    });
+
+
+  }
+
+  exportarTxt(){
+
+    const data: any[] = [...this.form.get('plano').value]
+    data.forEach( piso => {
+      piso.forEach( fila => {
+        fila.forEach( casilla => {
+          if(casilla.suscripcion){
+            delete casilla.suscripcion;
+          }
+          if(casilla.placa){
+            delete casilla.placa;
+          }
+        });
+      });
+    });
+
+    const blob = new Blob([JSON.stringify(data)], { type: "text/plain;charset=utf-8" })
+    saveAs(blob, `${new Date().getTime()}.txt`);
+  }
+
+  async subirPlano(evento) {
+    const file = evento.target.files[0];
+    if (file) {
+      let reader = new FileReader();
+      reader.onload = () => {
+        // this 'text' is the content of the file
+        let text:any = reader.result;
+        let plano = JSON.parse(text);
+        if(plano.length > 0){
+          this.configurarPlanoTxt(plano);
+        }
+      }
+      reader.readAsText(file);
+    }
   }
 
 }

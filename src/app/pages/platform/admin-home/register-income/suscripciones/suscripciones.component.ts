@@ -1,10 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatabaseService } from '../../../services/database.service';
 import { NotificationService } from '../../../services/notification.service';
 import * as moment from 'moment';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { constantes } from 'src/app/constantes';
 
 
@@ -13,7 +12,7 @@ import { constantes } from 'src/app/constantes';
   templateUrl: './suscripciones.component.html',
   styleUrls: ['./suscripciones.component.scss']
 })
-export class SuscripcionesComponent implements OnInit {
+export class SuscripcionesComponent implements OnInit, AfterViewInit {
 
   vehiculos: any[];
   tarifas: any;
@@ -31,7 +30,8 @@ export class SuscripcionesComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     private db: DatabaseService,
-    private notify: NotificationService
+    private notify: NotificationService,
+    private cd: ChangeDetectorRef
   ) {
     this.traerTarifas();
     this.traerSuscripciones();
@@ -42,6 +42,10 @@ export class SuscripcionesComponent implements OnInit {
     console.log(this.data);
   }
 
+  ngAfterViewInit() {
+    this.cd.detectChanges();
+  }
+
   initForm() {
     this.form = this.formBuilder.group({
       tipoSuscripcion: ['', Validators.required],
@@ -50,15 +54,25 @@ export class SuscripcionesComponent implements OnInit {
       estado: [true, Validators.required],
       valor: [, Validators.required],
       pagado: [false, Validators.required],
-      parqueadero: [this.data.datosVehiculo['parqueadero'], Validators.required],
-      vehiculo: [this.data.datosVehiculo['key'], Validators.required],
+      parqueadero: [this.data.datosVehiculo.parqueadero, Validators.required],
+      vehiculo: [this.data.datosVehiculo.key, Validators.required],
     });
 
   }
 
   validadoresDinamicos(){
-    this.form.get('fechaInicio').setValidators(this.tipoSubs === 'hora' ? [] : [Validators.required]);
-    this.form.get('fechaFinal').setValidators(this.tipoSubs === 'mes' ? [Validators.required] : []);
+    if (this.tipoSubs === 'hora'){
+      this.form.get('fechaInicio').setValidators([]);
+    } else {
+      this.form.get('fechaInicio').setValidators([Validators.required]);
+    }
+
+    if (this.tipoSubs === 'mes') {
+      this.form.get('fechaFinal').setValidators([Validators.required]);
+    } else {
+      this.form.get('fechaInicio').setValidators([]);
+    }
+
   }
 
 
@@ -100,16 +114,16 @@ export class SuscripcionesComponent implements OnInit {
   }
 
   setearPrecio(tipo) {
-    const tipovh = this.data.datosVehiculo['tipo'];
+    const tipovh = this.data.datosVehiculo.tipo;
     this.form.get('valor').setValue(this.tarifas[tipo][tipovh]);
 
   }
 
   traerSuscripciones() {
-    this.db.getPorFiltro('suscripciones', 'vehiculo', this.data.datosVehiculo['key']).snapshotChanges().subscribe(respuesta => {
+    this.db.getPorFiltro('suscripciones', 'vehiculo', this.data.datosVehiculo.key).snapshotChanges().subscribe(respuesta => {
       const datos = respuesta.map(item => {
-        let x = item.payload.doc.data();
-        x['key'] = item.payload.doc.id;
+        let x: any = item.payload.doc.data();
+        x.key = item.payload.doc.id;
         return x;
       });
 
@@ -120,12 +134,11 @@ export class SuscripcionesComponent implements OnInit {
           this.suscripcionActiva = s;
         }
       });
-      console.log(this.suscripcionActiva);
       this.mostrarForm = Object.keys(this.suscripcionActiva).length ? false : true;
     })
   }s
 
-  toDate(hora, format = 'll') {
+  toDate(hora, format = 'LLL') {
     if (hora) {
       return moment(new Date(hora.seconds * 1000)).locale('en').format(format);
     }

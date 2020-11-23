@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { DatabaseService } from './database.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -27,9 +28,9 @@ export class AuthService {
 
   async validarSesion(){
     this.afAuth.authState.subscribe(user => {
-      if (user && localStorage.getItem('usuario')) {
+      if ((user && localStorage.getItem('usuario')) || this.datosUsuario) {
         this.sesionActiva = true;
-      } else{
+      } else {
         localStorage.setItem('usuario', null);
         this.sesionActiva = false;
         this.router.navigateByUrl('/login');
@@ -54,8 +55,28 @@ export class AuthService {
           this.validarTipoUser(result.user);
         }
       }).catch((error) => {
-        window.alert(error);
-      });
+        console.warn(error);
+        this.loginCliente(email, password)
+      }
+    );
+  }
+
+  loginCliente(email, password){
+    this.afs.collection('usuarios', ref => {
+      return ref.where('email', '==', email).where('password', '==', password);
+    }).snapshotChanges().pipe(
+      map((x: any[]) => {
+        return x.map(user => ({ ...user.payload.doc.data(), key: user.payload.doc.id }));
+      })
+    ).subscribe( cliente => {
+      if(cliente[0]){
+        const datos: any = cliente[0];
+        delete datos['password'];
+        this.guardarLS(Object.assign({}, datos));
+        const ruta = `platform/${datos.tipo}`;
+        this.router.navigateByUrl(ruta);
+      }
+    });
   }
 
   registrar(email, password) {
@@ -99,6 +120,8 @@ export class AuthService {
 
 
   cerrarSesion() {
+    localStorage.setItem('usuario', null);
+    this.validarSesion();
     return this.afAuth.signOut();
   }
 
@@ -120,12 +143,12 @@ export class AuthService {
 
   validarTipoUser(usuario){
     this.dbService.getPorId('usuarios', usuario.uid).snapshotChanges().subscribe(usuario => {
-        const user = usuario[0].payload.doc.data();
-        user['id'] = usuario[0].payload.doc.id;
-        this.guardarLS(Object.assign({}, user));
-        const ruta = `platform/${user['tipoUsuario']}`;
-        this.router.navigateByUrl(ruta);
-      });
+      const user = usuario[0].payload.doc.data();
+      user['id'] = usuario[0].payload.doc.id;
+      this.guardarLS(Object.assign({}, user));
+      const ruta = `platform/${user['tipoUsuario']}`;
+      this.router.navigateByUrl(ruta);
+    });
   }
 
 

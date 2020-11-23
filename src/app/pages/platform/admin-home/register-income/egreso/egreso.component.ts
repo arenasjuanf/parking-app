@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from '../../../services/auth.service';
 import { DatabaseService } from '../../../services/database.service';
@@ -17,11 +17,14 @@ export class EgresoComponent implements OnInit {
   totalPagar: number = 0;
   cantidadHoras: number;
   cantidadDias: number;
+  pagado: boolean = false;
+
   constructor( 
     private auth: AuthService,
     private db: DatabaseService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<EgresoComponent>,
+    private cd: ChangeDetectorRef
 
   ) {
     this.traerDatosParqueadero();
@@ -36,7 +39,6 @@ export class EgresoComponent implements OnInit {
       if(result){
         this.datosParqueadero = result;
         this.getlog();
-        
       }
     }, error => {
       console.log('error: ', error);
@@ -92,11 +94,12 @@ export class EgresoComponent implements OnInit {
     return cantidad * this.datosSuscripcion['valor'];
   }
 
-
   egresar(){
     if (this.datosSuscripcion.tipoSuscripcion !== 'mes'){
       this.finalizarSuscripcion(this.data['suscripcion']['suscripcion']);
-    } else {
+    } else if ( this.datosSuscripcion.tipoSuscripcion == 'mes' && this.pagado){
+      this.finalizarSuscripcion(this.data['suscripcion']['suscripcion'],true);
+    }else {
       this.dialogRef.close({ cerrar: true, valor: this.totalPagar });
     }
   }
@@ -156,11 +159,22 @@ export class EgresoComponent implements OnInit {
     printWindow.close();
   }
 
-  finalizarSuscripcion(idSuscripcion: string){
-    this.db.modificar('suscripciones', idSuscripcion,{estado: false}).then(() => {
-      console.log('susripción cerrada');
-      this.dialogRef.close({ cerrar: true, valor: this.totalPagar });
-    });
+  finalizarSuscripcion(idSuscripcion: string, soloPagar: boolean = false){
+    let propSubs = {};
+    if(!soloPagar){
+      propSubs = { estado: false, fechaFinal: new Date(), pagado: this.pagado ? true : false };
+      this.db.modificar('suscripciones', idSuscripcion, propSubs).then(() => {
+        console.log('susripción cerrada');
+        this.dialogRef.close({ cerrar: true, valor: this.totalPagar });
+      });
+    }else{
+      propSubs = { pagado: true };
+      this.db.modificar('suscripciones', idSuscripcion, propSubs).then(() => {
+        console.log('susripción pagada');
+        this.dialogRef.close({ cerrar: true, valor: this.totalPagar });
+      });
+    }
+    
   }
 
 }

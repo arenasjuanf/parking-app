@@ -103,7 +103,7 @@ export class UsuariosComponent implements OnInit {
 
   cambiarClave(usuario){
     this.auth.recuperarClave(usuario.email).then( result => {
-      console.log({result})
+      this.notificationService.notification("success", "Se ha enviado email de recuperación de clave");
     })
   }
 

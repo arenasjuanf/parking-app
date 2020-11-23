@@ -13,12 +13,14 @@ export class ValidarCliente implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    // tslint:disable-next-line: no-debugger
+
     if (this.auth.datosUsuario) {
-      const tipoUsuario = this.auth.datosUsuario.tipoUsuario;
+      const tipoUsuario = this.auth.datosUsuario.tipo;
       if (tipoUsuario === 'cliente'){
         return true;
       }
-      const ruta = `platform/${tipoUsuario}`;
+      const ruta = `platform`;
       this.router.navigateByUrl(ruta);
       return false;
     } else {

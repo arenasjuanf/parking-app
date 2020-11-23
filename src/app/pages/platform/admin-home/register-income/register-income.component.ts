@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { DatabaseService } from '../../services/database.service';
@@ -13,13 +13,17 @@ import { SuscripcionesComponent } from './suscripciones/suscripciones.component'
 import { NotificationService } from '../../services/notification.service';
 import { EgresoComponent } from './egreso/egreso.component';
 import { constantes } from 'src/app/constantes';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { ModalClientesComponent } from './modal-clientes/modal-clientes.component';
+import { createVoid } from 'typescript';
+const firebase = require('firebase/app');
 
 @Component({
   selector: 'app-register-income',
   templateUrl: './register-income.component.html',
   styleUrls: ['./register-income.component.scss']
 })
-export class RegisterIncomeComponent implements OnInit {
+export class RegisterIncomeComponent implements OnInit, OnDestroy {
   pisoSeleccionado: number = 0;
   asignar: boolean = false;
   datosCliente: any;
@@ -29,21 +33,6 @@ export class RegisterIncomeComponent implements OnInit {
   mostrarEgreso: boolean = false;
   configLoader = constantes.coloresLoader;
   cargando: boolean = false;
-
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private dataBaseService: DatabaseService,
-    public dialogComponent: MatDialog,
-    private router: Router,
-    private notify: NotificationService
-  ) {
-    this.dataUser = this.authService.datosUsuario;
-    this.getPlano();
-    this.getFloorsParking();
-  }
-
   formRegisterIncome: FormGroup;
   formVehiculo: FormGroup;
   branchVehicles: Array<object> = constantes.branchVehicles;
@@ -51,10 +40,29 @@ export class RegisterIncomeComponent implements OnInit {
   floorsParking;
   userValidData: object;
   validUser: boolean = false;
-  datosPlano = [];
+  datosPlano: any[] = [];
+  clientesActivos: any[] = [];
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private dataBaseService: DatabaseService,
+    public dialogComponent: MatDialog,
+    private router: Router,
+    private notify: NotificationService,
+    public afs: AngularFirestore
+  ) {
+    this.dataUser = this.authService.datosUsuario;
+    this.getPlano();
+    this.getFloorsParking();
+  }
 
   ngOnInit(): void {
     this.configForm();
+  }
+
+  ngOnDestroy(){
+    console.log('destroy');
   }
 
   configForm() {
@@ -90,7 +98,8 @@ export class RegisterIncomeComponent implements OnInit {
   getPlano() {
     this.cargando = true;
     this.dataBaseService.findDoc('parqueaderos', this.dataUser['parqueadero']).snapshotChanges().subscribe(respuesta => {
-      this.datosPlano = JSON.parse(respuesta.payload.get('plano'));
+      this.datosPlano = respuesta ? JSON.parse(respuesta.payload.get('plano')) : [];
+      this.clientesActivos = respuesta.payload.get('clientesActivos');
       this.cargando = false;
     }, error => {
       console.log("Error ", error);
@@ -99,50 +108,79 @@ export class RegisterIncomeComponent implements OnInit {
 
   searchDataUser(evento?) {
     if (!this.validUser) {
-      let valor = evento ? evento.srcElement.value : this.formRegisterIncome.get('documentoUsuario').value;
-      this.dataBaseService.getPorFiltro("usuarios", 'parqueadero', this.dataUser['parqueadero'])
-        .ref.orderBy('documento').startAt(valor).endAt(valor + '\uf8ff')
-        .onSnapshot(respuesta => {
+      const valor = evento ? evento.srcElement.value : this.formRegisterIncome.get('documentoUsuario').value;
+      const $obsUser = this.afs.collection(`/usuarios`, ref =>
+        ref.where('parqueadero', 'array-contains', this.dataUser['parqueadero']).orderBy('documento').startAt(valor).endAt(valor + '\uf8ff')
+      ).snapshotChanges().pipe(
+        map((x: any[]) => {
+          return x.map(user => ({ ...user.payload.doc.data(), key: user.payload.doc.id }));
+        })
+      ).subscribe((datos: any) => {
 
-          const datos = respuesta.docs.map(item => ({
-            ...item.data(), key: item.id
-          }));
+        if (this.validUser || (datos.length === 1 && datos[0]['documento'] === valor)) {
+          this.setValueData(this.validUser ? this.userValidData : datos[0]);
+          this.buscarVehiculo(datos[0].key);
+          $obsUser.unsubscribe();
+        } else {
+          if ( datos.length === 0) {
+            this.cargando = true;
+            // tslint:disable-next-line: no-shadowed-variable
+            const obsCliente$ = this.buscarCliente(valor).subscribe( ( datos: any) => {
+              if (datos.length > 0) {
+                this.cargando = false;
+                this.dialogComponent.open(ModalClientesComponent, {
+                  data: datos,
+                  disableClose: true,
+                  restoreFocus: false,
+                  height: '400px',
+                  width: '550px'
+                }).afterClosed().subscribe( result => {
+                  if(result){
+                    this.addParkingToClient(result.key);
+                    obsCliente$.unsubscribe();
+                  } else {
+                    obsCliente$.unsubscribe();
+                  }
+                })
 
-          if (this.validUser || (datos.length === 1 && datos[0]['documento'] === valor)) {
-            this.setValueData(this.validUser ? this.userValidData : datos[0]);
-            this.buscarVehiculo(datos[0].key);
+              } else {
+                this.cargando = false;
+                this.dialogComponent.open(ModalUserComponent, {
+                  data: {
+                    tipo: (datos.length ? 'listar' : 'crear'),
+                    datos,
+                    parqueadero: this.dataUser['parqueadero'],
+                    documento: valor
+                  },
+                  disableClose: true,
+                  restoreFocus: false,
+                  height: '500px',
+                  width: '700px'
+                }).afterClosed().subscribe(resultado => {
+                  if (resultado) {
 
-          } else {
-            const referencia = this.dialogComponent.open(ModalUserComponent, {
-              data: {
-                tipo: (datos.length ? 'listar' : 'crear'),
-                datos,
-                parqueadero: this.dataUser['parqueadero'],
-                documento: valor
-              },
-              disableClose: true,
-              restoreFocus: false,
-              height: '500px',
-              width: '700px'
-            });
-            referencia.afterClosed().subscribe(resultado => {
-              if ( resultado ) {
+                    if (resultado.datosUsuario) {
+                      this.setValueData(resultado.datosUsuario);
+                    }
 
-                if (resultado.datosUsuario) {
-                  this.setValueData(resultado.datosUsuario);
-                }
+                    if (resultado.datosVehiculo) {
+                      this.setValueVehicle(resultado.datosVehiculo);
+                    }
 
-                if (resultado.datosVehiculo) {
-                  this.setValueVehicle(resultado.datosVehiculo);
-                }
-
+                  }
+                });
+                obsCliente$.unsubscribe();
               }
             });
           }
-        }, error => {
-          console.log("Error ", error);
-        });
+          $obsUser.unsubscribe();
+        }
+        $obsUser.unsubscribe();
+      }, error => {
+        console.log("Error ", error);
+      });
     } else {
+
       this.dialogComponent.open(ModalUserComponent, {
         data: {
           tipo: 'crear',
@@ -169,8 +207,26 @@ export class RegisterIncomeComponent implements OnInit {
     }
   }
 
+  addParkingToClient(idCliente){
+    this.afs.collection('usuarios').doc(idCliente).update({
+      parqueadero: firebase.firestore.FieldValue.arrayUnion(this.dataUser['parqueadero'])
+    }).then(console.log)
+  }
+
+  buscarCliente(documento){
+    return this.dataBaseService.getPorFiltro('usuarios', 'documento', documento).snapshotChanges().pipe(
+      map((x: any[]) => {
+        return x.map(suscr => ({
+          ...suscr.payload.doc.data(),
+          key: suscr.payload.doc.id
+        }));
+      })
+    );
+  }
+
   setValueData(resultado) {
     this.datosCliente = resultado;
+    this.datosCliente.parqueadero = this.dataUser['parqueadero'];
     this.userValidData = resultado;
     this.formRegisterIncome.get('nombreUsuario').setValue(resultado.nombre);
     this.formRegisterIncome.get('documentoUsuario').setValue(resultado.documento);
@@ -179,6 +235,7 @@ export class RegisterIncomeComponent implements OnInit {
 
   setValueVehicle(resultado) {
     this.datosVehiculo = resultado;
+    this.datosVehiculo.parqueadero = this.dataUser['parqueadero'];
     this.buscarSuscripciones();
     this.formVehiculo.get('placa').setValue(resultado.placa);
     this.formVehiculo.get('tipoVehiculo').setValue(resultado.tipo);
@@ -224,10 +281,15 @@ export class RegisterIncomeComponent implements OnInit {
   }
 
   asignarCasilla(evento, idlog){
-
     // tslint:disable-next-line: max-line-length
     this.datosPlano[evento.piso][evento.fila][evento.columna]['suscripcion'] = { suscripcion: this.datosSuscripcion.key, vehiculo: this.datosVehiculo, idlog };
-    this.dataBaseService.modificar('parqueaderos', this.dataUser['parqueadero'] , {plano :JSON.stringify(this.datosPlano)}).then(x => {
+    if ( this.clientesActivos ) {
+      this.clientesActivos.push(this.datosCliente['key']);
+    } else {
+      this.clientesActivos = [this.datosCliente['key']];
+    }
+
+    this.dataBaseService.modificar('parqueaderos', this.dataUser['parqueadero'] , { plano: JSON.stringify(this.datosPlano), clientesActivos: this.clientesActivos}).then(x => {
       this.notify.notification('success', 'Suscripción creada');
       this.reset();
     }).catch(err => {
@@ -251,32 +313,52 @@ export class RegisterIncomeComponent implements OnInit {
       fechaEntrada: new Date(),
       puesto: evento
     };
+    
+    const permitirAsignacion = this.buscarVehiculoActivo();
 
-    this.dataBaseService.addData('logs', registroLog).then(result => {
+    if (evento.tipo === this.datosVehiculo.tipo && permitirAsignacion){
 
-      if(result){
-        const idLog = result.id;
-        this.asignarCasilla(evento, idLog);
-      }
+      this.dataBaseService.addData('logs', registroLog).then(result => {
 
-    }).catch(error => {
-      console.log({ error });
-      this.notify.notification('error', 'Error al crear suscripción');
-    })
+        if (result) {
+          const idLog = result.id;
+          this.asignarCasilla(evento, idLog);
+        }
 
+      }).catch(error => {
+        console.log({ error });
+        this.dataBaseService.addData('logs', registroLog).then(result => {
+
+          if (result) {
+            const idLog = result.id;
+            this.asignarCasilla(evento, idLog);
+          }
+
+        }).catch(error => {
+          console.log({ error });
+          this.notify.notification('error', 'Placa no encontrada');
+        })
+      })
+    } else {
+
+      this.notify.notification('error', permitirAsignacion ? 'El tipo de vehiculo no coincide' : 'vehiculo ya esta en parqueadero');
+    }
   }
 
   buscarVehiculo(idUsuario: string){
-    this.dataBaseService.getPorFiltro('vehiculos', 'usuario', idUsuario).snapshotChanges().subscribe(respuesta => {
+
+    this.afs.collection(`/vehiculos`, ref =>
+      ref.where('usuario', '==', idUsuario).where('parqueadero', '==', this.dataUser['parqueadero'])
+    ).snapshotChanges().subscribe(respuesta => {
       const datos = respuesta.map(item => {
         let x = item.payload.doc.data();
         x['key'] = item.payload.doc.id;
         return x;
       });
-      debugger;
-      if(datos.length == 1){
+
+      if(datos.length === 1){
         this.setValueVehicle(datos[0]);
-      }else{
+      } else {
         this.verVehiculos();
       }
 
@@ -287,7 +369,8 @@ export class RegisterIncomeComponent implements OnInit {
 
   verVehiculos(seleccionar = false){
 
-    const data = Object.assign({}, this.datosCliente)
+    const data = Object.assign({}, this.datosCliente);
+    data.parqueadero = this.dataUser['parqueadero'];
     data['seleccionar'] = seleccionar;
     if(!this.modalAbierta){
 
@@ -311,6 +394,29 @@ export class RegisterIncomeComponent implements OnInit {
     }
   }
 
+
+  buscarVehiculoActivo(){
+
+    for (const piso in this.datosPlano) {
+      // tslint:disable-next-line: forin
+      for (const fila in this.datosPlano[piso]) {
+        // tslint:disable-next-line: forin
+        for (const casilla in this.datosPlano[piso][fila]) {
+          const puesto = this.datosPlano[piso][fila][casilla];
+          if (puesto.suscripcion) {
+            const suscripcion = puesto.suscripcion;
+            if (suscripcion.vehiculo.placa.toLowerCase() === this.datosVehiculo.placa.toLowerCase()) {
+              return false;
+            }
+          }
+        }
+      }
+
+    }
+
+    return true;
+  }
+
   regresar() {
     this.router.navigateByUrl('/platform/admin/main');
   }
@@ -329,7 +435,6 @@ export class RegisterIncomeComponent implements OnInit {
 
   buscarSuscripciones(){
     const data = Object.assign({}, { datosVehiculo: this.datosVehiculo, datosCliente: this.datosCliente})
-
     this.dialogComponent.open(SuscripcionesComponent, {
       data,
       height: '500px',
@@ -388,21 +493,31 @@ export class RegisterIncomeComponent implements OnInit {
         width: '500px'
       }).afterClosed().subscribe((cerrar: {cerrar: boolean, valor: number}) => {
         if(cerrar.cerrar){
-          this.vaciarCasilla(datos.casilla, datos.suscripcion.idlog, cerrar.valor);
+          this.vaciarCasilla(datos.casilla, datos.suscripcion.idlog, cerrar.valor, datos?.suscripcion?.vehiculo?.usuario);
         }
       });
+    } else {
+      this.notify.notification('error', 'placa no encontrada')
     }
   }
 
-
-  vaciarCasilla(puesto, idLog, valor){
+  vaciarCasilla(puesto, idLog, valor, usuario){
 
     delete this.datosPlano[puesto.piso][puesto.fila][puesto.casilla]['suscripcion'];
     delete this.datosPlano[puesto.piso][puesto.fila][puesto.casilla]['placa'];
+
+    if(usuario){
+      const pos = this.clientesActivos.findIndex( user => user === usuario);
+      if(pos != -1){
+        this.clientesActivos.splice(pos, 1);
+      }
+    }
+
+
     this.dataBaseService.modificar(
       'parqueaderos',
       this.dataUser['parqueadero'], 
-      { plano: JSON.stringify(this.datosPlano) }
+      { plano: JSON.stringify(this.datosPlano) , clientesActivos: this.clientesActivos}
     ).then(x => {
       this.notify.notification('success', 'Egreso Exitoso');
       this.cerrarLog(idLog, valor);
@@ -413,10 +528,10 @@ export class RegisterIncomeComponent implements OnInit {
   cerrarLog(idLog, valor){
     const data = {
       fechaSalida: new Date(),
-      usuarioSalida :this.dataUser['nombre'],
+      usuarioSalida: this.dataUser['nombre'],
       valor
     };
-    this.dataBaseService.modificar('logs',idLog, data).then( x => {
+    this.dataBaseService.modificar('logs', idLog, data).then( x => {
       this.notify.notification('success', 'Registro Guardado')
     });
   }

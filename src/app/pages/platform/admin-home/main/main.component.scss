@@ -3,7 +3,7 @@
     width: 300px;
     border: 1px solid;
     margin: 30px;
-    border-radius: 15px;
+    border-radius: 20px;
     background-color: #2703021a;
     //float: left;
 
@@ -26,13 +26,14 @@
 }
 
 
-/* Sombra para los cuadros con una animacion con efecto de 1s con box box-shadow*/
+/* Sombra para los cuadros con una animacion con efecto de 0.5s con box box-shadow*/
 .sombra{
+    border-radius: 20px;
     -webkit-box-shadow: 6px 7px 5px 0px rgba(189,189,189,1);
     -moz-box-shadow: 6px 7px 5px 0px rgba(189,189,189,1);
     box-shadow: 6px 7px 5px 0px rgba(189,189,189,1);
     transition-property: box-shadow;
-    transition-duration: 1s;
+    transition-duration: 0.5s;
 }
   
 .sombra:hover{

@@ -33,7 +33,7 @@
           <mat-expansion-panel-header class="row" >
             <mat-panel-title class="col-6">{{ item['email'] }}</mat-panel-title>
             <mat-panel-description class="col-6" i18n>
-              Tipo de usuario: {{ ' '+ item['tipoUsuario'] | titlecase }}
+              Tipo de usuario: {{ ' '+ (item['tipoUsuario'] ? item['tipoUsuario'] : item['tipo'] ) | titlecase }}
             </mat-panel-description>
           </mat-expansion-panel-header>
           <div class="container-info-parking" *ngIf="item['datos']">

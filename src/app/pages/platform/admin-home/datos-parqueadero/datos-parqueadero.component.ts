@@ -57,8 +57,6 @@ export class DatosParqueaderoComponent implements OnInit {
       correo: ['', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")]],
       direccion: ['', Validators.required],
       cantidadPisos: [1, Validators.required],
-      capacidadCarros: ['', Validators.required],
-      capacidadMotos: ['', Validators.required],
       telefono: ['', Validators.required],
       pisos: this.fb.array([
         this.fb.group({
@@ -177,7 +175,6 @@ export class DatosParqueaderoComponent implements OnInit {
     });
 
     ref.afterClosed().subscribe(result => {
-      console.log(result);
       if (result) {
         this.form.get('plano').setValue(result);
       }
@@ -192,7 +189,6 @@ export class DatosParqueaderoComponent implements OnInit {
     const idParqueadero = this.auth.datosUsuario.parqueadero;
 
     this.db.modificar('parqueaderos', idParqueadero, datos).then(result => {
-      console.log('parqueadero actualizado');
       this.notificationService.notification("success", "Parqueadero actualizado");
     }).catch(error => {
       console.log('error modificar :', error);
