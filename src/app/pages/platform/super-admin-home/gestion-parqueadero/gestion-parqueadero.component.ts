@@ -229,20 +229,19 @@ export class GestionParqueaderoComponent implements OnInit {
   }
 
   configurarPlanoTxt(plano:any){
-
-    const estructura = { tipo: '', numero: '' };
-    const pisostmp = this.form.get('pisos').value;
     const pisos = [];
 
     console.log('plano: ', plano);
     let contP = 0;
     plano.forEach( piso => {
-      pisos[contP] = {};
+      pisos[contP] = {piso: contP};
       pisos[contP]['alto'] = piso.length;
       pisos[contP]['ancho'] = piso[0].length;
       contP++;
     })
 
+   
+    console.log(pisos);
     const data = {
       plano
     };
@@ -253,6 +252,15 @@ export class GestionParqueaderoComponent implements OnInit {
     ref.afterClosed().subscribe(result => {
       if (result) {
         this.form.get('plano').setValue(result);
+        for (let i = 1; i < pisos.length; i++) {
+          this.pisos.push(this.fb.group({
+            piso: [i, Validators.required],
+            alto: ['', Validators.required],
+            ancho: ['', Validators.required]
+          }));
+        };
+        this.form.get('cantidadPisos').setValue(pisos.length);
+        this.form.get('pisos').setValue(pisos);
       }
     });
 
