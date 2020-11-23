@@ -26,7 +26,7 @@ export class MensualidadComponent implements OnInit, AfterViewInit  {
   suscripciones: any[];
   vehiculos: any[];
   // tslint:disable-next-line: max-line-length
-  displayedColumns: string[] = ['documento', 'cliente', 'placa', 'marca', 'tipo', 'fechaInicio', 'fechaFinal', 'valor', 'estado', 'acciones'];
+  displayedColumns: string[] = ['documento', 'cliente', 'placa', 'marca', 'tipo', 'fechaInicio', 'fechaFinal', 'valor', 'estado'];
   dataSource: MatTableDataSource<any>;
   configLoader = constantes.coloresLoader;
   cargando: boolean = false;

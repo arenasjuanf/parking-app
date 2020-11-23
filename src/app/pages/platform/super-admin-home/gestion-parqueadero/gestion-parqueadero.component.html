@@ -18,7 +18,7 @@
                         (click)="fileInput.click()">
                         <i class="fas fa-plus"></i>
                     </button>
-                    <button [disabled]="form.disabled" type="button" class="btn btn-primary rounded-circle"
+                    <button [disabled]="form.disabled" type="button" class="btn btn-danger rounded-circle"
                         (click)="setImagenDefecto()">
                         <i class="fas fa-minus"></i>
                     </button>
@@ -79,26 +79,26 @@
 
                 <button class="btn btn-secondary" (click)="planoInput.click()" >
                     <i class="far fa-file-alt"></i>
-                    Import .TXT
+                    Importar .TXT
                 </button>
                 <input hidden (change)="subirPlano($event)" #planoInput type="file" id="file" accept=".txt">
 
 
                 <button class="btn btn-secondary mt-1" (click)="exportarTxt()" [disabled]="form.get('plano').value.length == 0">
                     <i class="far fa-file-alt"></i>
-                    Export .TXT
+                    Exportar .TXT
                 </button>
 
                 <button type="button" class="btn btn-primary mt-2" (click)="configurarPlano()"
                     [disabled]="!form.get('pisos').valid" i18n>
-                    Configurar Plano
-                    <i class="far fa-eye"></i>
+                    <i class="fas fa-cog"></i> Configurar Plano
                 </button>
-                <button type="button" class="btn btn-primary mt-2" (click)="configurarPlano(true)"
+                <button type="button" class="btn btn-info mt-2" (click)="configurarPlano(true)"
                     [disabled]="!form.get('plano').valid && accion !== 'ver'" i18n>
-                    Visualizar Plano <i class="far fa-eye"></i>
+                    <i class="far fa-eye"></i> Visualizar Plano
                 </button>
-                <button type="button" class="btn btn-primary mt-2" (click)="guardar()" [disabled]="!form.valid">
+                <button type="button" class="btn btn-success mt-2" (click)="guardar()" [disabled]="!form.valid">
+                    <i class="fas fa-save"></i>
                     {{ this.accion | titlecase }}
                 </button>
             </div>

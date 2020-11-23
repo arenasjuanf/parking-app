@@ -16,6 +16,7 @@ import { constantes } from 'src/app/constantes';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ModalClientesComponent } from './modal-clientes/modal-clientes.component';
 import { createVoid } from 'typescript';
+import { Observable, Subscription } from 'rxjs';
 const firebase = require('firebase/app');
 
 @Component({
@@ -42,6 +43,7 @@ export class RegisterIncomeComponent implements OnInit, OnDestroy {
   validUser: boolean = false;
   datosPlano: any[] = [];
   clientesActivos: any[] = [];
+  referenciaClientes: Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -62,6 +64,9 @@ export class RegisterIncomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
+    if (this.referenciaClientes) {
+      this.referenciaClientes.unsubscribe();
+    }
     console.log('destroy');
   }
 
@@ -128,7 +133,7 @@ export class RegisterIncomeComponent implements OnInit, OnDestroy {
             const obsCliente$ = this.buscarCliente(valor).subscribe( ( datos: any) => {
               if (datos.length > 0) {
                 this.cargando = false;
-                this.dialogComponent.open(ModalClientesComponent, {
+                this.referenciaClientes = this.dialogComponent.open(ModalClientesComponent, {
                   data: datos,
                   disableClose: true,
                   restoreFocus: false,

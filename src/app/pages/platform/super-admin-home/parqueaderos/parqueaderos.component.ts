@@ -68,6 +68,7 @@ export class ParqueaderosComponent implements OnInit, OnDestroy {
         park.plano = JSON.parse(park.plano);
         return park;
       });
+      
       this.dataSource = new MatTableDataSource(result);
       this.dataSource.paginator = this.paginator;
       this.cargando = false;
