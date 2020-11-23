@@ -7,11 +7,11 @@
         <input matInput type="number" [formControlName]="item">
       </mat-form-field>
       <div class="col-12 col-md-12 d-flex justify-content-between">
+        <button (click)="closeDialog()" type="button" class="btn btn-primary mt-2 bg-danger" i18n>
+          <i class="fa fa-times"></i> Cancelar
+        </button>
         <button type="submit" class="btn btn-primary mt-2">
           <i class="far fa-edit" i18n>Guardar</i>
-        </button>
-        <button (click)="closeDialog()" type="button" class="btn btn-primary mt-2" i18n>
-          <i class="fa fa-times"></i> Cancelar
         </button>
       </div>
     </div>
