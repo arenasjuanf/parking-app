@@ -55,7 +55,7 @@ export class constantes{
 
     public static permisosAdmin = [
         {
-            incono: 'fas fa-file-alt',
+            icono: 'fas fa-file-alt',
             nombre: 'informe',
             ruta: 'informe'
         },

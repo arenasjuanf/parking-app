@@ -8,7 +8,7 @@
             </div>
             <div class="col-md-4 col-12">
                 <div class="form-container">
-                    <h3 class="text-center mb-3" i18n>
+                    <h3 class="text-center mb-3">
                         {{ showReset ? 'Recuperar Clave' : 'Iniciar Sesión' }}
                     </h3>
                     <form (ngSubmit)="login(formulario)" #formulario="ngForm">
@@ -25,7 +25,7 @@
                             <i class="fa fa-sign-in" aria-hidden="true"></i>
                             {{ showReset ? 'Aceptar' : 'Ingresar' }}
                         </button>
-                        <button type="button" class="btn btn-danger btn-block" i18n (click)="showReset = !showReset">
+                        <button type="button" class="btn btn-danger btn-block" (click)="showReset = !showReset">
                             <i class="fas fa-question-circle" aria-hidden="true"></i>
                             {{ showReset ? 'Volver Al login' : 'Olvidé mi contraseña' }}
                         </button>
